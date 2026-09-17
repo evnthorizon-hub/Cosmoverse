@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CosmoVerse — a cinematic, scientifically grounded guide to the universe. Explore the Solar System, stars, black holes, galaxies, nebulae, cosmic events, space missions and cosmology.">
+    <meta name="keywords" content="astronomy, space, solar system, planets, stars, galaxies, black holes, nebulae, cosmic events, space missions, cosmology, universe">
+    <meta name="author" content="CosmoVerse">
+    <meta name="theme-color" content="#000003">
+    <title>CosmoVerse | Explore Beyond the Horizon</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <a href="#explore" class="skip-link">Skip to content</a>
+
+    <!-- Header / Navigation -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                CosmoVerse
+                <span class="logo-mark">Obs.</span>
+            </a>
+
+            <!-- CSS-only mobile menu toggle (checkbox technique) -->
+            <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+            <label for="mobile-menu-checkbox" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </label>
+
+            <nav class="nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+                    <li><a href="solar-system/index.html" class="nav-link">Solar System</a></li>
+                    <li><a href="stars/index.html" class="nav-link">Stars</a></li>
+                    <li><a href="black-holes/index.html" class="nav-link">Black Holes</a></li>
+                    <li><a href="galaxies/index.html" class="nav-link">Galaxies</a></li>
+                    <li><a href="nebulae/index.html" class="nav-link">Nebulae</a></li>
+                    <li><a href="cosmic-events/index.html" class="nav-link">Cosmic Events</a></li>
+                    <li><a href="missions/index.html" class="nav-link">Missions</a></li>
+                    <li><a href="exoplanets/index.html" class="nav-link">Exoplanets</a></li>
+                    <li><a href="universe/index.html" class="nav-link">Universe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============================================================
+             HERO — the opening frame
+             A planetary limb rising into the bottom of the shot, three
+             depths of drifting starfield, and one occasional meteor.
+             ============================================================ -->
+        <section class="hero">
+            <div class="hero__horizon" aria-hidden="true"></div>
+            <div class="starfield" aria-hidden="true"></div>
+            <div class="starfield-streak" aria-hidden="true"></div>
+
+            <div class="hero__content">
+                <p class="hero__eyebrow">CosmoVerse Observatory</p>
+                <h1 class="hero__title">
+                    Everything above you
+                    <em>has an explanation</em>
+                </h1>
+                <p class="hero__lede">A cinematic, scientifically grounded guide to the universe — from the rock under your feet to the edge of the observable cosmos.</p>
+
+                <div class="hero__actions">
+                    <a href="solar-system/index.html" class="btn btn--primary">
+                        Start with our Solar System
+                        <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                    <a href="#explore" class="btn btn--ghost btn--down">
+                        Browse all regions
+                        <span class="btn__arrow" aria-hidden="true">&darr;</span>
+                    </a>
+                </div>
+
+                <dl class="hero__telemetry">
+                    <div>
+                        <dt>Observable radius</dt>
+                        <dd>46.5 <small>Gly</small></dd>
+                    </div>
+                    <div>
+                        <dt>Age of universe</dt>
+                        <dd>13.79 <small>Gyr</small></dd>
+                    </div>
+                    <div>
+                        <dt>Galaxies</dt>
+                        <dd>~2 <small>trillion</small></dd>
+                    </div>
+                    <div>
+                        <dt>Regions charted</dt>
+                        <dd>9 <small>of 9</small></dd>
+                    </div>
+                </dl>
+            </div>
+
+            <p class="hero__cue" aria-hidden="true">Scroll</p>
+        </section>
+
+
+        <!-- ============================================================
+             THE NINE REGIONS
+             A contact sheet of observation plates. Each tile carries its
+             own domain theme, its own field geometry and its own emblem
+             — so this grid is simultaneously the site's navigation and
+             its living visual reference. Whatever personality a subject
+             shows here is exactly what its section inherits when built.
+             ============================================================ -->
+        <section id="explore" class="shell shell--abyss shell--seam">
+            <div class="container">
+                <header class="head head--center">
+                    <p class="eyebrow"><span class="eyebrow__id">00</span> Index</p>
+                    <h2 class="head__title">Nine regions of the <em>known universe</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Ordered outward, from the world you are standing on to the structure of everything. Each region has its own light, its own geometry and its own way of being measured.</p>
+                </header>
+
+                <div class="domain-grid">
+
+                    <!-- 01 · Solar System — live -->
+                    <a href="solar-system/index.html" class="tile dm-solar">
+                        <span class="tile__rule" aria-hidden="true"></span>
+                        <!-- Nudged up and held back a little. This is the
+                             one frame with labels baked along its middle
+                             (MERCURY, VENUS, JUPITER and so on), and at
+                             the default crop "JUPITER" landed across the
+                             tile's body copy. Shifting the window up puts
+                             the labels under the heaviest part of the
+                             scrim, and it is also the brightest of the
+                             nine, so it needs less opacity than the rest
+                             to sit at the same weight. -->
+                        <div class="tile__shot" aria-hidden="true"
+                             style="--shot-y:4%;--shot-opacity:0.5">
+                            <img src="images/solar-system.png" alt="" decoding="async">
+                        </div>
+                        <div class="field field--orbital" aria-hidden="true"></div>
+                        <div class="tile__head">
+                            <span class="emblem emblem--solar" aria-hidden="true"><i></i></span>
+                            <span class="chip chip--muted">01</span>
+                        </div>
+                        <h3 class="tile__title">Solar System</h3>
+                        <p class="tile__text">One star, eight worlds and a frozen archive stretching a quarter of the way to the next sun.</p>
+                        <p class="tile__foot">
+                            <span>9 subsections</span>
+                            <span class="tile__enter">Enter <span aria-hidden="true">&rarr;</span></span>
+                        </p>
+                    </a>
+
+                    <!-- 02 · Exoplanets — live
+                         Keeps dm-planets and field--banded rather than the
+                         region's own dm-exo and field--transit, because
+                         both of those are declared in css/exoplanets.css
+                         and this page does not load it. Pulling a whole
+                         page stylesheet in for one tile would cost more
+                         than the hue is worth, so the tile stays in
+                         reflected-daylight blue and the region it opens
+                         is cyan and gold. -->
+                    <a href="exoplanets/index.html" class="tile dm-planets">
+                        <span class="tile__rule" aria-hidden="true"></span>
+                        <div class="tile__shot" aria-hidden="true">
+                            <img src="images/exoplanets.png" alt="" loading="lazy" decoding="async">
+                        </div>
+                        <div class="field field--banded" aria-hidden="true"></div>
+                        <div class="tile__head">
+                            <span class="emblem emblem--planets" aria-hidden="true"><i></i></span>
+                            <span class="chip chip--muted">02</span>
+                        </div>
+                        <h3 class="tile__title">Exoplanets</h3>
+                        <p class="tile__text">Six thousand worlds around other stars, and not one of them ever seen as a surface. Everything known was read out of the starlight instead.</p>
+                        <p class="tile__foot">
+                            <span>12 subsections</span>
+                            <span class="tile__enter">Enter <span aria-hidden="true">&rarr;</span></span>
+                        </p>
+                    </a>
+
+                    <!-- 03 · Stars — live -->
+                    <a href="stars/index.html" class="tile dm-stars">
+                        <span class="tile__rule" aria-hidden="true"></span>
+                        <div class="tile__shot" aria-hidden="true">
+                            <img src="images/stars.png" alt="" decoding="async">
+                        </div>
+                        <div class="field field--spectral" aria-hidden="true"></div>
+                        <div class="tile__head">
+                            <span class="emblem emblem--stars" aria-hidden="true"><i></i></span>
+                            <span class="chip chip--muted">03</span>
+                        </div>
+                        <h3 class="tile__title">Stars</h3>
+                        <p class="tile__text">How mass alone decides whether a star burns for a trillion years or detonates in ten million.</p>
+                        <p class="tile__foot">
+                            <span>7 subsections</span>
+                            <span class="tile__enter">Enter <span aria-hidden="true">&rarr;</span></span>
+                        </p>
+                    </a>
+
+                    <!-- 04 · Black Holes — live -->
+                    <a href="black-holes/index.html" class="tile dm-holes">
+                        <span class="tile__rule" aria-hidden="true"></span>
+                        <div class="tile__shot" aria-hidden="true">
+                            <img src="images/black-holes.png" alt="" decoding="async">
+                        </div>
+                        <div class="field field--lensing" aria-hidden="true"></div>
+                        <div class="tile__head">
+                            <span class="emblem emblem--holes" aria-hidden="true"><i></i></span>
+                            <span class="chip chip--muted">04</span>
+                        </div>
+                        <h3 class="tile__title">Black Holes</h3>
+                        <p class="tile__text">Regions where gravity has closed over completely. Nothing to see — only the light bending around the gap.</p>
+                        <p class="tile__foot">
+                            <span>6 subsections</span>
+                            <span class="tile__enter">Enter <span aria-hidden="true">&rarr;</span></span>
+                        </p>
+                    </a>
+
+                    <!-- 05 · Galaxies — live -->
+                    <a href="galaxies/index.html" class="tile dm-galaxies">
+                        <span class="tile__rule" aria-hidden="true"></span>
+                        <div class="tile__shot" aria-hidden="true">
+                            <img src="images/galaxies.png" alt="" loading="lazy" decoding="async">
+                        </div>
+                        <div class="field field--spiral" aria-hidden="true"></div>
+                        <div class="tile__head">
+                            <span class="emblem emblem--galaxies" aria-hidden="true"><i></i></span>
+                            <span class="chip chip--muted">05</span>
+                        </div>
+                        <h3 class="tile__title">Galaxies</h3>
+                        <p class="tile__text">Gravitationally bound cities of hundreds of billions of stars, almost always with something enormous at the centre.</p>
+                        <p class="tile__foot">
+                            <span>15 subsections</span>
+                            <span class="tile__enter">Enter <span aria-hidden="true">&rarr;</span></span>
+                        </p>
+                    </a>
+
+                    <!-- 06 · Nebulae — live -->
+                    <a href="nebulae/index.html" class="tile dm-nebulae">
+                        <span class="tile__rule" aria-hidden="true"></span>
+                        <div class="tile__shot" aria-hidden="true">
+                            <img src="images/nebulae.png" alt="" loading="lazy" decoding="async">
+                        </div>
+                        <div class="field field--emission" aria-hidden="true"></div>
+                        <div class="tile__head">
+                            <span class="emblem emblem--nebulae" aria-hidden="true"><i></i></span>
+                            <span class="chip chip--muted">06</span>
+                        </div>
+                        <h3 class="tile__title">Nebulae</h3>
+                        <p class="tile__text">Clouds of gas and dust that are either the nursery a star is born in or the wreckage it leaves behind.</p>
+                        <p class="tile__foot">
+                            <span>5 subsections</span>
+                            <span class="tile__enter">Enter <span aria-hidden="true">&rarr;</span></span>
+                        </p>
+                    </a>
+
+                    <!-- 07 · Cosmic Events — live -->
+                    <a href="cosmic-events/index.html" class="tile dm-events">
+                        <span class="tile__rule" aria-hidden="true"></span>
+                        <div class="tile__shot" aria-hidden="true">
+                            <img src="images/cosmic-events.png" alt="" loading="lazy" decoding="async">
+                        </div>
+                        <div class="field field--burst" aria-hidden="true"></div>
+                        <div class="tile__head">
+                            <span class="emblem emblem--events" aria-hidden="true"><i></i></span>
+                            <span class="chip chip--muted">07</span>
+                        </div>
+                        <h3 class="tile__title">Cosmic Events</h3>
+                        <p class="tile__text">Supernovae, gamma-ray bursts, neutron star mergers, gravitational waves — the universe at its most violent.</p>
+                        <p class="tile__foot">
+                            <span>6 subsections</span>
+                            <span class="tile__enter">Enter <span aria-hidden="true">&rarr;</span></span>
+                        </p>
+                    </a>
+
+                    <!-- 08 · Space Missions — live -->
+                    <a href="missions/index.html" class="tile dm-missions">
+                        <span class="tile__rule" aria-hidden="true"></span>
+                        <div class="tile__shot" aria-hidden="true">
+                            <img src="images/missions.png" alt="" loading="lazy" decoding="async">
+                        </div>
+                        <div class="field field--telemetry" aria-hidden="true"></div>
+                        <div class="tile__head">
+                            <span class="emblem emblem--missions" aria-hidden="true"><i></i></span>
+                            <span class="chip chip--muted">08</span>
+                        </div>
+                        <h3 class="tile__title">Space Missions</h3>
+                        <p class="tile__text">Every fact on this site was won by an instrument someone had to build, launch and aim.</p>
+                        <p class="tile__foot">
+                            <span>6 subsections</span>
+                            <span class="tile__enter">Enter <span aria-hidden="true">&rarr;</span></span>
+                        </p>
+                    </a>
+
+                    <!-- 09 · Universe — live. The last tile to unlock, and
+                         the one whose photograph is reused as the full-bleed
+                         scale plate further down this page. -->
+                    <a href="universe/index.html" class="tile dm-universe">
+                        <span class="tile__rule" aria-hidden="true"></span>
+                        <div class="tile__shot" aria-hidden="true">
+                            <img src="images/universe.png" alt="" loading="lazy" decoding="async">
+                        </div>
+                        <div class="field field--web" aria-hidden="true"></div>
+                        <div class="tile__head">
+                            <span class="emblem emblem--universe" aria-hidden="true"><i></i></span>
+                            <span class="chip chip--muted">09</span>
+                        </div>
+                        <h3 class="tile__title">Universe</h3>
+                        <p class="tile__text">The Big Bang, cosmic expansion, the 46.5-billion-light-year horizon, the cosmic web, and the ninety-five per cent nobody can name.</p>
+                        <p class="tile__foot">
+                            <span>9 subsections</span>
+                            <span class="tile__enter">Enter <span aria-hidden="true">&rarr;</span></span>
+                        </p>
+                    </a>
+
+                </div>
+
+                <p class="caption caption--center">
+                    <span class="caption__id">Index</span>
+                    Regions are ordered by distance, not by importance. All nine are open.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             THREE DEPTHS
+             The site's reading contract, stated plainly.
+             ============================================================ -->
+        <section class="shell shell--void">
+            <div class="starfield" style="--stars-opacity:0.45" aria-hidden="true"></div>
+
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow">How to read this site</p>
+                    <h2 class="head__title">Three depths, <em>same subject</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Astronomy is usually written either for children or for physicists. CosmoVerse writes every subject at three depths and lets you choose which one you want today.</p>
+                </header>
+
+                <div class="plate-grid plate-grid--2">
+                    <article class="plate">
+                        <div class="plate__meta">
+                            <span class="plate__index">Depth 01</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Explore</h3>
+                        </div>
+                        <p class="plate__text">Plain language, visual first, no assumed background. Answers the question you would actually ask out loud: what <em>is</em> a black hole?</p>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__meta">
+                            <span class="plate__index">Depth 02</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Learn</h3>
+                        </div>
+                        <p class="plate__text">The mechanism, with the numbers kept in. How a star above roughly twenty solar masses ends up collapsing past its own escape velocity.</p>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__meta">
+                            <span class="plate__index">Depth 03</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Discover</h3>
+                        </div>
+                        <p class="plate__text">Individual objects, structured and cited. Sagittarius A*: 4.3 million solar masses, 26,000 light years away, imaged in 2022.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             SCALE PLATE
+             The one full-bleed photograph on the home page, and the
+             closing statement before the About copy: everything the
+             index just listed, at the only scale where all of it fits
+             in one frame. Cropped to the clean middle band of the
+             source — see the plate imagery notes in components.css.
+             ============================================================ -->
+        <section class="shell shell--void shell--seam" style="padding-bottom:0">
+            <figure class="shot-figure">
+                <div class="shot shot--deep">
+                    <img class="shot__img"
+                         src="images/universe.png"
+                         alt="The large-scale structure of the universe: clusters of galaxies strung along luminous filaments of the cosmic web, separated by darker voids."
+                         loading="lazy" decoding="async">
+                </div>
+                <div class="container">
+                    <figcaption class="caption">
+                        <span class="caption__id">Plate</span>
+                        The cosmic web &mdash; galaxy clusters gathered along filaments of dark matter, with voids hundreds of millions of light years across between them. Every region indexed above sits somewhere inside one of these strands.
+                    </figcaption>
+                </div>
+            </figure>
+        </section>
+
+
+        <!-- ============================================================
+             ABOUT
+             ============================================================ -->
+        <section class="shell shell--rise shell--seam">
+            <div class="container container--narrow">
+                <div class="head head--center" style="margin-bottom:0">
+                    <p class="eyebrow eyebrow--bare">About</p>
+                    <h2 class="head__title">Accurate first, <em>beautiful anyway</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">CosmoVerse is an educational project. Every figure comes from published observation, every diagram states what it compresses, and nothing is exaggerated to look impressive — the real numbers already are.</p>
+                    <p class="head__lede">The whole site is hand-built HTML and CSS. No frameworks, no libraries, no JavaScript. Every planet, star, ring and spiral you see is drawn with gradients and geometry.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p class="footer-text">&copy; 2026 CosmoVerse &mdash; Explore beyond the horizon.</p>
+            <p class="footer-note">Hand-built HTML &amp; CSS &middot; No JavaScript</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1497 @@
+/* ============================================================
+   COSMOVERSE — NEBULAE
+   ============================================================
+
+   THE VISUAL REFERENCE
+   --------------------
+   Nebulae are the easiest subject on this site to render badly,
+   because "glowing cloud" is also what generic sci-fi art looks
+   like. Four rules keep this region honest, and every render on
+   the page is built from them.
+
+   1. THE COLOUR IS LINE EMISSION, NOT A GRADIENT CHOICE. A hot
+      star ionises hydrogen; the hydrogen recombines and emits at
+      fixed wavelengths. H-alpha at 656.3 nm is a deep rose. The
+      forbidden [O III] doublet at 495.9 / 500.7 nm is teal-green.
+      Those two lines are the entire palette of this domain, and
+      Fig 01 shows them measured rather than asserted. Nothing
+      here is coloured because it looked good.
+
+   2. DUST DOES TWO THINGS AND GLOWS AT NEITHER. It blocks light
+      (dark nebulae — umber through black, drawn as absence) and
+      it scatters short wavelengths more than long ones
+      (reflection nebulae — cold blue, and no rose anywhere,
+      because there is no ionisation). A luminous filament of
+      dust would be a physics error, so there is not one.
+
+   3. GAS HAS NO SURFACE. Every cloud on this page is layered,
+      translucent and soft-edged. A hard boundary anywhere would
+      read as a painted blob, which is exactly the failure mode
+      this region has to avoid. Ionisation fronts are the one
+      permitted edge, and even they are drawn as a ramp.
+
+   4. VIOLET STAYS RESERVED. The Galaxies and Black Holes regions
+      spend violet on what cannot be seen — dark matter, spacetime
+      geometry. A supernova remnant's interior really does glow,
+      by synchrotron radiation, and that continuum reads blue-white
+      rather than violet. So the Crab is drawn cold blue-white and
+      the site's one violet meaning survives intact.
+
+   THE SIGNATURE GEOMETRY
+   ----------------------
+   Two geometries, and which one a nebula has tells you whether it
+   is a birth or a death.
+
+     BIRTH is filamentary and chaotic — sheets, pillars, lanes,
+     nothing symmetric, because turbulence and gravity are fighting
+     over an irregular cloud.
+
+     DEATH is a shell — a planetary nebula or a supernova remnant
+     is material thrown outward from a point, so it has a centre,
+     a radius and an edge.
+
+   Every .neb render below is one or the other, and the type plates
+   are ordered so the reader crosses from one to the other exactly
+   once.
+
+   THE ONE IDEA THE PAGE IS BUILT AROUND
+   -------------------------------------
+   The five "types" of nebula are not five kinds of object. Three
+   of them are one cloud seen under three lighting conditions, and
+   the other two are corpses. Fig 02 is the whole argument.
+
+   Layer 3 of 3. Requires style.css and components.css.
+   ============================================================ */
+
+
+/* ============================================================
+   1. PALETTE
+   ------------------------------------------------------------
+   The domain accent contract in components.css already sets
+   --accent to #5ce3d1 and --accent-2 to #ff6f9c — [O III] teal
+   into H-alpha rose. That is exactly the right pair for this
+   subject, so unlike Galaxies and Stars this page does NOT
+   override .head__title em / .page-hero__title em. The shared
+   heading gradient is already the two emission lines.
+
+   What is added here are the specific line colours, the two dust
+   behaviours, and the natal starlight.
+   ============================================================ */
+
+.dm-nebulae {
+    /* --- Emission lines. Real wavelengths, real hues. ------
+       These are the colours a visual observer at the eyepiece
+       would report, not narrowband channels mapped for print. */
+    --ha:          #ff6f8f;   /* H-alpha    656.3 nm  · rose      */
+    --ha-hot:      #ffa8bb;
+    --ha-soft:     rgba(255, 111, 143, 0.42);
+    --ha-deep:     #8e2540;
+    --hb:          #7ff0dc;   /* H-beta     486.1 nm  · blue-green */
+    --oiii:        #58e3c4;   /* [O III]    500.7 nm  · teal      */
+    --oiii-soft:   rgba(88, 227, 196, 0.38);
+    --oiii-deep:   #14655c;
+    --sii:         #e2506e;   /* [S II]     672.4 nm  · deeper red */
+
+    /* --- Dust. Rule 2: blocking and scattering, never glowing. */
+    --dust:        #150c06;
+    --dust-mid:    rgba(19, 11, 5, 0.82);
+    --dust-edge:   #3d2413;
+    --scatter:     #8fb6ff;   /* reflection: short-lambda scattering */
+    --scatter-hot: #cfe0ff;
+    --scatter-soft: rgba(143, 182, 255, 0.38);
+
+    /* --- Natal starlight ----------------------------------
+       The O and B stars inside an H II region are the youngest
+       stars there are, and they are the reason it is lit. */
+    --natal:       #ffffff;
+    --natal-hot:   #dfeaff;
+    --ob:          #a8c4ff;
+
+    /* --- Synchrotron. Rule 4: blue-white, not violet. ------ */
+    --synch:       #b9d6ff;
+    --synch-soft:  rgba(185, 214, 255, 0.34);
+
+    /* Height of the sticky local index. Anchor scroll targets are
+       computed from it, so it is declared once. */
+    --subnav-h:    46px;
+}
+
+
+/* ============================================================
+   2. LOCAL INDEX
+   ------------------------------------------------------------
+   The fourth copy of this component; Stars, Black Holes,
+   Galaxies and Exoplanets each carry their own. It belongs in
+   components.css, but promoting it would mean editing a
+   stylesheet five finished pages depend on, so it stays local
+   and the note stays here.
+   ============================================================ */
+
+.subnav {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 900;
+    background: rgba(2, 10, 12, 0.92);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    border-bottom: 1px solid var(--line);
+}
+
+/* The domain's two emission lines as a 1px rule: [O III] teal at
+   the edges, H-alpha rose through the middle. Same order the
+   spectrum in Fig 01 puts them in. */
+.subnav::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--oiii-deep) 10%,
+        var(--oiii) 28%,
+        var(--ha-hot) 50%,
+        var(--oiii) 72%,
+        var(--oiii-deep) 90%,
+        transparent 100%);
+    opacity: 0.55;
+}
+
+.subnav__list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+.subnav__list a {
+    position: relative;
+    padding: 0.85rem clamp(0.5rem, 1.1vw, 0.9rem);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+    transition: color var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child {
+    padding-left: 0;
+}
+
+.subnav__list a::after {
+    content: '';
+    position: absolute;
+    left: clamp(0.5rem, 1.1vw, 0.9rem);
+    right: clamp(0.5rem, 1.1vw, 0.9rem);
+    bottom: 0;
+    height: 1px;
+    background: var(--oiii);
+    box-shadow: 0 0 8px var(--oiii-soft);
+    transform: scaleX(0);
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child::after {
+    left: 0;
+}
+
+.subnav__list a:hover {
+    color: var(--text);
+}
+
+.subnav__list a:hover::after {
+    transform: scaleX(1);
+}
+
+.shell[id],
+.page-hero[id] {
+    scroll-margin-top: calc(var(--header-h) + var(--subnav-h));
+}
+
+
+/* ============================================================
+   3. FIGURE CHROME
+   ------------------------------------------------------------
+   A diagram is a coordinate system. It cannot usefully reflow,
+   so below its natural width it scrolls inside its frame rather
+   than deforming. Restated locally for the same reason the
+   local index is.
+   ============================================================ */
+
+.fig {
+    margin: 0;
+}
+
+.fig__frame {
+    position: relative;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+.fig__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* SVG typography, in the same instrument voice as every other
+   label on the site. Sizes are user units, so they scale with
+   the viewBox instead of fighting it. */
+.svg-label,
+.svg-value,
+.svg-unit {
+    font-family: var(--font-mono);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.svg-label {
+    font-size: 12px;
+    fill: var(--text-2);
+}
+
+.svg-value {
+    font-size: 12px;
+    fill: var(--text);
+    letter-spacing: 0.05em;
+    text-transform: none;
+    font-variant-numeric: tabular-nums;
+}
+
+.svg-unit {
+    font-size: 10px;
+    fill: var(--text-4);
+}
+
+/* For labels that have to sit over a lit cloud rather than over
+   the page background. Draws the glyph's own outline in the void
+   colour first, which keeps small mono type legible without a
+   solid label box behind it. */
+.svg-onlight {
+    paint-order: stroke fill;
+    stroke: rgba(1, 6, 8, 0.88);
+    stroke-width: 3.4;
+    stroke-linejoin: round;
+}
+
+.svg-label--ha      { fill: var(--ha); }
+.svg-label--oiii    { fill: var(--oiii); }
+.svg-label--scatter { fill: var(--scatter); }
+.svg-label--natal   { fill: var(--natal-hot); }
+
+/* Dust cannot label itself in its own colour: --dust-edge is a dark
+   umber and would be unreadable on a dark page. This is the lit
+   side of a grain rather than the grain, which keeps the label in
+   the same family without making it invisible. */
+.svg-label--dust    { fill: #ab8f74; }
+
+.svg-leader {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    opacity: 0.7;
+}
+
+.svg-leader--ha      { stroke: rgba(255, 111, 143, 0.4); }
+.svg-leader--oiii    { stroke: rgba(88, 227, 196, 0.4); }
+.svg-leader--scatter { stroke: rgba(143, 182, 255, 0.38); }
+
+.svg-tick {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+}
+
+.svg-dash {
+    fill: none;
+    stroke-dasharray: 4 5;
+}
+
+.svg-axis {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+}
+
+
+/* ============================================================
+   4. HERO
+   ------------------------------------------------------------
+   The photograph carries the arrival; the crop and the grade are
+   the plate-imagery component in components.css. What is added
+   here is the horizon: filaments, not an arc.
+
+   Galaxies gets a single clean logarithmic curve because a disk
+   is one smooth structure. A molecular cloud is the opposite —
+   sheets and threads with dust cutting across them — so the
+   nebulae hero states its geometry with four uneven strands and
+   one dark lane crossing all of them. It is the same job the
+   spiral arc does, done by the right shape.
+   ============================================================ */
+
+.neb-hero__veil {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 2;
+    height: min(50%, 380px);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.neb-hero__veil svg {
+    position: absolute;
+    left: 50%;
+    bottom: -14%;
+    width: min(1700px, 154%);
+    height: auto;
+    transform: translateX(-50%);
+}
+
+/* The crisp pass is deliberately fainter than the bloom. The
+   readout docks over the middle of the hero, so only the ends of
+   each strand are ever visible — and at the original 0.34 those
+   ends read as two stray straight lines poking out from behind the
+   panel rather than as gas. The weight now sits in the bloom, which
+   has no edges to be caught out by. */
+.neb-strand {
+    fill: none;
+    stroke: var(--oiii);
+    stroke-width: 1.1;
+    stroke-linecap: round;
+    opacity: 0.16;
+    filter: blur(1.2px);
+}
+
+.neb-strand--ha {
+    stroke: var(--ha);
+    opacity: 0.14;
+}
+
+/* The bloom pass. Wide, blurred and almost transparent — it is
+   what stops the strands reading as drawn lines. */
+.neb-strand--bloom {
+    stroke-width: 30;
+    opacity: 0.1;
+    filter: blur(14px);
+}
+
+/* Dust in front of the emission. Rule 2: it is absence. */
+.neb-lane {
+    fill: none;
+    stroke: var(--dust);
+    stroke-width: 13;
+    stroke-linecap: round;
+    opacity: 0.72;
+    filter: blur(5px);
+}
+
+/* Newly formed stars sitting in the gas that made them. */
+.neb-natal circle {
+    fill: var(--natal);
+}
+
+
+/* ============================================================
+   5. .neb — the interstellar-cloud primitive
+   ------------------------------------------------------------
+   The counterpart to .orb. Where .orb renders anything with a
+   surface, .neb renders anything without one: every nebula on
+   this page, from a 116px taxonomy thumbnail to a 172px plate
+   portrait, is this one primitive with different custom
+   properties.
+
+       .neb--orion {
+           --neb-skin:  <layered radial-gradients>;
+           --neb-dust:  <layered radial-gradients>;
+           --neb-stars: <point sources>;
+       }
+
+   Markup — every part is optional, exactly as with .orb:
+
+       <span class="neb neb--orion" style="--neb-d:172px" aria-hidden="true">
+           <span class="neb__gas"></span>
+           <span class="neb__web"></span>
+           <span class="neb__dust"></span>
+           <span class="neb__stars"></span>
+           <span class="neb__core"></span>
+       </span>
+
+   Two things are enforced by the primitive rather than left to
+   each variant, because they are rule 3 and rule 2:
+
+     · --neb-soft blurs the gas layer in proportion to --neb-d,
+       so a cloud has no hard edge at any size.
+     · .neb__dust always sits ABOVE .neb__gas in the stack. Dust
+       in front of emission is the only correct order; putting it
+       behind would make it a light source.
+   ============================================================ */
+
+.neb {
+    --neb-d: 160px;
+    position: relative;
+    flex: none;
+    display: block;
+    width: var(--neb-d);
+    height: var(--neb-d);
+    isolation: isolate;
+}
+
+/* The gas. Bleeds past its own box, because a cloud's edge is
+   where you stop being able to measure it, not where it stops. */
+.neb__gas {
+    position: absolute;
+    inset: -10%;
+    z-index: 0;
+    background: var(--neb-skin, none);
+    filter: blur(calc(var(--neb-d) * var(--neb-soft, 0.05)))
+            saturate(var(--neb-sat, 1.06));
+    opacity: var(--neb-o, 1);
+}
+
+/* Filaments. Used only by the two shell geometries, where the
+   material is genuinely stranded rather than diffuse. Masked to
+   an annulus so the strands read as a shell seen through, not as
+   a starburst. */
+/* Filaments. Used only by the two shell geometries, where the
+   material is genuinely stranded rather than diffuse.
+
+   The shape of this is the result of getting it wrong twice, so the
+   reasoning is worth keeping. Repeating conic gradients were the
+   obvious tool and they are the wrong one: they produce spokes at a
+   fixed angular period, and evenly spaced spokes converging on a
+   centre read as a firework whatever you do to the colour. Layering
+   three of them at coprime periods did not help — the brightest
+   layer still sets the rhythm and the eye locks onto it.
+
+   What a remnant actually looks like is a shell seen through: thin
+   sheets of shocked gas at various radii, broken into arcs. So the
+   filaments are now CONCENTRIC and the breaks are ANGULAR, and both
+   are hand-placed at irregular intervals rather than generated by a
+   repeating function. The web is the intersection of the two, which
+   is why this is the one component on the page that needs
+   mask-composite.
+
+       --neb-web       hand-spaced concentric shells
+       --neb-web-mask  [ irregular angular breaks, annulus ]
+
+   Where mask-composite is unsupported the two mask layers simply
+   add instead of intersecting: the arcs become full rings. Still a
+   shell, still not a firework. */
+.neb__web {
+    position: absolute;
+    inset: -4%;
+    z-index: 1;
+    background: var(--neb-web, none);
+    -webkit-mask-image: var(--neb-web-mask,
+        radial-gradient(circle, transparent 30%, #000 50%, transparent 82%));
+            mask-image: var(--neb-web-mask,
+        radial-gradient(circle, transparent 30%, #000 50%, transparent 82%));
+    /* Enough blur to take the geometric edge off a gradient stop.
+       Hard-edged filaments are what make a remnant look like clip
+       art. */
+    filter: blur(calc(var(--neb-d) * var(--neb-web-soft, 0.016)));
+    opacity: var(--neb-web-o, 0.85);
+}
+
+/* Annulus ∩ angular breaks. The topmost mask layer is listed first,
+   so the breaks intersect the annulus and the annulus itself is what
+   gets added to the empty backdrop. */
+.neb--remnant .neb__web,
+.neb--crab .neb__web {
+    -webkit-mask-composite: source-in, source-over;
+            mask-composite: intersect, add;
+}
+
+/* Dust. Always over the gas. Rule 2. */
+.neb__dust {
+    position: absolute;
+    inset: -10%;
+    z-index: 2;
+    background: var(--neb-dust, none);
+    filter: blur(calc(var(--neb-d) * var(--neb-dust-soft, 0.03)));
+}
+
+/* Embedded stars. Point sources — sized as a percentage of the
+   box so one declaration works at every --neb-d. */
+.neb__stars {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background-image: var(--neb-stars,
+        radial-gradient(1.1% 1.1% at 30% 34%, var(--natal), transparent),
+        radial-gradient(0.9% 0.9% at 58% 26%, var(--natal-hot), transparent),
+        radial-gradient(1% 1% at 46% 62%, var(--natal), transparent),
+        radial-gradient(0.8% 0.8% at 72% 50%, var(--ob), transparent),
+        radial-gradient(0.8% 0.8% at 22% 70%, var(--natal-hot), transparent));
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+/* The one star that matters: an ionising O star, an exposed white
+   dwarf, a pulsar. Drawn at the centre because in both shell
+   geometries that is where it is. */
+.neb__core {
+    position: absolute;
+    top: var(--core-y, 50%);
+    left: var(--core-x, 50%);
+    z-index: 4;
+    width: var(--core-d, 5%);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--core-fill,
+        radial-gradient(circle, #ffffff 0%, var(--natal-hot) 44%, transparent 100%));
+    box-shadow: 0 0 calc(var(--neb-d) * 0.1) var(--core-glow, rgba(223, 234, 255, 0.9));
+}
+
+
+/* ------------------------------------------------------------
+   5a. The five types
+   ------------------------------------------------------------
+   Ordered birth → death, and the ordering is the argument:
+   01-03 are one cloud under three lighting conditions, 04-05 are
+   two kinds of corpse. Note where the rose stops. Reflection and
+   dark nebulae have no ionising star, so they have no H-alpha at
+   all, and letting a single pink stop into either of them would
+   quietly undo the whole of Fig 02.
+   ------------------------------------------------------------ */
+
+/* 01 · EMISSION — an H II region. Hydrogen ionised by nearby O
+   and B stars, recombining and emitting at 656.3 nm. The teal is
+   doubly-ionised oxygen in the hottest gas nearest the stars,
+   which is why it sits inside the rose and not beside it. */
+.neb--emission {
+    --neb-skin:
+        radial-gradient(ellipse 34% 30% at 44% 42%, rgba(88, 227, 196, 0.5) 0%, transparent 68%),
+        radial-gradient(ellipse 50% 44% at 42% 46%, rgba(255, 111, 143, 0.66) 0%, rgba(255, 111, 143, 0.2) 54%, transparent 76%),
+        radial-gradient(ellipse 40% 34% at 66% 62%, rgba(226, 80, 110, 0.44) 0%, transparent 70%),
+        radial-gradient(ellipse 54% 40% at 50% 76%, rgba(142, 37, 64, 0.5) 0%, transparent 74%);
+    --neb-dust:
+        radial-gradient(ellipse 56% 6% at 40% 64%, rgba(19, 11, 5, 0.92) 0%, transparent 72%),
+        radial-gradient(ellipse 22% 26% at 78% 24%, rgba(19, 11, 5, 0.74) 0%, transparent 70%);
+    /* Tighter than the shared default. At the 132px used by the
+       taxonomy rows the default blur washed the lane out entirely,
+       and the lane is the only thing in this render that says dust
+       is present as well as gas. */
+    --neb-dust-soft: 0.018;
+}
+
+/* 02 · REFLECTION — no ionisation at all. Dust grains scattering
+   a nearby star's light, and scattering short wavelengths harder
+   than long ones, so the cloud comes out bluer than the star that
+   lights it. Deliberately dimmer than the emission skin: a
+   reflection nebula is a faint object. */
+.neb--reflection {
+    --neb-soft: 0.06;
+    --neb-skin:
+        radial-gradient(ellipse 46% 40% at 56% 40%, rgba(207, 224, 255, 0.5) 0%, rgba(143, 182, 255, 0.2) 44%, transparent 72%),
+        radial-gradient(ellipse 54% 46% at 42% 58%, rgba(143, 182, 255, 0.34) 0%, transparent 74%),
+        radial-gradient(ellipse 34% 30% at 70% 70%, rgba(110, 150, 230, 0.24) 0%, transparent 70%);
+    --neb-dust:
+        radial-gradient(ellipse 40% 8% at 52% 74%, rgba(19, 11, 5, 0.72) 0%, transparent 74%);
+    --neb-stars:
+        radial-gradient(1.6% 1.6% at 56% 40%, #ffffff, transparent),
+        radial-gradient(0.8% 0.8% at 26% 24%, var(--natal-hot), transparent),
+        radial-gradient(0.7% 0.7% at 78% 62%, var(--ob), transparent);
+}
+
+/* 03 · DARK — the same dust, with nothing behind it to light it
+   and something bright behind it to hide.
+
+   This is the one variant that inverts the stack. Everywhere else
+   the stars are embedded IN the cloud and belong in front of it;
+   here they are BEHIND it, because the entire subject is starlight
+   being removed. Without the z-index override below, .neb__stars
+   sits at z-index 3 and the field shines straight through the dust
+   — which produced a faint brown ring rather than an opaque mass.
+
+   The background wash is also deliberately not centred on the
+   dust. A glow directly behind an opaque blob only ever shows as a
+   halo around it, which reads as a donut; offsetting it means the
+   dust is silhouetted against something rather than ringed by it. */
+.neb--dark {
+    --neb-soft: 0.055;
+    --neb-skin:
+        radial-gradient(ellipse 62% 54% at 74% 26%, rgba(150, 138, 122, 0.2) 0%, transparent 72%),
+        radial-gradient(ellipse 54% 46% at 18% 78%, rgba(128, 124, 138, 0.14) 0%, transparent 74%);
+    /* One irregular opaque mass, not two blobs: three overlapping
+       lobes with a lane running off the lower left, so the outline
+       is ragged the way a real globule's is. */
+    --neb-dust:
+        radial-gradient(ellipse 34% 38% at 44% 48%, rgba(4, 3, 2, 1) 0%, rgba(6, 4, 2, 0.99) 62%, transparent 80%),
+        radial-gradient(ellipse 26% 30% at 62% 40%, rgba(5, 3, 2, 0.99) 0%, transparent 78%),
+        radial-gradient(ellipse 22% 24% at 34% 64%, rgba(5, 3, 2, 0.97) 0%, transparent 78%),
+        radial-gradient(ellipse 30% 9% at 22% 74%, rgba(8, 5, 3, 0.9) 0%, transparent 80%);
+    --neb-dust-soft: 0.026;
+    /* A dense field, so the silhouette has something to be a
+       silhouette against. Several of these sit under the dust and
+       are meant to disappear — that is the figure. */
+    --neb-stars:
+        radial-gradient(1% 1% at 12% 16%, var(--natal-hot), transparent),
+        radial-gradient(0.9% 0.9% at 86% 20%, var(--natal), transparent),
+        radial-gradient(0.8% 0.8% at 92% 58%, #ffe6c8, transparent),
+        radial-gradient(1% 1% at 18% 88%, var(--natal), transparent),
+        radial-gradient(0.8% 0.8% at 74% 90%, var(--natal-hot), transparent),
+        radial-gradient(0.7% 0.7% at 6% 50%, var(--ob), transparent),
+        radial-gradient(0.7% 0.7% at 96% 38%, var(--natal), transparent),
+        radial-gradient(0.7% 0.7% at 36% 6%, #ffe6c8, transparent),
+        radial-gradient(0.6% 0.6% at 60% 10%, var(--natal), transparent),
+        radial-gradient(0.6% 0.6% at 50% 94%, var(--ob), transparent),
+        radial-gradient(0.6% 0.6% at 28% 34%, var(--natal), transparent),
+        radial-gradient(0.6% 0.6% at 66% 56%, var(--natal-hot), transparent),
+        radial-gradient(0.5% 0.5% at 82% 74%, var(--natal), transparent),
+        radial-gradient(0.5% 0.5% at 14% 66%, #ffe6c8, transparent);
+}
+
+/* The inversion. Stated as its own rule rather than folded into the
+   variant above, because it is a stacking change and not a colour. */
+.neb--dark .neb__stars {
+    z-index: 1;
+}
+
+/* 04 · PLANETARY — a shell, and the first geometry with a centre.
+   The outer envelope of a dying low-mass star, thrown off and then
+   lit from inside by the exposed core. Teal outside because [O III]
+   dominates the ionised shell; rose within because H-alpha reaches
+   further in towards the star. */
+.neb--planetary {
+    --neb-soft: 0.035;
+    --neb-skin:
+        radial-gradient(circle at 50% 50%, transparent 0 20%, rgba(255, 111, 143, 0.44) 30%, rgba(255, 111, 143, 0.1) 44%, transparent 56%),
+        radial-gradient(circle at 50% 50%, transparent 0 30%, rgba(88, 227, 196, 0.56) 42%, rgba(88, 227, 196, 0.14) 54%, transparent 66%),
+        radial-gradient(circle at 50% 50%, rgba(20, 101, 92, 0.34) 0%, transparent 40%);
+    --core-d: 4.5%;
+    --core-fill: radial-gradient(circle, #ffffff 0%, #dff4ff 40%, transparent 100%);
+    --core-glow: rgba(200, 244, 255, 0.95);
+    --neb-stars:
+        radial-gradient(0.7% 0.7% at 16% 22%, var(--natal-hot), transparent),
+        radial-gradient(0.6% 0.6% at 86% 30%, var(--natal), transparent),
+        radial-gradient(0.6% 0.6% at 78% 84%, var(--ob), transparent);
+}
+
+/* 05 · SUPERNOVA REMNANT — the other shell, and the violent one.
+   Stranded rather than smooth, because this material was thrown
+   out at thousands of kilometres per second and is ploughing into
+   whatever was already there. The blue-white interior is
+   synchrotron radiation from a central pulsar. Rule 4: it is
+   blue-white, not violet. */
+.neb--remnant {
+    --neb-soft: 0.04;
+    --neb-skin:
+        radial-gradient(circle at 50% 50%, rgba(185, 214, 255, 0.46) 0%, rgba(185, 214, 255, 0.12) 34%, transparent 56%),
+        radial-gradient(circle at 50% 50%, transparent 0 34%, rgba(255, 111, 143, 0.3) 48%, transparent 66%);
+    /* Six shocked sheets at hand-spaced radii. Irregular gaps, and
+       the colours alternate between the two emission lines and the
+       shock's own [S II] because a remnant is chemically stratified
+       — the reverse shock lights different species at different
+       depths. */
+    --neb-web:
+        radial-gradient(circle at 50% 50%,
+            transparent 0 28.5%,
+            rgba(255, 111, 143, 0.52) 28.5% 30.1%,
+            transparent 30.1% 33.4%,
+            rgba(226, 80, 110, 0.38) 33.4% 34.6%,
+            transparent 34.6% 37.2%,
+            rgba(255, 111, 143, 0.46) 37.2% 38.9%,
+            transparent 38.9% 42.6%,
+            rgba(88, 227, 196, 0.32) 42.6% 43.8%,
+            transparent 43.8% 46.1%,
+            rgba(255, 111, 143, 0.4) 46.1% 47.4%,
+            transparent 47.4% 49.8%,
+            rgba(226, 80, 110, 0.26) 49.8% 50.7%,
+            transparent 50.7%);
+    --neb-web-o: 0.8;
+    /* Angular breaks: ten arcs of unequal length. Each boundary is a
+       ramp between stops rather than two stops at the same angle. A
+       hard break leaves a clean wedge of nothing, and ten clean
+       wedges all pointing at the centre become spokes of absence —
+       the firework, arrived at from the other direction. */
+    --neb-web-mask:
+        conic-gradient(from 0deg,
+            #000 0deg, #000 19deg, transparent 29deg, transparent 33deg,
+            #000 44deg, #000 57deg, transparent 65deg, transparent 68deg,
+            #000 79deg, #000 93deg, transparent 104deg, transparent 110deg,
+            #000 122deg, #000 130deg, transparent 137deg, transparent 141deg,
+            #000 152deg, #000 170deg, transparent 180deg, transparent 185deg,
+            #000 196deg, #000 204deg, transparent 211deg, transparent 216deg,
+            #000 227deg, #000 247deg, transparent 254deg, transparent 259deg,
+            #000 268deg, #000 279deg, transparent 288deg, transparent 295deg,
+            #000 305deg, #000 317deg, transparent 322deg, transparent 326deg,
+            #000 338deg, #000 360deg),
+        /* The shell the arcs live in. */
+        radial-gradient(circle,
+            transparent 24%, rgba(0, 0, 0, 0.6) 32%,
+            #000 44%, #000 60%, transparent 78%);
+    --core-d: 3.4%;
+    --core-fill: radial-gradient(circle, #ffffff 0%, var(--synch) 40%, transparent 100%);
+    --core-glow: rgba(185, 214, 255, 0.95);
+    --neb-stars:
+        radial-gradient(0.7% 0.7% at 18% 26%, var(--natal-hot), transparent),
+        radial-gradient(0.6% 0.6% at 82% 20%, var(--natal), transparent),
+        radial-gradient(0.6% 0.6% at 88% 74%, var(--natal-hot), transparent),
+        radial-gradient(0.6% 0.6% at 24% 84%, var(--ob), transparent);
+}
+
+
+/* ------------------------------------------------------------
+   5b. The four portraits
+   ------------------------------------------------------------
+   Each extends one of the five types rather than starting over,
+   and only says what makes that object itself. They are diagrams
+   of type with a real object's structure, not traced photographs,
+   and the plate caption says so.
+   ------------------------------------------------------------ */
+
+/* ORION · M42. A blister on the near face of a molecular cloud,
+   so it is lopsided rather than round: the Trapezium has eaten
+   its way out towards us and the cavity opens on one side. */
+.neb--orion {
+    --neb-skin:
+        radial-gradient(ellipse 26% 22% at 48% 38%, rgba(223, 244, 255, 0.62) 0%, transparent 66%),
+        radial-gradient(ellipse 38% 32% at 48% 40%, rgba(88, 227, 196, 0.52) 0%, transparent 70%),
+        radial-gradient(ellipse 56% 48% at 44% 46%, rgba(255, 111, 143, 0.62) 0%, rgba(255, 111, 143, 0.18) 56%, transparent 78%),
+        radial-gradient(ellipse 44% 34% at 68% 68%, rgba(226, 80, 110, 0.4) 0%, transparent 72%),
+        radial-gradient(ellipse 60% 30% at 46% 82%, rgba(142, 37, 64, 0.46) 0%, transparent 74%);
+    --neb-dust:
+        radial-gradient(ellipse 50% 7% at 36% 66%, rgba(19, 11, 5, 0.85) 0%, transparent 74%),
+        radial-gradient(ellipse 24% 30% at 82% 30%, rgba(19, 11, 5, 0.74) 0%, transparent 70%);
+    /* The Trapezium: four hot stars in a tight knot, which is what
+       is doing the ionising. */
+    --neb-stars:
+        radial-gradient(1.5% 1.5% at 47% 38%, #ffffff, transparent),
+        radial-gradient(1.2% 1.2% at 51% 41%, #ffffff, transparent),
+        radial-gradient(1% 1% at 45% 43%, var(--natal-hot), transparent),
+        radial-gradient(1% 1% at 50% 35%, var(--natal-hot), transparent),
+        radial-gradient(0.8% 0.8% at 28% 62%, var(--ob), transparent),
+        radial-gradient(0.8% 0.8% at 74% 52%, var(--natal), transparent);
+}
+
+/* EAGLE · M16. The pillars are the subject, and they are dust, so
+   they are drawn as columns of absence standing in front of the
+   emission — eroded from above by the cluster's radiation, which
+   is why they taper upward and not downward. */
+.neb--eagle {
+    --neb-skin:
+        radial-gradient(ellipse 44% 34% at 52% 22%, rgba(88, 227, 196, 0.4) 0%, transparent 72%),
+        radial-gradient(ellipse 62% 54% at 48% 44%, rgba(255, 111, 143, 0.58) 0%, rgba(255, 111, 143, 0.16) 58%, transparent 80%),
+        radial-gradient(ellipse 50% 40% at 44% 74%, rgba(142, 37, 64, 0.5) 0%, transparent 76%);
+    --neb-dust:
+        /* three pillars, tapering upward */
+        radial-gradient(ellipse 7% 34% at 34% 74%, rgba(13, 8, 4, 0.96) 0%, rgba(19, 11, 5, 0.6) 66%, transparent 88%),
+        radial-gradient(ellipse 5% 26% at 52% 78%, rgba(13, 8, 4, 0.94) 0%, rgba(19, 11, 5, 0.55) 64%, transparent 88%),
+        radial-gradient(ellipse 4% 20% at 65% 82%, rgba(13, 8, 4, 0.9) 0%, transparent 86%),
+        /* the cloud floor they rise out of */
+        radial-gradient(ellipse 70% 12% at 48% 100%, rgba(10, 6, 3, 0.94) 0%, transparent 78%);
+    --neb-dust-soft: 0.022;
+    --neb-stars:
+        radial-gradient(1.2% 1.2% at 50% 16%, #ffffff, transparent),
+        radial-gradient(0.9% 0.9% at 38% 12%, var(--natal-hot), transparent),
+        radial-gradient(0.9% 0.9% at 62% 20%, var(--natal-hot), transparent),
+        radial-gradient(0.7% 0.7% at 28% 26%, var(--ob), transparent),
+        radial-gradient(0.7% 0.7% at 74% 30%, var(--ob), transparent);
+}
+
+/* CRAB · M1. A filled remnant, not a hollow one: the pulsar keeps
+   pumping energy into the interior, so the synchrotron continuum
+   fills the shell instead of leaving a cavity. That is what makes
+   it look different from every other remnant. */
+.neb--crab {
+    /* Filled rather than hollow, so the filaments run further in and
+       there are more of them — but they stay subordinate to the
+       synchrotron glow, because in the real object the interior is
+       what dominates. */
+    --neb-web-o: 0.72;
+    --neb-web-soft: 0.013;
+    --neb-skin:
+        radial-gradient(ellipse 56% 48% at 50% 50%, rgba(185, 214, 255, 0.54) 0%, rgba(185, 214, 255, 0.2) 44%, transparent 70%),
+        radial-gradient(ellipse 64% 54% at 50% 50%, transparent 0 26%, rgba(255, 111, 143, 0.24) 46%, transparent 72%);
+    --neb-web:
+        radial-gradient(circle at 50% 50%,
+            transparent 0 17.8%,
+            rgba(255, 111, 143, 0.5) 17.8% 19.1%,
+            transparent 19.1% 22.3%,
+            rgba(226, 80, 110, 0.36) 22.3% 23.2%,
+            transparent 23.2% 26.4%,
+            rgba(255, 111, 143, 0.48) 26.4% 27.9%,
+            transparent 27.9% 30.6%,
+            rgba(88, 227, 196, 0.3) 30.6% 31.6%,
+            transparent 31.6% 34.9%,
+            rgba(255, 111, 143, 0.44) 34.9% 36.3%,
+            transparent 36.3% 39.2%,
+            rgba(226, 80, 110, 0.32) 39.2% 40.3%,
+            transparent 40.3% 43.4%,
+            rgba(255, 111, 143, 0.36) 43.4% 44.6%,
+            transparent 44.6% 47.1%,
+            rgba(226, 80, 110, 0.22) 47.1% 48%,
+            transparent 48%);
+    /* A different set of break angles from the generic remnant, so
+       the two do not read as the same object drawn twice. Ramped
+       boundaries for the same reason as above. */
+    --neb-web-mask:
+        conic-gradient(from 41deg,
+            #000 0deg, #000 24deg, transparent 34deg, transparent 39deg,
+            #000 50deg, #000 66deg, transparent 76deg, transparent 82deg,
+            #000 92deg, #000 101deg, transparent 108deg, transparent 112deg,
+            #000 124deg, #000 145deg, transparent 153deg, transparent 158deg,
+            #000 169deg, #000 177deg, transparent 187deg, transparent 192deg,
+            #000 204deg, #000 223deg, transparent 229deg, transparent 234deg,
+            #000 244deg, #000 256deg, transparent 265deg, transparent 271deg,
+            #000 282deg, #000 299deg, transparent 307deg, transparent 313deg,
+            #000 326deg, #000 360deg),
+        radial-gradient(circle,
+            transparent 13%, rgba(0, 0, 0, 0.5) 22%,
+            #000 34%, #000 60%, transparent 80%);
+}
+
+/* RING · M57. A barrel seen almost exactly down its axis. The
+   "ring" is the barrel's wall, thicker along the line of sight at
+   the rim than through the middle — so it is a projection effect,
+   and the render keeps the faint interior that proves it. */
+.neb--ring {
+    --neb-soft: 0.03;
+    --neb-skin:
+        radial-gradient(circle at 50% 50%, transparent 0 16%, rgba(255, 111, 143, 0.5) 26%, rgba(255, 111, 143, 0.12) 40%, transparent 52%),
+        radial-gradient(circle at 50% 50%, transparent 0 26%, rgba(88, 227, 196, 0.62) 38%, rgba(88, 227, 196, 0.16) 50%, transparent 62%),
+        radial-gradient(circle at 50% 50%, transparent 0 44%, rgba(20, 101, 92, 0.3) 54%, transparent 66%),
+        /* the interior is not empty, only faint */
+        radial-gradient(circle at 50% 50%, rgba(88, 227, 196, 0.14) 0%, transparent 34%);
+    --core-d: 4%;
+}
+
+
+/* ============================================================
+   6. TAXONOMY ROWS
+   ------------------------------------------------------------
+   Five types, and a five-up plate grid is the one thing the
+   shared component cannot do cleanly — at the container width it
+   resolves to four columns and orphans the fifth. Rather than
+   force it, the taxonomy becomes rows: render, definition, and
+   the two facts that actually distinguish one type from another
+   (what lights it, and what it is made of).
+
+   It also keeps this region short, which is the point of it.
+   ============================================================ */
+
+.ntypes {
+    border-top: 1px solid var(--line-2);
+}
+
+.ntype {
+    position: relative;
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(var(--s-5), 3vw, var(--s-7));
+    padding: clamp(var(--s-5), 2.6vw, var(--s-6)) 0;
+    border-bottom: 1px solid var(--line);
+    transition: background var(--dur-slow) var(--ease-out);
+}
+
+/* Same signal the observation plate uses: a short accent segment
+   that runs the width of the row on hover. */
+.ntype::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 34px;
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+    transition: width var(--dur-slow) var(--ease-cine);
+}
+
+.ntype:hover::before {
+    width: 100%;
+}
+
+.ntype:hover {
+    background: linear-gradient(90deg, var(--accent-wash) 0%, transparent 62%);
+}
+
+.ntype__stage {
+    display: grid;
+    place-items: center;
+    height: 150px;
+}
+
+.ntype:hover .neb {
+    transform: scale(1.05);
+}
+
+.ntype .neb {
+    transition: transform var(--dur-slow) var(--ease-cine);
+}
+
+.ntype__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3);
+    margin-bottom: var(--s-3);
+}
+
+.ntype__index {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+}
+
+.ntype__title {
+    font-size: var(--t-2xl);
+    font-weight: 400;
+    letter-spacing: var(--track-tight);
+}
+
+.ntype__text {
+    font-size: var(--t-base);
+    line-height: 1.72;
+    color: var(--text-2);
+}
+
+/* The two columns carry different jobs — prose on the left, the
+   discriminating facts on the right — so the spec list starts at
+   the same baseline as the title rather than the text. */
+.ntype__spec {
+    padding-top: 0.15rem;
+}
+
+
+/* ============================================================
+   7. Fig 01 — THE EMISSION-LINE SPECTRUM
+   ------------------------------------------------------------
+   Built on the shared .rail, because that component already is
+   "a labelled axis with marks at real positions" and this is
+   exactly that: a linear wavelength axis from 380 to 700 nm with
+   six real emission lines standing on it.
+
+   Two things are overridden. The axis becomes the visible
+   spectrum itself, so a line's horizontal position IS its
+   wavelength and the reader can see that H-alpha lands in the
+   red and [O III] lands in the teal-green. And the rail's origin
+   dot is removed — the left end here is 380 nm, not the Sun.
+   ============================================================ */
+
+.rail--spectrum {
+    height: 176px;
+    margin-top: var(--s-7);
+}
+
+.rail--spectrum::before {
+    top: 50%;
+    height: 30px;
+    transform: translateY(-50%);
+    /* Approximate sRGB rendering of the visible spectrum. Stops are
+       placed at their true fraction of 380-700 nm, so the hue under
+       a line is the hue that line actually is. */
+    background: linear-gradient(90deg,
+        #2b0a4d 0%,      /* 380 nm */
+        #3b16b0 8%,      /* 406 nm */
+        #1f45e8 17%,     /* 434 nm */
+        #12a9d8 28%,     /* 470 nm */
+        #26d07a 40%,     /* 508 nm */
+        #b8e21a 52%,     /* 546 nm */
+        #ffe600 62%,     /* 578 nm */
+        #ff9500 72%,     /* 610 nm */
+        #f42b1e 85%,     /* 652 nm */
+        #7d0b0e 100%);   /* 700 nm */
+    opacity: 0.5;
+}
+
+/* No origin marker: the axis starts at a wavelength, not a body. */
+.rail--spectrum::after {
+    display: none;
+}
+
+/* Marks are pushed clear of the 30px band. */
+.rail--spectrum .rail__mark--up {
+    bottom: calc(50% + 15px);
+}
+
+.rail--spectrum .rail__mark--down {
+    top: calc(50% + 15px);
+}
+
+/* An emission line. Drawn on the band at --pos, in its own colour,
+   so the figure states six measurements rather than illustrating
+   an idea. */
+.nline {
+    position: absolute;
+    left: var(--pos, 50%);
+    top: 50%;
+    z-index: 2;
+    width: 2px;
+    height: 42px;
+    transform: translate(-50%, -50%);
+    background: var(--nline, #ffffff);
+    box-shadow: 0 0 12px var(--nline, #ffffff),
+                0 0 26px -4px var(--nline, #ffffff);
+}
+
+/* The weaker partner of a doublet, or a line from a different
+   species sitting almost on top of a labelled one. Drawn, because
+   it is really there; unlabelled, because two labels 0.7% apart
+   collide. */
+.nline--faint {
+    width: 1.5px;
+    height: 34px;
+    opacity: 0.55;
+}
+
+
+/* ============================================================
+   7b. Fig 02 — ONE CLOUD, THREE APPEARANCES
+   ------------------------------------------------------------
+   The page's central argument, so it gets the page's central
+   rules. Three of them are load-bearing:
+
+     · .nfig__field is drawn BEFORE the cloud in the markup, so
+       the cloud attenuates the background stars and the dense
+       core removes them. That is extinction, and it is why the
+       right-hand zone works without any extra machinery.
+     · .nfig__core is nearly opaque. A dark nebula that lets its
+       background through is not a dark nebula.
+     · Nothing in the reflection zone is rose and nothing in the
+       dark zone is lit. Rule 2.
+   ============================================================ */
+
+.nfig__field circle {
+    fill: #dfe8ff;
+    opacity: 0.78;
+}
+
+/* Diffuse unresolved starlight behind the dark zone. Offset from the
+   core rather than concentric with it, because a glow centred on an
+   opaque blob only ever shows as a halo and reads as a ring. */
+.nfig__backglow {
+    fill: url(#nfBack);
+}
+
+.nfig__cloud {
+    fill: url(#nfCloud);
+}
+
+.nfig__hii  { fill: url(#nfHii); }
+.nfig__oiii { fill: url(#nfOiii); }
+.nfig__refl { fill: url(#nfRefl); }
+.nfig__core { fill: url(#nfCore); }
+
+/* The ionisation front. Dashed, because it is a ramp a few tenths
+   of a light year thick rather than a surface. */
+.nfig__front {
+    fill: none;
+    stroke: var(--ha);
+    stroke-width: 1.2;
+    opacity: 0.5;
+}
+
+/* Ionising ultraviolet — shorter than 91.2 nm, which is the only
+   light that can strip an electron off hydrogen. `color` is set
+   because the arrowhead marker fills with currentColor. */
+.nfig__uv path {
+    color: var(--oiii);
+    fill: none;
+    stroke: var(--oiii);
+    stroke-width: 1.1;
+    opacity: 0.52;
+}
+
+.nfig__star {
+    fill: #ffffff;
+}
+
+.nfig__star--o {
+    /* An O star is blue-white and it is the brightest thing in the
+       figure, so it gets the only real bloom. */
+    filter: drop-shadow(0 0 8px rgba(207, 224, 255, 0.95))
+            drop-shadow(0 0 20px rgba(143, 182, 255, 0.6));
+}
+
+.nfig__star--b {
+    fill: #eaf1ff;
+    filter: drop-shadow(0 0 6px rgba(207, 224, 255, 0.7));
+}
+
+/* What actually reaches the observer from each zone. */
+.nfig__los {
+    fill: none;
+    stroke-width: 1.3;
+    opacity: 0.72;
+}
+
+.nfig__los--ha {
+    color: var(--ha);
+    stroke: var(--ha);
+}
+
+.nfig__los--scatter {
+    color: var(--scatter);
+    stroke: var(--scatter);
+}
+
+/* Nothing arrives, so there is no arrowhead — the line just stops. */
+.nfig__los--none {
+    stroke: var(--text-4);
+    opacity: 0.55;
+}
+
+
+/* ============================================================
+   7c. Fig 03 — THE FORMATION SEQUENCE
+   ------------------------------------------------------------
+   Four panels, and the colour does the narration: the first two
+   are drawn almost entirely in dust, the third introduces the
+   first warmth, and only the fourth is allowed rose. That is the
+   physics in the right order — nothing is ionised until there is
+   something hot enough to ionise it.
+   ============================================================ */
+
+/* The field the first three clouds are silhouetted against. Dimmer
+   than Fig 02's, because here it is the setting rather than the
+   subject and it must not compete with four panels of structure. */
+.nform__field circle {
+    fill: #dfe8ff;
+    opacity: 0.5;
+}
+
+.nform__cloud  { fill: url(#nsCloud); }
+.nform__core   { fill: url(#nsCore); }
+.nform__warm   { fill: url(#nsWarm); }
+.nform__rim    { fill: url(#nsRim); }
+
+/* Material falling in. Cold, so it is drawn cold. */
+.nform__infall path {
+    color: var(--scatter);
+    fill: none;
+    stroke: var(--scatter);
+    stroke-width: 1.1;
+    opacity: 0.5;
+}
+
+/* The step between panels. Chrome, not data. */
+.nform__step {
+    color: var(--accent);
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1;
+    opacity: 0.55;
+}
+
+/* The accretion disc — edge-on, because that is the only
+   orientation in which it is legible at this size. */
+.nform__disc {
+    fill: none;
+    stroke: var(--dust-edge);
+    stroke-width: 7;
+    opacity: 0.85;
+}
+
+.nform__disc--thin {
+    stroke-width: 4;
+    opacity: 0.6;
+}
+
+/* Bipolar outflow. The collapse has angular momentum it cannot
+   keep, and this is where it goes. */
+.nform__jet {
+    fill: url(#nsJet);
+    opacity: 0.8;
+}
+
+.nform__proto {
+    fill: #ffe0c8;
+    filter: drop-shadow(0 0 7px rgba(255, 190, 150, 0.85));
+}
+
+.nform__star {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 9px rgba(223, 234, 255, 0.95))
+            drop-shadow(0 0 22px rgba(143, 182, 255, 0.55));
+}
+
+/* Diffraction spikes: the signature the Stars region uses for a
+   point source, reused here so the fourth panel reads as "this is
+   now a star" without a label saying so. */
+.nform__spikes path {
+    fill: none;
+    stroke: #dfeaff;
+    stroke-width: 1;
+    opacity: 0.55;
+}
+
+/* The cavity the young star has blown clear of its own cocoon. */
+.nform__cavity {
+    fill: none;
+    stroke: var(--ha);
+    stroke-width: 1;
+    opacity: 0.4;
+}
+
+
+/* ============================================================
+   7d. CAPTION BODY
+   ------------------------------------------------------------
+   .caption is a flex row: the figure number, then the prose. Any
+   element inside that prose becomes a flex item of its own, so a
+   caption written as
+
+       <span class="caption__id">Fig 01</span>
+       <strong>Base-10 axis</strong>, 0.1 to 1,000 light years ...
+
+   renders as three columns, and the <strong> collapses into a
+   stack of one-word lines. Wrapping the prose in one element
+   makes it a single flex item again and the emphasis goes back to
+   being inline. Every caption on this page uses it, including the
+   ones with no emphasis, so the pattern is not something to
+   remember only when it breaks.
+   ============================================================ */
+
+.caption__body {
+    min-width: 0;
+}
+
+
+/* ============================================================
+   8. PLATE TUNING
+   ------------------------------------------------------------
+   The shared plate stage draws an optical-axis hairline across
+   its middle for aligning drawn bodies. Through a nebula it reads
+   as a scratch on the print, so it is suppressed here.
+   ============================================================ */
+
+.neb-famous .plate__stage {
+    --stage-h: 208px;
+}
+
+.neb-famous .plate__stage::before {
+    display: none;
+}
+
+.neb-famous .plate__stage {
+    background: radial-gradient(ellipse 70% 66% at 50% 52%, var(--mood-low) 0%, transparent 74%);
+}
+
+
+/* ============================================================
+   9. PULL LINE
+   ------------------------------------------------------------
+   Restated from the Stars page for the same reason the local
+   index is restated. Uses the shared accent pair rather than a
+   local sequence variable.
+   ============================================================ */
+
+.pull {
+    max-width: 30ch;
+    font-family: var(--font-display);
+    font-size: var(--t-2xl);
+    font-weight: 300;
+    line-height: 1.34;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.pull em {
+    font-style: normal;
+    font-weight: 400;
+    background-image: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+
+/* ============================================================
+   10. MYTH / FACT
+   ------------------------------------------------------------
+   Claim on the left, correction on the right, hairline between.
+   Restated locally; the Galaxies and Black Holes copies are the
+   other two.
+   ============================================================ */
+
+.myths {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+}
+
+.myth {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(var(--s-5), 4vw, var(--s-7));
+    padding: clamp(var(--s-5), 3vw, var(--s-6)) 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.myth__claim {
+    position: relative;
+    padding-left: var(--s-5);
+    font-size: var(--t-md);
+    line-height: 1.5;
+    color: var(--text-3);
+}
+
+/* A struck-through bullet: the claim is being withdrawn, and the
+   mark says so before the sentence does. */
+.myth__claim::before {
+    content: '';
+    position: absolute;
+    top: 0.72em;
+    left: 0;
+    width: 10px;
+    height: 1px;
+    background: var(--text-4);
+}
+
+.myth__claim strong {
+    font-weight: 500;
+    color: var(--text-2);
+}
+
+.myth__truth {
+    font-size: var(--t-sm);
+    line-height: 1.72;
+    color: var(--text-3);
+}
+
+.myth__truth strong {
+    font-weight: 500;
+    color: var(--accent);
+}
+
+
+/* ============================================================
+   11. MOTION
+   ------------------------------------------------------------
+   Two things move on this page and both are decorative. The hero
+   strands drift, because interstellar gas is turbulent and a
+   perfectly static veil reads as a printed graphic. The remnant's
+   filaments turn very slowly, because a supernova remnant is
+   expanding and rotating material.
+
+   Nothing carries information, so under prefers-reduced-motion
+   both simply stop — and neither is left in a state that reads
+   as broken, because both are symmetric about their rest pose.
+   ============================================================ */
+
+.neb-hero__veil svg {
+    animation: veil-drift 46s ease-in-out infinite alternate;
+}
+
+@keyframes veil-drift {
+    from { transform: translateX(-50%) translateY(0) scale(1); }
+    to   { transform: translateX(-50%) translateY(-1.4%) scale(1.02); }
+}
+
+.neb--remnant .neb__web,
+.neb--crab .neb__web {
+    animation: web-turn 240s linear infinite;
+}
+
+@keyframes web-turn {
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .neb-hero__veil svg {
+        animation: none !important;
+        transform: translateX(-50%);
+    }
+
+    .neb--remnant .neb__web,
+    .neb--crab .neb__web {
+        animation: none !important;
+        transform: none;
+    }
+}
+
+
+/* ============================================================
+   12. RESPONSIVE
+   ------------------------------------------------------------
+   Desktop-first. Diagrams are coordinate systems, so below their
+   natural width they scroll inside their frame rather than
+   reflowing; everything that is a grid of prose wraps.
+   ============================================================ */
+
+@media (max-width: 1080px) {
+    .neb-famous {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* The index becomes a horizontal scroller before it can wrap onto
+   a second row — --subnav-h is fixed at 46px and every section's
+   scroll-margin-top is computed from it, so a two-row bar would
+   land every anchor jump half a bar too low. Five items clear
+   1023px comfortably; the scroller is insurance. */
+@media (max-width: 1023px) {
+    .subnav__list {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .subnav__list::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .ntype {
+        grid-template-columns: 124px minmax(0, 1fr);
+        gap: var(--s-5);
+    }
+
+    /* The spec list drops under the prose rather than shrinking to
+       a column too narrow for its own values. */
+    .ntype__spec {
+        grid-column: 2;
+        padding-top: 0;
+    }
+
+    .ntype__stage {
+        height: 124px;
+    }
+
+    .myth {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--s-4);
+    }
+}
+
+@media (max-width: 860px) {
+    .fig__frame {
+        padding-bottom: var(--s-3);
+    }
+
+    .fig__svg {
+        min-width: 700px;
+    }
+
+    .neb-hero__veil {
+        height: min(42%, 260px);
+    }
+}
+
+@media (max-width: 620px) {
+    .ntype {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ntype__spec {
+        grid-column: 1;
+    }
+
+    .ntype__stage {
+        height: 140px;
+        justify-items: start;
+    }
+
+    .neb-famous {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

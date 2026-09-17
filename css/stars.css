@@ -1,0 +1,2396 @@
+/* ============================================================
+   CosmoVerse — Stars
+   ------------------------------------------------------------
+   Layer 3. Requires style.css + components.css.
+
+   THE ORGANISING IDEA
+   -------------------
+   For stars, one physical quantity explains almost everything:
+   effective temperature. It sets the colour, the spectral class,
+   the luminosity, the mass, the lifetime and the ending. So this
+   domain is built around a single shared axis.
+
+   Every temperature figure on the page — the spectral ladder, the
+   H–R diagram, the class strips — maps temperature to horizontal
+   position with the *same* base-10 transform, declared once as
+   --tx-* below. Two figures stacked on this page therefore line
+   up column for column, and a reader can carry one axis in their
+   head for the whole scroll.
+
+   The palette is not decorative either. --sp-o … --sp-m are
+   approximate blackbody colours for each class, so a G star on
+   this page is rendered in the colour a G star actually is.
+   ============================================================ */
+
+
+/* ============================================================
+   1. THE STELLAR PALETTE + THE SHARED TEMPERATURE AXIS
+   ============================================================ */
+
+.dm-stars {
+    /* --- True spectral colours -----------------------------
+       Approximate blackbody appearance at each class's
+       mid-range temperature. Note that M is orange, not red:
+       a 3,000 K blackbody is genuinely orange, and "red dwarf"
+       is a historical misnomer. The page says so rather than
+       cheating the colour to match the name.               */
+    --sp-o: #9bb0ff;   /* ≥ 30,000 K   blue          */
+    --sp-b: #aabfff;   /* 10–30,000 K  blue-white    */
+    --sp-a: #cad7ff;   /* 7.5–10,000 K white         */
+    --sp-f: #f8f7ff;   /* 6–7,500 K    yellow-white  */
+    --sp-g: #fff4ea;   /* 5.2–6,000 K  yellow        */
+    --sp-k: #ffd2a1;   /* 3.7–5,200 K  orange        */
+    --sp-m: #ffcc6f;   /* 2.4–3,700 K  orange-red    */
+
+    /* Saturated companions, for glows only. A star's halo in
+       vacuum reads more strongly coloured than its disc. */
+    --gl-o: rgba(110, 145, 255, 0.6);
+    --gl-b: rgba(140, 175, 255, 0.55);
+    --gl-a: rgba(180, 205, 255, 0.5);
+    --gl-f: rgba(225, 232, 255, 0.44);
+    --gl-g: rgba(255, 220, 165, 0.46);
+    --gl-k: rgba(255, 168, 88, 0.5);
+    --gl-m: rgba(255, 132, 60, 0.54);
+
+    /* --- The shared temperature axis -----------------------
+       x% = (log10(42000) − log10(T)) / (log10(42000) − log10(2300))
+       Left edge 42,000 K · right edge 2,300 K · hot on the left,
+       which is the astronomical convention and the reason the
+       H–R diagram's axis runs "backwards".                  */
+    --tx-o:  0%;        /* 42,000 K — left edge      */
+    --tx-ob: 11.58%;    /* 30,000 K — O|B boundary   */
+    --tx-ba: 49.40%;    /* 10,000 K — B|A            */
+    --tx-af: 59.30%;    /*  7,500 K — A|F            */
+    --tx-fg: 66.98%;    /*  6,000 K — F|G            */
+    --tx-gk: 71.91%;    /*  5,200 K — G|K            */
+    --tx-km: 83.63%;    /*  3,700 K — K|M            */
+    --tx-end: 100%;     /*  2,300 K — right edge     */
+
+    /* Class widths, derived from the boundaries above. Any strip
+       that wants to show the sequence uses these as flex bases. */
+    --w-o: 11.58%;
+    --w-b: 37.82%;
+    --w-a: 9.90%;
+    --w-f: 7.68%;
+    --w-g: 4.93%;
+    --w-k: 11.72%;
+    --w-m: 16.37%;
+}
+
+/* The continuous stellar sequence, used as a gradient wherever
+   the page needs to show "all temperatures at once". Stops sit at
+   the true class boundaries, so the gradient is an axis too. */
+.dm-stars {
+    --sequence: linear-gradient(90deg,
+        var(--sp-o) 0%,
+        var(--sp-o) var(--tx-ob),
+        var(--sp-b) 30%,
+        var(--sp-a) var(--tx-ba),
+        var(--sp-f) var(--tx-af),
+        var(--sp-g) var(--tx-fg),
+        var(--sp-g) var(--tx-gk),
+        var(--sp-k) 78%,
+        var(--sp-m) var(--tx-km),
+        #ff9a4d 100%);
+}
+
+
+/* ============================================================
+   2. STAR — the self-luminous body primitive
+   ------------------------------------------------------------
+   Deliberately *not* the .orb primitive from components.css.
+   A planet is lit from outside, so .orb has an offset highlight
+   and a dark terminator. A star is lit from within: its radiance
+   is centred, it has no night side, and its limb darkens
+   symmetrically because we are looking obliquely through more
+   photosphere at the edge.
+
+   Centred radiance versus offset illumination is the single
+   visual cue that separates a star from a world, so the two
+   primitives are kept strictly apart.
+
+       .star--rigel { --st-d: 120px; --st-c: var(--sp-b);
+                      --st-g: var(--gl-b); }
+
+   Markup:
+       <span class="star star--rigel" aria-hidden="true">
+           <span class="star__corona"></span>
+           <span class="star__disc"></span>
+           <span class="star__spikes"></span>
+       </span>
+   ============================================================ */
+
+.star {
+    --st-d: 96px;
+    --st-c: var(--sp-g);
+    --st-g: var(--gl-g);
+    position: relative;
+    flex: none;
+    width: var(--st-d);
+    height: var(--st-d);
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+}
+
+.star__disc {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    /* White-hot centre → class colour → limb darkening. */
+    background: radial-gradient(circle at 50% 50%,
+        #ffffff 0%,
+        #ffffff 16%,
+        color-mix(in srgb, var(--st-c) 62%, #ffffff) 34%,
+        var(--st-c) 62%,
+        color-mix(in srgb, var(--st-c) 82%, #000000) 92%,
+        color-mix(in srgb, var(--st-c) 70%, #000000) 100%);
+    box-shadow:
+        0 0 calc(var(--st-d) * 0.16) color-mix(in srgb, var(--st-c) 70%, transparent),
+        0 0 calc(var(--st-d) * 0.5) var(--st-g),
+        0 0 calc(var(--st-d) * 1.15) var(--st-g);
+}
+
+/* Fallback for engines without color-mix(): a flatter but still
+   correct-coloured disc. */
+@supports not (color: color-mix(in srgb, red, blue)) {
+    .star__disc {
+        background: radial-gradient(circle at 50% 50%,
+            #ffffff 0%, #ffffff 18%, var(--st-c) 58%, var(--st-c) 100%);
+    }
+}
+
+/* Extended atmosphere. Grows and fades on a slow cycle — real
+   stars are not perfectly steady, and it keeps the page alive
+   without anything moving fast enough to distract. */
+.star__corona {
+    position: absolute;
+    z-index: 1;
+    inset: calc(var(--st-d) * -0.42);
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        var(--st-g) 0%,
+        color-mix(in srgb, var(--st-g) 40%, transparent) 34%,
+        transparent 62%);
+    filter: blur(calc(var(--st-d) * 0.06));
+    animation: star-breathe var(--st-cycle, 8s) ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes star-breathe {
+    0%, 100% { transform: scale(1);    opacity: 0.82; }
+    50%      { transform: scale(1.07); opacity: 1; }
+}
+
+/* Four-point diffraction spikes. These are an artefact of the
+   telescope, not the star — so they are reserved for the very
+   brightest objects, where an observer would actually see them. */
+.star__spikes {
+    position: absolute;
+    z-index: 3;
+    inset: calc(var(--st-d) * -0.55);
+    pointer-events: none;
+    opacity: var(--st-spike, 0.7);
+}
+
+.star__spikes::before,
+.star__spikes::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        color-mix(in srgb, var(--st-c) 80%, transparent) 42%,
+        #ffffff 50%,
+        color-mix(in srgb, var(--st-c) 80%, transparent) 58%,
+        transparent 100%);
+}
+
+.star__spikes::before {
+    width: 100%;
+    height: 1.5px;
+    transform: translate(-50%, -50%);
+}
+
+.star__spikes::after {
+    width: 100%;
+    height: 1.5px;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* Photospheric granulation, for stars shown close up. */
+.star__grain {
+    position: absolute;
+    z-index: 4;
+    inset: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+    background-image:
+        radial-gradient(circle at 24% 32%, rgba(255, 255, 255, 0.8) 0%, transparent 8%),
+        radial-gradient(circle at 46% 20%, rgba(0, 0, 0, 0.5) 0%, transparent 7%),
+        radial-gradient(circle at 68% 36%, rgba(255, 255, 255, 0.7) 0%, transparent 7%),
+        radial-gradient(circle at 32% 60%, rgba(0, 0, 0, 0.45) 0%, transparent 8%),
+        radial-gradient(circle at 60% 68%, rgba(255, 255, 255, 0.65) 0%, transparent 7%),
+        radial-gradient(circle at 78% 56%, rgba(0, 0, 0, 0.4) 0%, transparent 6%),
+        radial-gradient(circle at 42% 82%, rgba(255, 255, 255, 0.55) 0%, transparent 7%);
+    animation: star-rotate 120s linear infinite;
+}
+
+@keyframes star-rotate {
+    to { transform: rotate(360deg); }
+}
+
+/* --- Class presets ------------------------------------------
+   Sizes are illustrative and chosen for composition. Every claim
+   about real relative size is made by the radius ledger, which
+   uses a stated logarithmic axis. */
+.star--o { --st-c: var(--sp-o); --st-g: var(--gl-o); }
+.star--b { --st-c: var(--sp-b); --st-g: var(--gl-b); }
+.star--a { --st-c: var(--sp-a); --st-g: var(--gl-a); }
+.star--f { --st-c: var(--sp-f); --st-g: var(--gl-f); }
+.star--g { --st-c: var(--sp-g); --st-g: var(--gl-g); }
+.star--k { --st-c: var(--sp-k); --st-g: var(--gl-k); }
+.star--m { --st-c: var(--sp-m); --st-g: var(--gl-m); }
+
+/* A neutron star is not a photosphere at all — it is a 10 km
+   ball at a million kelvin. Rendered as a hard point source with
+   magnetic beams rather than a soft disc. */
+.star--neutron {
+    --st-c: #e8f2ff;
+    --st-g: rgba(150, 200, 255, 0.7);
+}
+
+.star--neutron .star__disc {
+    background: radial-gradient(circle at 50% 50%,
+        #ffffff 0%, #e8f2ff 30%, #7fb0ff 70%, #3c60c8 100%);
+    box-shadow:
+        0 0 calc(var(--st-d) * 0.5) #cfe4ff,
+        0 0 calc(var(--st-d) * 1.4) rgba(120, 180, 255, 0.75);
+}
+
+.star--neutron .star__spikes {
+    --st-spike: 0.95;
+    inset: calc(var(--st-d) * -1.6);
+}
+
+.star--neutron .star__spikes::before { display: none; }
+
+.star--neutron .star__spikes::after {
+    height: 2px;
+    transform: translate(-50%, -50%) rotate(66deg);
+}
+
+
+/* ============================================================
+   3. DOMAIN SUB-NAVIGATION
+   ------------------------------------------------------------
+   The Stars domain is one long argument in eight movements, so it
+   gets a local index that sticks under the site header. Built from
+   anchors only; the spectral gradient underneath doubles as a
+   reminder of what the domain is about.
+   ============================================================ */
+
+.dm-stars {
+    /* Height of the sticky local index. Declared once because three
+       separate things have to clear it: anchor scroll targets, the
+       catalog's sticky table head, and the sub-nav's own offset. */
+    --subnav-h: 46px;
+}
+
+.subnav {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 900;
+    background: rgba(3, 4, 12, 0.9);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid var(--line);
+}
+
+/* The whole spectral sequence as a 1px rule. */
+.subnav::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 1px;
+    background: var(--sequence);
+    opacity: 0.5;
+}
+
+.subnav__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+.subnav__list a {
+    position: relative;
+    padding: 0.85rem clamp(0.5rem, 1.1vw, 0.9rem);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+    transition: color var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child {
+    padding-left: 0;
+}
+
+.subnav__list a::after {
+    content: '';
+    position: absolute;
+    left: clamp(0.5rem, 1.1vw, 0.9rem);
+    right: clamp(0.5rem, 1.1vw, 0.9rem);
+    bottom: 0;
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+    transform: scaleX(0);
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child::after {
+    left: 0;
+}
+
+.subnav__list a:hover {
+    color: var(--text);
+}
+
+.subnav__list a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Anchor targets have to clear both sticky bars. */
+.shell[id],
+.page-hero[id] {
+    scroll-margin-top: calc(var(--header-h) + var(--subnav-h));
+}
+
+/* Breadcrumb, for pages below the domain root. */
+.crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.crumbs a {
+    color: var(--text-3);
+    transition: color var(--dur-base) var(--ease-out);
+}
+
+.crumbs a:hover {
+    color: var(--accent);
+}
+
+.crumbs li + li::before {
+    content: '/';
+    margin-right: var(--s-3);
+    color: var(--line-strong);
+}
+
+.crumbs [aria-current] {
+    color: var(--text-2);
+}
+
+
+/* ============================================================
+   4. HERO SIGNATURE
+   ------------------------------------------------------------
+   Solar System opens on a planetary limb. Stars opens on a
+   spectrum: the full O→M sequence laid across the frame as a band
+   of light, with the absorption lines that let us read a star's
+   composition from 400 light years away.
+   ============================================================ */
+
+.spectrum-horizon {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 1;
+    height: 44%;
+    pointer-events: none;
+}
+
+/* The dispersed beam itself. */
+.spectrum-horizon::before {
+    content: '';
+    position: absolute;
+    inset: auto 0 24% 0;
+    height: 88px;
+    background: var(--sequence);
+    filter: blur(26px);
+    opacity: 0.4;
+}
+
+/* A sharp core line through the middle of the beam, so the band
+   reads as focused light rather than a soft wash. */
+.spectrum-horizon::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 calc(24% + 42px) 0;
+    height: 2px;
+    background: var(--sequence);
+    box-shadow: 0 0 24px rgba(190, 214, 255, 0.5);
+    opacity: 0.85;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* Fraunhofer lines — the dark gaps where elements in the
+   photosphere have absorbed their own wavelengths. */
+.spectrum-horizon__lines {
+    position: absolute;
+    inset: auto 0 24% 0;
+    height: 88px;
+    background-image:
+        repeating-linear-gradient(90deg,
+            transparent 0 17px,
+            rgba(2, 3, 10, 0.55) 17px 18px,
+            transparent 18px 46px),
+        repeating-linear-gradient(90deg,
+            transparent 0 103px,
+            rgba(2, 3, 10, 0.8) 103px 105px,
+            transparent 105px 219px);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+    filter: blur(1px);
+    opacity: 0.7;
+}
+
+
+/* ============================================================
+   5. SPECTRAL CLASSIFICATION
+   ============================================================ */
+
+/* --- The class strip ---------------------------------------
+   Segment widths come from --w-*, so the strip is a temperature
+   axis: O is narrow because the O range is narrow in log T, and
+   B is wide because it spans 10,000–30,000 K. Reading the strip
+   left to right is reading temperature down.
+   ============================================================ */
+
+.class-strip {
+    display: flex;
+    height: 46px;
+    border: 1px solid var(--line-2);
+    overflow: hidden;
+}
+
+.class-strip__seg {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+    font-family: var(--font-mono);
+    font-size: var(--t-sm);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: rgba(6, 8, 20, 0.82);
+    background: var(--seg-c);
+    box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.16);
+}
+
+.class-strip__seg + .class-strip__seg {
+    border-left: 1px solid rgba(4, 6, 16, 0.5);
+}
+
+.class-strip__seg--o { flex: 0 0 var(--w-o); --seg-c: var(--sp-o); }
+.class-strip__seg--b { flex: 0 0 var(--w-b); --seg-c: var(--sp-b); }
+.class-strip__seg--a { flex: 0 0 var(--w-a); --seg-c: var(--sp-a); }
+.class-strip__seg--f { flex: 0 0 var(--w-f); --seg-c: var(--sp-f); }
+.class-strip__seg--g { flex: 0 0 var(--w-g); --seg-c: var(--sp-g); }
+.class-strip__seg--k { flex: 0 0 var(--w-k); --seg-c: var(--sp-k); }
+.class-strip__seg--m { flex: 0 0 var(--w-m); --seg-c: var(--sp-m); }
+
+/* Absorption lines over the whole strip. Their density is the
+   real reason classification works at all. */
+.class-strip__lines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(90deg,
+        transparent 0 6px,
+        rgba(4, 6, 16, 0.34) 6px 7px,
+        transparent 7px 19px);
+    pointer-events: none;
+}
+
+/* --- The classification ladder ------------------------------ */
+
+.ladder {
+    display: grid;
+    border-top: 1px solid var(--line-2);
+}
+
+.ladder__row {
+    display: grid;
+    /* badge · orb · temperature · description · abundance.
+       The description is the only column that wants to be elastic;
+       giving the fixed-content columns a fixed width stops them
+       hoarding space and leaving a hole mid-row. */
+    grid-template-columns: 68px 84px 196px minmax(0, 1fr) 192px;
+    align-items: center;
+    gap: clamp(var(--s-4), 2vw, var(--s-6));
+    padding: var(--s-4) 0;
+    border-bottom: 1px solid var(--line);
+    transition: background var(--dur-base) var(--ease-out);
+}
+
+.ladder__row:hover {
+    background: linear-gradient(90deg,
+        color-mix(in srgb, var(--row-c) 7%, transparent) 0%,
+        transparent 70%);
+}
+
+.ladder__badge {
+    display: grid;
+    place-items: center;
+    height: 54px;
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: rgba(6, 8, 20, 0.85);
+    background: var(--row-c);
+    box-shadow: 0 0 26px -6px var(--row-g);
+}
+
+.ladder__viz {
+    display: grid;
+    place-items: center;
+}
+
+.ladder__temp {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+}
+
+.ladder__temp small {
+    display: block;
+    margin-top: 3px;
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.ladder__desc {
+    font-size: var(--t-sm);
+    line-height: 1.6;
+    color: var(--text-2);
+}
+
+.ladder__desc b {
+    color: var(--text);
+    font-weight: 500;
+}
+
+/* Abundance. The bar is drawn on a logarithmic scale because a
+   linear one would render O-type stars as literally nothing —
+   they are 0.00003% of main-sequence stars. The figure is
+   printed beside it so the log axis cannot mislead. */
+.ladder__share {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+}
+
+.ladder__bar {
+    position: relative;
+    flex: 1;
+    height: 2px;
+    background: var(--line);
+}
+
+.ladder__bar i {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--share, 10%);
+    min-width: 3px;
+    background: var(--row-c);
+    box-shadow: 0 0 10px -1px var(--row-g);
+}
+
+.ladder__pct {
+    flex: none;
+    width: 62px;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: var(--text-2);
+}
+
+/* Row themes + log-scaled abundance widths.
+   share% = (log10(pct) + 5.6) / 7.5 · 100, clamped ≥ 2. */
+.ladder__row--o { --row-c: var(--sp-o); --row-g: var(--gl-o); --share: 2%; }
+.ladder__row--b { --row-c: var(--sp-b); --row-g: var(--gl-b); --share: 63%; }
+.ladder__row--a { --row-c: var(--sp-a); --row-g: var(--gl-a); --share: 72%; }
+.ladder__row--f { --row-c: var(--sp-f); --row-g: var(--gl-f); --share: 81%; }
+.ladder__row--g { --row-c: var(--sp-g); --row-g: var(--gl-g); --share: 86%; }
+.ladder__row--k { --row-c: var(--sp-k); --row-g: var(--gl-k); --share: 89%; }
+.ladder__row--m { --row-c: var(--sp-m); --row-g: var(--gl-m); --share: 100%; }
+
+
+/* ============================================================
+   6. THE H–R DIAGRAM  ·  the centrepiece
+   ------------------------------------------------------------
+   A real scatter plot, not an illustration of one.
+
+     x  effective temperature, log, DECREASING left to right
+     y  luminosity in solar units, log, 10⁻⁵ → 10⁶
+     right axis  absolute bolometric magnitude, M = 4.74 − 2.5 log L
+
+   Every star and every population region is placed from published
+   (T, L) values through the transform in section 1. Nothing here
+   is positioned by eye.
+
+   Regions are drawn as clouds of overlapping soft ellipses rather
+   than as one rotated bar, because the main sequence is genuinely
+   curved in log-log space — a straight band would be a lie that
+   anyone familiar with the diagram would spot immediately.
+   ============================================================ */
+
+.hr {
+    margin: 0;
+}
+
+.hr__frame {
+    display: grid;
+    grid-template-columns: 74px minmax(0, 1fr) 74px;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.hr__classbar {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.hr__plot {
+    position: relative;
+    grid-column: 2;
+    grid-row: 2;
+    height: clamp(400px, 42vw, 580px);
+    background:
+        radial-gradient(ellipse 70% 60% at 40% 30%, rgba(22, 30, 66, 0.5) 0%, transparent 70%),
+        var(--void);
+    border: 1px solid var(--line-2);
+    border-top: 0;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* --- Graticule ---------------------------------------------- */
+
+.hr__grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    /* Luminosity decades at 10⁶ 10⁴ 10² 1 10⁻² 10⁻⁴ (every 2 dex
+       = 18.18% of an 11-dex axis) and the temperature ticks. */
+    background-image:
+        repeating-linear-gradient(0deg,
+            var(--line) 0 1px,
+            transparent 1px 18.1818%),
+        linear-gradient(90deg, var(--line) 0 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%;
+    opacity: 0.75;
+}
+
+/* Vertical graticule, placed on the real temperature ticks. */
+.hr__vgrid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image:
+        linear-gradient(90deg, transparent calc(1.67% - 0.5px), var(--line) 1.67%, transparent calc(1.67% + 0.5px)),
+        linear-gradient(90deg, transparent calc(25.54% - 0.5px), var(--line) 25.54%, transparent calc(25.54% + 0.5px)),
+        linear-gradient(90deg, transparent calc(49.40% - 0.5px), var(--line) 49.40%, transparent calc(49.40% + 0.5px)),
+        linear-gradient(90deg, transparent calc(59.30% - 0.5px), var(--line) 59.30%, transparent calc(59.30% + 0.5px)),
+        linear-gradient(90deg, transparent calc(66.98% - 0.5px), var(--line) 66.98%, transparent calc(66.98% + 0.5px)),
+        linear-gradient(90deg, transparent calc(73.26% - 0.5px), var(--line) 73.26%, transparent calc(73.26% + 0.5px)),
+        linear-gradient(90deg, transparent calc(80.94% - 0.5px), var(--line) 80.94%, transparent calc(80.94% + 0.5px)),
+        linear-gradient(90deg, transparent calc(90.85% - 0.5px), var(--line) 90.85%, transparent calc(90.85% + 0.5px)),
+        linear-gradient(90deg, transparent calc(97.13% - 0.5px), var(--line) 97.13%, transparent calc(97.13% + 0.5px));
+    opacity: 0.6;
+}
+
+/* --- Population regions -------------------------------------
+   Each is one element carrying many soft ellipse gradients, one
+   per real (T, L) anchor along the population's track. Blur fuses
+   them into a continuous cloud.                              */
+
+.hr__zone {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Main sequence — 28 anchors from O5V to M8V. */
+.hr__zone--ms {
+    filter: blur(11px);
+    opacity: 0.85;
+    background-image:
+        radial-gradient(ellipse 5.6% 9.2% at 0.00% 2.74%,  var(--sp-o), transparent 70%),
+        radial-gradient(ellipse 5.6% 9.2% at 4.36% 5.47%,  var(--sp-o), transparent 70%),
+        radial-gradient(ellipse 5.6% 9.2% at 8.30% 9.09%,  var(--sp-o), transparent 70%),
+        radial-gradient(ellipse 5.6% 9.2% at 11.58% 15.45%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 5.6% 9.2% at 17.31% 16.33%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 5.6% 9.2% at 20.67% 18.37%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 5.6% 9.2% at 24.03% 20.40%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 5.6% 9.2% at 27.85% 23.21%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 5.6% 9.2% at 31.42% 25.68%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 5.6% 9.2% at 34.99% 28.15%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 5.2% 8.6% at 38.29% 29.68%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 5.2% 8.6% at 41.59% 31.22%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 5.2% 8.6% at 44.89% 32.75%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 4.6% 7.6% at 50.14% 37.24%, var(--sp-a), transparent 70%),
+        radial-gradient(ellipse 4.6% 7.6% at 53.23% 39.98%, var(--sp-a), transparent 70%),
+        radial-gradient(ellipse 4.6% 7.6% at 56.32% 42.72%, var(--sp-a), transparent 70%),
+        radial-gradient(ellipse 4.6% 7.6% at 60.24% 47.22%, var(--sp-f), transparent 70%),
+        radial-gradient(ellipse 4.6% 7.6% at 63.45% 50.34%, var(--sp-f), transparent 70%),
+        radial-gradient(ellipse 4.0% 6.6% at 67.28% 52.94%, var(--sp-g), transparent 70%),
+        radial-gradient(ellipse 4.0% 6.6% at 68.32% 54.55%, var(--sp-g), transparent 70%),
+        radial-gradient(ellipse 4.0% 6.6% at 69.61% 55.48%, var(--sp-g), transparent 70%),
+        radial-gradient(ellipse 4.0% 6.6% at 72.25% 57.97%, var(--sp-k), transparent 70%),
+        radial-gradient(ellipse 4.0% 6.6% at 77.59% 62.04%, var(--sp-k), transparent 70%),
+        radial-gradient(ellipse 4.0% 6.6% at 82.36% 64.67%, var(--sp-k), transparent 70%),
+        radial-gradient(ellipse 4.0% 6.6% at 85.35% 66.79%, var(--sp-m), transparent 70%),
+        radial-gradient(ellipse 4.0% 6.6% at 88.96% 72.35%, var(--sp-m), transparent 70%),
+        radial-gradient(ellipse 4.0% 6.6% at 92.37% 76.73%, var(--sp-m), transparent 70%),
+        radial-gradient(ellipse 4.0% 6.6% at 95.78% 81.10%, var(--sp-m), transparent 70%);
+}
+
+/* Red giant branch — cool, luminous, above the main sequence. */
+.hr__zone--giant {
+    filter: blur(15px);
+    opacity: 0.5;
+    background-image:
+        radial-gradient(ellipse 6.5% 10.7% at 71.91% 41.12%, var(--sp-k), transparent 70%),
+        radial-gradient(ellipse 6.5% 10.7% at 74.00% 40.00%, var(--sp-k), transparent 70%),
+        radial-gradient(ellipse 6.5% 10.7% at 74.67% 38.38%, var(--sp-k), transparent 70%),
+        radial-gradient(ellipse 6.5% 10.7% at 77.67% 35.65%, var(--sp-k), transparent 70%),
+        radial-gradient(ellipse 6.5% 10.7% at 80.94% 32.75%, var(--sp-k), transparent 70%),
+        radial-gradient(ellipse 6.5% 10.7% at 83.63% 30.01%, var(--sp-m), transparent 70%),
+        radial-gradient(ellipse 6.5% 10.7% at 85.55% 27.69%, var(--sp-m), transparent 70%);
+}
+
+/* Supergiants — a near-horizontal ceiling across every colour. */
+.hr__zone--super {
+    filter: blur(17px);
+    opacity: 0.42;
+    background-image:
+        radial-gradient(ellipse 7% 11.5% at 17.86% 13.84%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 23.50% 12.40%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 29.17% 11.11%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 36.15% 10.05%, var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 43.13% 9.09%,  var(--sp-b), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 50.11% 9.50%,  var(--sp-a), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 57.09% 9.97%,  var(--sp-a), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 63.54% 10.50%, var(--sp-f), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 69.99% 11.11%, var(--sp-g), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 75.50% 10.30%, var(--sp-k), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 80.94% 9.51%,  var(--sp-k), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 83.75% 8.80%,  var(--sp-k), transparent 70%),
+        radial-gradient(ellipse 7% 11.5% at 86.55% 8.06%,  var(--sp-m), transparent 70%);
+}
+
+/* White dwarfs — hot but tiny, so 10,000× fainter than the main
+   sequence at the same colour. That vertical gap is the whole
+   reason luminosity has to be on the y axis. */
+.hr__zone--wd {
+    /* Blobs sized and blurred to overlap. Drawn any tighter, the
+       cooling sequence renders as a row of separate dots instead of
+       the continuous track it is. */
+    filter: blur(14px);
+    opacity: 0.78;
+    background-image:
+        radial-gradient(ellipse 4.8% 7.9% at 11.58% 57.28%, #b8ccff, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 14.72% 60.46%, #b8ccff, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 17.86% 63.64%, #b8ccff, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 21.70% 65.45%, #c2d4ff, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 25.54% 67.25%, #c8d8ff, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 30.50% 69.63%, #dbe6ff, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 35.45% 72.01%, #dbe6ff, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 40.79% 74.18%, #dbe6ff, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 46.13% 76.35%, #e8eeff, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 51.61% 78.73%, #f4f2ff, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 57.09% 81.10%, #f4f2ff, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 62.04% 83.27%, #fbf4f0, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 66.98% 85.44%, #ffeedd, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 70.12% 86.81%, #ffeedd, transparent 70%),
+        radial-gradient(ellipse 4.8% 7.9% at 73.26% 88.17%, #ffeedd, transparent 70%);
+}
+
+/* --- Instability strip -------------------------------------
+   Where a star's envelope cannot settle and it pulses. Cepheids
+   sit at the top of it, RR Lyrae lower down. Hatched rather than
+   filled, because it is a region of behaviour, not a population.
+   ============================================================ */
+
+.hr__strip {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    clip-path: polygon(57.5% 12%, 61.8% 12%, 66.4% 48%, 62.1% 48%);
+    background-image: repeating-linear-gradient(102deg,
+        rgba(207, 225, 255, 0.5) 0 1px,
+        transparent 1px 8px);
+    opacity: 0.55;
+}
+
+/* --- Region labels ----------------------------------------- */
+
+.hr__tag {
+    position: absolute;
+    z-index: 4;
+    left: var(--x);
+    top: var(--y);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    white-space: nowrap;
+    pointer-events: none;
+    text-shadow: 0 0 10px rgba(2, 3, 10, 0.95), 0 0 20px rgba(2, 3, 10, 0.8);
+}
+
+.hr__tag small {
+    display: block;
+    margin-top: 3px;
+    letter-spacing: 0.14em;
+    color: var(--text-4);
+}
+
+/* The main-sequence label follows the band's own local slope where
+   it is placed — around 20° at the B-type end of the plot. */
+.hr__tag--ms {
+    transform: rotate(20deg);
+    transform-origin: left center;
+    color: var(--text);
+}
+
+.hr__tag--strip {
+    color: var(--accent);
+    opacity: 0.85;
+    transform: rotate(74deg);
+    transform-origin: left center;
+}
+
+/* --- Plotted stars ------------------------------------------ */
+
+.hr-star {
+    position: absolute;
+    z-index: 6;
+    left: var(--x);
+    top: var(--y);
+    width: var(--d, 8px);
+    height: var(--d, 8px);
+    /* Layout-based centring keeps transform free for the hover. */
+    margin: calc(var(--d, 8px) / -2) 0 0 calc(var(--d, 8px) / -2);
+    border-radius: 50%;
+    background: radial-gradient(circle at 42% 38%, #ffffff 0%, var(--c) 62%, var(--c) 100%);
+    box-shadow:
+        0 0 0 1.5px rgba(3, 5, 14, 0.9),
+        0 0 calc(var(--d, 8px) * 1.3) var(--g);
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.hr-star:hover {
+    transform: scale(1.5);
+    z-index: 9;
+}
+
+.hr-star__n {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(var(--lx, 10px), calc(-50% + var(--ly, 0px)));
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--text-2);
+    white-space: nowrap;
+    pointer-events: none;
+    text-shadow: 0 0 8px rgba(2, 3, 10, 1), 0 0 16px rgba(2, 3, 10, 0.9);
+}
+
+/* Right-hand labels flip to sit on the star's left. */
+.hr-star--l .hr-star__n {
+    transform: translate(calc(-100% + var(--lx, -10px)), calc(-50% + var(--ly, 0px)));
+}
+
+.hr-star:hover .hr-star__n {
+    color: var(--text);
+}
+
+/* Hover readout. An enhancement only — the same figures are in
+   the visually-hidden data table beside the diagram. */
+.hr-star__d {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 9px);
+    transform: translateX(-50%) scale(0.94);
+    padding: 0.36rem 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.09em;
+    line-height: 1.5;
+    text-transform: uppercase;
+    color: var(--text);
+    background: rgba(4, 6, 16, 0.96);
+    border: 1px solid var(--line-2);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-fast) var(--ease-out),
+                transform var(--dur-fast) var(--ease-out);
+}
+
+.hr-star:hover .hr-star__d {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.hr-star__d b {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+/* The Sun is the calibration point for every axis on this chart,
+   so it gets a crosshair instead of just a dot. */
+.hr-star--sun {
+    --d: 11px;
+    z-index: 8;
+}
+
+.hr-star--sun::before,
+.hr-star--sun::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: var(--sp-g);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.hr-star--sun::before {
+    width: 46px;
+    height: 1px;
+    transform: translate(-50%, -50%);
+}
+
+.hr-star--sun::after {
+    width: 1px;
+    height: 46px;
+    transform: translate(-50%, -50%);
+}
+
+.hr-star--sun .hr-star__n {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* --- Axes --------------------------------------------------- */
+
+.hr__ax {
+    position: relative;
+}
+
+.hr__ax--lum  { grid-column: 1; grid-row: 2; }
+.hr__ax--mag  { grid-column: 3; grid-row: 2; }
+.hr__ax--temp { grid-column: 2; grid-row: 3; height: 46px; }
+
+.hr__t {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+    white-space: nowrap;
+}
+
+/* Vertical axes: ticks sit at --at from the top. */
+.hr__ax--lum .hr__t,
+.hr__ax--mag .hr__t {
+    top: var(--at);
+    transform: translateY(-50%);
+}
+
+.hr__ax--lum .hr__t {
+    right: var(--s-3);
+    text-align: right;
+}
+
+.hr__ax--mag .hr__t {
+    left: var(--s-3);
+}
+
+/* Horizontal axis: ticks sit at --at from the left. */
+.hr__ax--temp .hr__t {
+    top: var(--s-3);
+    left: var(--at);
+    transform: translateX(-50%);
+}
+
+.hr__ax--temp .hr__t::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: calc(var(--s-3) * -1);
+    width: 1px;
+    height: 6px;
+    background: var(--line-strong);
+    transform: translateX(-50%);
+}
+
+.hr__ax-name {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.hr__ax--lum .hr__ax-name,
+.hr__ax--mag .hr__ax-name {
+    top: 50%;
+    left: 50%;
+    white-space: nowrap;
+}
+
+.hr__ax--lum .hr__ax-name {
+    transform: translate(-50%, -50%) rotate(-90deg);
+    left: -6px;
+}
+
+.hr__ax--mag .hr__ax-name {
+    transform: translate(-50%, -50%) rotate(90deg);
+    left: calc(100% + 6px);
+}
+
+.hr__ax--temp .hr__ax-name {
+    left: 50%;
+    bottom: -4px;
+    transform: translateX(-50%);
+}
+
+/* Legend below the figure. */
+.hr__key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3) var(--s-6);
+    margin-top: var(--s-5);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--line);
+}
+
+.hr__key span {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.hr__key i {
+    width: 22px;
+    height: 8px;
+    flex: none;
+    border-radius: 4px;
+    background: var(--key-c);
+    box-shadow: 0 0 12px -2px var(--key-c);
+}
+
+
+/* ============================================================
+   7. FORMATION TRACK
+   ------------------------------------------------------------
+   Five stages on one timeline. Each stage is a small CSS scene
+   rather than an icon, so the sequence shows the actual physical
+   change: a cold cloud, a collapsing core, a protostar throwing
+   bipolar jets, a T Tauri star clearing its disc, then ignition.
+   ============================================================ */
+
+.track {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--s-5);
+    counter-reset: stage;
+}
+
+.track__step {
+    position: relative;
+    counter-increment: stage;
+    padding-top: var(--s-6);
+}
+
+/* The timeline itself, threaded through the node dots. */
+.track__step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: calc(var(--s-5) * -1);
+    height: 1px;
+    background: var(--line-2);
+}
+
+.track__step:last-child::before {
+    right: 0;
+    background: linear-gradient(90deg, var(--line-2) 0%, transparent 100%);
+}
+
+.track__step::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--void);
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.track__time {
+    display: block;
+    margin-bottom: var(--s-5);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.9;
+}
+
+.track__time b {
+    display: block;
+    margin-top: 3px;
+    font-weight: 400;
+    color: var(--text-4);
+}
+
+.track__scene {
+    position: relative;
+    height: 132px;
+    margin-bottom: var(--s-4);
+    background: radial-gradient(ellipse 70% 70% at 50% 52%, rgba(18, 24, 54, 0.5) 0%, transparent 72%);
+    overflow: hidden;
+}
+
+.track__label {
+    font-size: var(--t-md);
+    font-weight: 500;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.track__label::before {
+    content: counter(stage, decimal-leading-zero) ' ';
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    color: var(--text-4);
+}
+
+.track__text {
+    margin-top: var(--s-3);
+    font-size: var(--t-sm);
+    line-height: 1.62;
+    color: var(--text-3);
+}
+
+/* --- Stage 1: cold molecular cloud ------------------------- */
+.scene-cloud {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(ellipse 40% 34% at 34% 44%, rgba(58, 48, 82, 0.9) 0%, transparent 70%),
+        radial-gradient(ellipse 36% 40% at 62% 56%, rgba(44, 40, 74, 0.85) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 26% at 50% 32%, rgba(70, 56, 92, 0.7) 0%, transparent 72%);
+    filter: blur(5px);
+}
+
+/* Background stars reddened by the dust in front of them. */
+.scene-cloud::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1.2px 1.2px at 22% 26%, rgba(255, 210, 161, 0.9), transparent),
+        radial-gradient(1px 1px at 74% 30%, rgba(255, 204, 111, 0.8), transparent),
+        radial-gradient(1.4px 1.4px at 58% 74%, rgba(255, 226, 190, 0.85), transparent),
+        radial-gradient(1px 1px at 30% 68%, rgba(255, 190, 130, 0.7), transparent);
+}
+
+/* --- Stage 2: gravitational collapse ---------------------- */
+.scene-collapse {
+    position: absolute;
+    inset: 0;
+}
+
+.scene-collapse::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(ellipse 26% 22% at 50% 50%, rgba(120, 96, 150, 0.85) 0%, transparent 72%),
+        radial-gradient(ellipse 46% 40% at 50% 50%, rgba(52, 44, 82, 0.6) 0%, transparent 72%);
+    filter: blur(4px);
+}
+
+/* Infall streamers. */
+.scene-collapse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            transparent 0deg 16deg,
+            rgba(190, 170, 220, 0.32) 16deg 17.5deg,
+            transparent 17.5deg 34deg);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 14%, #000 34%, transparent 62%);
+            mask-image: radial-gradient(circle at 50% 50%, transparent 14%, #000 34%, transparent 62%);
+}
+
+/* --- Stage 3: protostar with disc and bipolar jets --------- */
+.scene-proto {
+    position: absolute;
+    inset: 0;
+}
+
+/* Accretion disc, seen close to edge-on. */
+.scene-proto::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 104px;
+    height: 15px;
+    transform: translate(-50%, -50%) rotate(-9deg);
+    border-radius: 50%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(190, 150, 120, 0.5) 18%,
+        rgba(255, 214, 170, 0.85) 50%,
+        rgba(190, 150, 120, 0.5) 82%,
+        transparent 100%);
+    filter: blur(2.5px);
+}
+
+/* Twin jets along the rotation axis. */
+.scene-proto::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 116px;
+    transform: translate(-50%, -50%) rotate(-9deg);
+    background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(150, 190, 255, 0.55) 22%,
+        rgba(230, 240, 255, 0.9) 50%,
+        rgba(150, 190, 255, 0.55) 78%,
+        transparent 100%);
+    clip-path: polygon(50% 0%, 64% 42%, 64% 58%, 50% 100%, 36% 58%, 36% 42%);
+    filter: blur(1.2px);
+}
+
+/* --- Stage 4: T Tauri star --------------------------------
+   The star is assembled by now, so it is drawn — with the thinning
+   disc crossing in front of it, which is what "nearly edge-on"
+   actually looks like. */
+.scene-ttauri {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+}
+
+.scene-ttauri .star {
+    z-index: 2;
+}
+
+.scene-ttauri::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 118px;
+    height: 10px;
+    transform: translate(-50%, -50%) rotate(-7deg);
+    border-radius: 50%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(180, 150, 130, 0.34) 14%,
+        rgba(230, 200, 172, 0.55) 50%,
+        rgba(180, 150, 130, 0.34) 86%,
+        transparent 100%);
+    filter: blur(2px);
+    z-index: 3;
+}
+
+/* Gaps where forming planets have swept the disc clear. */
+.scene-ttauri::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 118px;
+    height: 10px;
+    transform: translate(-50%, -50%) rotate(-7deg);
+    background-image:
+        linear-gradient(90deg,
+            transparent 22%, rgba(4, 6, 16, 0.95) 26%, transparent 30%),
+        linear-gradient(90deg,
+            transparent 70%, rgba(4, 6, 16, 0.95) 74%, transparent 78%);
+    z-index: 4;
+}
+
+/* --- Stage 5: ignition ------------------------------------ */
+.scene-zams {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+}
+
+
+/* ============================================================
+   8. EVOLUTION FORK
+   ------------------------------------------------------------
+   Mass is destiny. Five bands of initial mass, five completely
+   different endings. Each track is a horizontal chain of stages
+   that terminates in a remnant, and each is tinted by where its
+   star sits on the temperature sequence.
+   ============================================================ */
+
+.fork {
+    display: grid;
+    border-top: 1px solid var(--line-2);
+}
+
+.fork__track {
+    display: grid;
+    grid-template-columns: 132px minmax(0, 1fr) 128px;
+    align-items: center;
+    gap: clamp(var(--s-4), 2.2vw, var(--s-6));
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid var(--line);
+    transition: background var(--dur-base) var(--ease-out);
+}
+
+.fork__track:hover {
+    background: linear-gradient(90deg,
+        color-mix(in srgb, var(--tk-c) 8%, transparent) 0%,
+        transparent 78%);
+}
+
+.fork__mass {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+}
+
+.fork__mass small {
+    display: block;
+    margin-top: 4px;
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--tk-c);
+    opacity: 0.85;
+}
+
+/* The chain. A hairline runs behind the nodes; each node is a
+   labelled dot with a small star render above it. */
+.fork__chain {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 58px;
+}
+
+.fork__chain::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg,
+        var(--tk-c) 0%,
+        color-mix(in srgb, var(--tk-c) 40%, transparent) 70%,
+        transparent 100%);
+    opacity: 0.5;
+}
+
+/* The node is only as tall as its dot, so `align-items: center` on
+   the chain puts the dot exactly on the connector line. The label
+   hangs below it absolutely — stacking them in flow instead would
+   push the dot above the line by half the label's height. */
+.fork__node {
+    position: relative;
+    display: block;
+    flex: none;
+    width: var(--nd, 9px);
+    height: var(--nd, 9px);
+}
+
+.fork__node i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 36%, #fff 0%, var(--nd-c, var(--tk-c)) 66%, var(--nd-c, var(--tk-c)) 100%);
+    /* First shadow knocks the connector line out from under the dot. */
+    box-shadow:
+        0 0 0 4px var(--abyss),
+        0 0 12px color-mix(in srgb, var(--nd-c, var(--tk-c)) 70%, transparent);
+}
+
+.fork__node b {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 21ch;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* The chain is justified edge to edge, so a centred label on the
+   first or last node hangs outside the chain and collides with the
+   mass column or the outcome chip. The end labels align inward. */
+.fork__node:first-child b {
+    left: 0;
+    transform: none;
+    text-align: left;
+}
+
+.fork__node:last-child b {
+    left: auto;
+    right: 0;
+    transform: none;
+    text-align: right;
+}
+
+.fork__end {
+    justify-self: end;
+    padding: 0.3rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgba(6, 8, 20, 0.9);
+    background: var(--tk-c);
+    box-shadow: 0 0 22px -6px var(--tk-c);
+}
+
+.fork__end--dim {
+    color: var(--tk-c);
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--tk-c) 45%, transparent);
+    box-shadow: none;
+}
+
+.fork__track--sub    { --tk-c: #a2724f; }
+.fork__track--dwarf  { --tk-c: var(--sp-m); }
+.fork__track--solar  { --tk-c: var(--sp-g); }
+.fork__track--massive{ --tk-c: var(--sp-b); }
+.fork__track--giant  { --tk-c: var(--sp-o); }
+
+/* The Sun's own track is called out, since it is the one the
+   reader has a stake in. */
+.fork__track--solar .fork__mass::after {
+    content: 'our Sun';
+    display: block;
+    margin-top: 4px;
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+
+/* ============================================================
+   9. RADIUS + LIFETIME LEDGERS
+   ------------------------------------------------------------
+   Both quantities span too many powers of ten for a linear axis,
+   so both are logarithmic and both say so. The ledger primitive
+   comes from components.css; only the --reach values are here.
+   ============================================================ */
+
+/* Radius. reach% = (log10(R/R☉) + 5) / 8.5 · 100 */
+.ledger--radius .ledger__row--neutron  { --reach: 1.9%; }
+.ledger--radius .ledger__row--wd       { --reach: 34.4%; }
+.ledger--radius .ledger__row--reddwarf { --reach: 49.3%; }
+.ledger--radius .ledger__row--sun      { --reach: 58.8%; }
+.ledger--radius .ledger__row--sirius   { --reach: 61.6%; }
+.ledger--radius .ledger__row--arcturus { --reach: 75.4%; }
+.ledger--radius .ledger__row--aldebaran{ --reach: 78.3%; }
+.ledger--radius .ledger__row--betelgeuse { --reach: 92.4%; }
+.ledger--radius .ledger__row--uyscuti  { --reach: 94.9%; }
+
+/* Main-sequence lifetime. reach% = (log10(years) − 6) / 7.2 · 100
+   Note this ledger runs the *opposite* way to every other one on
+   the site: more mass means a shorter bar. That inversion is the
+   point of the figure. */
+.ledger--life .ledger__row--m60  { --reach: 6.7%; }
+.ledger--life .ledger__row--m25  { --reach: 10.8%; }
+.ledger--life .ledger__row--m10  { --reach: 18.1%; }
+.ledger--life .ledger__row--m5   { --reach: 25.7%; }
+.ledger--life .ledger__row--m2   { --reach: 42.2%; }
+.ledger--life .ledger__row--m1   { --reach: 55.6%; }
+.ledger--life .ledger__row--m05  { --reach: 68.1%; }
+.ledger--life .ledger__row--m01  { --reach: 97.2%; }
+
+/* Tint each row's bar by the star's own colour, so the ledgers
+   carry the same temperature language as everything else. */
+.ledger--tinted .ledger__fill {
+    background: linear-gradient(90deg,
+        color-mix(in srgb, var(--row-c) 55%, transparent) 0%,
+        var(--row-c) 100%);
+    box-shadow: 0 0 14px -3px var(--row-c);
+}
+
+.ledger--tinted .ledger__fill::after {
+    background: var(--row-c);
+    box-shadow: 0 0 12px var(--row-c);
+}
+
+.ledger__row--o-tint { --row-c: var(--sp-o); }
+.ledger__row--b-tint { --row-c: var(--sp-b); }
+.ledger__row--a-tint { --row-c: var(--sp-a); }
+.ledger__row--f-tint { --row-c: var(--sp-f); }
+.ledger__row--g-tint { --row-c: var(--sp-g); }
+.ledger__row--k-tint { --row-c: var(--sp-k); }
+.ledger__row--m-tint { --row-c: var(--sp-m); }
+.ledger__row--wd-tint { --row-c: #dbe6ff; }
+.ledger__row--ns-tint { --row-c: #cfe4ff; }
+
+
+/* ============================================================
+   10. BINARY SYSTEM
+   ------------------------------------------------------------
+   Two stars about a common barycentre, viewed nearly edge-on so
+   that one genuinely passes in front of the other. The tilt is a
+   real 3D rotation with preserve-3d, which means the browser
+   depth-sorts the two stars for us: the eclipse is not faked with
+   z-index, it happens because the near star is nearer.
+
+   Orbit radii are inverse to mass, as they must be — Algol A is
+   about 4.5× the mass of Algol B, so it circles 4.5× closer in.
+   ============================================================ */
+
+.binary {
+    position: relative;
+    height: 250px;
+    perspective: 900px;
+}
+
+.binary__stage {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transform: rotateX(76deg);
+}
+
+/* Orbit outlines, lying in the orbital plane. */
+.binary__path {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--r) * 2);
+    height: calc(var(--r) * 2);
+    margin: calc(var(--r) * -1) 0 0 calc(var(--r) * -1);
+    border: 1px solid var(--line-2);
+    border-radius: 50%;
+}
+
+.binary__path--a { --r: 34px; }
+.binary__path--b { --r: 152px; }
+
+/* Barycentre. Both stars orbit this point, not each other. */
+.binary__bary {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 9px;
+    height: 9px;
+    margin: -4.5px 0 0 -4.5px;
+    transform: rotateX(-76deg);
+}
+
+.binary__bary::before,
+.binary__bary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: var(--accent);
+    opacity: 0.7;
+}
+
+.binary__bary::before {
+    width: 11px;
+    height: 1px;
+    transform: translate(-50%, -50%);
+}
+
+.binary__bary::after {
+    width: 1px;
+    height: 11px;
+    transform: translate(-50%, -50%);
+}
+
+.binary__arm {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    animation: bin-orbit 18s linear infinite;
+}
+
+/* Arm A defines phase zero. */
+.binary__arm--a {
+    animation-delay: 0s;
+}
+
+/* Half a period out of phase: the two stars are always opposite. */
+.binary__arm--b {
+    animation-delay: -9s;
+}
+
+@keyframes bin-orbit {
+    to { transform: rotate(360deg); }
+}
+
+/* Zero-size hub offset to the orbital radius. Children overflow
+   and sit centred on the point. */
+.binary__hub {
+    position: absolute;
+    top: 50%;
+    left: calc(50% + var(--r));
+    width: 0;
+    height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+}
+
+.binary__hub--a { --r: 34px; }
+.binary__hub--b { --r: 152px; }
+
+/* Cancels the plane tilt so each star is a circle again. */
+.binary__upright {
+    display: flex;
+    transform: rotateX(-76deg);
+    transform-style: preserve-3d;
+}
+
+.binary__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3) var(--s-6);
+    margin-top: var(--s-4);
+}
+
+.binary__legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.binary__legend i {
+    width: 9px;
+    height: 9px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--key-c);
+    box-shadow: 0 0 10px var(--key-c);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* Frozen just before mid-eclipse, which is the informative
+       moment rather than an arbitrary one. */
+    .binary__arm {
+        animation: none !important;
+        transform: rotate(64deg);
+    }
+
+    .binary__arm--b {
+        transform: rotate(244deg);
+    }
+}
+
+
+/* ============================================================
+   11. LIGHT CURVES
+   ------------------------------------------------------------
+   Brightness against time — the measurement that turned variable
+   stars from a curiosity into a distance ladder.
+
+   Each curve is a single element whose clip-path polygon traces
+   the real shape of the published light curve. No images, no
+   drawing library: the data *is* the geometry.
+
+   Magnitude runs the astronomer's way, brighter upward, so a dip
+   in the trace is a dip in brightness.
+   ============================================================ */
+
+.curve {
+    position: relative;
+    height: 200px;
+    background:
+        linear-gradient(180deg, rgba(12, 16, 40, 0.5) 0%, transparent 70%),
+        var(--void);
+    border: 1px solid var(--line-2);
+    overflow: hidden;
+}
+
+.curve__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 25%),
+        repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 10%);
+    opacity: 0.6;
+}
+
+.curve__fill {
+    position: absolute;
+    inset: 0;
+    clip-path: var(--trace);
+    background: linear-gradient(180deg,
+        color-mix(in srgb, var(--curve-c, var(--accent)) 62%, transparent) 0%,
+        color-mix(in srgb, var(--curve-c, var(--accent)) 26%, transparent) 34%,
+        color-mix(in srgb, var(--curve-c, var(--accent)) 7%, transparent) 68%,
+        transparent 100%);
+}
+
+/* The measured line itself.
+
+   A vertical gradient cannot do this: it would light the top of the
+   *box*, not the top of the curve, so the line would vanish wherever
+   the trace dips. Instead --stroke is a second closed polygon that
+   runs along the curve and then back again a couple of per cent
+   lower — a genuine stroked path, clipped out of a solid fill. */
+.curve__line {
+    position: absolute;
+    inset: 0;
+    clip-path: var(--stroke);
+    background: linear-gradient(90deg,
+        color-mix(in srgb, var(--curve-c, var(--accent)) 78%, #ffffff) 0%,
+        #ffffff 50%,
+        color-mix(in srgb, var(--curve-c, var(--accent)) 78%, #ffffff) 100%);
+    filter: drop-shadow(0 0 5px var(--curve-c, var(--accent)))
+            drop-shadow(0 0 12px var(--curve-c, var(--accent)));
+}
+
+.curve__ax {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.curve__ax--y  { top: var(--s-3); left: var(--s-3); }
+.curve__ax--y2 { bottom: var(--s-3); left: var(--s-3); }
+.curve__ax--x  { bottom: var(--s-3); right: var(--s-3); }
+
+/* Marks a feature on the trace and names it. */
+.curve__pin {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    z-index: 3;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    white-space: nowrap;
+    transform: translate(-50%, 0);
+    text-shadow: 0 0 8px rgba(2, 3, 10, 1);
+}
+
+.curve__pin::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -14px;
+    width: 1px;
+    height: 10px;
+    background: var(--accent);
+    opacity: 0.65;
+    transform: translateX(-50%);
+}
+
+/* --- Algol: an eclipsing binary ----------------------------
+   Flat outside eclipse. The deep V is the cool subgiant crossing
+   the hot primary; the shallow dip half a period later is the
+   primary crossing the secondary. Two dips per period is the
+   signature of an eclipsing system rather than a pulsating one.
+   Magnitude axis 1.9 (top) → 3.6 (bottom).             */
+.curve--algol {
+    --curve-c: var(--sp-b);
+    --trace: polygon(
+        0% 18.4%, 15% 18.4%,
+        18% 22%, 20.5% 34%, 22.5% 55%, 24% 72%, 25% 78.1%,
+        26% 72%, 27.5% 55%, 29.5% 34%, 32% 22%, 35% 18.4%,
+        65% 18.4%, 68% 19.2%, 71% 20.6%, 75% 21.2%,
+        79% 20.6%, 82% 19.2%, 85% 18.4%,
+        100% 18.4%, 100% 100%, 0% 100%
+    );
+    --stroke: polygon(
+        0% 18.4%, 15% 18.4%,
+        18% 22%, 20.5% 34%, 22.5% 55%, 24% 72%, 25% 78.1%,
+        26% 72%, 27.5% 55%, 29.5% 34%, 32% 22%, 35% 18.4%,
+        65% 18.4%, 68% 19.2%, 71% 20.6%, 75% 21.2%,
+        79% 20.6%, 82% 19.2%, 85% 18.4%,
+        100% 18.4%, 100% 21%, 85% 21%,
+        82% 21.8%, 79% 23.2%, 75% 23.8%, 71% 23.2%, 68% 21.8%, 65% 21%,
+        35% 21%, 32% 24.6%, 29.5% 36.6%, 27.5% 57.6%, 26% 74.6%,
+        25% 80.7%, 24% 74.6%, 22.5% 57.6%, 20.5% 36.6%, 18% 24.6%,
+        15% 21%, 0% 21%
+    );
+}
+
+/* --- Delta Cephei: a pulsating variable --------------------
+   The sawtooth is diagnostic: a fast rise, then a slow decline as
+   the envelope falls back. The period tracks the true luminosity,
+   which is why these stars measure the distance to other
+   galaxies. Magnitude axis 3.3 (top) → 4.5 (bottom).    */
+.curve--cepheid {
+    --curve-c: var(--sp-f);
+    --trace: polygon(
+        0% 79.3%, 3% 62%, 6% 46%, 9% 32%, 12% 23%, 15% 20%,
+        20% 22%, 26% 27%, 33% 34%, 40% 41%, 48% 48%,
+        56% 55%, 64% 61%, 72% 67%, 80% 72%, 88% 76%,
+        94% 78.4%, 100% 79.3%, 100% 100%, 0% 100%
+    );
+    --stroke: polygon(
+        0% 79.3%, 3% 62%, 6% 46%, 9% 32%, 12% 23%, 15% 20%,
+        20% 22%, 26% 27%, 33% 34%, 40% 41%, 48% 48%,
+        56% 55%, 64% 61%, 72% 67%, 80% 72%, 88% 76%,
+        94% 78.4%, 100% 79.3%, 100% 81.9%,
+        94% 81%, 88% 78.6%, 80% 74.6%, 72% 69.6%, 64% 63.6%,
+        56% 57.6%, 48% 50.6%, 40% 43.6%, 33% 36.6%, 26% 29.6%,
+        20% 24.6%, 15% 22.6%, 12% 25.6%, 9% 34.6%, 6% 48.6%,
+        3% 64.6%, 0% 81.9%
+    );
+}
+
+
+/* ============================================================
+   12. STAR CATALOG
+   ------------------------------------------------------------
+   A real data table with a CSS-only spectral filter, built on the
+   same checked-radio technique as the site's mobile navigation.
+   No scripting, and the filter degrades to "everything visible"
+   if the selector is ever unsupported.
+   ============================================================ */
+
+/* Scoping root. The filter selectors all reach forward from the
+   radios inside it, so the order of children matters:
+   radios → .cat__bar → .cat__status → .cat__wrap */
+.cat {
+    position: relative;
+}
+
+.cat__radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.cat__bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    /* Shrink-wrapped: stretched to full width, the hairline
+       background shows through as an empty grey cell after the
+       last chip and reads as a broken control. */
+    width: fit-content;
+    max-width: 100%;
+    margin-bottom: var(--s-5);
+    background: var(--line-2);
+    border: 1px solid var(--line-2);
+}
+
+.cat__chip {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    padding: 0.6rem 0.95rem;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    background: var(--abyss);
+    cursor: pointer;
+    transition: color var(--dur-base) var(--ease-out),
+                background var(--dur-base) var(--ease-out);
+}
+
+.cat__chip::before {
+    content: '';
+    width: 9px;
+    height: 9px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--chip-c, var(--text-4));
+    box-shadow: 0 0 10px -1px var(--chip-c, transparent);
+}
+
+.cat__chip b {
+    font-weight: 400;
+    color: var(--text-4);
+}
+
+.cat__chip:hover {
+    color: var(--text);
+    background: var(--deep);
+}
+
+.cat__chip--o { --chip-c: var(--sp-o); }
+.cat__chip--b { --chip-c: var(--sp-b); }
+.cat__chip--a { --chip-c: var(--sp-a); }
+.cat__chip--f { --chip-c: var(--sp-f); }
+.cat__chip--g { --chip-c: var(--sp-g); }
+.cat__chip--k { --chip-c: var(--sp-k); }
+.cat__chip--m { --chip-c: var(--sp-m); }
+.cat__chip--all { --chip-c: transparent; }
+
+.cat__chip--all::before {
+    background: var(--sequence);
+    border-radius: 2px;
+    width: 22px;
+}
+
+/* Selected state. */
+#f-all:checked ~ .cat__bar [for="f-all"],
+#f-o:checked   ~ .cat__bar [for="f-o"],
+#f-b:checked   ~ .cat__bar [for="f-b"],
+#f-a:checked   ~ .cat__bar [for="f-a"],
+#f-f:checked   ~ .cat__bar [for="f-f"],
+#f-g:checked   ~ .cat__bar [for="f-g"],
+#f-k:checked   ~ .cat__bar [for="f-k"],
+#f-m:checked   ~ .cat__bar [for="f-m"],
+#f-wd:checked  ~ .cat__bar [for="f-wd"] {
+    color: var(--text);
+    background: var(--surface-raised);
+    box-shadow: inset 0 1px 0 0 var(--accent);
+}
+
+/* Keyboard focus has to land on the label, because the radio it
+   belongs to is positioned off-screen. */
+#f-all:focus-visible ~ .cat__bar [for="f-all"],
+#f-o:focus-visible   ~ .cat__bar [for="f-o"],
+#f-b:focus-visible   ~ .cat__bar [for="f-b"],
+#f-a:focus-visible   ~ .cat__bar [for="f-a"],
+#f-f:focus-visible   ~ .cat__bar [for="f-f"],
+#f-g:focus-visible   ~ .cat__bar [for="f-g"],
+#f-k:focus-visible   ~ .cat__bar [for="f-k"],
+#f-m:focus-visible   ~ .cat__bar [for="f-m"],
+#f-wd:focus-visible  ~ .cat__bar [for="f-wd"] {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+
+.cat__chip--wd { --chip-c: #dbe6ff; }
+
+/* The filter itself. */
+#f-o:checked  ~ .cat__wrap tbody tr:not(.is-o),
+#f-b:checked  ~ .cat__wrap tbody tr:not(.is-b),
+#f-a:checked  ~ .cat__wrap tbody tr:not(.is-a),
+#f-f:checked  ~ .cat__wrap tbody tr:not(.is-f),
+#f-g:checked  ~ .cat__wrap tbody tr:not(.is-g),
+#f-k:checked  ~ .cat__wrap tbody tr:not(.is-k),
+#f-m:checked  ~ .cat__wrap tbody tr:not(.is-m),
+#f-wd:checked ~ .cat__wrap tbody tr:not(.is-wd) {
+    display: none;
+}
+
+/* Each filter names what it is showing, so the status line stays
+   accurate as the selection changes. */
+#f-all:checked ~ .cat__status .cat__state::after { content: 'all 36 entries'; }
+#f-o:checked   ~ .cat__status .cat__state::after { content: 'class O only'; }
+#f-b:checked   ~ .cat__status .cat__state::after { content: 'class B only'; }
+#f-a:checked   ~ .cat__status .cat__state::after { content: 'class A only'; }
+#f-f:checked   ~ .cat__status .cat__state::after { content: 'class F only'; }
+#f-g:checked   ~ .cat__status .cat__state::after { content: 'class G only'; }
+#f-k:checked   ~ .cat__status .cat__state::after { content: 'class K only'; }
+#f-m:checked   ~ .cat__status .cat__state::after { content: 'class M only'; }
+#f-wd:checked  ~ .cat__status .cat__state::after { content: 'white dwarfs only'; }
+
+.cat__status {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-3);
+    margin-bottom: var(--s-3);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.cat__state {
+    color: var(--accent);
+}
+
+/* A bounded, scrollable panel rather than a table that runs down
+   the page. This is what lets the header row stay pinned: sticky
+   resolves against the nearest scroll container, and `overflow-x`
+   alone would make that container non-scrolling vertically, so the
+   header would never actually stick. */
+.cat__wrap {
+    max-height: min(72vh, 780px);
+    overflow: auto;
+    border: 1px solid var(--line-2);
+    background: var(--abyss);
+}
+
+.cat__table {
+    width: 100%;
+    min-width: 880px;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+}
+
+.cat__table th,
+.cat__table td {
+    padding: 0.62rem var(--s-4);
+    text-align: right;
+    border-bottom: 1px solid var(--line);
+}
+
+.cat__table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    background: var(--surface);
+    border-bottom: 1px solid var(--line-2);
+    white-space: nowrap;
+}
+
+.cat__table th:first-child,
+.cat__table td:first-child,
+.cat__table th:nth-child(3),
+.cat__table td:nth-child(3) {
+    text-align: left;
+}
+
+.cat__table tbody tr {
+    transition: background var(--dur-fast) var(--ease-out);
+}
+
+.cat__table tbody tr:hover {
+    background: linear-gradient(90deg,
+        color-mix(in srgb, var(--row-c, var(--accent)) 9%, transparent) 0%,
+        transparent 82%);
+}
+
+.cat__name {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-size: var(--t-base);
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+/* Colour swatch, straight off the spectral class. The table is
+   also a picture of the temperature sequence. */
+.cat__name::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    flex: none;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 36%, #fff 0%, var(--row-c) 68%, var(--row-c) 100%);
+    box-shadow: 0 0 10px -1px var(--row-c);
+}
+
+.cat__name small {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--text-4);
+}
+
+.cat__table td {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    color: var(--text-2);
+}
+
+/* Spectral type is the key column, so it reads at full strength. */
+.cat__table .cat__sp {
+    color: var(--text);
+}
+
+.cat__table .cat__con {
+    font-family: var(--font-body);
+    font-size: var(--t-sm);
+    color: var(--text-3);
+    white-space: nowrap;
+}
+
+tr.is-o { --row-c: var(--sp-o); }
+tr.is-b { --row-c: var(--sp-b); }
+tr.is-a { --row-c: var(--sp-a); }
+tr.is-f { --row-c: var(--sp-f); }
+tr.is-g { --row-c: var(--sp-g); }
+tr.is-k { --row-c: var(--sp-k); }
+tr.is-m { --row-c: var(--sp-m); }
+tr.is-wd { --row-c: #dbe6ff; }
+
+
+/* ============================================================
+   13. SMALL SHARED PIECES
+   ============================================================ */
+
+/* Star-type plates let the corona bleed past the stage edge. The
+   shared component clips its stage, which is right for a planet —
+   a planet has an edge — but a star's glow has no boundary, and
+   clipping it draws a visible rectangle around the light. */
+.plate-grid--stars .plate__stage {
+    --stage-h: 208px;
+    overflow: visible;
+}
+
+/* Readout values land on one baseline even when a label wraps to two
+   lines and its neighbour does not. */
+.dm-stars .readout__cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Comparison pair: two stars side by side at honest relative size
+   within the pair. */
+.pair {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(var(--s-5), 4vw, var(--s-8));
+    min-height: 220px;
+}
+
+.pair__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-4);
+    text-align: center;
+}
+
+.pair__cap {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.pair__cap b {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+/* Quote / emphasis line, used once or twice to let the page
+   breathe between dense figures. */
+.pull {
+    max-width: 30ch;
+    font-family: var(--font-display);
+    font-size: var(--t-2xl);
+    font-weight: 300;
+    line-height: 1.34;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.pull em {
+    font-style: normal;
+    font-weight: 400;
+    background-image: var(--sequence);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+
+/* ============================================================
+   14. BASIC MOBILE COMPATIBILITY
+   ------------------------------------------------------------
+   This domain is designed desktop-first. The rules below keep it
+   legible and unbroken on a phone; they are not an attempt at a
+   separately-designed small-screen experience. Dense figures
+   become horizontally scrollable rather than being redrawn.
+   ============================================================ */
+
+@media (max-width: 1024px) {
+    .ladder__row {
+        grid-template-columns: 54px 74px minmax(0, 1fr) minmax(120px, 0.8fr);
+    }
+
+    .ladder__row .ladder__desc {
+        grid-column: 3;
+    }
+
+    .track {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: var(--s-7);
+    }
+}
+
+@media (max-width: 860px) {
+    .subnav__list {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+    }
+
+    .subnav__list::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* The H–R diagram cannot usefully reflow — it is a coordinate
+       system. Give it a minimum width and let it scroll. */
+    .hr {
+        overflow-x: auto;
+        padding-bottom: var(--s-3);
+    }
+
+    .hr__frame {
+        min-width: 720px;
+    }
+
+    .ladder__row {
+        grid-template-columns: 46px minmax(0, 1fr) minmax(110px, 0.7fr);
+        gap: var(--s-4);
+    }
+
+    .ladder__viz,
+    .ladder__desc {
+        display: none;
+    }
+
+    .fork__track {
+        grid-template-columns: 100px minmax(0, 1fr);
+        row-gap: var(--s-4);
+    }
+
+    .fork__end {
+        grid-column: 2;
+        justify-self: start;
+    }
+
+    .fork__chain {
+        overflow-x: auto;
+        gap: var(--s-5);
+        justify-content: flex-start;
+    }
+
+    .track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .binary {
+        height: 210px;
+    }
+
+    .binary__path--b,
+    .binary__hub--b {
+        --r: 116px;
+    }
+}
+
+@media (max-width: 560px) {
+    .track {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .class-strip {
+        height: 36px;
+    }
+
+    .class-strip__seg {
+        font-size: var(--t-micro);
+    }
+
+    .pair {
+        flex-direction: column;
+    }
+
+    .curve {
+        height: 170px;
+    }
+}

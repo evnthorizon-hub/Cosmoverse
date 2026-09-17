@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Star catalog — 36 nearest and brightest stars with spectral type, distance, apparent and absolute magnitude, mass, radius and effective temperature. Filterable by spectral class.">
+    <meta name="keywords" content="star catalog, nearest stars, brightest stars, spectral type, absolute magnitude, stellar mass, stellar radius, effective temperature, astronomy data">
+    <meta name="author" content="CosmoVerse">
+    <meta name="theme-color" content="#000003">
+    <title>Star Catalog | Stars | CosmoVerse</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/stars.css">
+</head>
+<body class="dm-stars">
+    <a href="#catalog" class="skip-link">Skip to the catalog</a>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                CosmoVerse
+                <span class="logo-mark">Obs.</span>
+            </a>
+
+            <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+            <label for="mobile-menu-checkbox" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </label>
+
+            <nav class="nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="../../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../../solar-system/index.html" class="nav-link">Solar System</a></li>
+                    <li><a href="../index.html" class="nav-link active" aria-current="page">Stars</a></li>
+                    <li><a href="../../black-holes/index.html" class="nav-link">Black Holes</a></li>
+                    <li><a href="../../galaxies/index.html" class="nav-link">Galaxies</a></li>
+                    <li><a href="../../nebulae/index.html" class="nav-link">Nebulae</a></li>
+                    <li><a href="../../cosmic-events/index.html" class="nav-link">Cosmic Events</a></li>
+                    <li><a href="../../missions/index.html" class="nav-link">Missions</a></li>
+                    <li><a href="../../exoplanets/index.html" class="nav-link">Exoplanets</a></li>
+                    <li><a href="../../universe/index.html" class="nav-link">Universe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============================================================
+             ARRIVAL — compact, because this is a reference page rather
+             than a narrative one.
+             ============================================================ -->
+        <section class="page-hero" style="min-height:auto;padding-bottom:0">
+            <div class="field field--spectral" aria-hidden="true" style="--field-opacity:0.3"></div>
+            <div class="starfield" aria-hidden="true" style="--stars-opacity:0.7"></div>
+
+            <div class="container">
+                <ul class="crumbs">
+                    <li><a href="../../index.html">CosmoVerse</a></li>
+                    <li><a href="../index.html">Stars</a></li>
+                    <li aria-current="page">Catalog</li>
+                </ul>
+
+                <h1 class="page-hero__title" style="max-width:26ch">Star<em>Catalog</em></h1>
+                <p class="page-hero__lede">The 16 nearest stars and the 20 brightest, in one table. Only three objects appear on both lists &mdash; which is the whole lesson of the catalog.</p>
+                <p class="page-hero__coords">
+                    <span>36 entries</span>
+                    <span>Sorted by distance</span>
+                    <span>Filter by spectral class</span>
+                </p>
+            </div>
+
+            <div class="page-hero__dock">
+                <div class="container">
+                    <dl class="readout readout--flush">
+                        <div class="readout__cell">
+                            <dt>Closest entry</dt>
+                            <dd>4.25 <small>ly</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Farthest entry</dt>
+                            <dd>2,615 <small>ly</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Brightest</dt>
+                            <dd>&minus;1.46 <small>V mag</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Faintest</dt>
+                            <dd>+13.54 <small>V mag</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Coolest</dt>
+                            <dd>2,670 <small>K</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Hottest</dt>
+                            <dd>40,000 <small>K</small></dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             LOCAL INDEX — the same one the domain page uses, so a
+             reader who arrives here directly can still get anywhere.
+             ============================================================ -->
+        <nav class="subnav" aria-label="Sections in this region">
+            <div class="subnav__list">
+                <a href="../index.html#overview">Overview</a>
+                <a href="../index.html#classification">Classification</a>
+                <a href="../index.html#hr">H&ndash;R Diagram</a>
+                <a href="../index.html#formation">Formation</a>
+                <a href="../index.html#evolution">Evolution</a>
+                <a href="../index.html#types">Star Types</a>
+                <a href="../index.html#variable">Binary &amp; Variable</a>
+                <a href="../index.html#famous">Famous Stars</a>
+                <a href="index.html">Catalog</a>
+            </div>
+        </nav>
+
+
+        <!-- ============================================================
+             THE CATALOG
+             CSS-only spectral filter: eight radios, sibling selectors,
+             no scripting. Falls back to showing every row.
+             ============================================================ -->
+        <section class="shell shell--abyss" id="catalog">
+            <div class="container">
+                <header class="head" style="max-width:44rem">
+                    <p class="eyebrow"><span class="eyebrow__id">09</span> Catalog</p>
+                    <h2 class="head__title">Near is not the same as <em>bright</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Apparent magnitude measures how bright a star looks; absolute magnitude measures how bright it actually is, standardised to 10&nbsp;parsecs. Compare the two columns below and the sky rearranges itself: the stars that dominate our night are mostly distant giants, while our actual neighbours are almost all invisible.</p>
+                </header>
+
+                <div class="cat">
+                    <!-- Radios first: every filter rule below reaches
+                         forward with the sibling combinator. -->
+                    <input type="radio" name="spclass" id="f-all" class="cat__radio" checked>
+                    <input type="radio" name="spclass" id="f-o"   class="cat__radio">
+                    <input type="radio" name="spclass" id="f-b"   class="cat__radio">
+                    <input type="radio" name="spclass" id="f-a"   class="cat__radio">
+                    <input type="radio" name="spclass" id="f-f"   class="cat__radio">
+                    <input type="radio" name="spclass" id="f-g"   class="cat__radio">
+                    <input type="radio" name="spclass" id="f-k"   class="cat__radio">
+                    <input type="radio" name="spclass" id="f-m"   class="cat__radio">
+                    <input type="radio" name="spclass" id="f-wd"  class="cat__radio">
+
+                    <div class="cat__bar" role="group" aria-label="Filter the catalog by spectral class">
+                        <label class="cat__chip cat__chip--all" for="f-all">All <b>36</b></label>
+                        <label class="cat__chip cat__chip--o"   for="f-o">O <b>2</b></label>
+                        <label class="cat__chip cat__chip--b"   for="f-b">B <b>5</b></label>
+                        <label class="cat__chip cat__chip--a"   for="f-a">A <b>6</b></label>
+                        <label class="cat__chip cat__chip--f"   for="f-f">F <b>2</b></label>
+                        <label class="cat__chip cat__chip--g"   for="f-g">G <b>3</b></label>
+                        <label class="cat__chip cat__chip--k"   for="f-k">K <b>5</b></label>
+                        <label class="cat__chip cat__chip--m"   for="f-m">M <b>11</b></label>
+                        <label class="cat__chip cat__chip--wd"  for="f-wd">WD <b>2</b></label>
+                    </div>
+
+                    <p class="cat__status">Showing <span class="cat__state"></span> &middot; ordered by distance from the Sun</p>
+
+                    <div class="cat__wrap">
+                        <table class="cat__table">
+                            <caption class="sr-only">The nearest and brightest stars, with spectral type, constellation, distance, apparent and absolute magnitude, mass, radius and effective temperature, ordered by distance from the Sun.</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Star</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Constellation</th>
+                                    <th scope="col">Dist. (ly)</th>
+                                    <th scope="col">V mag</th>
+                                    <th scope="col">Abs. mag</th>
+                                    <th scope="col">Mass (M&#9737;)</th>
+                                    <th scope="col">Radius (R&#9737;)</th>
+                                    <th scope="col">Temp. (K)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="is-m">
+                                    <th scope="row"><span class="cat__name">Proxima Centauri <small>&alpha; Cen C</small></span></th>
+                                    <td class="cat__sp">M5.5 Ve</td>
+                                    <td class="cat__con">Centaurus</td>
+                                    <td>4.25</td><td>+11.13</td><td>+15.56</td>
+                                    <td>0.122</td><td>0.154</td><td>3,042</td>
+                                </tr>
+                                <tr class="is-g">
+                                    <th scope="row"><span class="cat__name">&alpha; Centauri A <small>Rigil Kentaurus</small></span></th>
+                                    <td class="cat__sp">G2 V</td>
+                                    <td class="cat__con">Centaurus</td>
+                                    <td>4.37</td><td>&minus;0.01</td><td>+4.36</td>
+                                    <td>1.079</td><td>1.223</td><td>5,790</td>
+                                </tr>
+                                <tr class="is-k">
+                                    <th scope="row"><span class="cat__name">&alpha; Centauri B <small>Toliman</small></span></th>
+                                    <td class="cat__sp">K1 V</td>
+                                    <td class="cat__con">Centaurus</td>
+                                    <td>4.37</td><td>+1.33</td><td>+5.70</td>
+                                    <td>0.909</td><td>0.863</td><td>5,260</td>
+                                </tr>
+                                <tr class="is-m">
+                                    <th scope="row"><span class="cat__name">Barnard's Star</span></th>
+                                    <td class="cat__sp">M4 V</td>
+                                    <td class="cat__con">Ophiuchus</td>
+                                    <td>5.96</td><td>+9.51</td><td>+13.20</td>
+                                    <td>0.144</td><td>0.196</td><td>3,130</td>
+                                </tr>
+                                <tr class="is-m">
+                                    <th scope="row"><span class="cat__name">Wolf 359 <small>CN Leonis</small></span></th>
+                                    <td class="cat__sp">M6 V</td>
+                                    <td class="cat__con">Leo</td>
+                                    <td>7.86</td><td>+13.54</td><td>+16.63</td>
+                                    <td>0.110</td><td>0.16</td><td>2,800</td>
+                                </tr>
+                                <tr class="is-m">
+                                    <th scope="row"><span class="cat__name">Lalande 21185</span></th>
+                                    <td class="cat__sp">M2 V</td>
+                                    <td class="cat__con">Ursa Major</td>
+                                    <td>8.31</td><td>+7.52</td><td>+10.49</td>
+                                    <td>0.39</td><td>0.39</td><td>3,550</td>
+                                </tr>
+                                <tr class="is-a">
+                                    <th scope="row"><span class="cat__name">Sirius A <small>&alpha; CMa A</small></span></th>
+                                    <td class="cat__sp">A1 V</td>
+                                    <td class="cat__con">Canis Major</td>
+                                    <td>8.60</td><td>&minus;1.46</td><td>+1.44</td>
+                                    <td>2.063</td><td>1.711</td><td>9,940</td>
+                                </tr>
+                                <tr class="is-wd">
+                                    <th scope="row"><span class="cat__name">Sirius B <small>&alpha; CMa B</small></span></th>
+                                    <td class="cat__sp">DA2</td>
+                                    <td class="cat__con">Canis Major</td>
+                                    <td>8.60</td><td>+8.44</td><td>+11.34</td>
+                                    <td>1.018</td><td>0.0084</td><td>25,000</td>
+                                </tr>
+                                <tr class="is-m">
+                                    <th scope="row"><span class="cat__name">Luyten 726-8 A <small>UV Ceti</small></span></th>
+                                    <td class="cat__sp">M5.5 V</td>
+                                    <td class="cat__con">Cetus</td>
+                                    <td>8.73</td><td>+12.54</td><td>+15.40</td>
+                                    <td>0.10</td><td>0.14</td><td>2,670</td>
+                                </tr>
+                                <tr class="is-m">
+                                    <th scope="row"><span class="cat__name">Ross 154 <small>V1216 Sgr</small></span></th>
+                                    <td class="cat__sp">M3.5 V</td>
+                                    <td class="cat__con">Sagittarius</td>
+                                    <td>9.71</td><td>+10.44</td><td>+13.07</td>
+                                    <td>0.17</td><td>0.24</td><td>3,340</td>
+                                </tr>
+                                <tr class="is-m">
+                                    <th scope="row"><span class="cat__name">Ross 248 <small>HH Andromedae</small></span></th>
+                                    <td class="cat__sp">M5 V</td>
+                                    <td class="cat__con">Andromeda</td>
+                                    <td>10.30</td><td>+12.29</td><td>+14.79</td>
+                                    <td>0.136</td><td>0.16</td><td>2,799</td>
+                                </tr>
+                                <tr class="is-k">
+                                    <th scope="row"><span class="cat__name">&epsilon; Eridani <small>Ran</small></span></th>
+                                    <td class="cat__sp">K2 V</td>
+                                    <td class="cat__con">Eridanus</td>
+                                    <td>10.48</td><td>+3.73</td><td>+6.20</td>
+                                    <td>0.82</td><td>0.735</td><td>5,084</td>
+                                </tr>
+                                <tr class="is-m">
+                                    <th scope="row"><span class="cat__name">Lacaille 9352 <small>GJ 887</small></span></th>
+                                    <td class="cat__sp">M0.5 V</td>
+                                    <td class="cat__con">Sculptor</td>
+                                    <td>10.72</td><td>+7.34</td><td>+9.76</td>
+                                    <td>0.479</td><td>0.474</td><td>3,626</td>
+                                </tr>
+                                <tr class="is-m">
+                                    <th scope="row"><span class="cat__name">Ross 128 <small>FI Virginis</small></span></th>
+                                    <td class="cat__sp">M4 V</td>
+                                    <td class="cat__con">Virgo</td>
+                                    <td>11.01</td><td>+11.13</td><td>+13.49</td>
+                                    <td>0.168</td><td>0.197</td><td>3,192</td>
+                                </tr>
+                                <tr class="is-f">
+                                    <th scope="row"><span class="cat__name">Procyon A <small>&alpha; CMi A</small></span></th>
+                                    <td class="cat__sp">F5 IV-V</td>
+                                    <td class="cat__con">Canis Minor</td>
+                                    <td>11.46</td><td>+0.34</td><td>+2.61</td>
+                                    <td>1.499</td><td>2.048</td><td>6,530</td>
+                                </tr>
+                                <tr class="is-wd">
+                                    <th scope="row"><span class="cat__name">Procyon B <small>&alpha; CMi B</small></span></th>
+                                    <td class="cat__sp">DQZ</td>
+                                    <td class="cat__con">Canis Minor</td>
+                                    <td>11.46</td><td>+10.70</td><td>+12.97</td>
+                                    <td>0.602</td><td>0.012</td><td>7,740</td>
+                                </tr>
+                                <tr class="is-g">
+                                    <th scope="row"><span class="cat__name">&tau; Ceti</span></th>
+                                    <td class="cat__sp">G8 V</td>
+                                    <td class="cat__con">Cetus</td>
+                                    <td>11.91</td><td>+3.50</td><td>+5.69</td>
+                                    <td>0.783</td><td>0.793</td><td>5,344</td>
+                                </tr>
+                                <tr class="is-a">
+                                    <th scope="row"><span class="cat__name">Altair <small>&alpha; Aquilae</small></span></th>
+                                    <td class="cat__sp">A7 V</td>
+                                    <td class="cat__con">Aquila</td>
+                                    <td>16.73</td><td>+0.76</td><td>+2.21</td>
+                                    <td>1.86</td><td>1.79</td><td>7,550</td>
+                                </tr>
+                                <tr class="is-a">
+                                    <th scope="row"><span class="cat__name">Vega <small>&alpha; Lyrae</small></span></th>
+                                    <td class="cat__sp">A0 V</td>
+                                    <td class="cat__con">Lyra</td>
+                                    <td>25.04</td><td>+0.03</td><td>+0.60</td>
+                                    <td>2.135</td><td>2.362</td><td>9,602</td>
+                                </tr>
+                                <tr class="is-a">
+                                    <th scope="row"><span class="cat__name">Fomalhaut <small>&alpha; PsA</small></span></th>
+                                    <td class="cat__sp">A4 V</td>
+                                    <td class="cat__con">Piscis Austrinus</td>
+                                    <td>25.13</td><td>+1.16</td><td>+1.73</td>
+                                    <td>1.92</td><td>1.842</td><td>8,590</td>
+                                </tr>
+                                <tr class="is-k">
+                                    <th scope="row"><span class="cat__name">Pollux <small>&beta; Geminorum</small></span></th>
+                                    <td class="cat__sp">K0 III</td>
+                                    <td class="cat__con">Gemini</td>
+                                    <td>33.78</td><td>+1.14</td><td>+1.06</td>
+                                    <td>1.91</td><td>8.8</td><td>4,666</td>
+                                </tr>
+                                <tr class="is-k">
+                                    <th scope="row"><span class="cat__name">Arcturus <small>&alpha; Bo&ouml;tis</small></span></th>
+                                    <td class="cat__sp">K1.5 III</td>
+                                    <td class="cat__con">Bo&ouml;tes</td>
+                                    <td>36.7</td><td>&minus;0.05</td><td>&minus;0.31</td>
+                                    <td>1.08</td><td>25.4</td><td>4,286</td>
+                                </tr>
+                                <tr class="is-g">
+                                    <th scope="row"><span class="cat__name">Capella Aa <small>&alpha; Aurigae</small></span></th>
+                                    <td class="cat__sp">G8 III</td>
+                                    <td class="cat__con">Auriga</td>
+                                    <td>42.9</td><td>+0.08</td><td>&minus;0.52</td>
+                                    <td>2.57</td><td>11.98</td><td>4,970</td>
+                                </tr>
+                                <tr class="is-k">
+                                    <th scope="row"><span class="cat__name">Aldebaran <small>&alpha; Tauri</small></span></th>
+                                    <td class="cat__sp">K5 III</td>
+                                    <td class="cat__con">Taurus</td>
+                                    <td>65.3</td><td>+0.86</td><td>&minus;0.65</td>
+                                    <td>1.16</td><td>45.1</td><td>3,910</td>
+                                </tr>
+                                <tr class="is-b">
+                                    <th scope="row"><span class="cat__name">Regulus A <small>&alpha; Leonis</small></span></th>
+                                    <td class="cat__sp">B8 IVn</td>
+                                    <td class="cat__con">Leo</td>
+                                    <td>79.3</td><td>+1.40</td><td>&minus;0.53</td>
+                                    <td>3.80</td><td>3.09</td><td>12,460</td>
+                                </tr>
+                                <tr class="is-b">
+                                    <th scope="row"><span class="cat__name">Achernar <small>&alpha; Eridani</small></span></th>
+                                    <td class="cat__sp">B6 Vpe</td>
+                                    <td class="cat__con">Eridanus</td>
+                                    <td>139</td><td>+0.46</td><td>&minus;2.69</td>
+                                    <td>6.7</td><td>7.3</td><td>15,000</td>
+                                </tr>
+                                <tr class="is-b">
+                                    <th scope="row"><span class="cat__name">Spica A <small>&alpha; Virginis</small></span></th>
+                                    <td class="cat__sp">B1 III-IV</td>
+                                    <td class="cat__con">Virgo</td>
+                                    <td>250</td><td>+0.97</td><td>&minus;3.45</td>
+                                    <td>11.43</td><td>7.47</td><td>22,400</td>
+                                </tr>
+                                <tr class="is-a">
+                                    <th scope="row"><span class="cat__name">Canopus <small>&alpha; Carinae</small></span></th>
+                                    <td class="cat__sp">A9 II</td>
+                                    <td class="cat__con">Carina</td>
+                                    <td>310</td><td>&minus;0.74</td><td>&minus;5.63</td>
+                                    <td>8.0</td><td>71</td><td>7,400</td>
+                                </tr>
+                                <tr class="is-b">
+                                    <th scope="row"><span class="cat__name">Hadar <small>&beta; Centauri</small></span></th>
+                                    <td class="cat__sp">B1 III</td>
+                                    <td class="cat__con">Centaurus</td>
+                                    <td>390</td><td>+0.61</td><td>&minus;4.78</td>
+                                    <td>12.02</td><td>9.0</td><td>25,000</td>
+                                </tr>
+                                <tr class="is-f">
+                                    <th scope="row"><span class="cat__name">Polaris Aa <small>&alpha; UMi</small></span></th>
+                                    <td class="cat__sp">F7 Ib</td>
+                                    <td class="cat__con">Ursa Minor</td>
+                                    <td>448</td><td>+1.98</td><td>&minus;3.71</td>
+                                    <td>5.40</td><td>37.5</td><td>6,015</td>
+                                </tr>
+                                <tr class="is-m">
+                                    <th scope="row"><span class="cat__name">Betelgeuse <small>&alpha; Orionis</small></span></th>
+                                    <td class="cat__sp">M1&ndash;2 Ia-ab</td>
+                                    <td class="cat__con">Orion</td>
+                                    <td>548</td><td>+0.50</td><td>&minus;5.63</td>
+                                    <td>16.5</td><td>724</td><td>3,600</td>
+                                </tr>
+                                <tr class="is-m">
+                                    <th scope="row"><span class="cat__name">Antares A <small>&alpha; Scorpii</small></span></th>
+                                    <td class="cat__sp">M1.5 Iab</td>
+                                    <td class="cat__con">Scorpius</td>
+                                    <td>550</td><td>+0.91</td><td>&minus;5.22</td>
+                                    <td>12.0</td><td>680</td><td>3,660</td>
+                                </tr>
+                                <tr class="is-b">
+                                    <th scope="row"><span class="cat__name">Rigel A <small>&beta; Orionis</small></span></th>
+                                    <td class="cat__sp">B8 Ia</td>
+                                    <td class="cat__con">Orion</td>
+                                    <td>860</td><td>+0.13</td><td>&minus;6.98</td>
+                                    <td>21.0</td><td>78.9</td><td>12,100</td>
+                                </tr>
+                                <tr class="is-o">
+                                    <th scope="row"><span class="cat__name">Naos <small>&zeta; Puppis</small></span></th>
+                                    <td class="cat__sp">O4 If</td>
+                                    <td class="cat__con">Puppis</td>
+                                    <td>1,080</td><td>+2.25</td><td>&minus;5.35</td>
+                                    <td>56.1</td><td>20</td><td>40,000</td>
+                                </tr>
+                                <tr class="is-o">
+                                    <th scope="row"><span class="cat__name">Alnitak Aa <small>&zeta; Orionis</small></span></th>
+                                    <td class="cat__sp">O9.2 Ib</td>
+                                    <td class="cat__con">Orion</td>
+                                    <td>1,260</td><td>+1.77</td><td>&minus;6.16</td>
+                                    <td>33</td><td>20</td><td>29,500</td>
+                                </tr>
+                                <tr class="is-a">
+                                    <th scope="row"><span class="cat__name">Deneb <small>&alpha; Cygni</small></span></th>
+                                    <td class="cat__sp">A2 Ia</td>
+                                    <td class="cat__con">Cygnus</td>
+                                    <td>2,615</td><td>+1.25</td><td>&minus;8.27</td>
+                                    <td>19.0</td><td>203</td><td>8,525</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p class="caption">
+                    <span class="caption__id">Table 01</span>
+                    Row colour is taken from the spectral class, so the table is also a picture of the temperature sequence &mdash; scroll it and you are scanning down the same axis as Figures 1 and 3.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             READING NOTES
+             ============================================================ -->
+        <section class="shell shell--void shell--seam">
+            <div class="container">
+                <div class="split">
+                    <div class="note">
+                        <span class="note__title">Reading the columns</span>
+                        <ul class="note__list">
+                            <li><strong>V mag</strong> &mdash; apparent visual magnitude. Lower is brighter, and the scale is logarithmic: five magnitudes is a factor of exactly 100 in brightness. Negative values are very bright.</li>
+                            <li><strong>Abs. mag</strong> &mdash; what the star's magnitude would be at a standard 10&nbsp;parsecs (32.6&nbsp;ly). This strips distance out, so it is a true comparison of output.</li>
+                            <li><strong>Type</strong> &mdash; spectral class, subclass, then luminosity class in Roman numerals: <b>V</b> main sequence, <b>IV</b> subgiant, <b>III</b> giant, <b>II</b> bright giant, <b>I</b> supergiant. <b>D</b> prefixes mark degenerate stars, meaning white dwarfs.</li>
+                            <li><strong>Mass and radius</strong> &mdash; relative to the Sun. Radius is the least certain figure for supergiants, which have no sharp surface.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">What the table shows</span>
+                        <ul class="note__list">
+                            <li><strong>Only three stars are on both lists.</strong> Sirius A, &alpha;&nbsp;Centauri&nbsp;A and Procyon&nbsp;A are both nearby and genuinely bright. Every other prominent star in the sky is prominent because it is enormous, not because it is close.</li>
+                            <li><strong>Eleven of the sixteen nearest are class M</strong> and not one of them is visible to the naked eye. The nearest star to the Sun sits at magnitude 11.</li>
+                            <li><strong>Deneb is the extreme case.</strong> It is 2,615&nbsp;light years away &mdash; over 300&nbsp;times further than Sirius &mdash; and still one of the twenty brightest stars in the sky.</li>
+                            <li><strong>Absolute magnitude sorts them properly.</strong> Read that column alone and the giants separate from the dwarfs by more than twenty magnitudes: a factor of a hundred million in output.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="note" style="margin-top:3rem">
+                    <span class="note__title">Sources and precision</span>
+                    <ul class="note__list">
+                        <li>Distances for nearby stars come from parallax, principally <strong>Gaia</strong> and <strong>Hipparcos</strong>. These are accurate to better than a per cent within a few dozen light years.</li>
+                        <li>Distances beyond a few hundred light years are much softer. Values for Betelgeuse (~548&nbsp;ly, NASA), Rigel, Antares, Polaris and Deneb carry uncertainties of ten per cent or more, and the derived absolute magnitudes inherit that.</li>
+                        <li>Absolute magnitudes here are computed from the listed apparent magnitude and distance rather than copied, so the columns are internally consistent. They are uncorrected for interstellar extinction, which matters most for the distant O and B stars.</li>
+                        <li>Variable stars &mdash; Betelgeuse, Antares, Polaris, Achernar and several M dwarfs &mdash; are listed at a representative magnitude, not a fixed one.</li>
+                        <li>Multiple systems are listed by component where the components are resolved and physically distinct, so Sirius, Procyon and &alpha;&nbsp;Centauri each appear more than once.</li>
+                    </ul>
+                </div>
+
+                <p style="margin-top:3rem">
+                    <a href="../index.html" class="back-link"><span aria-hidden="true">&larr;</span> Back to the Stars region</a>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p class="footer-text">&copy; 2026 CosmoVerse &mdash; Explore beyond the horizon.</p>
+            <p class="footer-note">Region 03 &middot; Stellar &middot; Catalog &middot; 36 entries</p>
+        </div>
+    </footer>
+</body>
+</html>

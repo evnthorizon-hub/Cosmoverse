@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galaxies — anatomy, types, spiral structure, rotation curves and the dark matter problem, formation, mergers, the Milky Way from outside, the Local Group, the cosmic web, and the four galaxies we know best.">
+    <meta name="keywords" content="galaxies, spiral galaxy, elliptical galaxy, lenticular, irregular, galaxy rotation curve, dark matter, dark matter halo, Milky Way, Andromeda, M87, Sombrero, Local Group, cosmic web, large-scale structure, Vera Rubin, astronomy">
+    <meta name="author" content="CosmoVerse">
+    <meta name="theme-color" content="#000003">
+    <title>Galaxies | CosmoVerse</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/galaxies.css">
+</head>
+<!-- dm-galaxies sets the domain palette; galaxies.css adds the two
+     stellar populations and reserves violet for what cannot be seen. -->
+<body class="dm-galaxies">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                CosmoVerse
+                <span class="logo-mark">Obs.</span>
+            </a>
+
+            <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+            <label for="mobile-menu-checkbox" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </label>
+
+            <nav class="nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../solar-system/index.html" class="nav-link">Solar System</a></li>
+                    <li><a href="../stars/index.html" class="nav-link">Stars</a></li>
+                    <li><a href="../black-holes/index.html" class="nav-link">Black Holes</a></li>
+                    <li><a href="index.html" class="nav-link active" aria-current="page">Galaxies</a></li>
+                    <li><a href="../nebulae/index.html" class="nav-link">Nebulae</a></li>
+                    <li><a href="../cosmic-events/index.html" class="nav-link">Cosmic Events</a></li>
+                    <li><a href="../missions/index.html" class="nav-link">Missions</a></li>
+                    <li><a href="../exoplanets/index.html" class="nav-link">Exoplanets</a></li>
+                    <li><a href="../universe/index.html" class="nav-link">Universe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ============================================================
+             SHARED SVG LIBRARY
+
+             Defined once, referenced everywhere. The logarithmic spiral
+             arm is a single path — r = a·e^(0.3249θ), a pitch angle of
+             18°, plotted at 25 points from the bulge edge out to the
+             disk rim — and every spiral on this page is that one path
+             stroked, blurred, rotated 180° for the second arm, and
+             offset slightly for its dust lane. Nothing is freehand, and
+             the eleven spirals on the page cost one path between them.
+             ============================================================ -->
+        <svg width="0" height="0" aria-hidden="true" focusable="false"
+             style="position:absolute;pointer-events:none">
+            <defs>
+                <!-- The arm. Bulge edge r=18, rim r≈101. -->
+                <path id="gxArm" d="M 18 0 L 18.9 4.2 L 18.8 8.9 L 17.6 13.7 L 15.3 18.5
+                                    L 11.7 23 L 6.9 26.8 L 0.9 29.8 L -6 31.4 L -13.7 31.6
+                                    L -21.8 29.9 L -29.9 26.2 L -37.6 20.3 L -44.2 12.4
+                                    L -49.2 3 L -52.3 -8.4 L -53 -20.9 L -50.7 -34.3
+                                    L -45.2 -47.7 L -36.4 -60.5 L -23.3 -72.2 L -7.5 -81.2
+                                    L 11.3 -86.9 L 31.9 -88.6 L 54.3 -85.4"/>
+
+                <!-- Old population: ivory core falling to ember. -->
+                <radialGradient id="gxBulge" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="#fff9ec"/>
+                    <stop offset="24%"  stop-color="#ffe7bb"/>
+                    <stop offset="52%"  stop-color="#f0c082" stop-opacity="0.9"/>
+                    <stop offset="78%"  stop-color="#b87f45" stop-opacity="0.5"/>
+                    <stop offset="100%" stop-color="#6b4522" stop-opacity="0"/>
+                </radialGradient>
+
+                <!-- The smooth stellar disk the arms sit in. Warm
+                     inside, cooling outward as the old population
+                     thins and the young one takes over.
+
+                     Opacities are deliberately high. At half these
+                     values the sheet vanished and the arms read as
+                     two threads on black — the disk is what makes a
+                     spiral a galaxy rather than a swirl. -->
+                <radialGradient id="gxDisk" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="#ffe0a8" stop-opacity="0.8"/>
+                    <stop offset="18%"  stop-color="#f0c384" stop-opacity="0.6"/>
+                    <stop offset="38%"  stop-color="#c9a274" stop-opacity="0.42"/>
+                    <stop offset="58%"  stop-color="#8b96c0" stop-opacity="0.3"/>
+                    <stop offset="76%"  stop-color="#5d79b8" stop-opacity="0.19"/>
+                    <stop offset="90%"  stop-color="#3f6bb8" stop-opacity="0.09"/>
+                    <stop offset="100%" stop-color="#1d3260" stop-opacity="0"/>
+                </radialGradient>
+
+                <!-- Irregular body: young stars and hydrogen, no
+                     nucleus. Blue-dominant with only a trace of warmth. -->
+                <radialGradient id="gxIrr" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="#a8c8ff" stop-opacity="0.36"/>
+                    <stop offset="34%"  stop-color="#7aa6f0" stop-opacity="0.26"/>
+                    <stop offset="68%"  stop-color="#5d79b8" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#1d3260" stop-opacity="0"/>
+                </radialGradient>
+
+                <!-- Arms are brightest at mid-radius and fade at both
+                     the bulge and the rim, so they are masked by a
+                     radial ramp rather than stopped abruptly. -->
+                <radialGradient id="gxArmFade" gradientUnits="userSpaceOnUse"
+                                cx="0" cy="0" r="104">
+                    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.25"/>
+                    <stop offset="20%"  stop-color="#ffffff" stop-opacity="0.85"/>
+                    <stop offset="40%"  stop-color="#ffffff" stop-opacity="1"/>
+                    <stop offset="70%"  stop-color="#ffffff" stop-opacity="0.9"/>
+                    <stop offset="90%"  stop-color="#ffffff" stop-opacity="0.4"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                </radialGradient>
+                <mask id="gxArmMask" maskUnits="userSpaceOnUse"
+                      x="-118" y="-118" width="236" height="236">
+                    <rect x="-118" y="-118" width="236" height="236" fill="url(#gxArmFade)"/>
+                </mask>
+
+                <!-- Stellar halo: old, sparse, and much rounder than
+                     the disk. Not the dark halo — that is violet and
+                     comes later. -->
+                <radialGradient id="gxHalo" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="#dfa964" stop-opacity="0.1"/>
+                    <stop offset="55%"  stop-color="#a4703c" stop-opacity="0.05"/>
+                    <stop offset="100%" stop-color="#5c3c1f" stop-opacity="0"/>
+                </radialGradient>
+
+                <!-- Hero horizon arc: cool at the ends, warm where it
+                     passes the notional centre. -->
+                <linearGradient id="gxHorizonRamp" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%"   stop-color="#3f6bb8" stop-opacity="0"/>
+                    <stop offset="22%"  stop-color="#7aa6f0" stop-opacity="0.7"/>
+                    <stop offset="50%"  stop-color="#ffe7bb"/>
+                    <stop offset="78%"  stop-color="#7aa6f0" stop-opacity="0.7"/>
+                    <stop offset="100%" stop-color="#3f6bb8" stop-opacity="0"/>
+                </linearGradient>
+
+                <!-- Anatomy figure, seen edge-on. -->
+                <linearGradient id="anatDisk" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%"   stop-color="#3f6bb8" stop-opacity="0"/>
+                    <stop offset="14%"  stop-color="#7aa6f0" stop-opacity="0.4"/>
+                    <stop offset="38%"  stop-color="#dfa964" stop-opacity="0.72"/>
+                    <stop offset="50%"  stop-color="#ffe7bb" stop-opacity="0.85"/>
+                    <stop offset="62%"  stop-color="#dfa964" stop-opacity="0.72"/>
+                    <stop offset="86%"  stop-color="#7aa6f0" stop-opacity="0.4"/>
+                    <stop offset="100%" stop-color="#3f6bb8" stop-opacity="0"/>
+                </linearGradient>
+
+                <radialGradient id="anatBulge" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="#fff9ec"/>
+                    <stop offset="30%"  stop-color="#ffe7bb" stop-opacity="0.95"/>
+                    <stop offset="64%"  stop-color="#e0a866" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#8a5a2c" stop-opacity="0"/>
+                </radialGradient>
+
+                <radialGradient id="anatHalo" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="#dfa964" stop-opacity="0.09"/>
+                    <stop offset="60%"  stop-color="#a4703c" stop-opacity="0.045"/>
+                    <stop offset="100%" stop-color="#5c3c1f" stop-opacity="0"/>
+                </radialGradient>
+
+                <!-- Rotation panels. -->
+                <radialGradient id="rotDisk" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="#ffe7bb" stop-opacity="0.5"/>
+                    <stop offset="26%"  stop-color="#dfa964" stop-opacity="0.26"/>
+                    <stop offset="62%"  stop-color="#6f86b8" stop-opacity="0.13"/>
+                    <stop offset="100%" stop-color="#1d3260" stop-opacity="0"/>
+                </radialGradient>
+
+                <!-- Dark halo: densest at the centre, no edge. The
+                     fade to nothing is the honest part — nobody has
+                     found where it stops. -->
+                <radialGradient id="haloFall" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="#c489ff" stop-opacity="0.3"/>
+                    <stop offset="24%"  stop-color="#c489ff" stop-opacity="0.17"/>
+                    <stop offset="52%"  stop-color="#c489ff" stop-opacity="0.085"/>
+                    <stop offset="78%"  stop-color="#c489ff" stop-opacity="0.035"/>
+                    <stop offset="100%" stop-color="#c489ff" stop-opacity="0"/>
+                </radialGradient>
+
+                <linearGradient id="haloDisk" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%"   stop-color="#7aa6f0" stop-opacity="0.2"/>
+                    <stop offset="50%"  stop-color="#ffe7bb"/>
+                    <stop offset="100%" stop-color="#7aa6f0" stop-opacity="0.2"/>
+                </linearGradient>
+
+                <!-- Milky Way map. -->
+                <linearGradient id="mwBar" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%"   stop-color="#c99a63" stop-opacity="0.15"/>
+                    <stop offset="50%"  stop-color="#ffe7bb" stop-opacity="0.62"/>
+                    <stop offset="100%" stop-color="#c99a63" stop-opacity="0.15"/>
+                </linearGradient>
+
+                <radialGradient id="mwBulge" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="#fff9ec" stop-opacity="0.95"/>
+                    <stop offset="34%"  stop-color="#ffe0a8" stop-opacity="0.7"/>
+                    <stop offset="72%"  stop-color="#d69a58" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="#8a5a2c" stop-opacity="0"/>
+                </radialGradient>
+
+                <!-- ==== Reusable galaxy bodies ==================== -->
+
+                <!-- SPIRAL. Two arms from one path, a dust lane just
+                     inside each, HII knots strung along them, and the
+                     old bulge painted last so it sits in front. -->
+                <symbol id="gxSpiral" viewBox="-118 -118 236 236">
+                    <circle class="gx-halo" cx="0" cy="0" r="114"/>
+                    <circle class="gx-disk" cx="0" cy="0" r="104"/>
+
+                    <g mask="url(#gxArmMask)">
+                        <use class="gx-arm gx-arm--bloom" href="#gxArm"/>
+                        <use class="gx-arm gx-arm--bloom" href="#gxArm" transform="rotate(180)"/>
+
+                        <use class="gx-dust" href="#gxArm" transform="rotate(-9) scale(0.96)"/>
+                        <use class="gx-dust" href="#gxArm" transform="rotate(171) scale(0.96)"/>
+
+                        <use class="gx-arm" href="#gxArm"/>
+                        <use class="gx-arm" href="#gxArm" transform="rotate(180)"/>
+                        <use class="gx-arm gx-arm--core" href="#gxArm"/>
+                        <use class="gx-arm gx-arm--core" href="#gxArm" transform="rotate(180)"/>
+                    </g>
+
+                    <g class="gx-hii--glow">
+                        <circle cx="6.9" cy="26.8" r="7"/><circle cx="-29.9" cy="26.2" r="8"/>
+                        <circle cx="-52.3" cy="-8.4" r="7"/><circle cx="-36.4" cy="-60.5" r="8"/>
+                        <circle cx="11.3" cy="-86.9" r="7"/>
+                        <circle cx="-6.9" cy="-26.8" r="7"/><circle cx="29.9" cy="-26.2" r="8"/>
+                        <circle cx="52.3" cy="8.4" r="7"/><circle cx="36.4" cy="60.5" r="8"/>
+                        <circle cx="-11.3" cy="86.9" r="7"/>
+                    </g>
+                    <g class="gx-hii">
+                        <circle cx="6.9" cy="26.8" r="2.6"/><circle cx="-29.9" cy="26.2" r="3"/>
+                        <circle cx="-52.3" cy="-8.4" r="2.4"/><circle cx="-36.4" cy="-60.5" r="3"/>
+                        <circle cx="11.3" cy="-86.9" r="2.4"/>
+                        <circle cx="-6.9" cy="-26.8" r="2.6"/><circle cx="29.9" cy="-26.2" r="3"/>
+                        <circle cx="52.3" cy="8.4" r="2.4"/><circle cx="36.4" cy="60.5" r="3"/>
+                        <circle cx="-11.3" cy="86.9" r="2.4"/>
+                    </g>
+
+                    <g class="gx-globular">
+                        <circle cx="-78" cy="52" r="1.8"/><circle cx="66" cy="-74" r="1.6"/>
+                        <circle cx="88" cy="34" r="1.5"/><circle cx="-42" cy="-92" r="1.7"/>
+                        <circle cx="18" cy="98" r="1.5"/><circle cx="-96" cy="-22" r="1.6"/>
+                    </g>
+
+                    <circle class="gx-bulge" cx="0" cy="0" r="26"/>
+                </symbol>
+
+                <!-- ELLIPTICAL. No disk, no arms, no dust, no ongoing
+                     star formation — so it is one smooth old-population
+                     ellipsoid and nothing else. The absence is the
+                     identifying feature. -->
+                <symbol id="gxElliptical" viewBox="-118 -118 236 236">
+                    <ellipse class="gx-halo" cx="0" cy="0" rx="112" ry="92"/>
+                    <ellipse class="gx-bulge" cx="0" cy="0" rx="88" ry="70"/>
+                    <ellipse class="gx-bulge" cx="0" cy="0" rx="54" ry="43"/>
+                    <g class="gx-globular">
+                        <circle cx="-92" cy="30" r="1.7"/><circle cx="84" cy="-40" r="1.6"/>
+                        <circle cx="34" cy="80" r="1.5"/><circle cx="-56" cy="-72" r="1.6"/>
+                        <circle cx="100" cy="16" r="1.4"/><circle cx="-104" cy="-16" r="1.5"/>
+                        <circle cx="10" cy="-88" r="1.4"/><circle cx="-24" cy="88" r="1.5"/>
+                    </g>
+                </symbol>
+
+                <!-- LENTICULAR. A disk that has run out of gas: the
+                     bulge and the flat disk of a spiral, with the arms
+                     gone because there is nothing left to form stars
+                     from. A dust lane often survives. -->
+                <symbol id="gxLenticular" viewBox="-118 -118 236 236">
+                    <ellipse class="gx-halo" cx="0" cy="0" rx="116" ry="76"/>
+                    <!-- Two nested disks rather than one, so the sheet
+                         reads as a disk with an extent instead of a ring
+                         round a ball. The first attempt had a dominant
+                         bulge on a thin line and looked like a ringed
+                         planet; the bulge is now half that size and the
+                         disk carries the frame. -->
+                    <ellipse class="gx-disk" cx="0" cy="0" rx="112" ry="38"/>
+                    <ellipse class="gx-disk" cx="0" cy="0" rx="82" ry="27"/>
+                    <ellipse class="gx-bulge" cx="0" cy="0" rx="34" ry="29"/>
+                    <!-- The dust lane is usually the last structure a
+                         lenticular keeps, which is why one is here. It
+                         crosses in front of the bulge. -->
+                    <path class="gx-dust" style="--arm-w:15"
+                          d="M -96 5 Q 0 20 96 5"/>
+                    <g class="gx-globular">
+                        <circle cx="-96" cy="-44" r="1.6"/><circle cx="88" cy="48" r="1.5"/>
+                        <circle cx="24" cy="-58" r="1.4"/><circle cx="-44" cy="60" r="1.5"/>
+                    </g>
+                </symbol>
+
+                <!-- IRREGULAR. No bulge, no symmetry, no defined
+                     centre — usually a small galaxy that has been
+                     tidally mauled by a bigger one. Star formation
+                     happens in patches wherever gas has piled up. -->
+                <symbol id="gxIrregular" viewBox="-118 -118 236 236">
+                    <!-- One coherent gas-rich body, lopsided, with star
+                         formation firing in patches through it.
+
+                         The first version stacked three warm ellipses
+                         and read as a cluster of separate orange
+                         smudges — the warm gradient implied a bulge in
+                         each lobe, and an irregular has no bulge at
+                         all. The body is now a single blue-dominant
+                         sheet, because a gas-rich dwarf is young stars
+                         and hydrogen and very little else. -->
+                    <ellipse class="gx-halo" cx="-4" cy="2" rx="100" ry="82"
+                             transform="rotate(-18 -4 2)"/>
+                    <ellipse class="gx-irr" cx="-10" cy="-4" rx="92" ry="62"
+                             transform="rotate(-20 -10 -4)"/>
+                    <ellipse class="gx-irr" cx="22" cy="20" rx="54" ry="40"
+                             transform="rotate(14 22 20)"/>
+
+                    <g class="gx-hii--glow">
+                        <circle cx="-48" cy="-22" r="16"/><circle cx="14" cy="24" r="13"/>
+                        <circle cx="-12" cy="-46" r="11"/><circle cx="50" cy="8" r="10"/>
+                        <circle cx="-64" cy="16" r="9"/><circle cx="30" cy="-26" r="8"/>
+                    </g>
+                    <g class="gx-hii">
+                        <circle cx="-48" cy="-22" r="4.6"/><circle cx="14" cy="24" r="4"/>
+                        <circle cx="-12" cy="-46" r="3.4"/><circle cx="50" cy="8" r="3"/>
+                        <circle cx="-64" cy="16" r="2.6"/><circle cx="30" cy="-26" r="2.4"/>
+                    </g>
+                    <!-- A few bright young clumps: no nucleus, just the
+                         biggest OB associations. -->
+                    <g fill="var(--young-hot)" opacity="0.8">
+                        <circle cx="-34" cy="-6" r="2.6"/><circle cx="2" cy="10" r="2.2"/>
+                        <circle cx="-56" cy="-30" r="1.8"/><circle cx="38" cy="26" r="1.8"/>
+                    </g>
+                </symbol>
+            </defs>
+        </svg>
+
+
+        <!-- ============================================================
+             ARRIVAL
+
+             Solar System opens on a planetary limb, Stars on a
+             dispersed spectrum, Black Holes on the Gargantua frame.
+             Galaxies opens on a real spiral, with one logarithmic arc
+             swept across the foot of the frame — the geometry the whole
+             page is plotted from, stated before any diagram uses it.
+             ============================================================ -->
+        <section class="page-hero">
+            <div class="page-hero__shot" aria-hidden="true">
+                <img src="../images/galaxies.png" alt="" decoding="async">
+            </div>
+            <div class="field field--spiral" aria-hidden="true"></div>
+            <div class="starfield" aria-hidden="true"></div>
+            <div class="starfield-streak" aria-hidden="true"></div>
+
+            <div class="gx-hero__horizon" aria-hidden="true">
+                <svg viewBox="0 0 1700 420" preserveAspectRatio="xMidYMax meet">
+                    <path class="gx-arc gx-arc--soft"
+                          d="M -60 392 C 300 300, 620 196, 850 196 C 1080 196, 1400 300, 1760 392"/>
+                    <path class="gx-arc"
+                          d="M -60 392 C 300 300, 620 196, 850 196 C 1080 196, 1400 300, 1760 392"/>
+                    <path class="gx-arc"
+                          d="M -60 418 C 340 336, 640 246, 850 246 C 1060 246, 1360 336, 1760 418"
+                          style="opacity:0.28"/>
+                </svg>
+            </div>
+
+            <div class="container">
+                <p class="eyebrow"><span class="eyebrow__id">05</span> Region &middot; Structure</p>
+                <h1 class="page-hero__title">The<em>Galaxies</em></h1>
+                <p class="page-hero__lede">Gravitationally bound systems of stars, gas, dust and a great deal of something nobody has identified. They are the unit the universe is built out of &mdash; and every one of them turns far too fast for the matter you can see.</p>
+                <p class="page-hero__coords">
+                    <span>Milky Way &middot; barred spiral SBbc</span>
+                    <span>Rotation flat at ~220 km/s</span>
+                    <span>~85% of the mass is dark</span>
+                </p>
+            </div>
+
+            <div class="page-hero__dock">
+                <div class="container">
+                    <dl class="readout readout--flush">
+                        <div class="readout__cell">
+                            <dt>Our disk</dt>
+                            <dd>~100 <small>kly</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Our stars</dt>
+                            <dd>100&ndash;400 <small>billion</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>We sit at</dt>
+                            <dd>26,700 <small>ly</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Galactic year</dt>
+                            <dd>230 <small>Myr</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Local Group</dt>
+                            <dd>~80 <small>members</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Andromeda</dt>
+                            <dd>2.5 <small>Mly, closing</small></dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             LOCAL INDEX
+             ============================================================ -->
+        <nav class="subnav" aria-label="Sections in this region">
+            <div class="subnav__list">
+                <a href="#overview">Overview</a>
+                <a href="#anatomy">Anatomy</a>
+                <a href="#types">Types</a>
+                <a href="#spiral">Arms</a>
+                <a href="#rotation">Rotation</a>
+                <a href="#curve">Curve</a>
+                <a href="#dark-matter">Dark Matter</a>
+                <a href="#formation">Formation</a>
+                <a href="#mergers">Mergers</a>
+                <a href="#milky-way">Milky Way</a>
+                <a href="#local-group">Local</a>
+                <a href="#scale">Scale</a>
+                <a href="#cosmic-web">Web</a>
+                <a href="#famous">Famous</a>
+                <a href="#facts">Myths</a>
+            </div>
+        </nav>
+
+
+        <!-- ============================================================
+             01 · OVERVIEW
+             ============================================================ -->
+        <section class="shell shell--abyss" id="overview">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">01</span> Overview</p>
+                    <h2 class="head__title">Not collections of stars. <em>Structures that hold them</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">A galaxy is not a region of space that happens to contain a lot of stars. It is a gravitationally bound system with a shape, a rotation, a history and an age &mdash; and the stars are the least of its mass. Roughly six times more of it is material that has never been seen, only weighed.</p>
+                </header>
+
+                <div class="split">
+                    <div class="prose prose--lede">
+                        <p>For most of recorded astronomy these were called nebulae &mdash; faint smudges assumed to be clouds inside our own system of stars. The argument about whether they were nearby or impossibly distant ran for over a century and was settled in 1924, when Edwin Hubble found a Cepheid variable in the Andromeda &ldquo;nebula&rdquo; and used its known brightness to put it far outside the Milky Way.</p>
+                        <p>That single measurement changed the size of the known universe by a factor of a thousand overnight. Every smudge in every catalogue became a separate system of billions of stars, and our own galaxy stopped being the universe and became one object in it.</p>
+                        <p>What follows is built in that order: what a galaxy is made of, what kinds there are, how they turn, why the turning does not add up, and what has to be there to fix it.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">Four numbers worth holding on to</span>
+                            <ul class="note__list">
+                                <li><strong>Two trillion.</strong> The most-cited estimate for how many galaxies the observable universe holds &mdash; though see the last section, because that figure is contested.</li>
+                                <li><strong>85 per cent.</strong> The fraction of all matter that is dark. Every galaxy on this page is mostly something we cannot detect except by its gravity.</li>
+                                <li><strong>Ten to the eleven.</strong> A typical large galaxy's stellar count, give or take an order of magnitude in both directions.</li>
+                                <li><strong>Almost never collide.</strong> When two galaxies merge, essentially no stars hit each other. The gas does; the stars just pass through.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             02 · ANATOMY
+             Edge-on, because that is the only orientation in which a
+             disk, a bulge and a halo are simultaneously distinguishable.
+             ============================================================ -->
+        <section class="shell shell--void shell--seam" id="anatomy">
+            <div class="field field--spiral" aria-hidden="true" style="--field-opacity:0.2"></div>
+
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">02</span> Anatomy</p>
+                    <h2 class="head__title">Five parts, and <em>only one of them is bright</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">A spiral galaxy is a very thin disk inside a very round halo, with a bulge of old stars at the middle and a black hole at the exact centre. Seen from above you would never guess how flat it is; seen edge-on you would never guess it has arms. This is the edge-on view.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 640" role="img"
+                             aria-label="A spiral galaxy seen edge-on. A stellar halo extends far above and below a very thin disk. A bright bulge of old stars sits at the centre of the disk, with a supermassive black hole marked at its exact centre. A dark dust lane runs along the disk's midplane, and globular clusters are scattered through the halo.">
+
+                            <!-- STELLAR HALO · outermost, roundest,
+                                 oldest. Drawn as a dashed boundary
+                                 because it has no edge — it simply
+                                 thins until it cannot be measured. -->
+                            <ellipse class="anat__halo" cx="560" cy="320" rx="470" ry="250"/>
+
+                            <g class="anat__globular">
+                                <circle cx="200" cy="180" r="3"/><circle cx="880" cy="452" r="2.6"/>
+                                <circle cx="330" cy="122" r="2.4"/><circle cx="760" cy="510" r="2.8"/>
+                                <circle cx="140" cy="380" r="2.5"/><circle cx="960" cy="238" r="2.4"/>
+                                <circle cx="470" cy="96" r="2.6"/><circle cx="640" cy="544" r="2.5"/>
+                                <circle cx="1010" cy="352" r="2.2"/><circle cx="252" cy="486" r="2.3"/>
+                                <circle cx="700" cy="112" r="2.2"/><circle cx="410" cy="540" r="2.4"/>
+                            </g>
+
+                            <!-- DISK · the thin sheet. Real spirals are
+                                 about 1,000 light years thick and
+                                 100,000 across: a ratio of 1 to 100,
+                                 which is drawn honestly here rather
+                                 than thickened for legibility. -->
+                            <ellipse class="anat__disk" cx="560" cy="320" rx="440" ry="15"/>
+
+                            <!-- DUST LANE · along the midplane, where
+                                 the cold gas settles. Absence, not
+                                 emission. -->
+                            <ellipse class="anat__dust" cx="560" cy="322" rx="410" ry="4.5"/>
+
+                            <!-- BULGE · old population, rounder and
+                                 thicker than the disk it sits in. -->
+                            <ellipse class="anat__bulge" cx="560" cy="320" rx="118" ry="72"/>
+
+                            <!-- CENTRAL BLACK HOLE · marked, not drawn.
+                                 Four million solar masses inside a
+                                 region smaller than Neptune's orbit is
+                                 a few millionths of a pixel here. -->
+                            <circle class="anat__bh" cx="560" cy="320" r="3.5"/>
+                            <path class="anat__bh-mark" d="M 560 300 L 560 288 M 546 320 L 534 320 M 560 340 L 560 352 M 574 320 L 586 320"/>
+
+                            <!-- ---- Callout rail, left ------------- -->
+                            <g>
+                                <path class="svg-leader" d="M 240 176 L 150 176 L 150 148 L 96 148"/>
+                                <text class="svg-label svg-label--old" x="88" y="144" text-anchor="end">Stellar halo</text>
+                                <text class="svg-unit" x="88" y="162" text-anchor="end">Old stars &middot; no sharp edge</text>
+
+                                <path class="svg-leader" d="M 252 486 L 168 486 L 168 512 L 96 512"/>
+                                <text class="svg-label svg-label--old" x="88" y="508" text-anchor="end">Globular clusters</text>
+                                <text class="svg-unit" x="88" y="526" text-anchor="end">~150 in the Milky Way</text>
+                            </g>
+
+                            <!-- ---- Callout rail, right ----------- -->
+                            <g>
+                                <path class="svg-leader" d="M 900 320 L 1012 320 L 1012 256 L 1090 256"/>
+                                <text class="svg-label svg-label--young" x="1098" y="252">Disk</text>
+                                <text class="svg-unit" x="1098" y="270">~1 kly thick, ~100 kly wide</text>
+
+                                <path class="svg-leader svg-leader--old" d="M 620 288 L 700 250 L 1012 250 L 1012 196 L 1090 196"/>
+                                <text class="svg-label svg-label--old" x="1098" y="192">Bulge</text>
+                                <text class="svg-unit" x="1098" y="210">Old population &middot; ~10 kly</text>
+
+                                <path class="svg-leader" d="M 586 336 L 700 396 L 1012 396 L 1012 424 L 1090 424"/>
+                                <text class="svg-label svg-label--lit" x="1098" y="420">Supermassive black hole</text>
+                                <text class="svg-unit" x="1098" y="438">4.3 million M&#9737; &middot; Sgr A*</text>
+
+                                <path class="svg-leader" d="M 850 326 L 940 358 L 1012 358 L 1012 490 L 1090 490"/>
+                                <text class="svg-label" x="1098" y="486">Dust lane</text>
+                                <text class="svg-unit" x="1098" y="504">Cold grains &middot; blocks light</text>
+                            </g>
+
+                            <!-- Scale bar, so "thin" is a number. -->
+                            <g>
+                                <path class="svg-tick" d="M 120 596 L 120 606 M 560 596 L 560 606 M 120 601 L 560 601"/>
+                                <text class="svg-unit" x="340" y="588" text-anchor="middle">50,000 light years</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 01</span>
+                        Disk thickness is to scale against disk width &mdash; the sheet really is a hundred times wider than it is deep. The halo is drawn at its measurable extent, not its true one: the dark halo reaching several times further is the subject of Fig&nbsp;05.
+                    </figcaption>
+                </figure>
+
+                <div class="note" style="margin-top:3.5rem">
+                    <span class="note__title">Why the two populations are different colours</span>
+                    <ul class="note__list">
+                        <li><strong>The bulge and halo are old.</strong> Star formation there finished billions of years ago. Every massive blue star that was ever in them has long since died, leaving the low-mass, long-lived, red ones &mdash; so the integrated light is warm ivory through amber.</li>
+                        <li><strong>The arms are now.</strong> The disk still has cold gas, so it is still making stars, including the rare heavy ones that burn blue-white and last only a few million years. They never get far from where they formed, which is why they trace the arms so sharply.</li>
+                        <li><strong>That is the whole reason a spiral looks like a gold coin wrapped in blue thread.</strong> It is not artistic licence and it is not false colour. Every galaxy render on this page is built from it.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             03 · TYPES
+             ============================================================ -->
+        <section class="shell shell--lit" id="types">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">03</span> Types</p>
+                    <h2 class="head__title">Four shapes, and <em>one is just a spiral that stopped</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Galaxies sort into a small number of forms, and the thing that separates them is not size or age but whether they still have cold gas. Gas means star formation, star formation means blue arms, and a galaxy that has lost its gas keeps its disk but loses its pattern.</p>
+                </header>
+
+                <div class="plate-grid gx-types">
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <svg class="gx" style="--gx-d:196px" aria-hidden="true"><use href="#gxSpiral"/></svg>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">01 / 04</span>
+                            <span class="plate__index">Sa &ndash; Sc &middot; SBa &ndash; SBc</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Spiral</h3>
+                            <span class="chip">~60% of large galaxies</span>
+                        </div>
+                        <p class="plate__text">A thin gas-rich disk with a density-wave pattern turning through it, a bulge of old stars at the centre, and blue arms marking where the gas is collapsing right now. Two-thirds have a straight bar across the middle &mdash; ours does. The Hubble subtypes run a to c by how tightly the arms wind and how large the bulge is.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Cold gas</dt><dd>Yes &mdash; still forming stars</dd></div>
+                            <div class="spec__row"><dt>Populations</dt><dd>Old bulge, young disk</dd></div>
+                            <div class="spec__row"><dt>Rotation</dt><dd>Ordered, in a plane</dd></div>
+                            <div class="spec__row"><dt>Example</dt><dd>Milky Way, M31, M51</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <svg class="gx" style="--gx-d:196px" aria-hidden="true"><use href="#gxElliptical"/></svg>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">02 / 04</span>
+                            <span class="plate__index">E0 &ndash; E7</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Elliptical</h3>
+                            <span class="chip">Dominates clusters</span>
+                        </div>
+                        <p class="plate__text">A smooth ellipsoid of old stars with no disk, no arms, no dust lanes and almost no ongoing star formation. The stars orbit in every plane at once rather than together, which is why there is no flattening into a sheet. The largest galaxies known are all this shape, and all of them look like the wreckage of repeated mergers &mdash; because that is what they are.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Cold gas</dt><dd>Little to none</dd></div>
+                            <div class="spec__row"><dt>Populations</dt><dd>Old only &mdash; &ldquo;red and dead&rdquo;</dd></div>
+                            <div class="spec__row"><dt>Rotation</dt><dd>Random orbital planes</dd></div>
+                            <div class="spec__row"><dt>Example</dt><dd>M87, M49, IC 1101</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <svg class="gx" style="--gx-d:196px" aria-hidden="true"><use href="#gxLenticular"/></svg>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">03 / 04</span>
+                            <span class="plate__index">S0 &middot; SB0</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Lenticular</h3>
+                            <span class="chip chip--outline">The in-between</span>
+                        </div>
+                        <p class="plate__text">Disk and bulge like a spiral, but with the gas stripped out and the arms gone with it. A lenticular is what a spiral becomes when it runs out of the raw material for new stars &mdash; the structure survives, the pattern does not. Often the dust lane is the last thing left, which is why one is drawn here.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Cold gas</dt><dd>Largely gone</dd></div>
+                            <div class="spec__row"><dt>Populations</dt><dd>Old, in a disk</dd></div>
+                            <div class="spec__row"><dt>Rotation</dt><dd>Ordered, like a spiral</dd></div>
+                            <div class="spec__row"><dt>Example</dt><dd>Sombrero, NGC 5866</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <svg class="gx" style="--gx-d:196px" aria-hidden="true"><use href="#gxIrregular"/></svg>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">04 / 04</span>
+                            <span class="plate__index">Irr I &middot; Irr II</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Irregular</h3>
+                            <span class="chip chip--outline">Most numerous</span>
+                        </div>
+                        <p class="plate__text">No bulge, no symmetry, no defined centre. Usually a small gas-rich galaxy that has been pulled out of shape by a larger neighbour, with star formation firing in patches wherever the gas has piled up. They are by far the commonest kind of galaxy by count &mdash; they are simply too faint to dominate any picture.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Cold gas</dt><dd>Yes, often plenty</dd></div>
+                            <div class="spec__row"><dt>Populations</dt><dd>Young, patchy</dd></div>
+                            <div class="spec__row"><dt>Rotation</dt><dd>Disturbed or none</dd></div>
+                            <div class="spec__row"><dt>Example</dt><dd>Both Magellanic Clouds</dd></div>
+                        </dl>
+                    </article>
+                </div>
+
+                <figure class="fig" style="margin-top:4rem">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 400" role="img"
+                             aria-label="Hubble's tuning fork classification. Ellipticals E0 to E7 run along a handle from round to elongated, meeting lenticular S0 at a junction, where the diagram forks into two parallel prongs: unbarred spirals Sa, Sb, Sc above, and barred spirals SBa, SBb, SBc below.">
+
+                            <!-- Handle: ellipticals, round to elongated -->
+                            <path class="svg-axis" d="M 70 200 L 470 200"/>
+                            <g>
+                                <ellipse class="gx-bulge" cx="110" cy="200" rx="21" ry="21"/>
+                                <ellipse class="gx-bulge" cx="200" cy="200" rx="24" ry="19"/>
+                                <ellipse class="gx-bulge" cx="290" cy="200" rx="28" ry="16"/>
+                                <ellipse class="gx-bulge" cx="380" cy="200" rx="32" ry="13"/>
+                                <text class="svg-unit" x="110" y="246" text-anchor="middle">E0</text>
+                                <text class="svg-unit" x="200" y="246" text-anchor="middle">E3</text>
+                                <text class="svg-unit" x="290" y="246" text-anchor="middle">E5</text>
+                                <text class="svg-unit" x="380" y="246" text-anchor="middle">E7</text>
+                            </g>
+                            <text class="svg-label svg-label--old" x="70" y="148">Ellipticals</text>
+                            <text class="svg-unit" x="70" y="166">Round &rarr; elongated</text>
+
+                            <!-- The junction: lenticular -->
+                            <g>
+                                <ellipse class="gx-disk" cx="500" cy="200" rx="42" ry="11"/>
+                                <ellipse class="gx-bulge" cx="500" cy="200" rx="17" ry="15"/>
+                                <text class="svg-unit" x="500" y="246" text-anchor="middle">S0</text>
+                            </g>
+                            <path class="svg-leader" d="M 500 174 L 500 140 L 556 140"/>
+                            <text class="svg-label" x="564" y="136">Lenticular</text>
+                            <text class="svg-unit" x="564" y="154">Disk kept, gas lost</text>
+
+                            <!-- The fork -->
+                            <path class="svg-axis" d="M 542 200 C 600 200, 620 116, 690 116"/>
+                            <path class="svg-axis" d="M 542 200 C 600 200, 620 288, 690 288"/>
+
+                            <!-- Upper prong: unbarred spirals.
+
+                                 The a-to-c axis is bulge size and arm
+                                 tightness. One shared path cannot change
+                                 its own pitch angle, so the discriminator
+                                 drawn here is the bulge — large in Sa,
+                                 almost absent in Sc — which is the more
+                                 reliable of the two criteria anyway. -->
+                            <g>
+                                <use href="#gxSpiral" x="676" y="62" width="108" height="108"/>
+                                <circle class="gx-bulge" cx="730" cy="116" r="17"/>
+                                <use href="#gxSpiral" x="816" y="62" width="108" height="108"/>
+                                <circle class="gx-bulge" cx="870" cy="116" r="11"/>
+                                <use href="#gxSpiral" x="956" y="62" width="108" height="108"/>
+                                <circle class="gx-bulge" cx="1010" cy="116" r="6"/>
+                                <text class="svg-unit" x="730" y="192" text-anchor="middle">Sa</text>
+                                <text class="svg-unit" x="870" y="192" text-anchor="middle">Sb</text>
+                                <text class="svg-unit" x="1010" y="192" text-anchor="middle">Sc</text>
+                            </g>
+
+                            <!-- Lower prong: barred spirals. Same bodies
+                                 with a bar laid across the middle. -->
+                            <g>
+                                <use href="#gxSpiral" x="676" y="234" width="108" height="108"/>
+                                <circle class="gx-bulge" cx="730" cy="288" r="15"/>
+                                <use href="#gxSpiral" x="816" y="234" width="108" height="108"/>
+                                <circle class="gx-bulge" cx="870" cy="288" r="10"/>
+                                <use href="#gxSpiral" x="956" y="234" width="108" height="108"/>
+                                <circle class="gx-bulge" cx="1010" cy="288" r="6"/>
+                                <!-- Bars drawn last and solid. Behind the
+                                     bulge and filled with the faint bar
+                                     ramp they were invisible, which left
+                                     the two prongs looking identical and
+                                     the whole point of the fork lost. -->
+                                <g fill="var(--old-hot)" opacity="0.62">
+                                    <rect x="702" y="285" width="56" height="6" rx="3"/>
+                                    <rect x="842" y="285" width="56" height="6" rx="3"/>
+                                    <rect x="982" y="285" width="56" height="6" rx="3"/>
+                                </g>
+                                <text class="svg-unit" x="730" y="364" text-anchor="middle">SBa</text>
+                                <text class="svg-unit" x="870" y="364" text-anchor="middle">SBb</text>
+                                <text class="svg-unit" x="1010" y="364" text-anchor="middle">SBc</text>
+                            </g>
+
+                            <text class="svg-label svg-label--young" x="1100" y="46" text-anchor="end">Unbarred spirals</text>
+                            <text class="svg-label svg-label--young" x="1100" y="392" text-anchor="end">Barred spirals</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 02</span>
+                        Hubble published this in 1936 believing it was an evolutionary sequence &mdash; that galaxies began round and unwound into spirals. They do not, and the arrow of change mostly runs the other way: spirals lose their gas and merge into ellipticals. The diagram survives because the classification is still useful, not because the idea behind it was right.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             04 · SPIRAL STRUCTURE
+             ============================================================ -->
+        <section class="shell shell--abyss shell--seam" id="spiral">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">04</span> Spiral structure</p>
+                    <h2 class="head__title">The arms are a traffic jam, <em>not an object</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">If spiral arms were made of a fixed set of stars they would have wound themselves into a tight coil billions of years ago, because the inside of a disk goes round far more often than the outside. They have not. The arms are a wave of compression that the stars pass <em>through</em>, and it turns at its own speed.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <!-- The galaxy is drawn at 400px, close to the size
+                             the shared symbol is built for. Blown up to 720
+                             its broad arm strokes started reading as painted
+                             ribbons and its HII knots as scattered confetti:
+                             a thumbnail body does not survive being used as
+                             a portrait, and this figure's subject is the
+                             orbit tracks rather than the galaxy itself. -->
+                        <svg class="fig__svg" viewBox="0 0 1180 640" role="img"
+                             aria-label="A face-on spiral galaxy with three dashed circular orbit tracks over it. Markers on each track orbit at different rates, fastest on the innermost track, while the spiral arm pattern itself turns much more slowly - showing that stars move through the arms rather than travelling with them.">
+
+                            <!-- <use> sized directly, NOT wrapped in a
+                                 nested <svg viewBox>. The symbol carries its
+                                 own viewBox; wrapping it in another applies
+                                 the mapping twice and leaves one quadrant of
+                                 the galaxy stranded in a corner. -->
+                            <g class="spiral__pattern">
+                                <use href="#gxSpiral" x="390" y="120" width="400" height="400"/>
+                            </g>
+
+                            <!-- Material orbits. The rotation curve is flat,
+                                 so period scales with radius and the inner
+                                 track laps the outer one about two and a
+                                 half times over. -->
+                            <circle class="spiral__track" cx="590" cy="320" r="66"/>
+                            <circle class="spiral__track" cx="590" cy="320" r="114"/>
+                            <circle class="spiral__track" cx="590" cy="320" r="162"/>
+
+                            <!-- Phase-offset, so the tracks are already
+                                 sheared apart on arrival. Left un-delayed
+                                 all six markers sat on the +x axis at t=0,
+                                 stacked on top of the pitch annotation and
+                                 showing no differential rotation at all
+                                 until the animation had run. -->
+                            <g class="spiral__orbit" style="--orbit-t:14s;animation-delay:-2.4s">
+                                <circle class="spiral__star spiral__star--young" cx="656" cy="320" r="5"/>
+                            </g>
+                            <g class="spiral__orbit" style="--orbit-t:25s;animation-delay:-11s">
+                                <circle class="spiral__star spiral__star--young" cx="704" cy="320" r="5"/>
+                            </g>
+                            <g class="spiral__orbit" style="--orbit-t:36s;animation-delay:-21s">
+                                <circle class="spiral__star spiral__star--young" cx="752" cy="320" r="5"/>
+                            </g>
+
+                            <!-- A second, phase-offset set, so the eye reads
+                                 tracks shearing apart rather than following
+                                 one dot round. -->
+                            <g class="spiral__orbit" style="--orbit-t:14s;animation-delay:-4.6s">
+                                <circle class="spiral__star" cx="656" cy="320" r="3.4"/>
+                            </g>
+                            <g class="spiral__orbit" style="--orbit-t:25s;animation-delay:-8.3s">
+                                <circle class="spiral__star" cx="704" cy="320" r="3.4"/>
+                            </g>
+                            <g class="spiral__orbit" style="--orbit-t:36s;animation-delay:-12s">
+                                <circle class="spiral__star" cx="752" cy="320" r="3.4"/>
+                            </g>
+
+                            <!-- ---- Callout rail, left ----------------
+                                 Rail at x=268, not x=142. Anchored end, the
+                                 longest of these units strings is about 176
+                                 user units wide, so at 142 it ran off the
+                                 left edge of the viewBox and lost its first
+                                 few characters. -->
+                            <g>
+                                <path class="svg-leader svg-leader--old" d="M 452 236 L 360 200 L 288 200 L 288 168 L 276 168"/>
+                                <text class="svg-label svg-label--old" x="268" y="164" text-anchor="end">The pattern</text>
+                                <text class="svg-unit" x="268" y="182" text-anchor="end">Turns slowly, holds its shape</text>
+
+                                <path class="svg-leader svg-leader--old" d="M 476 396 L 372 452 L 288 452 L 288 484 L 276 484"/>
+                                <text class="svg-label" x="268" y="480" text-anchor="end">Dust lane</text>
+                                <text class="svg-unit" x="268" y="498" text-anchor="end">Inside the arm it feeds</text>
+                            </g>
+
+                            <!-- ---- Callout rail, right -------------- -->
+                            <g>
+                                <path class="svg-leader" d="M 660 300 L 780 224 L 900 224 L 900 192 L 986 192"/>
+                                <text class="svg-label svg-label--young" x="994" y="188">Material orbits</text>
+                                <text class="svg-unit" x="994" y="206">Fast inside, slow outside</text>
+
+                                <path class="svg-leader" d="M 700 404 L 820 468 L 900 468 L 900 500 L 986 500"/>
+                                <text class="svg-label svg-label--hii" x="994" y="496">HII regions</text>
+                                <text class="svg-unit" x="994" y="514">New stars in the wave crest</text>
+                            </g>
+
+                            <!-- Pitch angle: the one number that defines a
+                                 logarithmic spiral. -->
+                            <g>
+                                <path class="svg-dash" style="stroke:var(--line-strong);opacity:0.45"
+                                      d="M 590 320 L 800 320"/>
+                                <path class="svg-leader svg-leader--old" d="M 764 320 A 34 34 0 0 0 758 294"/>
+                                <text class="svg-unit" x="776" y="302">18&deg; pitch</text>
+                            </g>
+
+                            <text class="svg-label svg-label--young" x="590" y="596" text-anchor="middle">Stars pass through the arms; the arms stay put</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 03</span>
+                        Arm geometry is a true logarithmic spiral, r&nbsp;=&nbsp;a&nbsp;e<sup>0.3249&thinsp;&theta;</sup>, which is a pitch angle of 18&deg; &mdash; a grand-design value of the kind M51 and M74 have. Orbit periods scale with radius because the rotation curve is flat, which is the result the next three sections are about. Rates are compressed by a factor of roughly ten billion.
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="prose prose--lede">
+                        <p>The problem was noticed long before it was solved. At the Sun's distance the galaxy takes about 230 million years to turn once; a star a third of the way out takes far less. Over the ten billion years the disk has existed, the inner regions have completed dozens more circuits than the outer ones, and any pattern made of fixed material would have been wound into a spiral so tight it would be indistinguishable from a smooth disk.</p>
+                        <p>The resolution, worked out by Lin and Shu in the mid-1960s, is that the arms are a standing density wave. Gas drifting into the wave crest is compressed, collapses, and lights up as new stars; the stars drift out the other side and fade. The bright arm is not a group of stars travelling together, it is a place where stars are always being made.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">Three consequences that check out</span>
+                            <ul class="note__list">
+                                <li><strong>Arms should be blue on their leading edge.</strong> Gas enters, is compressed, and takes time to ignite &mdash; so the youngest stars sit slightly ahead of the dust lane. They do.</li>
+                                <li><strong>There should be a radius where pattern and material agree.</strong> At the corotation radius the stars keep pace with the wave and stop being swept through it. Star formation there is measurably lower.</li>
+                                <li><strong>Bars should drive the whole thing.</strong> A bar is a much stronger, longer-lived density wave, and barred spirals have more sharply defined arms. Ours is barred.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             05 · ROTATION
+             ============================================================ -->
+        <section class="shell shell--void" id="rotation">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">05</span> Rotation</p>
+                    <h2 class="head__title">Two disks, same mass, <em>and only one behaves</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Put the mass where the light is and Newtonian gravity makes a firm prediction: past the bright part of the disk, orbital speed must fall away as the square root of distance, exactly as the outer planets move more slowly than the inner ones. Every spiral galaxy ever measured refuses to do this.</p>
+                </header>
+
+                <!-- Two panels, two <svg> elements, because each galaxy
+                     has to sit on its own viewBox centre for the rotation
+                     origin to resolve correctly. -->
+                <div class="rot-pair">
+                    <div class="rot-pair__panel rot-pair--pred">
+                        <svg class="fig__svg rot--pred" viewBox="0 0 560 560" role="img"
+                             aria-label="A face-on spiral with four ring radii at 8, 16, 24 and 32 kiloparsecs, labelled with the orbital speeds predicted from the visible mass alone: 220, 156, 127 and 114 kilometres per second. Markers on each ring turn at those rates, and the outermost lags steadily further behind.">
+                            <use href="#gxSpiral" x="146" y="146" width="268" height="268"/>
+
+                            <circle class="rot__ring" cx="280" cy="280" r="66"/>
+                            <circle class="rot__ring" cx="280" cy="280" r="124"/>
+                            <circle class="rot__ring" cx="280" cy="280" r="182"/>
+                            <circle class="rot__ring" cx="280" cy="280" r="236"/>
+
+                            <g class="rot__spoke" style="--spoke-t:12s;animation-delay:-6.7s;--rest-pred:200deg">
+                                <path class="rot__ref" d="M 280 280 L 346 280"/>
+                                <circle class="rot__marker" cx="346" cy="280" r="6"/>
+                            </g>
+                            <g class="rot__spoke" style="--spoke-t:34s;animation-delay:-14.2s;--rest-pred:150deg">
+                                <path class="rot__ref" d="M 280 280 L 404 280"/>
+                                <circle class="rot__marker" cx="404" cy="280" r="6"/>
+                            </g>
+                            <g class="rot__spoke" style="--spoke-t:62s;animation-delay:-16.4s;--rest-pred:95deg">
+                                <path class="rot__ref" d="M 280 280 L 462 280"/>
+                                <circle class="rot__marker rot__marker--far" cx="462" cy="280" r="6"/>
+                            </g>
+                            <g class="rot__spoke" style="--spoke-t:96s;animation-delay:-14.7s;--rest-pred:55deg">
+                                <path class="rot__ref" d="M 280 280 L 516 280"/>
+                                <circle class="rot__marker rot__marker--far" cx="516" cy="280" r="6"/>
+                            </g>
+
+                            <!-- Speed per ring, read at twelve o'clock.
+
+                                 The figure originally relied on the fan of
+                                 spokes alone to carry the comparison, and
+                                 it could not: orbital angle wraps, so a
+                                 still frame cannot show that the outer
+                                 marker is a whole lap behind, and the
+                                 instantaneous spread between the two
+                                 panels came to only about sixty degrees.
+                                 The numbers state it outright, and they
+                                 work identically whether the figure is
+                                 moving or frozen. -->
+                            <g>
+                                <text class="svg-unit" x="280" y="18" text-anchor="middle">kpc &#183; km/s</text>
+                                <text class="svg-unit svg-onlight" x="280" y="208" text-anchor="middle" style="font-size:11px">8 &#183; 220</text>
+                                <text class="svg-unit svg-onlight" x="280" y="150" text-anchor="middle" style="font-size:11px">16 &#183; 156</text>
+                                <text class="svg-unit svg-onlight" x="280" y="92" text-anchor="middle" style="font-size:11px">24 &#183; 127</text>
+                                <text class="svg-value svg-onlight" x="280" y="38" text-anchor="middle" style="font-size:11px;fill:var(--young-mid)">32 &#183; 114</text>
+                            </g>
+                        </svg>
+                        <p class="rot-pair__cap"><b>Predicted &middot; visible mass only</b>Falls away as the square root of distance. By the rim it is down to half the inner speed.</p>
+                    </div>
+
+                    <div class="rot-pair__panel rot-pair--obs">
+                        <svg class="fig__svg rot--obs" viewBox="0 0 560 560" role="img"
+                             aria-label="The same spiral and the same four ring radii, labelled with the orbital speeds actually measured: 220 kilometres per second at every radius. The markers stay far closer together than the prediction allows.">
+                            <use href="#gxSpiral" x="146" y="146" width="268" height="268"/>
+
+                            <circle class="rot__ring" cx="280" cy="280" r="66"/>
+                            <circle class="rot__ring" cx="280" cy="280" r="124"/>
+                            <circle class="rot__ring" cx="280" cy="280" r="182"/>
+                            <circle class="rot__ring" cx="280" cy="280" r="236"/>
+
+                            <g class="rot__spoke" style="--spoke-t:12s;animation-delay:-6.7s;--rest-obs:200deg">
+                                <path class="rot__ref" d="M 280 280 L 346 280"/>
+                                <circle class="rot__marker" cx="346" cy="280" r="6"/>
+                            </g>
+                            <g class="rot__spoke" style="--spoke-t:24s;animation-delay:-11.3s;--rest-obs:170deg">
+                                <path class="rot__ref" d="M 280 280 L 404 280"/>
+                                <circle class="rot__marker" cx="404" cy="280" r="6"/>
+                            </g>
+                            <g class="rot__spoke" style="--spoke-t:36s;animation-delay:-14.0s;--rest-obs:140deg">
+                                <path class="rot__ref" d="M 280 280 L 462 280"/>
+                                <circle class="rot__marker rot__marker--far" cx="462" cy="280" r="6"/>
+                            </g>
+                            <g class="rot__spoke" style="--spoke-t:48s;animation-delay:-15.3s;--rest-obs:115deg">
+                                <path class="rot__ref" d="M 280 280 L 516 280"/>
+                                <circle class="rot__marker rot__marker--far" cx="516" cy="280" r="6"/>
+                            </g>
+
+                            <!-- Speed per ring, read at twelve o'clock.
+
+                                 The figure originally relied on the fan of
+                                 spokes alone to carry the comparison, and
+                                 it could not: orbital angle wraps, so a
+                                 still frame cannot show that the outer
+                                 marker is a whole lap behind, and the
+                                 instantaneous spread between the two
+                                 panels came to only about sixty degrees.
+                                 The numbers state it outright, and they
+                                 work identically whether the figure is
+                                 moving or frozen. -->
+                            <g>
+                                <text class="svg-unit" x="280" y="18" text-anchor="middle">kpc &#183; km/s</text>
+                                <text class="svg-unit svg-onlight" x="280" y="208" text-anchor="middle" style="font-size:11px">8 &#183; 220</text>
+                                <text class="svg-unit svg-onlight" x="280" y="150" text-anchor="middle" style="font-size:11px">16 &#183; 220</text>
+                                <text class="svg-unit svg-onlight" x="280" y="92" text-anchor="middle" style="font-size:11px">24 &#183; 220</text>
+                                <text class="svg-value svg-onlight" x="280" y="38" text-anchor="middle" style="font-size:11px;fill:var(--old-hot)">32 &#183; 220</text>
+                            </g>
+                        </svg>
+                        <p class="rot-pair__cap"><b>Measured &middot; 21 cm hydrogen</b>Flat. The rim is doing the same speed as the inside, and nothing about the light explains it.</p>
+                    </div>
+                </div>
+
+                <p class="caption" style="margin-top:2rem">
+                    <span class="caption__id">Fig 04</span>
+                    Rings are at 8, 16, 24 and 32 kiloparsecs. Both panels are anchored to the same 220&nbsp;km/s at 8&nbsp;kpc &mdash; the Sun's radius, where the two models agree &mdash; and the predicted curve then falls as v&nbsp;=&nbsp;220&#8202;&radic;(8/r), reaching 114&nbsp;km/s at the rim. Measured speeds stay flat instead, so the outermost marker completes an orbit in half the predicted time. Vera Rubin and Kent Ford established this for dozens of spirals through the 1970s; it holds for every one measured since.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             06 · ROTATION CURVE
+             The page's central chart.
+             ============================================================ -->
+        <section class="shell shell--lit shell--seam" id="curve">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">06</span> Rotation curve</p>
+                    <h2 class="head__title">The curve that should fall, <em>and does not</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Plot orbital speed against distance from the centre and the disagreement stops being an impression and becomes a measurement. The two curves are drawn from the same galaxy: one from the gravity of everything that shines, one from the Doppler shift of hydrogen. They part company at the edge of the bright disk and never come back together.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 660" role="img"
+                             aria-label="A rotation curve. Orbital speed rises steeply in the first two kiloparsecs to about 220 kilometres per second and then stays flat all the way out to 30 kiloparsecs. A second, dashed curve shows the speed predicted from visible mass alone, which peaks at the same place and then falls away to 114 kilometres per second. The widening gap between them is filled violet and labelled as the missing mass.">
+
+                            <!-- ---- Grid and axes -------------------- -->
+                            <g class="svg-grid">
+                                <path d="M 90 560 L 1050 560"/>
+                                <path d="M 90 469.6 L 1050 469.6"/>
+                                <path d="M 90 379.2 L 1050 379.2"/>
+                                <path d="M 90 288.8 L 1050 288.8"/>
+                                <path d="M 90 198.4 L 1050 198.4"/>
+                                <path d="M 90 108 L 1050 108"/>
+                            </g>
+                            <path class="svg-axis" d="M 90 92 L 90 560 L 1050 560"/>
+
+                            <g class="svg-unit">
+                                <text x="78" y="564" text-anchor="end">0</text>
+                                <text x="78" y="473.6" text-anchor="end">50</text>
+                                <text x="78" y="383.2" text-anchor="end">100</text>
+                                <text x="78" y="292.8" text-anchor="end">150</text>
+                                <text x="78" y="202.4" text-anchor="end">200</text>
+                                <text x="78" y="112" text-anchor="end">250</text>
+                            </g>
+                            <text class="svg-label" x="26" y="330" transform="rotate(-90 26 330)" text-anchor="middle">Orbital speed &middot; km/s</text>
+
+                            <g class="svg-tick">
+                                <path d="M 90 560 L 90 570"/><path d="M 250 560 L 250 570"/>
+                                <path d="M 410 560 L 410 570"/><path d="M 570 560 L 570 570"/>
+                                <path d="M 730 560 L 730 570"/><path d="M 890 560 L 890 570"/>
+                                <path d="M 1050 560 L 1050 570"/>
+                            </g>
+                            <g class="svg-unit">
+                                <text x="90" y="588" text-anchor="middle">0</text>
+                                <text x="250" y="588" text-anchor="middle">5</text>
+                                <text x="410" y="588" text-anchor="middle">10</text>
+                                <text x="570" y="588" text-anchor="middle">15</text>
+                                <text x="730" y="588" text-anchor="middle">20</text>
+                                <text x="890" y="588" text-anchor="middle">25</text>
+                                <text x="1050" y="588" text-anchor="middle">30</text>
+                            </g>
+                            <text class="svg-label" x="570" y="616" text-anchor="middle">Distance from centre &middot; kiloparsecs</text>
+
+                            <!-- ---- The discrepancy, as a region ----
+                                 Rule 3: the missing mass is violet, and
+                                 it is stated as an area rather than as a
+                                 caption, because the area is the thing
+                                 that has to be explained. -->
+                            <path class="curve__gap"
+                                  d="M 346 162 L 410 153 L 474 144 L 570 153 L 730 162 L 890 166 L 1050 171
+                                     L 1050 354.6 L 890 335.1 L 730 308.6 L 570 269.5 L 474 235.3 L 410 204.2 Z"/>
+                            <path class="curve__gap-edge" d="M 346 162 L 410 204.2 L 474 235.3 L 570 269.5 L 730 308.6 L 890 335.1 L 1050 354.6"/>
+
+                            <!-- ---- Predicted from visible mass ------
+                                 Rises with the observed curve to 8 kpc,
+                                 where the two models are anchored, then
+                                 falls as v = 220 sqrt(8/r). -->
+                            <path class="curve__predicted"
+                                  d="M 90 560 L 122 289 L 154 199 L 218 162 L 282 153 L 346 162
+                                     L 410 204.2 L 474 235.3 L 570 269.5 L 730 308.6 L 890 335.1 L 1050 354.6"/>
+
+                            <!-- ---- Measured ------------------------- -->
+                            <path class="curve__observed-bloom"
+                                  d="M 90 560 L 122 289 L 154 199 L 218 162 L 282 153 L 346 162
+                                     L 410 153 L 474 144 L 570 153 L 730 162 L 890 166 L 1050 171"/>
+                            <path class="curve__observed"
+                                  d="M 90 560 L 122 289 L 154 199 L 218 162 L 282 153 L 346 162
+                                     L 410 153 L 474 144 L 570 153 L 730 162 L 890 166 L 1050 171"/>
+
+                            <g class="curve__point">
+                                <circle cx="154" cy="199" r="3.4"/><circle cx="218" cy="162" r="3.4"/>
+                                <circle cx="282" cy="153" r="3.4"/><circle cx="410" cy="153" r="3.4"/>
+                                <circle cx="474" cy="144" r="3.4"/><circle cx="570" cy="153" r="3.4"/>
+                                <circle cx="730" cy="162" r="3.4"/><circle cx="890" cy="166" r="3.4"/>
+                                <circle cx="1050" cy="171" r="3.4"/>
+                            </g>
+                            <g class="curve__point--pred">
+                                <circle cx="410" cy="204.2" r="3"/><circle cx="474" cy="235.3" r="3"/>
+                                <circle cx="570" cy="269.5" r="3"/><circle cx="730" cy="308.6" r="3"/>
+                                <circle cx="890" cy="335.1" r="3"/><circle cx="1050" cy="354.6" r="3"/>
+                            </g>
+
+                            <!-- ---- Where the bright disk ends ------- -->
+                            <path class="svg-dash" style="stroke:var(--line-strong);opacity:0.6"
+                                  d="M 570 108 L 570 560"/>
+                            <text class="svg-unit" x="562" y="102" text-anchor="end">Optical disk ends here</text>
+
+                            <!-- ---- Us ------------------------------- -->
+                            <circle class="curve__sun" cx="352" cy="162" r="5"/>
+                            <path class="svg-leader svg-leader--old" d="M 352 152 L 352 126 L 300 126"/>
+                            <text class="svg-label svg-label--lit" x="292" y="122" text-anchor="end">The Sun</text>
+                            <text class="svg-unit" x="292" y="140" text-anchor="end">8.18 kpc &middot; 220 km/s</text>
+
+                            <!-- ---- Curve labels --------------------- -->
+                            <g>
+                                <text class="svg-label svg-label--lit" x="1042" y="146" text-anchor="end">Measured &mdash; flat</text>
+                                <text class="svg-unit" x="1042" y="196" text-anchor="end">21 cm hydrogen, out past the stars</text>
+
+                                <text class="svg-label svg-label--young" x="1042" y="386" text-anchor="end">Predicted from starlight</text>
+                                <text class="svg-unit" x="1042" y="404" text-anchor="end">Keplerian falloff, v &#8733; 1/&radic;r</text>
+                            </g>
+
+                            <!-- ---- The gap, named ------------------- -->
+                            <path class="svg-leader svg-leader--dark" d="M 800 250 L 800 214 L 720 214"/>
+                            <text class="svg-label svg-label--dark svg-onlight" x="712" y="210" text-anchor="end">Missing mass</text>
+                            <text class="svg-unit svg-onlight" x="712" y="228" text-anchor="end">Nothing here emits light</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 05</span>
+                        Idealised from Milky Way measurements, anchored at 220&nbsp;km/s at the Sun's radius. Speeds inside about 2&nbsp;kpc are dominated by the bulge and the bar and are messier than a single line suggests. Beyond 15&nbsp;kpc there are almost no stars left to measure, which is why the curve is traced in neutral hydrogen instead &mdash; and hydrogen is exactly where the flatness becomes impossible to argue with.
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="prose prose--lede">
+                        <p>Orbital speed is a direct measure of enclosed mass. If nearly all of a galaxy's mass sits in its bright inner region, then a star further out is orbiting a nearly fixed total, and its speed must drop off as the square root of its distance &mdash; the same law that has Neptune crawling round the Sun at a fifth of Mercury's speed.</p>
+                        <p>The curves stay flat instead. For speed to hold constant while radius grows, enclosed mass has to keep growing in direct proportion to radius, out into regions where the starlight has effectively stopped. Something is there, in quantity, arranged in a roughly spherical distribution far larger than the disk, and it neither emits nor absorbs light at any wavelength we have looked in.</p>
+                        <p>Vera Rubin and Kent Ford measured this galaxy after galaxy through the 1970s. The result was initially treated as a curiosity about spiral disks. It is now the main reason cosmology thinks most of the universe is made of something nobody has identified.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">What else it could have been</span>
+                            <ul class="note__list">
+                                <li><strong>Faint ordinary matter.</strong> Cold gas, dim dwarfs, dead stars. Ruled out by how much of it there would have to be, and by how much deuterium the early universe made.</li>
+                                <li><strong>Modified gravity.</strong> Change the force law instead of adding mass. MOND fits rotation curves impressively well and struggles badly with galaxy clusters and the cosmic microwave background.</li>
+                                <li><strong>Measurement error.</strong> The one possibility that has been most thoroughly eliminated. The flat curve shows up in optical spectra, in 21&nbsp;cm radio, in gravitational lensing and in the motions of whole clusters.</li>
+                                <li><strong>Dark matter.</strong> Not an explanation so much as a name for the discrepancy, and still the only candidate that fits every measurement at once.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             07 · DARK MATTER HALO
+             ============================================================ -->
+        <section class="shell shell--void" id="dark-matter">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">07</span> Dark matter halo</p>
+                    <h2 class="head__title">The galaxy is the small bright bit <em>in the middle of it</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Fit a mass distribution to the flat rotation curve and you get a roughly spherical halo that extends many times further than the stars, contains several times more mass than everything visible, and has no detectable edge. Drawn to one scale, the galaxy you can photograph is a scratch at the centre of it.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 660" role="img"
+                             aria-label="A dark matter halo drawn to scale as a violet sphere 200 kiloparsecs in radius, with dashed shells at 50, 100, 150 and 200 kiloparsecs. The entire visible stellar disk is a tiny sliver at the centre, only 15 kiloparsecs across, shown magnified thirteen times in an inset panel to the right.">
+
+                            <!-- ---- The halo, to scale --------------
+                                 1.25 px per kiloparsec. No outer edge is
+                                 drawn as a solid line because none has
+                                 been found; the fill simply runs out. -->
+                            <circle class="halo__fill" cx="400" cy="330" r="250"/>
+                            <g class="halo__shell">
+                                <circle cx="400" cy="330" r="62.5"/>
+                                <circle cx="400" cy="330" r="125"/>
+                                <circle cx="400" cy="330" r="187.5"/>
+                                <circle cx="400" cy="330" r="250"/>
+                            </g>
+
+                            <g class="svg-unit">
+                                <text x="400" y="262" text-anchor="middle" class="svg-onlight">50</text>
+                                <text x="400" y="199" text-anchor="middle" class="svg-onlight">100</text>
+                                <text x="400" y="136" text-anchor="middle" class="svg-onlight">150</text>
+                                <text x="400" y="74" text-anchor="middle" class="svg-onlight">200 kpc</text>
+                            </g>
+
+                            <!-- Satellite galaxies, which are the other
+                                 way the halo gets weighed: they orbit
+                                 out here, far outside the disk. -->
+                            <g class="lg__dwarf">
+                                <circle cx="286" cy="182" r="3"/><circle cx="548" cy="252" r="2.6"/>
+                                <circle cx="228" cy="430" r="2.8"/><circle cx="520" cy="452" r="2.4"/>
+                                <circle cx="392" cy="128" r="2.4"/><circle cx="176" cy="300" r="2.6"/>
+                                <circle cx="596" cy="366" r="2.2"/><circle cx="330" cy="536" r="2.4"/>
+                            </g>
+                            <path class="svg-leader svg-leader--dark" d="M 286 182 L 240 150 L 150 150"/>
+                            <text class="svg-unit" x="142" y="154" text-anchor="end">Satellite dwarfs orbit out here</text>
+
+                            <!-- ---- The visible galaxy, same scale ---
+                                 15 kpc of stellar disk is 18.75 units.
+                                 It is meant to look negligible. -->
+                            <ellipse class="halo__visible" cx="400" cy="330" rx="18.75" ry="5"/>
+
+                            <!-- ---- Tie to the inset ---------------- -->
+                            <rect class="halo__inset-frame" x="378" y="316" width="44" height="28"/>
+                            <path class="halo__inset-tie" d="M 422 316 L 760 168 M 422 344 L 760 470"/>
+
+                            <!-- ---- Inset: the whole visible galaxy -- -->
+                            <rect class="halo__inset-frame" x="760" y="168" width="330" height="302"/>
+                            <use href="#gxSpiral" x="795" y="184" width="260" height="260"/>
+                            <text class="svg-unit" x="776" y="192">&times;13 &mdash; everything we can photograph</text>
+                            <g class="svg-tick">
+                                <path d="M 812 448 L 812 456 M 1038 448 L 1038 456 M 812 452 L 1038 452"/>
+                            </g>
+                            <text class="svg-unit" x="925" y="442" text-anchor="middle">30 kpc &middot; the optical disk</text>
+
+                            <!-- ---- Mass ledger --------------------- -->
+                            <g>
+                                <text class="svg-label svg-label--dark" x="760" y="536">Halo mass</text>
+                                <text class="svg-value" x="1090" y="536" text-anchor="end">~1.15 &times; 10&#185;&sup2; M&#9737;</text>
+                                <path class="svg-axis" d="M 760 548 L 1090 548"/>
+                                <text class="svg-label svg-label--lit" x="760" y="576">Stars and gas</text>
+                                <text class="svg-value" x="1090" y="576" text-anchor="end">~6 &times; 10&#185;&#8304; M&#9737;</text>
+                                <path class="svg-axis" d="M 760 588 L 1090 588"/>
+                                <text class="svg-label" x="760" y="616">Ratio</text>
+                                <text class="svg-value" x="1090" y="616" text-anchor="end">about 19 to 1</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 06</span>
+                        Halo radius is the virial radius, roughly 200&nbsp;kpc for the Milky Way, and the shells mark equal steps rather than any physical boundary &mdash; the density falls smoothly and no one has found where it stops. The 19-to-1 ratio is for the halo as a whole; within the optical disk, where most of the stars are, visible matter still holds its own.
+                    </figcaption>
+                </figure>
+
+                <div class="note" style="margin-top:3.5rem">
+                    <span class="note__title">Four independent ways the halo gets weighed</span>
+                    <ul class="note__list">
+                        <li><strong>Rotation curves</strong> give the mass inside each radius directly, out as far as there is hydrogen to observe.</li>
+                        <li><strong>Satellite orbits.</strong> The Milky Way's dwarf companions swing out to hundreds of kiloparsecs, and their speeds require far more mass than the disk contains.</li>
+                        <li><strong>Gravitational lensing.</strong> A foreground galaxy bends the light of things behind it by an amount set by its total mass, with no assumption about what that mass is made of.</li>
+                        <li><strong>Escape velocity.</strong> Fast-moving halo stars are still bound to the galaxy. That puts a floor under its mass that starlight alone cannot reach.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             08 · FORMATION
+             ============================================================ -->
+        <section class="shell shell--abyss shell--seam" id="formation">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">08</span> Formation</p>
+                    <h2 class="head__title">Dark matter first, <em>then everything else</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Galaxies did not condense out of a smooth universe on their own. The dark matter collapsed first, because it does not feel radiation pressure and had a head start, and the gas fell into the wells it had already made. Every structure below is gas settling into a shape that was decided before the first star existed.</p>
+                </header>
+
+                <ol class="track">
+                    <li class="track__step">
+                        <span class="track__time">z &asymp; 20<b>~200 Myr</b></span>
+                        <div class="track__scene">
+                            <svg viewBox="0 0 200 150" aria-hidden="true" style="width:100%;height:100%">
+                                <g class="web__filament">
+                                    <path d="M 10 40 L 74 66 L 140 44 L 192 62"/>
+                                    <path d="M 20 122 L 74 66 L 128 118 L 186 106"/>
+                                    <path d="M 74 12 L 74 66"/>
+                                </g>
+                                <circle cx="74" cy="66" r="26" fill="url(#haloFall)"/>
+                                <circle cx="74" cy="66" r="9" fill="url(#gxIrr)"/>
+                                <g fill="var(--young-hot)" opacity="0.5">
+                                    <circle cx="74" cy="66" r="1.8"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <h3 class="track__label">Halos collapse</h3>
+                        <p class="track__text">Dark matter overdensities left over from the Big Bang pull themselves together into halos. Gas falls into them and begins to cool. Nothing has ignited yet.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">z &asymp; 6<b>~1 Gyr</b></span>
+                        <div class="track__scene">
+                            <svg viewBox="0 0 200 150" aria-hidden="true" style="width:100%;height:100%">
+                                <circle cx="100" cy="75" r="46" fill="url(#haloFall)"/>
+                                <g fill="url(#gxIrr)">
+                                    <ellipse cx="84" cy="66" rx="26" ry="20" transform="rotate(-20 84 66)"/>
+                                    <ellipse cx="118" cy="88" rx="20" ry="15" transform="rotate(16 118 88)"/>
+                                    <ellipse cx="112" cy="56" rx="14" ry="11"/>
+                                </g>
+                                <g class="gx-hii--glow">
+                                    <circle cx="80" cy="64" r="9"/><circle cx="116" cy="88" r="8"/>
+                                    <circle cx="112" cy="54" r="6"/>
+                                </g>
+                                <g class="gx-hii">
+                                    <circle cx="80" cy="64" r="3"/><circle cx="116" cy="88" r="2.6"/>
+                                    <circle cx="112" cy="54" r="2.2"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <h3 class="track__label">Clumps and mergers</h3>
+                        <p class="track__text">The first galaxies are small, lumpy, gas-rich and forming stars furiously. They merge constantly. Nothing yet has a disk, a bulge or a spiral pattern.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">z &asymp; 2<b>~3.3 Gyr</b></span>
+                        <div class="track__scene">
+                            <svg viewBox="0 0 200 150" aria-hidden="true" style="width:100%;height:100%">
+                                <circle cx="100" cy="75" r="52" fill="url(#haloFall)"/>
+                                <ellipse cx="100" cy="75" rx="62" ry="26" fill="url(#gxDisk)"
+                                         transform="rotate(-14 100 75)"/>
+                                <ellipse cx="100" cy="75" rx="16" ry="14" fill="url(#gxBulge)"/>
+                                <g class="gx-hii--glow">
+                                    <circle cx="62" cy="84" r="10"/><circle cx="136" cy="66" r="10"/>
+                                    <circle cx="88" cy="60" r="7"/><circle cx="118" cy="90" r="7"/>
+                                </g>
+                                <g class="gx-hii">
+                                    <circle cx="62" cy="84" r="3.2"/><circle cx="136" cy="66" r="3.2"/>
+                                    <circle cx="88" cy="60" r="2.4"/><circle cx="118" cy="90" r="2.4"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <h3 class="track__label">Peak star formation</h3>
+                        <p class="track__text">The universe makes stars faster now than at any time before or since. Angular momentum in the infalling gas flattens it, and a thick, turbulent disk settles out.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">z &asymp; 0.5<b>~8.6 Gyr</b></span>
+                        <div class="track__scene">
+                            <svg viewBox="0 0 200 150" aria-hidden="true" style="width:100%;height:100%">
+                                <circle cx="100" cy="75" r="54" fill="url(#haloFall)"/>
+                                <use href="#gxSpiral" x="42" y="17" width="116" height="116"/>
+                            </svg>
+                        </div>
+                        <h3 class="track__label">The pattern appears</h3>
+                        <p class="track__text">The disk thins and cools enough to carry a density wave, and spiral arms become a persistent feature rather than a passing disturbance. A bar often forms at the same time.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">z = 0<b>13.8 Gyr</b></span>
+                        <div class="track__scene">
+                            <svg viewBox="0 0 200 150" aria-hidden="true" style="width:100%;height:100%">
+                                <circle cx="100" cy="75" r="56" fill="url(#haloFall)"/>
+                                <use href="#gxSpiral" x="38" y="13" width="124" height="124"/>
+                                <g class="lg__dwarf">
+                                    <circle cx="44" cy="34" r="3"/><circle cx="160" cy="112" r="2.4"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <h3 class="track__label">Now</h3>
+                        <p class="track__text">A quiet spiral, still turning, still making stars but at a fraction of its old rate, with a few surviving satellites and the shredded remains of the ones it has already eaten.</p>
+                    </li>
+                </ol>
+
+                <p class="caption" style="margin-top:3rem">
+                    <span class="caption__id">Fig 07</span>
+                    Redshifts and ages use the standard cosmology; the violet wash in each frame is the dark matter halo, which is present from the first panel and grows throughout. The Milky Way's own disk is at least 12&nbsp;billion years old, so for our galaxy most of this happened early and very little has happened since.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             09 · MERGERS
+             ============================================================ -->
+        <section class="shell shell--rise" id="mergers">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">09</span> Mergers</p>
+                    <h2 class="head__title">Two galaxies collide and <em>almost nothing hits anything</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Stars are unimaginably far apart relative to their size. When two galaxies pass through each other the stars simply miss &mdash; the odds of any two colliding are effectively zero. What does collide is the gas, and what does the damage is tide: gravity pulling harder on the near side of a disk than the far side, until neither disk survives.</p>
+                </header>
+
+                <div class="merge">
+                    <div class="merge__frame">
+                        <div class="merge__stage">
+                            <svg viewBox="0 0 280 190" aria-hidden="true" style="width:100%;height:100%">
+                                <g class="merge__drift-a">
+                                    <use href="#gxSpiral" x="6" y="46" width="98" height="98"/>
+                                </g>
+                                <g class="merge__drift-b">
+                                    <use href="#gxSpiral" x="176" y="46" width="98" height="98"/>
+                                </g>
+                                <g class="lg__vector">
+                                    <path d="M 118 95 L 162 95"/>
+                                </g>
+                                <path class="lg__vector-tip" d="M 162 91 L 170 95 L 162 99 Z"/>
+                                <path class="lg__vector" d="M 162 95 L 118 95" style="opacity:0"/>
+                            </svg>
+                        </div>
+                        <p class="merge__t">Now</p>
+                        <h3 class="merge__title">Approach</h3>
+                        <p class="merge__text">The Milky Way and Andromeda are 2.5 million light years apart and closing at about 110&nbsp;km/s. Both are ordinary spirals with intact disks and their own retinues of satellites.</p>
+                    </div>
+
+                    <div class="merge__frame">
+                        <div class="merge__stage">
+                            <svg viewBox="0 0 280 190" aria-hidden="true" style="width:100%;height:100%">
+                                <use href="#gxSpiral" x="26" y="34" width="112" height="112"/>
+                                <use href="#gxSpiral" x="142" y="44" width="104" height="104"/>
+                                <!-- Tails start inside their own disk.
+                                     Begun just outside it they read as
+                                     arcs floating in the corners with no
+                                     visible connection to either galaxy. -->
+                                <path class="merge__tail" d="M 74 74 C 44 54, 18 40, 12 14 C 10 6, 20 3, 30 8"/>
+                                <path class="merge__tail" d="M 200 122 C 232 142, 258 156, 266 182 C 268 190, 258 193, 248 188"/>
+                                <path class="merge__bridge" d="M 116 92 C 140 84, 164 88, 186 96"/>
+                                <g class="merge__burst">
+                                    <circle cx="146" cy="92" r="9"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <p class="merge__t">+4 Gyr</p>
+                        <h3 class="merge__title">First pass</h3>
+                        <p class="merge__text">They miss each other, but tides throw long tails of stars out of both disks and a bridge of gas stretches between them. Neither galaxy looks like a spiral any more.</p>
+                    </div>
+
+                    <div class="merge__frame">
+                        <div class="merge__stage">
+                            <svg viewBox="0 0 280 190" aria-hidden="true" style="width:100%;height:100%">
+                                <ellipse cx="140" cy="95" rx="86" ry="66" fill="url(#gxHalo)"/>
+                                <use href="#gxSpiral" x="70" y="30" width="96" height="96"/>
+                                <use href="#gxSpiral" x="118" y="58" width="88" height="88"/>
+                                <path class="merge__tail" d="M 112 66 C 76 42, 40 26, 12 18 C 2 15, 2 6, 14 5"/>
+                                <path class="merge__tail" d="M 170 118 C 206 142, 242 160, 268 170 C 278 174, 278 183, 266 184"/>
+                                <g class="merge__burst">
+                                    <circle cx="132" cy="86" r="16"/><circle cx="156" cy="102" r="12"/>
+                                    <circle cx="118" cy="104" r="9"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <p class="merge__t">+6 Gyr</p>
+                        <h3 class="merge__title">Starburst</h3>
+                        <p class="merge__text">The gas clouds do collide. Shocked hydrogen collapses across both galaxies at once and star formation spikes by a factor of tens, burning through the raw material in a few hundred million years.</p>
+                    </div>
+
+                    <div class="merge__frame">
+                        <div class="merge__stage">
+                            <svg viewBox="0 0 280 190" aria-hidden="true" style="width:100%;height:100%">
+                                <ellipse cx="140" cy="95" rx="104" ry="80" fill="url(#gxHalo)"/>
+                                <!-- Smaller than the pair it came from, and
+                                     the tails are now faint shells rather
+                                     than fresh streams: by ten billion
+                                     years the debris has phase-mixed back
+                                     into the body. -->
+                                <use href="#gxElliptical" x="70" y="25" width="140" height="140"/>
+                                <path class="merge__tail" d="M 96 62 C 62 42, 34 30, 14 26" style="opacity:0.2"/>
+                                <path class="merge__tail" d="M 186 128 C 220 148, 248 160, 268 164" style="opacity:0.2"/>
+                                <g class="gx-globular">
+                                    <circle cx="46" cy="52" r="1.8"/><circle cx="238" cy="140" r="1.6"/>
+                                    <circle cx="60" cy="150" r="1.5"/><circle cx="226" cy="44" r="1.6"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <p class="merge__t">+10 Gyr</p>
+                        <h3 class="merge__title">One elliptical</h3>
+                        <p class="merge__text">The orbits have randomised, the gas is spent, and what is left is a single smooth ellipsoid of old stars with no disk and no ongoing star formation. Both central black holes eventually merge too.</p>
+                    </div>
+                </div>
+
+                <p class="caption" style="margin-top:2.5rem">
+                    <span class="caption__id">Fig 08</span>
+                    Timings from n-body simulations of the Local Group; the first close pass is usually put at four to five billion years from now, with the merger complete a few billion years after that. The Sun will still exist, and is unlikely to be disturbed &mdash; but the night sky will be unrecognisable, and there will be no Milky Way left to be in.
+                </p>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="prose prose--lede">
+                        <p>The reason ellipticals dominate the centres of galaxy clusters is that clusters are where mergers happen most often. Repeated collisions scramble ordered rotation into random orbits, strip out or exhaust the cold gas, and leave behind exactly the red, smooth, gas-poor, non-rotating objects the Hubble sequence puts at the far end of its handle.</p>
+                        <p>Our own galaxy has done this before on a smaller scale. The stellar halo is full of streams &mdash; long ribbons of stars moving together on shared orbits, which are the disassembled remains of dwarf galaxies the Milky Way has already absorbed. The Sagittarius dwarf is being pulled apart right now.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">Why the stars miss</span>
+                            <ul class="note__list">
+                                <li><strong>Scale it down.</strong> If the Sun were a grain of sand, the nearest other grain would be about seven kilometres away. A galaxy is mostly empty space by an enormous margin.</li>
+                                <li><strong>Gas is different.</strong> Clouds are light years across rather than light seconds, so they cannot miss. They shock, compress and collapse.</li>
+                                <li><strong>Tides do the shaping.</strong> No contact is needed. A difference in gravitational pull across the width of a disk is enough to unwind it completely.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             10 · MILKY WAY
+             ============================================================ -->
+        <section class="shell shell--void shell--seam" id="milky-way">
+            <div class="field field--spiral" aria-hidden="true" style="--field-opacity:0.18"></div>
+
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">10</span> The Milky Way</p>
+                    <h2 class="head__title">A map of the one galaxy <em>nobody has ever seen</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Every other galaxy on this page can simply be photographed. Ours cannot: we are inside the disk, two-thirds of the way out, looking through it. This map is assembled from parallaxes, maser distances, gas surveys and infrared counts &mdash; and the far side is still the least certain part of it, because the bulge is in the way.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 720" role="img"
+                             aria-label="A face-on map of the Milky Way showing a central bar and bulge, four major spiral arms named Perseus, Sagittarius-Carina, Scutum-Centaurus and Norma, radius rings at 10 to 50 thousand light years, and the Sun marked on the Orion Spur about 26,700 light years from the centre, a little over halfway to the visible edge.">
+
+                            <!-- ---- The disk sheet -------------------
+                                 Added after the first pass, where the map
+                                 was rings and arms on bare black and read
+                                 as neon wireframe rather than a galaxy.
+                                 The sheet is what the arms are structure
+                                 *in*, so without it there is nothing for
+                                 them to be structure in. -->
+                            <ellipse cx="560" cy="350" rx="262" ry="256" fill="url(#gxDisk)" opacity="0.46"/>
+
+                            <!-- ---- Radius rings, 10 kly apart -------
+                                 5 units per thousand light years. -->
+                            <g class="mw__ring">
+                                <circle cx="560" cy="350" r="50"/>
+                                <circle cx="560" cy="350" r="100"/>
+                                <circle cx="560" cy="350" r="150"/>
+                                <circle cx="560" cy="350" r="200"/>
+                                <circle cx="560" cy="350" r="250"/>
+                            </g>
+                            <g class="svg-unit">
+                                <text x="560" y="296" text-anchor="middle" class="svg-onlight">10</text>
+                                <text x="560" y="246" text-anchor="middle" class="svg-onlight">20</text>
+                                <text x="560" y="196" text-anchor="middle" class="svg-onlight">30</text>
+                                <text x="560" y="146" text-anchor="middle" class="svg-onlight">40</text>
+                                <text x="560" y="96" text-anchor="middle" class="svg-onlight">50 kly</text>
+                            </g>
+
+                            <!-- ---- Arms ----------------------------
+                                 TWO major arms, not four. Spitzer counts
+                                 two in the Milky Way, and four copies of
+                                 a 300-degree logarithmic sweep overlapped
+                                 into concentric mush anyway. The minor
+                                 arms are short outer segments instead,
+                                 which is closer to how survey traces
+                                 actually look.
+
+                                 Stroke widths are pre-transform values:
+                                 the scale multiplies them, so these are
+                                 the rendered widths divided by 1.9. -->
+                            <g>
+                                <use class="mw__arm" href="#gxArm" style="stroke-width:7"
+                                     transform="translate(560,350) rotate(18) scale(1.9)"/>
+                                <use class="mw__arm" href="#gxArm" style="stroke-width:7"
+                                     transform="translate(560,350) rotate(198) scale(1.9)"/>
+                                <use class="mw__arm-core" href="#gxArm" style="stroke-width:1.8"
+                                     transform="translate(560,350) rotate(18) scale(1.9)"/>
+                                <use class="mw__arm-core" href="#gxArm" style="stroke-width:1.8"
+                                     transform="translate(560,350) rotate(198) scale(1.9)"/>
+                            </g>
+
+                            <!-- Minor arms: outer segments only. -->
+                            <g>
+                                <path class="mw__arm" style="stroke-width:11"
+                                      d="M 366 196 C 452 158, 566 152, 664 182"/>
+                                <path class="mw__arm-core" style="stroke-width:2.6"
+                                      d="M 366 196 C 452 158, 566 152, 664 182"/>
+                                <path class="mw__arm" style="stroke-width:11"
+                                      d="M 754 504 C 668 542, 554 548, 456 518"/>
+                                <path class="mw__arm-core" style="stroke-width:2.6"
+                                      d="M 754 504 C 668 542, 554 548, 456 518"/>
+                            </g>
+
+                            <!-- ---- Bar and bulge -------------------
+                                 Smaller than the first attempt, which
+                                 was a solid tan ellipse reading like a
+                                 planet's ring rather than a stellar bar. -->
+                            <ellipse class="mw__bar" cx="560" cy="350" rx="64" ry="15"
+                                     transform="rotate(-24 560 350)"/>
+                            <ellipse class="mw__bulge" cx="560" cy="350" rx="34" ry="31"/>
+                            <circle cx="560" cy="350" r="2.4" fill="#000000" stroke="var(--old-hot)" stroke-width="1"/>
+
+                            <!-- ---- The Sun's orbit ----------------- -->
+                            <circle class="mw__orbit" cx="560" cy="350" r="133.5"/>
+
+                            <!-- ---- Orion Spur ---------------------- -->
+                            <path class="mw__spur" d="M 512 470 C 546 482, 588 486, 622 476"/>
+
+                            <!-- ---- Us ------------------------------ -->
+                            <circle class="mw__sun-pulse" cx="560" cy="483.5" r="7"/>
+                            <circle class="mw__sun-ring" cx="560" cy="483.5" r="7"/>
+                            <circle class="mw__sun" cx="560" cy="483.5" r="3.2"/>
+
+                            <!-- Direction of travel round the orbit. -->
+                            <path class="lg__vector" d="M 616 470 A 133.5 133.5 0 0 0 640 452"/>
+                            <path class="lg__vector-tip" d="M 636 456 L 644 448 L 646 459 Z"/>
+                            <text class="svg-unit svg-onlight" x="560" y="544" text-anchor="middle">One lap: 230 Myr</text>
+
+                            <!-- ---- Callout rail, left -------------- -->
+                            <g>
+                                <path class="svg-leader svg-leader--old" d="M 560 490 L 470 540 L 330 540 L 330 574 L 300 574"/>
+                                <text class="svg-label svg-label--lit" x="292" y="570" text-anchor="end">The Sun</text>
+                                <text class="svg-unit" x="292" y="588" text-anchor="end">26,700 ly out &middot; on the Orion Spur</text>
+
+                                <path class="svg-leader" d="M 520 352 L 420 300 L 330 300 L 330 268 L 300 268"/>
+                                <text class="svg-label svg-label--lit" x="292" y="264" text-anchor="end">Bar and bulge</text>
+                                <text class="svg-unit" x="292" y="282" text-anchor="end">Old stars &middot; ~10 kly across</text>
+
+                                <path class="svg-leader" d="M 562 348 L 470 200 L 330 200 L 330 168 L 300 168"/>
+                                <text class="svg-label svg-label--lit" x="292" y="164" text-anchor="end">Sagittarius A*</text>
+                                <text class="svg-unit" x="292" y="182" text-anchor="end">4.3 million M&#9737;</text>
+                            </g>
+
+                            <!-- ---- Arm names, right --------------- -->
+                            <g>
+                                <path class="svg-leader" d="M 760 250 L 850 214 L 900 214"/>
+                                <text class="svg-label svg-label--young" x="908" y="210">Perseus Arm</text>
+                                <text class="svg-unit" x="908" y="228">Outside us</text>
+
+                                <path class="svg-leader" d="M 700 486 L 850 528 L 900 528"/>
+                                <text class="svg-label svg-label--young" x="908" y="524">Sagittarius&ndash;Carina</text>
+                                <text class="svg-unit" x="908" y="542">Inside us</text>
+
+                                <path class="svg-leader" d="M 400 210 L 300 122 L 262 122" style="opacity:0"/>
+                                <path class="svg-leader" d="M 366 470 L 300 640 L 480 640"/>
+                                <text class="svg-label svg-label--young" x="488" y="636">Scutum&ndash;Centaurus</text>
+                                <text class="svg-unit" x="488" y="654">The other major arm</text>
+
+                                <path class="svg-leader" d="M 796 430 L 900 380 L 940 380"/>
+                                <text class="svg-label svg-label--young" x="948" y="376">Norma &amp; Outer</text>
+                                <text class="svg-unit" x="948" y="394">Minor arms</text>
+                            </g>
+
+                            <!-- The honesty note, on the far side. -->
+                            <text class="svg-unit svg-onlight" x="560" y="700" text-anchor="middle">The far side of the disk is behind the bulge, and is the least certain part of this map</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 09</span>
+                        Rings are 10,000 light years apart. Arm geometry uses the same 18&deg; logarithmic spiral as the rest of the page, positioned to match survey traces rather than plotted from the data directly. The Sun's distance, 26,700 light years, is now known to better than a fifth of a per cent from tracking a single star's orbit around Sagittarius&nbsp;A* for 27 years.
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="prose prose--lede">
+                        <p>By the standard isophote measure the disk is 87,400 light years across. The familiar round number of 100,000 comes from older, more generous definitions, and the faint outer disk of gas and old stars can be traced further still &mdash; a galaxy has no edge, only a brightness at which you stop counting.</p>
+                        <p>We sit in a quiet spot: not in an arm, but on the Orion Spur, a short bridge of gas and young stars between the Sagittarius and Perseus arms. The Sun has been round the galaxy perhaps twenty times since it formed, and the Solar System has been through a spiral arm on several of those laps.</p>
+                    </div>
+
+                    <div>
+                        <dl class="spec">
+                            <div class="spec__row"><dt>Type</dt><dd>SB(rs)bc &mdash; barred spiral</dd></div>
+                            <div class="spec__row"><dt>Disk diameter</dt><dd>87,400 &plusmn; 3,600 ly</dd></div>
+                            <div class="spec__row"><dt>Disk thickness</dt><dd>~1,000 ly</dd></div>
+                            <div class="spec__row"><dt>Stars</dt><dd>100&ndash;400 billion</dd></div>
+                            <div class="spec__row"><dt>Total mass</dt><dd>~1.15 &times; 10&#185;&sup2; M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Stellar mass</dt><dd>~6 &times; 10&#185;&#8304; M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Sun's distance</dt><dd>26,700 ly &middot; 8.18 kpc</dd></div>
+                            <div class="spec__row"><dt>Orbital speed</dt><dd>~220 km/s</dd></div>
+                            <div class="spec__row"><dt>Galactic year</dt><dd>~230 Myr</dd></div>
+                            <div class="spec__row"><dt>Globular clusters</dt><dd>~150 known</dd></div>
+                            <div class="spec__row"><dt>Satellites</dt><dd>60+ confirmed dwarfs</dd></div>
+                            <div class="spec__row"><dt>Disk age</dt><dd>&gt; 12 Gyr</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             11 · LOCAL GROUP
+             ============================================================ -->
+        <section class="shell shell--abyss" id="local-group">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">11</span> Local Group</p>
+                    <h2 class="head__title">Eighty galaxies, and <em>two of them are the group</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Our galaxy belongs to a small, loose, gravitationally bound collection about ten million light years across. It has around eighty known members, and almost all of the mass is in the Milky Way and Andromeda. Everything else is a dwarf, and most of those orbit one of the two big spirals.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 620" role="img"
+                             aria-label="A map of the Local Group. The Milky Way and Andromeda sit 2.5 million light years apart with arrows showing them closing on a shared barycentre. M33 lies beyond Andromeda. Dwarf satellites cluster around both spirals, and a dashed violet boundary marks the group's shared dark matter halo, which encloses both.">
+
+                            <!-- ---- The group's shared dark halo ----
+                                 It encloses both big spirals, which is
+                                 one of the cleanest arguments that halos
+                                 are far larger than the galaxies in them. -->
+                            <ellipse class="lg__halo" cx="560" cy="316" rx="470" ry="248"/>
+                            <text class="svg-label svg-label--dark" x="112" y="106">Shared dark halo</text>
+                            <text class="svg-unit" x="112" y="124">Encloses both spirals</text>
+
+                            <!-- ---- The axis they are falling along -- -->
+                            <path class="lg__axis" d="M 330 380 L 730 250"/>
+
+                            <!-- ---- Barycentre ---------------------- -->
+                            <circle class="lg__bary" cx="570" cy="302" r="7"/>
+                            <path class="lg__bary" d="M 570 291 L 570 313 M 559 302 L 581 302"/>
+                            <!-- Leader runs left, not right: to the right
+                                 it put this label on the same line as
+                                 Andromeda's subtitle and the two collided. -->
+                            <path class="svg-leader svg-leader--dark" d="M 566 306 L 520 214 L 476 214"/>
+                            <text class="svg-unit" x="468" y="218" text-anchor="end">Barycentre &mdash; both fall here</text>
+
+                            <!-- ---- Milky Way ----------------------- -->
+                            <use href="#gxSpiral" x="278" y="328" width="104" height="104"/>
+                            <text class="lg__label" x="330" y="452" text-anchor="middle">Milky Way</text>
+                            <text class="svg-unit" x="330" y="470" text-anchor="middle">Barred spiral &middot; 87 kly</text>
+
+                            <g class="lg__dwarf">
+                                <circle cx="272" cy="440" r="4"/><circle cx="252" cy="452" r="3"/>
+                                <circle cx="392" cy="330" r="2.6"/><circle cx="258" cy="316" r="2.4"/>
+                                <circle cx="356" cy="286" r="2.2"/><circle cx="230" cy="376" r="2.4"/>
+                                <circle cx="404" cy="404" r="2.2"/>
+                            </g>
+                            <path class="svg-leader svg-leader--old" d="M 268 444 L 200 486 L 160 486"/>
+                            <text class="svg-unit" x="152" y="490" text-anchor="end">Magellanic Clouds</text>
+
+                            <!-- ---- Andromeda ---------------------- -->
+                            <use href="#gxSpiral" x="666" y="186" width="128" height="128"/>
+                            <text class="lg__label" x="730" y="336" text-anchor="middle">Andromeda &middot; M31</text>
+                            <text class="svg-unit" x="730" y="354" text-anchor="middle">Spiral &middot; ~220 kly &middot; 2.5 Mly away</text>
+
+                            <g class="lg__dwarf">
+                                <circle cx="654" cy="176" r="3.4"/><circle cx="806" cy="270" r="3"/>
+                                <circle cx="700" cy="158" r="2.4"/><circle cx="784" cy="182" r="2.4"/>
+                                <circle cx="642" cy="252" r="2.2"/><circle cx="820" cy="212" r="2.2"/>
+                            </g>
+                            <path class="svg-leader svg-leader--old" d="M 806 274 L 866 310 L 906 310"/>
+                            <text class="svg-unit" x="914" y="314">M32, M110 and 30 more</text>
+
+                            <!-- ---- M33 ---------------------------- -->
+                            <use href="#gxSpiral" x="852" y="376" width="72" height="72"/>
+                            <text class="lg__label" x="888" y="470" text-anchor="middle">Triangulum &middot; M33</text>
+                            <text class="svg-unit" x="888" y="488" text-anchor="middle">The third spiral &middot; ~60 kly</text>
+
+                            <!-- ---- Approach vectors -------------- -->
+                            <g class="lg__vector">
+                                <path d="M 404 346 L 470 325"/>
+                                <path d="M 660 268 L 594 289"/>
+                            </g>
+                            <path class="lg__vector-tip" d="M 470 320 L 480 325 L 470 330 Z"/>
+                            <path class="lg__vector-tip" d="M 594 284 L 584 289 L 594 294 Z"/>
+                            <text class="svg-unit svg-onlight" x="500" y="252" text-anchor="middle">Closing at ~110 km/s</text>
+
+                            <!-- ---- Scale bar --------------------- -->
+                            <g class="svg-tick">
+                                <path d="M 112 570 L 112 580 M 272 570 L 272 580 M 112 575 L 272 575"/>
+                            </g>
+                            <text class="svg-unit" x="192" y="562" text-anchor="middle">1 million light years</text>
+
+                            <text class="svg-unit" x="1068" y="570" text-anchor="end">~80 members &middot; ~10 Mly across</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 10</span>
+                        Positions are projected onto a plane, so the spacing is indicative rather than exact; the group is genuinely three-dimensional and rather irregular. The two big spirals hold most of the mass but only a small fraction of the members &mdash; new faint dwarfs are still being discovered, and the count of eighty is a floor rather than a total.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             12 · SCALE
+             ============================================================ -->
+        <section class="shell shell--lit shell--seam" id="scale">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">12</span> Scale</p>
+                    <h2 class="head__title">The word &ldquo;galaxy&rdquo; covers <em>four orders of magnitude</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">A dwarf spheroidal with a few thousand stars and a giant elliptical with a hundred trillion are both galaxies. The category is defined by being gravitationally bound and having its own dark halo, not by size &mdash; and the range inside it is wider than most diagrams admit.</p>
+                </header>
+
+                <ol class="ledger ledger--old" role="img"
+                    aria-label="Galaxy diameters on a logarithmic scale: Segue 1 about 230 light years, the Large Magellanic Cloud 32,000, the Milky Way 87,400, Andromeda about 220,000, and IC 1101 up to 4 million light years including its diffuse halo.">
+                    <li class="ledger__row" style="--reach:7%">
+                        <span class="ledger__label">Segue 1 <small>Dwarf spheroidal</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">~230 ly</span>
+                    </li>
+                    <li class="ledger__row" style="--reach:50%">
+                        <span class="ledger__label">Large Magellanic Cloud <small>Irregular satellite</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">~32,000 ly</span>
+                    </li>
+                    <li class="ledger__row" style="--reach:59%">
+                        <span class="ledger__label">Milky Way <small>Barred spiral &middot; us</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">87,400 ly</span>
+                    </li>
+                    <li class="ledger__row" style="--reach:67%">
+                        <span class="ledger__label">Andromeda <small>Spiral &middot; nearest large neighbour</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">~220,000 ly</span>
+                    </li>
+                    <li class="ledger__row" style="--reach:92%">
+                        <span class="ledger__label">IC 1101 <small>Giant elliptical &middot; with halo</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">up to ~4 Mly</span>
+                    </li>
+                </ol>
+
+                <p class="caption" style="margin-top:2.5rem">
+                    <span class="caption__id">Fig 11</span>
+                    <strong>Logarithmic scale</strong> &mdash; each equal step along a bar is a factor of ten, not a fixed distance. On a linear scale the Milky Way's bar would be about one fiftieth of IC&nbsp;1101's and Segue&nbsp;1 would be invisible. In real terms IC&nbsp;1101 is roughly 45 times the Milky Way's diameter and Segue&nbsp;1 is about one three-hundred-and-eightieth of it. IC&nbsp;1101's headline figure includes a very diffuse outer halo; its bright stellar body is considerably smaller, which is why quoted sizes for it vary so much.
+                </p>
+
+                <div class="note" style="margin-top:3.5rem">
+                    <span class="note__title">Where a galaxy stops being one</span>
+                    <ul class="note__list">
+                        <li><strong>Down the bottom end</strong> the distinction between a faint dwarf galaxy and a large globular cluster gets genuinely difficult. The test used is dark matter: a dwarf galaxy's stars move too fast for their visible mass, and a globular cluster's do not.</li>
+                        <li><strong>Segue 1</strong> has perhaps a thousand stars and yet appears to be several hundred times more massive than they account for. It is one of the most dark-matter-dominated objects known.</li>
+                        <li><strong>At the top end</strong> the limit is set by mergers. Giant ellipticals sit at the centres of clusters, where they have absorbed everything that fell in, and their outer halos blend into the cluster's own diffuse light with no clear boundary.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             13 · COSMIC WEB
+             ============================================================ -->
+        <section class="shell shell--void" id="cosmic-web">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">13</span> Cosmic web</p>
+                    <h2 class="head__title">Zoom out far enough and <em>a galaxy is one pixel</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Galaxies are not scattered at random. They lie along filaments, gather at the junctions where filaments cross, and leave vast regions almost completely empty. The pattern was laid down by dark matter collapsing under its own gravity, and the galaxies are only the parts of it that happened to light up.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 680" role="img"
+                             aria-label="A map of large-scale structure. Violet filaments connect bright warm nodes where galaxy clusters sit, and large dashed circles mark the near-empty voids between them. A slow scan traces along one filament.">
+
+                            <g class="web__drift">
+                                <!-- ---- Voids first, behind everything.
+                                     Marked, not filled: the emptiness is
+                                     the structure, so it is left empty. -->
+                                <g class="web__void">
+                                    <circle cx="300" cy="270" r="98"/>
+                                    <circle cx="640" cy="250" r="86"/>
+                                    <circle cx="920" cy="300" r="76"/>
+                                    <circle cx="450" cy="490" r="88"/>
+                                    <circle cx="790" cy="500" r="80"/>
+                                    <circle cx="150" cy="470" r="62"/>
+                                </g>
+                                <text class="svg-unit" x="300" y="274" text-anchor="middle">Void</text>
+                                <text class="svg-unit" x="640" y="254" text-anchor="middle">Void</text>
+                                <text class="svg-unit" x="450" y="494" text-anchor="middle">Void</text>
+
+                                <!-- ---- Filaments ------------------- -->
+                                <g class="web__filament--bright">
+                                    <path d="M 90 150 L 260 96 L 470 168 L 700 108 L 930 186 L 1096 130"/>
+                                    <path d="M 130 380 L 340 336 L 560 392 L 810 340 L 1050 396"/>
+                                    <path d="M 110 596 L 320 610 L 540 566 L 760 620 L 1010 580"/>
+                                    <path d="M 260 96 L 340 336 L 320 610"/>
+                                    <path d="M 470 168 L 560 392 L 540 566"/>
+                                    <path d="M 700 108 L 810 340 L 760 620"/>
+                                    <path d="M 930 186 L 1050 396 L 1010 580"/>
+                                </g>
+                                <g class="web__filament">
+                                    <path d="M 90 150 L 260 96 L 470 168 L 700 108 L 930 186 L 1096 130"/>
+                                    <path d="M 130 380 L 340 336 L 560 392 L 810 340 L 1050 396"/>
+                                    <path d="M 110 596 L 320 610 L 540 566 L 760 620 L 1010 580"/>
+                                    <path d="M 260 96 L 340 336 L 320 610"/>
+                                    <path d="M 470 168 L 560 392 L 540 566"/>
+                                    <path d="M 700 108 L 810 340 L 760 620"/>
+                                    <path d="M 930 186 L 1050 396 L 1010 580"/>
+                                    <path d="M 130 380 L 260 96 M 1050 396 L 1096 130"/>
+                                    <path d="M 110 596 L 130 380 M 1010 580 L 1050 396"/>
+                                </g>
+
+                                <!-- A survey scan running along one
+                                     filament: slow, single, no pulsing. -->
+                                <path class="web__scan" d="M 130 380 L 340 336 L 560 392 L 810 340 L 1050 396"/>
+
+                                <!-- ---- Nodes ---------------------- -->
+                                <g class="web__node-glow">
+                                    <circle cx="260" cy="96" r="18"/><circle cx="470" cy="168" r="15"/>
+                                    <circle cx="700" cy="108" r="16"/><circle cx="930" cy="186" r="13"/>
+                                    <circle cx="340" cy="336" r="20"/><circle cx="560" cy="392" r="17"/>
+                                    <circle cx="810" cy="340" r="19"/><circle cx="1050" cy="396" r="13"/>
+                                    <circle cx="320" cy="610" r="15"/><circle cx="540" cy="566" r="17"/>
+                                    <circle cx="760" cy="620" r="13"/><circle cx="1010" cy="580" r="12"/>
+                                    <circle cx="130" cy="380" r="11"/><circle cx="110" cy="596" r="9"/>
+                                    <circle cx="90" cy="150" r="9"/><circle cx="1096" cy="130" r="9"/>
+                                </g>
+                                <g class="web__node--big">
+                                    <circle cx="340" cy="336" r="5"/><circle cx="810" cy="340" r="4.6"/>
+                                    <circle cx="260" cy="96" r="4.2"/><circle cx="540" cy="566" r="4"/>
+                                </g>
+                                <g class="web__node">
+                                    <circle cx="470" cy="168" r="3"/><circle cx="700" cy="108" r="3.2"/>
+                                    <circle cx="930" cy="186" r="2.6"/><circle cx="560" cy="392" r="3.4"/>
+                                    <circle cx="1050" cy="396" r="2.6"/><circle cx="320" cy="610" r="3"/>
+                                    <circle cx="760" cy="620" r="2.6"/><circle cx="1010" cy="580" r="2.4"/>
+                                    <circle cx="130" cy="380" r="2.2"/><circle cx="110" cy="596" r="2"/>
+                                    <circle cx="90" cy="150" r="2"/><circle cx="1096" cy="130" r="2"/>
+                                </g>
+
+                                <!-- Field galaxies strung along the
+                                     filaments between the clusters. -->
+                                <g class="lg__dwarf">
+                                    <circle cx="366" cy="130" r="1.6"/><circle cx="590" cy="140" r="1.4"/>
+                                    <circle cx="816" cy="146" r="1.5"/><circle cx="234" cy="360" r="1.4"/>
+                                    <circle cx="450" cy="364" r="1.6"/><circle cx="686" cy="366" r="1.5"/>
+                                    <circle cx="930" cy="368" r="1.4"/><circle cx="216" cy="604" r="1.4"/>
+                                    <circle cx="430" cy="588" r="1.5"/><circle cx="650" cy="594" r="1.4"/>
+                                    <circle cx="300" cy="216" r="1.3"/><circle cx="520" cy="280" r="1.3"/>
+                                    <circle cx="760" cy="224" r="1.3"/><circle cx="330" cy="474" r="1.3"/>
+                                    <circle cx="550" cy="480" r="1.3"/><circle cx="786" cy="480" r="1.3"/>
+                                </g>
+                            </g>
+
+                            <!-- ---- Annotations, outside the drift -- -->
+                            <g>
+                                <path class="svg-leader svg-leader--old" d="M 344 330 L 400 250 L 470 250" style="opacity:0"/>
+                                <text class="svg-label svg-label--dark" x="90" y="46">Filaments</text>
+                                <text class="svg-unit" x="90" y="64">Dark matter scaffolding</text>
+
+                                <text class="svg-label svg-label--lit" x="1090" y="46" text-anchor="end">Nodes</text>
+                                <text class="svg-unit" x="1090" y="64" text-anchor="end">Galaxy clusters &mdash; thousands of members</text>
+                            </g>
+
+                            <g class="svg-tick">
+                                <path d="M 90 662 L 90 670 M 290 662 L 290 670 M 90 666 L 290 666"/>
+                            </g>
+                            <text class="svg-unit" x="190" y="654" text-anchor="middle">~100 million light years</text>
+                            <text class="svg-unit" x="1090" y="658" text-anchor="end">Every node here is a cluster of hundreds to thousands of galaxies</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 12</span>
+                        Schematic, at roughly the scale of a redshift survey slice. Voids run 100 to 300 million light years across and are not quite empty &mdash; they hold a sparse population of isolated galaxies. Our own supercluster, Laniakea, is about 520&nbsp;million light years across, and the Milky Way sits well out towards its edge, drifting towards a mass concentration called the Great Attractor.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             14 · FAMOUS GALAXIES
+             ============================================================ -->
+        <section class="shell shell--atmos shell--seam" id="famous">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">14</span> Four we know best</p>
+                    <h2 class="head__title">One from inside, <em>three from a very long way off</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Between them these four cover every structure on this page: the spiral we live in, the spiral we are going to collide with, the giant elliptical that gave us the first photograph of a black hole's shadow, and the lenticular whose dust lane is so sharp it has been used as a textbook illustration for a century.</p>
+                </header>
+
+                <div class="plate-grid gx-famous">
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <svg class="gx" style="--gx-d:184px" aria-hidden="true"><use href="#gxSpiral"/></svg>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">01 / 04</span>
+                            <span class="plate__index">SB(rs)bc</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Milky Way</h3>
+                            <span class="chip">Home</span>
+                        </div>
+                        <p class="plate__text">A barred spiral of a few hundred billion stars, and the only galaxy we cannot photograph. Everything known about its shape has been inferred from inside it &mdash; which is why its arm count was still being revised in the 2000s and its far side is still being mapped.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Distance</dt><dd>0 &mdash; we are in it</dd></div>
+                            <div class="spec__row"><dt>Diameter</dt><dd>87,400 ly</dd></div>
+                            <div class="spec__row"><dt>Central hole</dt><dd>Sgr A* &middot; 4.3M M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Notable</dt><dd>Imaged Sgr A* in 2022</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <svg class="gx" style="--gx-d:200px" aria-hidden="true"><use href="#gxSpiral"/></svg>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">02 / 04</span>
+                            <span class="plate__index">SA(s)b &middot; M31</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Andromeda</h3>
+                            <span class="chip">Inbound</span>
+                        </div>
+                        <p class="plate__text">The nearest large galaxy and the most distant thing visible to the unaided eye. It is where Hubble found the Cepheid that proved galaxies are separate systems, and it is one of the very few galaxies that is blueshifted &mdash; because it is coming towards us.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Distance</dt><dd>2.5 Mly</dd></div>
+                            <div class="spec__row"><dt>Diameter</dt><dd>~220,000 ly</dd></div>
+                            <div class="spec__row"><dt>Approach</dt><dd>~110 km/s</dd></div>
+                            <div class="spec__row"><dt>Notable</dt><dd>Hubble's 1924 Cepheid</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <svg class="gx" style="--gx-d:200px" aria-hidden="true"><use href="#gxElliptical"/></svg>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">03 / 04</span>
+                            <span class="plate__index">E0-1 pec &middot; M87</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">M87</h3>
+                            <span class="chip chip--outline">First black hole image</span>
+                        </div>
+                        <p class="plate__text">A giant elliptical at the heart of the Virgo Cluster, with no disk, thousands of globular clusters and a relativistic jet 5,000 light years long that is visible from radio through to X-ray. In 2019 the Event Horizon Telescope resolved the shadow of its central black hole &mdash; the first ever obtained.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Distance</dt><dd>53.5 Mly</dd></div>
+                            <div class="spec__row"><dt>Diameter</dt><dd>~120,000 ly</dd></div>
+                            <div class="spec__row"><dt>Central hole</dt><dd>6.5 billion M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Notable</dt><dd>EHT image, April 2019</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <svg class="gx" style="--gx-d:206px" aria-hidden="true"><use href="#gxLenticular"/></svg>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">04 / 04</span>
+                            <span class="plate__index">SA(s)a &middot; M104</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Sombrero</h3>
+                            <span class="chip chip--outline">The dust lane</span>
+                        </div>
+                        <p class="plate__text">Seen almost exactly edge-on, with an unusually large bright bulge and a dust lane so sharply defined that it has been a textbook figure since the plate-camera era. Its classification has been argued over for decades: the bulge says elliptical, the disk and dust say spiral, and it sits close to the boundary.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Distance</dt><dd>~31 Mly</dd></div>
+                            <div class="spec__row"><dt>Diameter</dt><dd>~50,000 ly</dd></div>
+                            <div class="spec__row"><dt>Central hole</dt><dd>~1 billion M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Notable</dt><dd>Inclined just 6&deg; to edge-on</dd></div>
+                        </dl>
+                    </article>
+                </div>
+
+                <p class="caption" style="margin-top:2.5rem">
+                    <span class="caption__id">Plates</span>
+                    Bodies are built from the same population model as the rest of the page rather than traced from photographs, so treat them as diagrams of type and not as portraits. Sizes here are not to a shared scale; for that see Fig&nbsp;11.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             15 · MISCONCEPTIONS
+             ============================================================ -->
+        <section class="shell shell--void" id="facts">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">15</span> Misconceptions</p>
+                    <h2 class="head__title">Eight things that sound right <em>and are not</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Most of these are not folklore. They are things that were taught, or that were true of an older model, or that are true of the diagram rather than the object.</p>
+                </header>
+
+                <div class="myths">
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Spiral arms are streams of stars orbiting together.</strong></p>
+                        <p class="myth__truth">They are a <strong>density wave</strong>. Stars and gas orbit through the arm and out the other side, and the pattern turns at its own speed. If arms were made of fixed material the difference between inner and outer orbital periods would have wound them into an indistinguishable coil billions of years ago. The bright arm is a place where stars are continually being made, not a group of stars going somewhere.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>The Milky Way is about 100,000 light years across.</strong></p>
+                        <p class="myth__truth">The standard isophote measurement gives <strong>87,400 &plusmn; 3,600</strong> light years. The round 100,000 comes from older and more generous definitions and has stuck through repetition. Neither is wrong exactly &mdash; a galaxy has no edge, only a surface brightness at which you stop counting, and the faint outer disk can be traced considerably further.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Dark matter is a kind of exotic gas filling the galaxy.</strong></p>
+                        <p class="myth__truth">It is not a fluid and it does not fill the disk. The evidence points to a roughly <strong>spherical halo</strong>, far larger than the visible galaxy, made of something that does not interact electromagnetically at all &mdash; so it cannot clump, cannot cool, cannot form structures and cannot collide with itself. That non-interaction is precisely why it stayed spherical while the gas flattened into a disk.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>When the Milky Way and Andromeda collide, stars will crash into each other.</strong></p>
+                        <p class="myth__truth">Essentially <strong>none</strong> will. The ratio of a star's size to the distance between stars is roughly that of a grain of sand to a seven-kilometre gap. The gas clouds are light years across and do collide, which triggers a burst of star formation; the stars themselves pass through untouched, on scrambled orbits.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Hubble's tuning fork shows how galaxies evolve.</strong></p>
+                        <p class="myth__truth">Hubble thought so, and it does not. Galaxies do not begin as ellipticals and unwind into spirals. If anything the sequence runs backwards: spirals lose or exhaust their gas to become lenticulars, and mergers scramble disks into ellipticals. The diagram survived because the <strong>classification</strong> is useful, not because the mechanism behind it was right.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>There are two trillion galaxies in the observable universe.</strong></p>
+                        <p class="myth__truth">That is the most-quoted figure, from a 2016 extrapolation that tried to account for galaxies too faint to detect. A 2021 measurement of the sky's background light from the <em>New Horizons</em> spacecraft, far from the zodiacal glow, favoured only <strong>hundreds of billions</strong>. The honest answer is that the count is uncertain by about an order of magnitude and depends heavily on what you are willing to call a galaxy.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Every galaxy has a supermassive black hole at its centre.</strong></p>
+                        <p class="myth__truth">Most large ones do, and the hole's mass correlates tightly with the bulge's &mdash; which is a real and still not fully explained relationship. But plenty of <strong>dwarf and bulgeless galaxies</strong> show no sign of one, and at least a few large galaxies appear to be missing theirs. It is a strong pattern, not a rule.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Galaxies are held together by their own stars' gravity.</strong></p>
+                        <p class="myth__truth">Only about <strong>a twentieth</strong> of the mass holding a large galaxy together is in its stars and gas. Take the dark halo away and a spiral disk turning at the speeds we measure would simply fly apart. The visible galaxy is a passenger in a much larger gravitational structure.</p>
+                    </div>
+                </div>
+
+                <div class="note" style="margin-top:3.5rem">
+                    <span class="note__title">Three that are true and sound false</span>
+                    <ul class="note__list">
+                        <li><strong>Andromeda is blueshifted.</strong> Almost every galaxy is receding, but the Local Group is bound, so its members' own motions beat the expansion. Andromeda is closing at about 110&nbsp;km/s.</li>
+                        <li><strong>The Milky Way is eating other galaxies right now.</strong> The Sagittarius dwarf is being pulled apart on its way through, and the halo carries streams of stars from earlier meals.</li>
+                        <li><strong>Irregular galaxies outnumber every other kind.</strong> By count they dominate. They are simply so faint that no picture of the universe looks like it is mostly irregulars.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             ONWARD
+             ============================================================ -->
+        <section class="shell shell--rise shell--seam">
+            <div class="container">
+                <div class="head head--center" style="margin-bottom:0">
+                    <p class="eyebrow eyebrow--bare">Onward</p>
+                    <h2 class="head__title">Next: the clouds <em>galaxies are made from</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Everything on this page is a structure made of gas that collapsed. The Nebulae region takes the step down &mdash; into the individual clouds where that collapse happens, and the wreckage the finished stars leave behind.</p>
+                    <p style="margin-top:2.5rem">
+                        <a href="../black-holes/index.html" class="back-link"><span aria-hidden="true">&larr;</span> Back to the Black Holes at their centres</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p class="footer-text">&copy; 2026 CosmoVerse &mdash; Explore beyond the horizon.</p>
+            <p class="footer-note">Region 05 &middot; Structure &middot; 15 sections &middot; Figures 01&ndash;12</p>
+        </div>
+    </footer>
+</body>
+</html>

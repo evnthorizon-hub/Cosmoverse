@@ -1,0 +1,2361 @@
+/* ============================================================
+   CosmoVerse — Cosmic Visual Language
+   ------------------------------------------------------------
+   Layer 2 of 3. Requires style.css.
+
+   THE CONTRACT
+   ------------
+   Nothing in this file hard-codes a colour for a subject. Every
+   component reads the accent contract declared in style.css:
+
+       --accent  --accent-2  --accent-deep  --accent-ink
+       --accent-glow  --accent-wash  --mood-high  --mood-low
+
+   A section gets its own personality by (a) setting a domain
+   theme class, and (b) choosing a field texture. Everything
+   else — headings, plates, readouts, rails, orbs — retunes
+   itself automatically. That is how nine very different
+   astronomical subjects can each feel like their own place
+   while still reading as one product.
+
+   To theme a future section:
+       <body class="dm-nebulae"> … </body>
+       <section class="shell shell--lit">
+           <div class="field field--emission"></div>
+           …
+       </section>
+   ============================================================ */
+
+
+/* ============================================================
+   1. DOMAIN THEMES
+   ------------------------------------------------------------
+   One palette per astronomical subject. Each is anchored to a
+   real physical cue so the colour is never arbitrary:
+
+     Solar System  photosphere amber — sunlight, warmth, home
+     Planets       reflected daylight blue — worlds seen by day
+     Stars         H-R diagram: blue-white hot ↔ amber cool
+     Black Holes   accretion-disc orange on true black + lensing violet
+     Galaxies      old-population violet with young-arm magenta
+     Nebulae       OIII teal + H-alpha rose — real emission lines
+     Cosmic Events shock-front crimson and detonation white
+     Space Missions instrument telemetry green on blueprint cyan
+     Universe      CMB indigo cooling to aqua
+   ============================================================ */
+
+.dm-solar {
+    --accent:      #ffb648;
+    --accent-2:    #ff7a2f;
+    --accent-deep: #46220a;
+    --accent-ink:  #1b0d00;
+    --accent-glow: rgba(255, 182, 72, 0.26);
+    --accent-wash: rgba(255, 140, 47, 0.09);
+    --mood-high:   rgba(74, 42, 14, 0.52);
+    --mood-low:    rgba(255, 182, 72, 0.07);
+}
+
+.dm-planets {
+    --accent:      #86b9ff;
+    --accent-2:    #5f6cf0;
+    --accent-deep: #14224f;
+    --accent-ink:  #03060f;
+    --accent-glow: rgba(134, 185, 255, 0.24);
+    --accent-wash: rgba(95, 108, 240, 0.09);
+    --mood-high:   rgba(20, 34, 79, 0.55);
+    --mood-low:    rgba(134, 185, 255, 0.07);
+}
+
+.dm-stars {
+    --accent:      #cfe1ff;
+    --accent-2:    #ffb178;
+    --accent-deep: #1d2547;
+    --accent-ink:  #05060f;
+    --accent-glow: rgba(207, 225, 255, 0.28);
+    --accent-wash: rgba(255, 177, 120, 0.07);
+    --mood-high:   rgba(30, 38, 72, 0.5);
+    --mood-low:    rgba(207, 225, 255, 0.07);
+}
+
+.dm-holes {
+    --void:        #000000;
+    --abyss:       #010104;
+    --deep:        #020206;
+    --surface:     #06060c;
+    --accent:      #ff7a3d;
+    --accent-2:    #a866ff;
+    --accent-deep: #3a1508;
+    --accent-ink:  #14060a;
+    --accent-glow: rgba(255, 122, 61, 0.26);
+    --accent-wash: rgba(168, 102, 255, 0.08);
+    --mood-high:   rgba(38, 14, 30, 0.6);
+    --mood-low:    rgba(255, 122, 61, 0.06);
+}
+
+.dm-galaxies {
+    --accent:      #c489ff;
+    --accent-2:    #ff6fd0;
+    --accent-deep: #2c1150;
+    --accent-ink:  #0b0316;
+    --accent-glow: rgba(196, 137, 255, 0.26);
+    --accent-wash: rgba(255, 111, 208, 0.08);
+    --mood-high:   rgba(42, 18, 70, 0.55);
+    --mood-low:    rgba(196, 137, 255, 0.07);
+}
+
+.dm-nebulae {
+    --accent:      #5ce3d1;
+    --accent-2:    #ff6f9c;
+    --accent-deep: #0a3b3a;
+    --accent-ink:  #02100f;
+    --accent-glow: rgba(92, 227, 209, 0.24);
+    --accent-wash: rgba(255, 111, 156, 0.09);
+    --mood-high:   rgba(12, 46, 54, 0.55);
+    --mood-low:    rgba(92, 227, 209, 0.07);
+}
+
+.dm-events {
+    --accent:      #ff5068;
+    --accent-2:    #ffd9a0;
+    --accent-deep: #490d1c;
+    --accent-ink:  #160206;
+    --accent-glow: rgba(255, 80, 104, 0.28);
+    --accent-wash: rgba(255, 217, 160, 0.08);
+    --mood-high:   rgba(58, 12, 26, 0.55);
+    --mood-low:    rgba(255, 80, 104, 0.07);
+}
+
+.dm-missions {
+    --accent:      #3ce0a6;
+    --accent-2:    #6cd0ff;
+    --accent-deep: #0a3a2c;
+    --accent-ink:  #021410;
+    --accent-glow: rgba(60, 224, 166, 0.24);
+    --accent-wash: rgba(108, 208, 255, 0.08);
+    --mood-high:   rgba(10, 44, 42, 0.5);
+    --mood-low:    rgba(60, 224, 166, 0.06);
+}
+
+.dm-universe {
+    --accent:      #97a4ff;
+    --accent-2:    #5fe7ff;
+    --accent-deep: #1a1f56;
+    --accent-ink:  #04051a;
+    --accent-glow: rgba(151, 164, 255, 0.26);
+    --accent-wash: rgba(95, 231, 255, 0.08);
+    --mood-high:   rgba(24, 28, 74, 0.55);
+    --mood-low:    rgba(151, 164, 255, 0.07);
+}
+
+
+/* ============================================================
+   2. FIELD TEXTURES
+   ------------------------------------------------------------
+   The second half of a subject's personality. A field is a
+   non-interactive backdrop layer whose *geometry* encodes the
+   physics of its subject: orbits are concentric, spectra are
+   linear, lensing is warped, galaxies rotate, missions are
+   drafted on grid paper.
+
+   Usage:  <div class="field field--orbital" aria-hidden="true"></div>
+   ============================================================ */
+
+.field {
+    /* Field geometry is drawn in the domain's own accent, at low
+       alpha. That is what makes each subject's backdrop read as
+       *its* physics rather than as generic ornament. Override
+       --field-line per section to push or pull the effect. */
+    --field-line: var(--accent-glow);
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: var(--field-opacity, 0.55);
+}
+
+/* --- Solar System: concentric orbital shells ---------------- */
+.field--orbital {
+    background-image:
+        repeating-radial-gradient(circle at 50% 118%,
+            transparent 0 94px,
+            var(--field-line) 94px 95px,
+            transparent 95px 190px);
+    -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 118%, #000 12%, transparent 74%);
+            mask-image: radial-gradient(ellipse 80% 90% at 50% 118%, #000 12%, transparent 74%);
+}
+
+/* --- Planets: banded atmosphere -----------------------------
+   Kept very low contrast. Cloud bands drawn any stronger stop
+   reading as atmosphere and start reading as scan lines across
+   whatever is rendered on top of them. */
+.field--banded {
+    --field-opacity: 0.4;
+    background-image:
+        repeating-linear-gradient(179deg,
+            transparent 0 76px,
+            var(--mood-low) 76px 112px,
+            transparent 112px 190px);
+    filter: blur(14px);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 45%, transparent);
+            mask-image: linear-gradient(180deg, transparent, #000 45%, transparent);
+}
+
+/* --- Stars: an absorption spectrum --------------------------
+   Dialled back from the shared default: hard vertical rules over
+   a hero read as interface furniture if they get too crisp. */
+.field--spectral {
+    --field-opacity: 0.4;
+    background-image:
+        repeating-linear-gradient(90deg,
+            transparent 0 22px,
+            var(--field-line) 22px 23px,
+            transparent 23px 61px),
+        repeating-linear-gradient(90deg,
+            transparent 0 137px,
+            var(--accent-glow) 137px 139px,
+            transparent 139px 300px),
+        linear-gradient(90deg,
+            rgba(120, 150, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.04) 42%,
+            rgba(255, 177, 120, 0.05) 100%);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 62%);
+            mask-image: linear-gradient(180deg, #000 0%, transparent 62%);
+}
+
+/* --- Black Holes: gravitational lensing --------------------- */
+.field--lensing {
+    background-image:
+        repeating-radial-gradient(circle at 50% 44%,
+            transparent 0 26px,
+            var(--accent-glow) 26px 27px,
+            transparent 27px 74px),
+        radial-gradient(circle at 50% 44%, #000 0 16%, transparent 30%);
+    -webkit-mask-image: radial-gradient(circle at 50% 44%, transparent 12%, #000 34%, transparent 68%);
+            mask-image: radial-gradient(circle at 50% 44%, transparent 12%, #000 34%, transparent 68%);
+}
+
+/* --- Galaxies: a rotating spiral disc ----------------------- */
+.field--spiral {
+    background-image:
+        conic-gradient(from 210deg at 50% 46%,
+            transparent 0deg,
+            var(--accent-wash) 42deg,
+            transparent 96deg,
+            var(--mood-low) 188deg,
+            transparent 250deg,
+            var(--accent-wash) 312deg,
+            transparent 360deg);
+    -webkit-mask-image: radial-gradient(ellipse 58% 46% at 50% 46%, #000 6%, rgba(0, 0, 0, 0.55) 44%, transparent 76%);
+            mask-image: radial-gradient(ellipse 58% 46% at 50% 46%, #000 6%, rgba(0, 0, 0, 0.55) 44%, transparent 76%);
+    animation: field-rotate 260s linear infinite;
+}
+
+@keyframes field-rotate {
+    to { transform: rotate(360deg); }
+}
+
+/* --- Nebulae: overlapping emission clouds ------------------- */
+.field--emission {
+    background-image:
+        radial-gradient(ellipse 44% 40% at 22% 30%, var(--accent-wash) 0%, transparent 66%),
+        radial-gradient(ellipse 38% 46% at 74% 62%, var(--mood-low) 0%, transparent 68%),
+        radial-gradient(ellipse 30% 26% at 52% 18%, rgba(255, 255, 255, 0.035) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 30% at 60% 92%, var(--accent-wash) 0%, transparent 70%);
+    filter: blur(6px);
+}
+
+/* --- Cosmic Events: a shock front -------------------------- */
+.field--burst {
+    background-image:
+        repeating-conic-gradient(from 0deg at 50% 34%,
+            transparent 0deg 3deg,
+            var(--accent-glow) 3deg 3.5deg,
+            transparent 3.5deg 7deg);
+    -webkit-mask-image: radial-gradient(circle at 50% 34%, transparent 6%, #000 26%, transparent 62%);
+            mask-image: radial-gradient(circle at 50% 34%, transparent 6%, #000 26%, transparent 62%);
+}
+
+/* --- Space Missions: drafting grid + range rings ------------ */
+.field--telemetry {
+    background-image:
+        repeating-linear-gradient(0deg,   transparent 0 47px, var(--field-line) 47px 48px),
+        repeating-linear-gradient(90deg,  transparent 0 47px, var(--field-line) 47px 48px),
+        repeating-radial-gradient(circle at 84% 22%,
+            transparent 0 58px,
+            var(--accent-glow) 58px 59px,
+            transparent 59px 118px);
+    -webkit-mask-image: linear-gradient(200deg, #000 0%, transparent 72%);
+            mask-image: linear-gradient(200deg, #000 0%, transparent 72%);
+}
+
+/* --- Universe: large-scale filament web -------------------- */
+.field--web {
+    background-image:
+        repeating-linear-gradient(62deg,  transparent 0 118px, var(--field-line) 118px 119px),
+        repeating-linear-gradient(-49deg, transparent 0 154px, var(--field-line) 154px 155px),
+        repeating-linear-gradient(8deg,   transparent 0 196px, var(--field-line) 196px 197px),
+        radial-gradient(circle at 24% 30%, var(--accent-wash) 0%, transparent 34%),
+        radial-gradient(circle at 78% 66%, var(--mood-low) 0%, transparent 38%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 42%, #000 10%, transparent 80%);
+            mask-image: radial-gradient(ellipse 90% 80% at 50% 42%, #000 10%, transparent 80%);
+}
+
+
+/* ============================================================
+   3. SECTION SHELLS
+   ------------------------------------------------------------
+   Sections are not boxes stacked on a page — they are altitudes
+   in one continuous sky. Tones differ by how much light reaches
+   them, and each seam is a lit horizon rather than a hard edge.
+   ============================================================ */
+
+.shell {
+    position: relative;
+    padding-block: clamp(var(--s-7), 7vw, var(--s-9));
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.shell > .container {
+    position: relative;
+    z-index: 2;
+}
+
+.shell--void  { background: var(--void); }
+.shell--abyss { background: var(--abyss); }
+.shell--deep  { background: var(--deep); }
+
+.shell--atmos {
+    background:
+        linear-gradient(180deg, var(--abyss) 0%, var(--surface) 52%, var(--abyss) 100%);
+}
+
+/* Lit from above — used where a section should feel like it is
+   being illuminated by whatever object it describes. */
+.shell--lit {
+    background:
+        radial-gradient(ellipse 78% 58% at 50% -6%, var(--mood-high) 0%, transparent 64%),
+        var(--void);
+}
+
+/* Lit from below — the object is beneath the horizon line. */
+.shell--rise {
+    background:
+        radial-gradient(ellipse 86% 52% at 50% 106%, var(--mood-high) 0%, transparent 66%),
+        var(--abyss);
+}
+
+/* A shell lit from above butts against the section before it while
+   its wash is still at full strength, which shows up as a hard
+   band across the join. This fade returns the meeting edge to the
+   void so the two read as one continuous sky.
+
+   --rise needs no equivalent: its glow sits at the bottom edge on
+   purpose, and the next section's lit seam reads as the horizon
+   line it is cut by. */
+.shell--lit::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 34%;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(180deg, var(--void) 0%, transparent 100%);
+}
+
+/* Lit seam at the top of a shell. Ties chrome to domain accent. */
+.shell--seam::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    z-index: 3;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--line-2) 26%,
+        var(--accent) 50%,
+        var(--line-2) 74%,
+        transparent 100%);
+    opacity: 0.7;
+}
+
+/* Standalone divider, for use between sections in the same tone. */
+.seam {
+    position: relative;
+    height: 1px;
+    background: var(--line);
+}
+
+.seam::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: clamp(80px, 16vw, 180px);
+    height: 1px;
+    transform: translateX(-50%);
+    background: var(--accent);
+    box-shadow: 0 0 16px var(--accent-glow);
+}
+
+
+/* ============================================================
+   4. LABELS, EYEBROWS, CHIPS
+   ------------------------------------------------------------
+   The monospace "instrument voice". Wherever CosmoVerse states a
+   fact, a unit, a classification or a coordinate, it speaks in
+   this voice. Wherever it describes wonder, it speaks in the
+   display voice. Keeping the two strictly separated is what
+   makes the site read as scientific rather than decorative.
+   ============================================================ */
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-weight: 500;
+    letter-spacing: var(--track-label);
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.eyebrow::before {
+    content: '';
+    width: clamp(16px, 3vw, 28px);
+    height: 1px;
+    flex: none;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.eyebrow--bare::before {
+    display: none;
+}
+
+.eyebrow__id {
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.24rem 0.55rem;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-wash);
+    border: 1px solid transparent;
+    border-radius: var(--r-xs);
+    white-space: nowrap;
+}
+
+.chip--outline {
+    color: var(--text-3);
+    background: transparent;
+    border-color: var(--line-2);
+}
+
+.chip--muted {
+    color: var(--text-4);
+    background: rgba(255, 255, 255, 0.028);
+}
+
+/* Figure caption — always numbered, always in the instrument voice.
+
+   Note for callers: .caption is a flex container, so any element
+   inside the caption text becomes its own flex item and gets sized
+   independently — a leading <strong> collapses into a narrow
+   column of stacked words. Captions that need inline emphasis
+   should wrap their prose in a single child element. See
+   .caption__body in nebulae.css. */
+.caption {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-3);
+    margin-top: var(--s-5);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-4);
+    line-height: 1.6;
+}
+
+.caption__id {
+    flex: none;
+    color: var(--accent);
+}
+
+.caption--center {
+    justify-content: center;
+    text-align: center;
+}
+
+
+/* ============================================================
+   5. SECTION HEADINGS
+   ============================================================ */
+
+.head {
+    max-width: 780px;
+    margin-bottom: clamp(var(--s-6), 5vw, var(--s-8));
+}
+
+.head--center {
+    margin-inline: auto;
+    text-align: center;
+}
+
+.head--center .eyebrow {
+    justify-content: center;
+}
+
+.head--center .head__rule {
+    margin-inline: auto;
+}
+
+.head__title {
+    margin-top: var(--s-4);
+    font-size: var(--t-3xl);
+    font-weight: 300;
+    letter-spacing: var(--track-display);
+}
+
+/* One lit word per heading. Restrained; never more than one. */
+.head__title em {
+    font-style: normal;
+    font-weight: 500;
+    color: var(--text);
+    background-image: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 100%);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+    .head__title em {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+}
+
+.head__rule {
+    width: 56px;
+    height: 1px;
+    margin-top: var(--s-5);
+    background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.head__lede {
+    margin-top: var(--s-5);
+    max-width: 60ch;
+    font-size: var(--t-lg);
+    line-height: 1.78;
+    color: var(--text-2);
+}
+
+.head--center .head__lede {
+    margin-inline: auto;
+}
+
+/* Small heading used inside plates and columns. */
+.sub-title {
+    font-size: var(--t-xl);
+    font-weight: 500;
+    letter-spacing: var(--track-tight);
+}
+
+
+/* ============================================================
+   6. CATEGORY PAGE HERO
+   ------------------------------------------------------------
+   Deliberately different from the home hero: left-aligned,
+   bottom-anchored, and it docks a data readout at the horizon.
+   Home = invitation. Category = arrival at an observation site.
+   ============================================================ */
+
+.page-hero {
+    position: relative;
+    display: grid;
+    align-content: end;
+    min-height: min(76svh, 760px);
+    padding: calc(var(--header-h) + var(--s-8)) 0 0;
+    background: var(--void);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse 70% 46% at 78% 6%, var(--mood-high) 0%, transparent 62%),
+        radial-gradient(ellipse 60% 40% at 12% 88%, var(--mood-low) 0%, transparent 64%),
+        linear-gradient(180deg, transparent 40%, var(--abyss) 100%);
+}
+
+.page-hero > .container {
+    position: relative;
+    z-index: 3;
+}
+
+.page-hero__title {
+    margin-top: var(--s-5);
+    max-width: 20ch;
+    font-size: var(--t-4xl);
+    font-weight: 300;
+    line-height: 0.98;
+    letter-spacing: var(--track-display);
+}
+
+.page-hero__title em {
+    display: block;
+    font-style: normal;
+    font-weight: 500;
+    background-image: linear-gradient(96deg, #ffffff 0%, var(--accent) 58%, var(--accent-2) 100%);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+    .page-hero__title em {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+}
+
+.page-hero__lede {
+    margin-top: var(--s-5);
+    max-width: 54ch;
+    font-size: var(--t-lg);
+    line-height: 1.78;
+    color: var(--text-2);
+}
+
+/* Coordinate line — a small scientific signature under the lede. */
+.page-hero__coords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2) var(--s-5);
+    margin-top: var(--s-5);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.page-hero__coords span::before {
+    content: '· ';
+    color: var(--accent);
+}
+
+.page-hero__dock {
+    position: relative;
+    z-index: 3;
+    margin-top: clamp(var(--s-7), 7vh, var(--s-9));
+}
+
+
+/* ============================================================
+   7. INSTRUMENT READOUT
+   ------------------------------------------------------------
+   Grid gaps double as hairlines, so the panel wraps at any
+   column count without ever losing or doubling a rule.
+   ============================================================ */
+
+.readout {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+    gap: 1px;
+    background: var(--line-2);
+    border: 1px solid var(--line-2);
+}
+
+.readout__cell {
+    padding: var(--s-4) clamp(var(--s-4), 2vw, var(--s-5));
+    background: var(--abyss);
+}
+
+.readout--flush .readout__cell {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.022), transparent), var(--void);
+}
+
+.readout__cell dt,
+.readout__label {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.readout__cell dd,
+.readout__value {
+    margin-top: var(--s-2);
+    font-family: var(--font-display);
+    font-size: var(--t-xl);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.015em;
+    color: var(--text);
+}
+
+.readout__cell dd small,
+.readout__value small {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--text-3);
+}
+
+/* Accent corner brackets — the panel reads as an instrument, not
+   a stat card. */
+.readout::before,
+.readout::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--accent);
+    pointer-events: none;
+}
+
+.readout::before {
+    top: -1px;
+    left: -1px;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.readout::after {
+    right: -1px;
+    bottom: -1px;
+    border-left: 0;
+    border-top: 0;
+}
+
+
+/* ============================================================
+   8. SPEC LIST
+   ------------------------------------------------------------
+   Hairline key/value rows. Tabular numerals throughout so
+   columns of figures align down the page.
+   ============================================================ */
+
+.spec {
+    display: grid;
+}
+
+.spec__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.spec__row dt {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.spec__row dd {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: var(--text);
+}
+
+
+/* ============================================================
+   9. ORB — the celestial-body primitive
+   ------------------------------------------------------------
+   One primitive renders every sphere on the site: planets,
+   moons, dwarf planets, stars, exoplanets. A body is described
+   only by custom properties, so a future page can invent a new
+   world in five lines of CSS and it will match automatically.
+
+       .orb--kepler-22b {
+           --orb-d:    72px;
+           --orb-skin: linear-gradient(…);
+           --orb-halo: rgba(…);
+           --orb-air:  rgba(…);
+       }
+
+   Markup:
+       <span class="orb orb--mars" aria-hidden="true">
+           <span class="orb__limb"></span>
+           <span class="orb__body"></span>
+       </span>
+   ============================================================ */
+
+.orb {
+    --orb-d: 64px;
+    position: relative;
+    flex: none;
+    width: var(--orb-d);
+    height: var(--orb-d);
+    display: grid;
+    place-items: center;
+    transform: rotate(var(--orb-tilt, 0deg));
+}
+
+.orb__body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--orb-skin, radial-gradient(circle at 34% 30%, #8b93a8, #23283a));
+    background-size: var(--orb-skin-size, auto);
+    /* Terminator + limb darkening + a faint bounce light, then the
+       body's own glow cast into the surrounding vacuum. */
+    box-shadow:
+        inset calc(var(--orb-d) * -0.17) calc(var(--orb-d) * -0.11) calc(var(--orb-d) * 0.28) rgba(0, 0, 5, 0.82),
+        inset calc(var(--orb-d) * 0.05)  calc(var(--orb-d) * 0.04)  calc(var(--orb-d) * 0.16) rgba(190, 210, 255, 0.05),
+        0 0 calc(var(--orb-d) * 0.55) var(--orb-halo, transparent);
+    overflow: hidden;
+}
+
+/* Specular highlight — where the Sun actually is. */
+.orb__body::after {
+    content: '';
+    position: absolute;
+    top: 9%;
+    left: 13%;
+    width: 38%;
+    height: 30%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 42% 42%,
+        rgba(255, 255, 255, var(--orb-shine, 0.26)) 0%, transparent 68%);
+}
+
+/* Optional atmospheric limb — sits outside the body so it can
+   bleed light past the edge like real Rayleigh scattering. */
+.orb__limb {
+    position: absolute;
+    inset: calc(var(--orb-d) * -0.045);
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        transparent 63%,
+        var(--orb-air, transparent) 84%,
+        transparent 100%);
+    pointer-events: none;
+}
+
+/* Surface feature (a storm, a basin, a mare). */
+.orb__mark {
+    position: absolute;
+    top: var(--mark-y, 55%);
+    left: var(--mark-x, 24%);
+    width: var(--mark-w, 26%);
+    height: var(--mark-h, 14%);
+    border-radius: 50%;
+    background: var(--mark-fill, rgba(0, 0, 0, 0.25));
+    transform: rotate(var(--mark-rot, -6deg));
+    z-index: 2;
+}
+
+/* --- Ring system -------------------------------------------
+   Two clipped halves give real occlusion: the far half passes
+   behind the globe, the near half crosses in front of it. */
+.orb__ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--ring-w, 234%);
+    height: var(--ring-h, 60%);
+    transform: translate(-50%, -50%) rotate(var(--ring-tilt, -16deg));
+    border-radius: 50%;
+    border: var(--ring-t, 6px) solid var(--ring-mid, rgba(224, 208, 168, 0.3));
+    border-top-color: var(--ring-far, rgba(242, 230, 198, 0.44));
+    border-bottom-color: var(--ring-near, rgba(202, 184, 144, 0.22));
+    pointer-events: none;
+}
+
+.orb__ring--back  { clip-path: polygon(-15% -35%, 115% -35%, 115% 50%, -15% 50%); }
+.orb__ring--front { clip-path: polygon(-15% 50%, 115% 50%, 115% 135%, -15% 135%); }
+
+/* For bodies whose ring plane is close to edge-on from our side
+   (Uranus), the near and far halves split left/right instead. */
+.orb__ring--far-side  { clip-path: polygon(50% -20%, 120% -20%, 120% 120%, 50% 120%); }
+.orb__ring--near-side { clip-path: polygon(-20% -20%, 50% -20%, 50% 120%, -20% 120%); }
+
+
+/* ============================================================
+   10. OBSERVATION PLATE
+   ------------------------------------------------------------
+   The alternative to a card. No enclosing rounded box: a single
+   top hairline, a lit accent segment that runs the width on
+   hover, and one corner tick. It reads as a plate in an
+   observation log rather than a tile in a dashboard.
+   ============================================================ */
+
+.plate {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--s-5) 0 var(--s-6);
+    color: inherit;
+    border-top: 1px solid var(--line-2);
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.plate::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 34px;
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+    transition: width var(--dur-slow) var(--ease-cine);
+}
+
+.plate::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: var(--s-3);
+    width: 9px;
+    height: 9px;
+    border-right: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    opacity: 0;
+    transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.plate:hover,
+.plate:focus-visible {
+    transform: translateY(-4px);
+}
+
+.plate:hover::before,
+.plate:focus-visible::before {
+    width: 100%;
+}
+
+.plate:hover::after,
+.plate:focus-visible::after {
+    opacity: 1;
+}
+
+/* The stage: where the body is rendered. Full-bleed inside the
+   plate, with an optical axis hairline for alignment. */
+.plate__stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: var(--stage-h, 176px);
+    margin-bottom: var(--s-5);
+    background:
+        radial-gradient(ellipse 66% 62% at 50% 56%, var(--mood-low) 0%, transparent 72%);
+    overflow: hidden;
+}
+
+.plate__stage::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 56%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line), transparent);
+}
+
+.plate__stage > * {
+    position: relative;
+    z-index: 1;
+    transition: transform var(--dur-slow) var(--ease-cine);
+}
+
+.plate:hover .plate__stage > * {
+    transform: scale(1.06);
+}
+
+.plate__meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+    margin-bottom: var(--s-3);
+}
+
+.plate__index {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    color: var(--text-4);
+    font-variant-numeric: tabular-nums;
+}
+
+.plate__title {
+    font-size: var(--t-2xl);
+    font-weight: 400;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.plate__title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3);
+    margin-bottom: var(--s-3);
+}
+
+.plate__text {
+    margin-bottom: var(--s-5);
+    font-size: var(--t-base);
+    line-height: 1.7;
+    color: var(--text-2);
+}
+
+.plate__spec {
+    margin-top: auto;
+}
+
+/* --- Plate grid ---------------------------------------------
+   Editorial stagger breaks the "row of equal cards" rhythm that
+   makes template pages look like templates. */
+.plate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
+    gap: clamp(var(--s-5), 3vw, var(--s-7)) clamp(var(--s-5), 2.4vw, var(--s-6));
+}
+
+.plate-grid--2 {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* Every stage in a grid must share one height, or the titles below
+   them stop aligning across a row and the whole thing reads as a
+   layout bug rather than as an editorial stagger. Set the tallest
+   body's requirement once, here. */
+.plate-grid--tall .plate__stage {
+    --stage-h: 222px;
+}
+
+@media (min-width: 900px) {
+    .plate-grid--stagger > *:nth-child(even) {
+        transform: translateY(34px);
+    }
+
+    .plate-grid--stagger > *:nth-child(even):hover,
+    .plate-grid--stagger > *:nth-child(even):focus-visible {
+        transform: translateY(30px);
+    }
+}
+
+
+/* ============================================================
+   11. LEDGER — proportional data rows
+   ------------------------------------------------------------
+   One quantitative primitive, reused for any "compare these
+   objects on one axis" job: moon diameters, orbital distances,
+   stellar masses, galaxy redshifts. Each row sets --reach as a
+   percentage, so the bar itself carries the data.
+   ============================================================ */
+
+.ledger {
+    display: grid;
+    gap: 0;
+}
+
+.ledger__row {
+    display: grid;
+    grid-template-columns: minmax(88px, 1.1fr) minmax(0, 2.4fr) minmax(76px, auto);
+    align-items: center;
+    gap: var(--s-4);
+    padding: 0.68rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.ledger__row:last-child {
+    border-bottom: 1px solid var(--line);
+}
+
+.ledger__label {
+    font-size: var(--t-base);
+    font-weight: 500;
+    color: var(--text);
+}
+
+.ledger__label small {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.ledger__track {
+    position: relative;
+    height: 2px;
+    background: var(--line);
+}
+
+.ledger__fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--reach, 20%);
+    /* A value at the origin of a log axis is still a real value,
+       so it must remain visible rather than collapsing to nothing. */
+    min-width: 8px;
+    background: linear-gradient(90deg, var(--accent-2) 0%, var(--accent) 100%);
+    box-shadow: 0 0 12px -2px var(--accent-glow);
+}
+
+.ledger__fill::after {
+    content: '';
+    position: absolute;
+    right: -3px;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+}
+
+.ledger__value {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: var(--text-2);
+}
+
+.ledger__caption {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--s-3);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+
+/* ============================================================
+   11b. SCALE RAIL — a labelled axis
+   ------------------------------------------------------------
+   The horizontal counterpart to the ledger. Where a diagram has
+   to compress reality to stay legible, put a rail beneath it and
+   state the real numbers. Marks alternate above and below the
+   axis so labels never collide.
+
+       <div class="rail rail--au">
+           <span class="rail__mark rail__mark--up rail__mark--earth">
+               <em class="rail__name">Earth</em>
+               <b class="rail__value">1.00 AU</b>
+               <i class="rail__tick"></i>
+           </span>
+       </div>
+
+   Each mark's position comes from --pos, declared by the page.
+   ============================================================ */
+
+.rail {
+    position: relative;
+    height: 148px;
+    margin-top: var(--s-6);
+}
+
+.rail::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg,
+        var(--accent) 0%,
+        var(--line-2) 14%,
+        var(--line-2) 86%,
+        transparent 100%);
+}
+
+/* Origin marker — the Sun sits at the left end of every rail. */
+.rail::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    transform: translate(-3px, -50%);
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+}
+
+.rail__mark {
+    position: absolute;
+    left: var(--pos, 0%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-1);
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.rail__mark--up {
+    bottom: 50%;
+    justify-content: flex-end;
+}
+
+.rail__mark--down {
+    top: 50%;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+}
+
+.rail__name {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-style: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    white-space: nowrap;
+}
+
+.rail__value {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-4);
+    white-space: nowrap;
+}
+
+.rail__tick {
+    display: block;
+    width: 1px;
+    height: 16px;
+    background: linear-gradient(180deg, var(--line-strong), transparent);
+}
+
+.rail__mark--down .rail__tick {
+    background: linear-gradient(0deg, var(--line-strong), transparent);
+}
+
+/* Region marks (belts, not bodies) read as secondary. */
+.rail__mark--region .rail__name {
+    color: var(--accent);
+    opacity: 0.8;
+}
+
+.rail__mark--region .rail__tick {
+    background: linear-gradient(180deg, var(--accent-glow), transparent);
+}
+
+
+/* ============================================================
+   12. NOTE / FIELD CALLOUT
+   ============================================================ */
+
+.note {
+    position: relative;
+    padding: var(--s-5) var(--s-5) var(--s-5) var(--s-6);
+    border-left: 1px solid var(--accent);
+    background: linear-gradient(90deg, var(--accent-wash) 0%, transparent 72%);
+}
+
+.note__title {
+    display: block;
+    margin-bottom: var(--s-3);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.note__list li {
+    position: relative;
+    padding-left: var(--s-5);
+    font-size: var(--t-base);
+    line-height: 1.7;
+    color: var(--text-2);
+}
+
+.note__list li + li {
+    margin-top: var(--s-3);
+}
+
+.note__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 10px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.7;
+}
+
+/* Two-column editorial split, used for paired subjects. */
+.split {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(var(--s-6), 4vw, var(--s-8));
+}
+
+
+/* ============================================================
+   13. DOMAIN MOSAIC
+   ------------------------------------------------------------
+   The nine subjects of CosmoVerse, shown as a contact sheet of
+   observation plates. Each tile carries its own domain theme, so
+   this grid is also the site's living style reference: whatever
+   personality a tile shows here is exactly what its section
+   will inherit when it is built.
+   ============================================================ */
+
+.domain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+}
+
+.tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    min-height: 258px;
+    padding: clamp(var(--s-5), 2.4vw, var(--s-6));
+    color: inherit;
+    background: var(--abyss);
+    overflow: hidden;
+    isolation: isolate;
+    transition: background var(--dur-slow) var(--ease-out);
+}
+
+.tile > * {
+    position: relative;
+    z-index: 2;
+}
+
+.tile .field {
+    z-index: 0;
+    opacity: 0.32;
+    transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+/* Accent light rises from the bottom edge on hover — the tile
+   feels lit by its own subject. */
+.tile::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 62%;
+    z-index: 1;
+    background: linear-gradient(0deg, var(--accent-wash) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity var(--dur-slow) var(--ease-out);
+    pointer-events: none;
+}
+
+.tile__rule {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 30px;
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+    transition: width var(--dur-slow) var(--ease-cine);
+}
+
+a.tile:hover,
+a.tile:focus-visible {
+    background: var(--deep);
+}
+
+a.tile:hover .field,
+a.tile:focus-visible .field {
+    opacity: 0.55;
+}
+
+a.tile:hover::after,
+a.tile:focus-visible::after {
+    opacity: 1;
+}
+
+a.tile:hover .tile__rule,
+a.tile:focus-visible .tile__rule {
+    width: 100%;
+}
+
+.tile__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--s-4);
+}
+
+.tile__title {
+    margin-top: var(--s-4);
+    font-size: var(--t-xl);
+    font-weight: 500;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.tile__text {
+    font-size: var(--t-sm);
+    line-height: 1.68;
+    color: var(--text-3);
+}
+
+.tile__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    margin-top: auto;
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+a.tile .tile__enter {
+    color: var(--accent);
+}
+
+a.tile .tile__enter span {
+    display: inline-block;
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+a.tile:hover .tile__enter span {
+    transform: translateX(4px);
+}
+
+/* Sections that do not exist yet are stated plainly rather than
+   linked to a dead end. */
+.tile--locked {
+    cursor: default;
+}
+
+.tile--locked .tile__title,
+.tile--locked .tile__text {
+    color: var(--text-3);
+}
+
+.tile--locked .emblem {
+    opacity: 0.62;
+    filter: saturate(0.75);
+}
+
+
+/* ============================================================
+   14. EMBLEMS — one per subject
+   ------------------------------------------------------------
+   Drawn entirely with gradients, borders and clip paths. Each
+   emblem states the *geometry* of its subject: orbits are
+   concentric, stars are point sources with diffraction spikes,
+   a black hole is a hole, a galaxy is a rotating disc, a burst
+   is anisotropic.
+
+   Markup:  <span class="emblem emblem--stars"><i></i></span>
+   ============================================================ */
+
+.emblem {
+    position: relative;
+    flex: none;
+    width: 62px;
+    height: 62px;
+    transition: transform var(--dur-slow) var(--ease-cine);
+}
+
+a.tile:hover .emblem {
+    transform: scale(1.08);
+}
+
+.emblem::before,
+.emblem::after,
+.emblem > i,
+.emblem > i::before,
+.emblem > i::after {
+    content: '';
+    position: absolute;
+}
+
+.emblem > i {
+    inset: 0;
+    display: block;
+}
+
+/* --- Solar System: a star with two orbits ------------------- */
+.emblem--solar::before {
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 32%, #fff8e2 0%, #ffc85a 42%, #ff7a2f 100%);
+    box-shadow: 0 0 16px rgba(255, 168, 60, 0.75), 0 0 34px rgba(255, 122, 47, 0.35);
+    z-index: 2;
+}
+
+.emblem--solar::after {
+    inset: 4px 0;
+    border: 1px solid rgba(255, 182, 72, 0.4);
+    border-radius: 50%;
+    transform: rotate(-20deg) scaleY(0.42);
+}
+
+.emblem--solar > i::before {
+    inset: 16px 12px;
+    border: 1px solid rgba(255, 182, 72, 0.55);
+    border-radius: 50%;
+    transform: rotate(-20deg) scaleY(0.46);
+}
+
+.emblem--solar > i::after {
+    top: 15px;
+    right: 3px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ffd79a;
+    box-shadow: 0 0 8px rgba(255, 215, 154, 0.9);
+}
+
+/* --- Planets: a banded world with a ring ------------------- */
+.emblem--planets::before {
+    top: 12px;
+    left: 12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background:
+        repeating-linear-gradient(172deg,
+            #9ec8ff 0 4px,
+            #6f9fe8 4px 7px,
+            #b9d8ff 7px 10px,
+            #5f80d8 10px 14px);
+    box-shadow: inset -7px -5px 12px rgba(0, 0, 8, 0.62),
+                0 0 20px rgba(134, 185, 255, 0.28);
+    z-index: 2;
+}
+
+.emblem--planets::after {
+    top: 50%;
+    left: 50%;
+    width: 66px;
+    height: 20px;
+    margin: -10px 0 0 -33px;
+    border: 2px solid rgba(160, 196, 255, 0.42);
+    border-top-color: rgba(206, 226, 255, 0.6);
+    border-radius: 50%;
+    transform: rotate(-18deg);
+    z-index: 3;
+}
+
+.emblem--planets > i::before {
+    top: 6px;
+    right: 2px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #cfe0ff;
+    box-shadow: 0 0 8px rgba(207, 224, 255, 0.8);
+}
+
+/* --- Stars: point source with diffraction spikes ----------- */
+.emblem--stars::before {
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 38%, #ffffff 0%, #dcecff 40%, #7fa8ff 100%);
+    box-shadow: 0 0 14px #ffffff, 0 0 32px rgba(160, 200, 255, 0.75),
+                0 0 60px rgba(120, 160, 255, 0.35);
+    z-index: 3;
+}
+
+.emblem--stars::after {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    margin-top: -0.75px;
+    background: linear-gradient(90deg, transparent, rgba(226, 240, 255, 0.9) 50%, transparent);
+}
+
+.emblem--stars > i::before {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1.5px;
+    margin-left: -0.75px;
+    background: linear-gradient(180deg, transparent, rgba(226, 240, 255, 0.85) 50%, transparent);
+}
+
+.emblem--stars > i::after {
+    inset: 9px;
+    border-radius: 50%;
+    border: 1px solid rgba(207, 225, 255, 0.22);
+}
+
+/* --- Black Holes: accretion disc + event horizon ----------- */
+.emblem--holes::before {
+    top: 50%;
+    left: -2px;
+    right: -2px;
+    height: 22px;
+    margin-top: -11px;
+    border-radius: 50%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 122, 61, 0.15) 12%,
+        #ffb066 34%,
+        #fff2df 50%,
+        #ff8a3d 66%,
+        rgba(168, 102, 255, 0.2) 88%,
+        transparent 100%);
+    filter: blur(1.5px);
+    z-index: 1;
+}
+
+/* The horizon itself: nothing. Only the light bending round it. */
+.emblem--holes > i::before {
+    top: 50%;
+    left: 50%;
+    width: 26px;
+    height: 26px;
+    margin: -13px 0 0 -13px;
+    border-radius: 50%;
+    background: #000000;
+    box-shadow:
+        0 0 0 1.5px rgba(255, 206, 160, 0.92),
+        0 0 14px 2px rgba(255, 138, 61, 0.5),
+        inset 0 0 12px rgba(0, 0, 0, 1);
+    z-index: 3;
+}
+
+/* Near edge of the disc crossing in front of the horizon. */
+.emblem--holes > i::after {
+    top: 50%;
+    left: 6px;
+    right: 6px;
+    height: 9px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, transparent, #ffc98c 45%, #fff6ea 55%, transparent);
+    filter: blur(1px);
+    z-index: 4;
+}
+
+.emblem--holes::after {
+    inset: 2px;
+    border-radius: 50%;
+    border: 1px solid rgba(168, 102, 255, 0.22);
+    transform: scaleY(0.9);
+}
+
+/* --- Galaxies: rotating spiral disc ------------------------ */
+.emblem--galaxies::before {
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg,
+        transparent 0deg,
+        rgba(214, 164, 255, 1) 30deg,
+        rgba(196, 137, 255, 0.5) 62deg,
+        transparent 104deg,
+        rgba(255, 130, 216, 0.9) 186deg,
+        rgba(255, 111, 208, 0.45) 218deg,
+        transparent 256deg,
+        rgba(214, 164, 255, 0.9) 316deg,
+        transparent 356deg);
+    -webkit-mask-image: radial-gradient(circle, #000 12%, rgba(0, 0, 0, 0.6) 44%, transparent 72%);
+            mask-image: radial-gradient(circle, #000 12%, rgba(0, 0, 0, 0.6) 44%, transparent 72%);
+    transform: scaleY(0.62) rotate(-14deg);
+    animation: field-rotate 40s linear infinite;
+}
+
+.emblem--galaxies > i::before {
+    inset: 11px;
+    border-radius: 50%;
+    background: conic-gradient(from 140deg,
+        transparent 0deg,
+        rgba(255, 232, 250, 0.5) 60deg,
+        transparent 150deg,
+        rgba(196, 137, 255, 0.45) 260deg,
+        transparent 340deg);
+    -webkit-mask-image: radial-gradient(circle, #000 20%, transparent 76%);
+            mask-image: radial-gradient(circle, #000 20%, transparent 76%);
+    transform: scaleY(0.62) rotate(-14deg);
+}
+
+.emblem--galaxies::after {
+    top: 50%;
+    left: 50%;
+    width: 11px;
+    height: 11px;
+    margin: -5.5px 0 0 -5.5px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0%, #ffd9f4 45%, rgba(196, 137, 255, 0) 100%);
+    box-shadow: 0 0 16px rgba(255, 214, 244, 0.85);
+    z-index: 3;
+}
+
+/* --- Nebulae: emission clouds with embedded stars ---------- */
+.emblem--nebulae::before {
+    inset: -6px;
+    background:
+        radial-gradient(ellipse 44% 40% at 30% 34%, rgba(92, 240, 220, 0.95) 0%, transparent 64%),
+        radial-gradient(ellipse 40% 44% at 70% 62%, rgba(255, 118, 162, 0.88) 0%, transparent 66%),
+        radial-gradient(ellipse 32% 28% at 58% 24%, rgba(168, 180, 255, 0.7) 0%, transparent 68%),
+        radial-gradient(ellipse 30% 26% at 36% 74%, rgba(255, 210, 150, 0.42) 0%, transparent 70%);
+    filter: blur(5px) saturate(1.15);
+}
+
+/* Dark lane — dust in front of the emission. */
+.emblem--nebulae > i::before {
+    top: 42%;
+    left: -10%;
+    width: 120%;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(2, 4, 12, 0.85);
+    filter: blur(3px);
+    transform: rotate(-24deg);
+    z-index: 2;
+}
+
+.emblem--nebulae::after {
+    inset: 0;
+    z-index: 3;
+    background-image:
+        radial-gradient(1.4px 1.4px at 18px 14px, #ffffff, transparent),
+        radial-gradient(1.2px 1.2px at 44px 22px, rgba(226, 240, 255, 0.9), transparent),
+        radial-gradient(1.6px 1.6px at 32px 44px, #ffffff, transparent),
+        radial-gradient(1.1px 1.1px at 12px 46px, rgba(200, 226, 255, 0.8), transparent),
+        radial-gradient(1.2px 1.2px at 50px 50px, rgba(255, 240, 226, 0.85), transparent);
+}
+
+/* --- Cosmic Events: anisotropic detonation ----------------- */
+
+/* The expanding shock front. It animates, so a second static ring
+   sits underneath — the emblem must never be momentarily empty. */
+.emblem--events::before {
+    inset: 3px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 96, 118, 0.7);
+    box-shadow: 0 0 20px rgba(255, 80, 104, 0.32),
+                inset 0 0 18px rgba(255, 80, 104, 0.18);
+    animation: shock 4.6s var(--ease-out) infinite;
+}
+
+.emblem--events::after {
+    inset: 14px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 217, 160, 0.55);
+    box-shadow: inset 0 0 14px rgba(255, 217, 160, 0.14);
+}
+
+/* Static outer remnant, always present. */
+.emblem--events > i {
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(255, 80, 104, 0.24);
+}
+
+/* Twin relativistic jets. */
+.emblem--events > i::before {
+    top: -6px;
+    bottom: -6px;
+    left: 50%;
+    width: 20px;
+    margin-left: -10px;
+    background: linear-gradient(180deg,
+        rgba(255, 240, 235, 0) 0%,
+        rgba(255, 190, 190, 0.85) 32%,
+        #ffffff 50%,
+        rgba(255, 190, 190, 0.85) 68%,
+        rgba(255, 240, 235, 0) 100%);
+    clip-path: polygon(50% 0%, 62% 44%, 62% 56%, 50% 100%, 38% 56%, 38% 44%);
+    transform: rotate(24deg);
+    filter: blur(0.4px);
+    z-index: 2;
+}
+
+.emblem--events > i::after {
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    margin: -6px 0 0 -6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0%, #ffd9a0 50%, rgba(255, 80, 104, 0) 100%);
+    box-shadow: 0 0 20px #ffffff, 0 0 40px rgba(255, 80, 104, 0.7);
+    z-index: 3;
+}
+
+@keyframes shock {
+    0%       { transform: scale(0.72); opacity: 0; }
+    28%      { opacity: 1; }
+    100%     { transform: scale(1.16); opacity: 0; }
+}
+
+/* --- Space Missions: trajectory over a drafting grid ------- */
+.emblem--missions::before {
+    inset: 2px;
+    background-image:
+        repeating-linear-gradient(0deg,  transparent 0 9px, rgba(60, 224, 166, 0.16) 9px 10px),
+        repeating-linear-gradient(90deg, transparent 0 9px, rgba(60, 224, 166, 0.16) 9px 10px);
+    border: 1px solid rgba(60, 224, 166, 0.3);
+}
+
+/* Hyperbolic escape path. */
+.emblem--missions::after {
+    top: 8px;
+    left: -14px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(108, 208, 255, 0.75);
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    transform: rotate(38deg);
+    z-index: 2;
+}
+
+/* Body being escaped. */
+.emblem--missions > i::before {
+    bottom: 6px;
+    left: 6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 32%, #3ce0a6 0%, #12705a 70%, #05231d 100%);
+    box-shadow: 0 0 14px rgba(60, 224, 166, 0.45);
+    z-index: 3;
+}
+
+/* Spacecraft. */
+.emblem--missions > i::after {
+    top: 9px;
+    right: 11px;
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
+    box-shadow: 0 0 10px #6cd0ff, -8px 6px 0 -2px rgba(108, 208, 255, 0.55);
+    transform: rotate(45deg);
+    z-index: 4;
+}
+
+/* --- Universe: large-scale filament web ------------------- */
+.emblem--universe::before {
+    inset: 0;
+    background-image:
+        linear-gradient(58deg,  transparent 47.5%, rgba(168, 180, 255, 0.95) 50%, transparent 52.5%),
+        linear-gradient(-42deg, transparent 47.5%, rgba(120, 240, 255, 0.85) 50%, transparent 52.5%),
+        linear-gradient(4deg,   transparent 48.5%, rgba(168, 180, 255, 0.6) 50%, transparent 51.5%),
+        linear-gradient(96deg,  transparent 48.5%, rgba(168, 180, 255, 0.55) 50%, transparent 51.5%);
+    -webkit-mask-image: radial-gradient(circle, #000 22%, rgba(0, 0, 0, 0.65) 58%, transparent 84%);
+            mask-image: radial-gradient(circle, #000 22%, rgba(0, 0, 0, 0.65) 58%, transparent 84%);
+}
+
+.emblem--universe::after {
+    inset: 0;
+    background-image:
+        radial-gradient(2.6px 2.6px at 31px 31px, #ffffff, transparent),
+        radial-gradient(2px 2px at 12px 20px, rgba(151, 164, 255, 0.95), transparent),
+        radial-gradient(2px 2px at 50px 42px, rgba(95, 231, 255, 0.95), transparent),
+        radial-gradient(1.6px 1.6px at 44px 13px, rgba(207, 225, 255, 0.85), transparent),
+        radial-gradient(1.6px 1.6px at 16px 47px, rgba(207, 225, 255, 0.8), transparent);
+    z-index: 3;
+}
+
+.emblem--universe > i::before {
+    inset: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(151, 164, 255, 0.28) 0%, transparent 70%);
+}
+
+
+/* ============================================================
+   15. IN-DEVELOPMENT PANEL
+   ------------------------------------------------------------
+   Replaces the generic "coming soon" block. States scope, shows
+   the planned structure, and stays inside the visual language.
+   ============================================================ */
+
+.roadmap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(var(--s-6), 4vw, var(--s-8));
+    max-width: 900px;
+}
+
+@media (min-width: 860px) {
+    .roadmap {
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+        align-items: start;
+    }
+}
+
+.roadmap__list {
+    counter-reset: rung;
+}
+
+.roadmap__list li {
+    position: relative;
+    counter-increment: rung;
+    padding: 0.72rem 0 0.72rem var(--s-7);
+    border-top: 1px solid var(--line);
+    font-size: var(--t-base);
+    color: var(--text-2);
+}
+
+.roadmap__list li:last-child {
+    border-bottom: 1px solid var(--line);
+}
+
+.roadmap__list li::before {
+    content: counter(rung, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.86rem;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    opacity: 0.75;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    transition: color var(--dur-base) var(--ease-out);
+}
+
+.back-link span {
+    display: inline-block;
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.back-link:hover {
+    color: var(--accent);
+}
+
+.back-link:hover span {
+    transform: translateX(-4px);
+}
+
+
+/* ============================================================
+   16. PLATE IMAGERY — the photographic layer
+   ------------------------------------------------------------
+   The nine domain renders in /images are finished 16:9 banners
+   with CosmoVerse typography already burned into them: a title
+   block top-left, an EXPLORE / LEARN / WONDER / BEYOND rail below
+   it, a three-line object caption bottom-left, and phrase blocks
+   in both right-hand corners. Dropped in whole they fight every
+   headline placed over them, and two sets of type doing the same
+   job reads as a mistake rather than as a layer.
+
+   So nothing here ever shows a whole image. Measured against the
+   source frames, the band between 35% and 84% of the image height
+   is the only region no baked text touches — at any x. Every use
+   below crops to inside that band and nothing else.
+
+   Two crop techniques, chosen for what stays true when the
+   viewport moves:
+
+     · Wide bands use object-fit: cover with a fixed aspect-ratio
+       on the frame. A frame at 3.6:1 reveals exactly 49% of a
+       1.76:1 source's height, so object-position: 50% 59% lands
+       the window on 34.5%–83.5%. Because the frame's ratio is
+       fixed rather than fluid, that stays true at every width.
+
+     · Tiles size the image by height percentage instead. The
+       index tiles are close to 16:9 themselves, so cover would
+       show almost the entire frame, baked type included. Laying
+       the image in at 300% of the tile height and sliding it
+       gives a portrait window through the middle instead.
+
+   Frames get no border and no radius. A photograph with a rounded
+   rectangle around it is a card; these are meant to read as
+   frames from a film, so they bleed to the full width of the
+   section and dissolve into the page's black at the edges rather
+   than stopping against it.
+   ============================================================ */
+
+.shot-figure {
+    margin: 0;
+}
+
+.shot {
+    position: relative;
+    /* 3.8:1, not 3.6:1. At 3.6 the window opened on 34.5%–83.5% of
+       the source, and the EXPLORE / LEARN / WONDER / BEYOND rail
+       reaches a little further down the left edge in some of the
+       nine frames than in others — enough to surface two of its
+       lines. 3.8 pulls the window to 35.8%–82.2% and clears them
+       all, at the cost of 45px of band height. */
+    aspect-ratio: var(--shot-ar, 38 / 10);
+    width: 100%;
+    background: var(--void);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.shot__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--shot-pos, 50% 59%);
+    /* A small contrast lift. These renders are dark and the page
+       behind them is darker still, so without it the subject sinks
+       into the section it is sitting in. */
+    filter: contrast(1.06) saturate(1.03) brightness(var(--shot-bright, 1));
+}
+
+/* Edge treatment. The top and bottom ramps are what stop the band
+   reading as a rectangle pasted onto the page — it arrives out of
+   the black and leaves the same way. The left ramp does one extra
+   job: it buries the far-left EXPLORE rail, the only baked text
+   that sits close enough to the crop to reappear if a browser
+   rounds the aspect ratio the wrong way. */
+.shot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        /* Belt and braces on the top-left corner. The crop already
+           clears the EXPLORE rail; this makes sure a browser that
+           rounds the aspect ratio the other way cannot put a line
+           of it back on screen. Kept small so the corner darkens
+           without flattening the left third of the picture. */
+        radial-gradient(ellipse 22% 34% at 0% 0%,
+            rgba(0, 0, 3, 0.96) 0%, rgba(0, 0, 3, 0.55) 52%, transparent 100%),
+        linear-gradient(180deg,
+            var(--void) 0%, rgba(0, 0, 3, 0.55) 7%, transparent 20%,
+            transparent 80%, rgba(0, 0, 3, 0.55) 93%, var(--void) 100%),
+        linear-gradient(90deg, var(--void) 0%, rgba(0, 0, 3, 0.5) 6%, transparent 20%),
+        /* Reaches further in than the left ramp. Several of these
+           frames carry a label hard against the right edge, and a
+           short fade cut one mid-word; this dissolves it instead. */
+        linear-gradient(270deg,
+            var(--void) 0%, rgba(0, 0, 3, 0.72) 4%,
+            rgba(0, 0, 3, 0.3) 13%, transparent 26%),
+        radial-gradient(ellipse 88% 76% at 50% 50%,
+            transparent 38%, rgba(0, 0, 3, 0.42) 100%);
+}
+
+/* A hairline in the domain accent along the top edge, the same
+   signal .tile__rule and .head__rule use. It ties the photograph
+   to the section it belongs to instead of leaving it floating. */
+.shot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: clamp(40px, 12%, 160px);
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* Taller variant, for a band that has to carry more presence.
+   2.7:1 reveals 65% of the source height, which reaches past the
+   clean band, so the crop is pulled in with a scale instead and
+   the frame keeps a fixed ratio so the zoom stays correct. */
+.shot--deep {
+    --shot-ar: 27 / 10;
+}
+
+.shot--deep .shot__img {
+    transform: scale(1.34);
+    transform-origin: 50% 59%;
+}
+
+/* Caption. Reuses .caption, so only the placement is new: indented
+   to the container's gutter and hung directly under the frame. */
+.shot-figure .caption {
+    margin-top: var(--s-5);
+}
+
+
+/* --- Page-hero backdrop ------------------------------------
+   A band across the top of a category hero, above the mood wash
+   and below the copy. Fixed aspect ratio rather than inset:0, so
+   the crop cannot drift as the hero's height changes with svh —
+   filling the hero would make the visible slice depend on the
+   viewport, and the baked type would swim back into frame at some
+   window sizes. */
+.page-hero__shot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    aspect-ratio: 34 / 10;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.page-hero__shot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--shot-pos, 50% 58%);
+    filter: contrast(1.05) saturate(1.02);
+}
+
+/* The hero's copy is bottom-anchored, so the band has to be gone
+   by the time it arrives. This fades the lower half out entirely
+   rather than relying on .page-hero::before, which is tuned for
+   drawn art and is not opaque enough to sit under body text. */
+.page-hero__shot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg,
+            var(--void) 0%, rgba(0, 0, 3, 0.6) 8%, rgba(0, 0, 3, 0.2) 26%,
+            rgba(0, 0, 3, 0.52) 58%, rgba(0, 0, 3, 0.94) 86%, var(--void) 100%),
+        radial-gradient(ellipse 24% 30% at 0% 0%,
+            rgba(0, 0, 3, 0.9) 0%, transparent 100%),
+        linear-gradient(90deg, var(--void) 0%, rgba(0, 0, 3, 0.52) 7%, transparent 24%),
+        linear-gradient(270deg, var(--void) 0%, transparent 16%);
+}
+
+
+/* --- Index tile backdrop -----------------------------------
+   Held well back: the tile's job is to be read, not admired, and
+   the drawn .field on top of it is what carries the domain's
+   geometry. On hover the photograph comes forward and the tile
+   briefly becomes the image. */
+/* Scoped through .tile so it outranks `.tile > *`, which promotes
+   every direct child to z-index 2 and would otherwise push the
+   photograph above the drawn field. */
+.tile .tile__shot {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.tile__shot img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    /* 260% of the tile height. On a 360x332 tile that opens a window
+       onto roughly the middle 24% x 39% of the source: tight enough
+       that the subject fills the tile, wide enough not to be an
+       abstract patch of gradient.
+
+       The vertical window lands on 30%-69%, and nothing baked into
+       these frames sits in that band at any x — so --shot-x below is
+       free to travel almost the full width of the source to find a
+       subject, which is not true of a looser crop. */
+    height: 260%;
+    max-width: none;
+    /* The second translate slides that window inside the frame;
+       --shot-x / --shot-y let a tile aim at its own subject without
+       changing how much of the source is shown. There is about 17%
+       of horizontal play and 9% of downward play before the window
+       reaches type. */
+    transform: translate(-50%, -50%)
+               translate(var(--shot-x, 0%), var(--shot-y, -3%));
+    opacity: var(--shot-opacity, 0.58);
+    filter: saturate(0.84) contrast(1.04) brightness(var(--shot-bright, 1));
+    transition:
+        opacity var(--dur-slow) var(--ease-out),
+        transform var(--dur-slow) var(--ease-cine);
+}
+
+/* Legibility, aimed rather than uniform.
+
+   All of a tile's copy is stacked down its left and bottom edges,
+   and the top-right corner carries nothing at all. So the scrim is
+   directional: it opens up towards top-right, where the photograph
+   is allowed to be a photograph, and closes to near-black across
+   the bottom-left where the title, body and footer sit. A flat
+   veil strong enough to protect the text made every tile look
+   empty; this protects the same text and still lets the image
+   read. */
+.tile__shot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 125% 115% at 92% 8%,
+            transparent 0%,
+            rgba(0, 0, 3, 0.32) 42%,
+            rgba(0, 0, 3, 0.72) 74%,
+            rgba(0, 0, 3, 0.92) 100%),
+        linear-gradient(0deg,
+            rgba(0, 0, 3, 0.94) 0%,
+            rgba(0, 0, 3, 0.82) 26%,
+            rgba(0, 0, 3, 0.58) 48%,
+            rgba(0, 0, 3, 0.28) 70%,
+            transparent 92%);
+}
+
+a.tile:hover .tile__shot img,
+a.tile:focus-visible .tile__shot img {
+    opacity: calc(var(--shot-opacity, 0.4) + 0.26);
+    transform: translate(-50%, -50%)
+               translate(var(--shot-x, 0%), var(--shot-y, -3%))
+               scale(1.06);
+}
+
+/* Unbuilt regions read as dimmer on purpose — the photograph is
+   the reward for a section that exists. */
+.tile--locked .tile__shot img {
+    opacity: calc(var(--shot-opacity, 0.4) * 0.62);
+    filter: saturate(0.58) contrast(1.02) brightness(var(--shot-bright, 1));
+}
+
+
+/* ============================================================
+   17. RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+    .domain-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 860px) {
+    .page-hero {
+        min-height: auto;
+        padding-bottom: var(--s-4);
+    }
+
+    .plate__stage,
+    .plate-grid--tall .plate__stage {
+        --stage-h: 168px;
+    }
+
+    /* A 3.6:1 band is only 130px tall on a phone, which is a strip
+       rather than a photograph. The frames get squarer and the
+       image is scaled to compensate, so the visible slice of the
+       source stays inside the same clean band it uses on desktop
+       instead of letting the baked type back in. */
+    .shot {
+        --shot-ar: 24 / 10;
+    }
+
+    .shot .shot__img {
+        transform: scale(1.5);
+        transform-origin: 50% 59%;
+    }
+
+    .shot--deep {
+        --shot-ar: 20 / 10;
+    }
+
+    .shot--deep .shot__img {
+        transform: scale(1.8);
+    }
+
+    .page-hero__shot {
+        aspect-ratio: 21 / 10;
+    }
+
+    .page-hero__shot img {
+        transform: scale(1.62);
+        transform-origin: 50% 58%;
+    }
+}
+
+@media (max-width: 760px) {
+    /* The rail runs out of horizontal room before it runs out of
+       marks, so the figures go and the names turn vertical. Rotated
+       names are far taller than horizontal ones, and marks grow
+       outward from the axis — so the rail has to grow with them or
+       the longest label climbs into the caption above it. */
+    .rail {
+        height: 250px;
+    }
+
+    .rail__value {
+        display: none;
+    }
+
+    .rail__name {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+    }
+}
+
+@media (max-width: 620px) {
+    .domain-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .tile {
+        min-height: 0;
+    }
+
+    .ledger__row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        row-gap: var(--s-3);
+    }
+
+    .ledger__track {
+        grid-column: 1 / -1;
+        order: 3;
+    }
+
+    .plate-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

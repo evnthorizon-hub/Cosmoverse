@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Space Missions — what a mission actually is, Apollo and the return to the Moon, the Voyager Grand Tour, the James Webb Space Telescope, Mars rovers and orbiters, and what is scheduled next.">
+    <meta name="keywords" content="space missions, spacecraft, Apollo 11, Apollo program, Artemis, Artemis II, Voyager 1, Voyager 2, Grand Tour, gravity assist, James Webb Space Telescope, Hubble, Mars rovers, Curiosity, Perseverance, Sojourner, Opportunity, Europa Clipper, Dragonfly, Deep Space Network, astronomy">
+    <meta name="author" content="CosmoVerse">
+    <meta name="theme-color" content="#000003">
+    <title>Space Missions | CosmoVerse</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/missions.css">
+</head>
+<!-- dm-missions sets the domain palette. Its accent pair is already
+     telemetry green into blueprint cyan, so like Nebulae and Cosmic
+     Events this page does not retune the heading gradient. What
+     missions.css adds is a hard semantic split on that pair: green is
+     a mission that flew and reported back, cyan is one that has not
+     flown yet. Three figures depend on it. -->
+<body class="dm-missions">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                CosmoVerse
+                <span class="logo-mark">Obs.</span>
+            </a>
+
+            <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+            <label for="mobile-menu-checkbox" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </label>
+
+            <!-- The label is "Missions" rather than "Space Missions"
+                 purely for fit: at nine items the full name pushes the
+                 list onto a second row at the 1180px measure, and a
+                 two-row primary nav changes the height of the fixed
+                 header on every page of the site. -->
+            <nav class="nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../solar-system/index.html" class="nav-link">Solar System</a></li>
+                    <li><a href="../stars/index.html" class="nav-link">Stars</a></li>
+                    <li><a href="../black-holes/index.html" class="nav-link">Black Holes</a></li>
+                    <li><a href="../galaxies/index.html" class="nav-link">Galaxies</a></li>
+                    <li><a href="../nebulae/index.html" class="nav-link">Nebulae</a></li>
+                    <li><a href="../cosmic-events/index.html" class="nav-link">Cosmic Events</a></li>
+                    <li><a href="index.html" class="nav-link active" aria-current="page">Missions</a></li>
+                    <li><a href="../exoplanets/index.html" class="nav-link">Exoplanets</a></li>
+                    <li><a href="../universe/index.html" class="nav-link">Universe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ============================================================
+             ARRIVAL
+             Galaxies opens on a logarithmic arc, Nebulae on filaments,
+             Cosmic Events on a shock front. This opens on an ascent
+             trajectory drafted over range rings — the only hero
+             flourish on the site built from construction lines, because
+             this is the only region whose subject was drawn before it
+             existed.
+             ============================================================ -->
+        <section class="page-hero">
+            <div class="page-hero__shot" aria-hidden="true">
+                <img src="../images/missions.png" alt="" decoding="async">
+            </div>
+            <!-- Held back so the photograph reads. .field--telemetry is
+                 a drafting grid and at full strength it tiles straight
+                 lines across the whole frame. -->
+            <div class="field field--telemetry" aria-hidden="true" style="--field-opacity:0.3"></div>
+            <div class="starfield" style="--stars-opacity:0.7" aria-hidden="true"></div>
+            <div class="starfield-streak" aria-hidden="true"></div>
+
+            <div class="ms-hero__plot" aria-hidden="true">
+                <svg viewBox="0 0 1700 440" preserveAspectRatio="xMidYMax meet">
+                    <!-- Range rings, drafted from the pad at the lower left. -->
+                    <circle class="ms-ring" cx="150" cy="430" r="300"/>
+                    <circle class="ms-ring" cx="150" cy="430" r="560"/>
+                    <circle class="ms-ring" cx="150" cy="430" r="860"/>
+                    <circle class="ms-ring" cx="150" cy="430" r="1180"/>
+
+                    <!-- The horizon being left. -->
+                    <path class="ms-horizon" d="M -80 424 C 400 410, 1100 410, 1780 424"/>
+
+                    <!-- A real gravity turn: vertical off the pad, then
+                         pitching over progressively, so by the time the
+                         vehicle is out of the thick atmosphere it is
+                         flying almost horizontally. A straight diagonal
+                         would be the wrong shape. -->
+                    <path class="ms-track ms-track--bloom"
+                          d="M 150 432 C 152 330, 176 250, 268 196 C 420 106, 800 62, 1780 44"/>
+                    <path class="ms-track"
+                          d="M 150 432 C 152 330, 176 250, 268 196 C 420 106, 800 62, 1780 44"/>
+                    <path class="ms-track"
+                          d="M 150 432 C 154 356, 190 288, 300 236 C 470 156, 880 108, 1780 88"
+                          style="opacity:0.12"/>
+
+                    <g class="ms-event">
+                        <circle cx="268" cy="196" r="2.2"/>
+                        <circle cx="470" cy="118" r="1.8"/>
+                        <circle cx="812" cy="74" r="1.6"/>
+                        <circle cx="1240" cy="54" r="1.4"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="container">
+                <p class="eyebrow"><span class="eyebrow__id">08</span> Region &middot; Instruments</p>
+                <h1 class="page-hero__title">The<em>Space Missions</em></h1>
+                <p class="page-hero__lede">Every fact in the other eight regions of this site arrived through hardware that somebody had to design, fund, build, launch and then aim correctly on the first attempt. This region is about the instruments rather than the sky.</p>
+                <p class="page-hero__coords">
+                    <span>Delta-v is the only currency</span>
+                    <span>Mars window every 26 months</span>
+                    <span>Deep Space Network &middot; 3 sites</span>
+                </p>
+            </div>
+
+            <div class="page-hero__dock">
+                <div class="container">
+                    <!-- Labels are kept short enough to stay on one line. A
+                         two-line label in one cell drops that cell's figure
+                         below the other five and the readout stops reading
+                         as a single instrument. -->
+                    <dl class="readout readout--flush">
+                        <div class="readout__cell">
+                            <dt>Apollo samples</dt>
+                            <dd>382 <small>kg</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Voyager 1 now</dt>
+                            <dd>~174 <small>AU</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>V1 round trip</dt>
+                            <dd>~48 <small>hours</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Webb mirror</dt>
+                            <dd>6.5 <small>m</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Mars rovers</dt>
+                            <dd>6 <small>landed</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Artemis II</dt>
+                            <dd>Apr <small>2026</small></dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             LOCAL INDEX
+             ============================================================ -->
+        <nav class="subnav" aria-label="Sections in this region">
+            <div class="subnav__list">
+                <a href="#overview">Overview</a>
+                <a href="#apollo">Apollo &amp; the Moon</a>
+                <a href="#voyager">Voyager</a>
+                <a href="#webb">Webb</a>
+                <a href="#mars">Mars</a>
+                <a href="#future">What's Next</a>
+            </div>
+        </nav>
+
+
+        <!-- ============================================================
+             01 · OVERVIEW
+             ============================================================ -->
+        <section class="shell shell--abyss" id="overview">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">01</span> Overview</p>
+                    <h2 class="head__title">The spacecraft is <em>the smallest part of it</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">A space mission is a spacecraft, a launch vehicle, a trajectory, a communications network and a team of people who will spend the next twenty years reading its telemetry. The hardware that leaves the ground is the part that gets photographed and very nearly the least of the problem.</p>
+                </header>
+
+                <div class="split">
+                    <div class="prose prose--lede">
+                        <p>Everything about mission design comes back to one quantity. Delta-v is the total change in velocity a spacecraft can manage with the propellant it carries, and it is the currency the whole discipline is denominated in. You do not travel a distance in space; you buy a velocity change, and the price is exponential in the mass you are moving.</p>
+                        <p>Two consequences follow, and between them they explain most of what this page describes. The first is that departures are not optional in their timing: a transfer to Mars is only cheap when the two planets are correctly arranged, which happens about every 26 months, and a mission that misses its window waits. The second is that if you cannot afford the velocity you need, you borrow it. A gravity assist steals a fraction of a planet's orbital momentum, changing the spacecraft's speed relative to the Sun for no propellant at all &mdash; and the planet loses exactly as much, spread over a body 10<sup>20</sup> times heavier, which is why nobody minds.</p>
+                        <p>Then the long part begins. Cruise phases run for years, and a spacecraft on the far side of the Solar System is a few watts of transmitter answering a question that was asked two days ago. The Deep Space Network's three complexes &mdash; California, Spain and Australia, spaced roughly 120 degrees apart so something is always facing outward &mdash; are the reason any of it comes back at all.</p>
+                    </div>
+
+                    <div>
+                        <p class="pull">Nobody has ever flown to another planet. Every mission <em>fell there</em>, accurately.</p>
+
+                        <div class="note" style="margin-top:2.5rem">
+                            <span class="note__title">Six kinds of mission, in order of difficulty</span>
+                            <ul class="note__list">
+                                <li><strong>Flyby.</strong> Pass once, take everything you can. Cheapest, and it is how every outer planet was first seen properly.</li>
+                                <li><strong>Orbiter.</strong> Arrive and then brake, which costs delta-v you had to carry all the way. Buys years of coverage instead of hours.</li>
+                                <li><strong>Lander.</strong> Arrive and then stop completely. On a world with an atmosphere this is mostly a heat problem; on one without, entirely a propellant problem.</li>
+                                <li><strong>Rover.</strong> A lander that then has to survive, navigate and decide things with a signal delay measured in minutes.</li>
+                                <li><strong>Sample return.</strong> Everything above, then a launch from the surface of somewhere else, then a rendezvous. Achieved from the Moon, from asteroids and from comet dust.</li>
+                                <li><strong>Crewed.</strong> All of it, with a mass budget for air, water, food and shielding, and no acceptable failure modes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fig 01 · The ordering principle for the page. Linear,
+                     deliberately: the most informative thing on this axis
+                     is an absence, and an absence is only visible on an
+                     even scale. -->
+                <h3 class="sub-title" style="margin-top:4.5rem">Seventy years, evenly spaced</h3>
+
+                <figure class="fig" style="margin-top:1rem">
+                    <div class="rail rail--years" role="img"
+                         aria-label="A linear timeline from 1950 to 2040 marking Sputnik 1 in 1957, Apollo 11 in 1969, Voyager 1 and 2 in 1977, Hubble in 1990, Spirit and Opportunity in 2004, Curiosity in 2012, Webb and Perseverance in 2021, and Artemis II in 2026. A hatched band spans the 54 years between Apollo 17 in 1972 and Artemis II in 2026, during which no crew left low Earth orbit.">
+
+                        <span class="rail__decade" style="--pos:0%"><span>1950</span></span>
+                        <span class="rail__decade" style="--pos:11.1%"><span>1960</span></span>
+                        <span class="rail__decade" style="--pos:22.2%"><span>1970</span></span>
+                        <span class="rail__decade" style="--pos:33.3%"><span>1980</span></span>
+                        <span class="rail__decade" style="--pos:44.4%"><span>1990</span></span>
+                        <span class="rail__decade" style="--pos:55.6%"><span>2000</span></span>
+                        <span class="rail__decade" style="--pos:66.7%"><span>2010</span></span>
+                        <span class="rail__decade" style="--pos:77.8%"><span>2020</span></span>
+                        <span class="rail__decade" style="--pos:88.9%"><span>2030</span></span>
+                        <span class="rail__decade" style="--pos:100%"><span>2040</span></span>
+
+                        <!-- 1972 to 2026, as a fraction of 1950-2040. -->
+                        <span class="rail__gap" style="--from:24.4%; --span:60%">
+                            <b>54 years &middot; nobody beyond low Earth orbit</b>
+                        </span>
+
+                        <span class="rail__mark rail__mark--up" style="--pos:7.8%">
+                            <em class="rail__name">Sputnik 1</em><b class="rail__value">1957</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down" style="--pos:21.1%">
+                            <em class="rail__name">Apollo 11</em><b class="rail__value">1969</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--up" style="--pos:30%">
+                            <em class="rail__name">Voyager 1 &amp; 2</em><b class="rail__value">1977</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down" style="--pos:44.4%">
+                            <em class="rail__name">Hubble</em><b class="rail__value">1990</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--up" style="--pos:60%">
+                            <em class="rail__name">Spirit &amp; Opportunity</em><b class="rail__value">2004</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down" style="--pos:68.9%">
+                            <em class="rail__name">Curiosity</em><b class="rail__value">2012</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--up" style="--pos:78.9%">
+                            <em class="rail__name">Webb &middot; Perseverance</em><b class="rail__value">2021</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down" style="--pos:84.4%">
+                            <em class="rail__name">Artemis II</em><b class="rail__value">2026</b><i class="rail__tick"></i>
+                        </span>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 01</span>
+                        <span class="caption__body"><strong>Linear year axis, 1950 to 2040 &mdash; uncompressed.</strong> A centimetre is the same number of years anywhere along it, which is the entire reason it is drawn this way: the hatched band is the 54 years between Apollo 17 leaving the Moon in December 1972 and Artemis II carrying a crew past it in April 2026. On a logarithmic or event-spaced timeline that gap disappears into the layout. Dates are launches, except Artemis II, which is the flight. The axis turns from green to cyan near its right-hand end, where it runs out of missions that have actually flown.</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             02 · APOLLO AND THE MOON
+             shell--lit: illuminated from above by the thing it describes.
+             ============================================================ -->
+        <section class="shell shell--lit shell--seam" id="apollo">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">02</span> Apollo &amp; the Moon</p>
+                    <h2 class="head__title">Twelve people walked there, and <em>then nobody did</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Six Apollo missions landed between July 1969 and December 1972. They returned 382 kilograms of rock that rewrote lunar geology, left instruments that are still being used, and then stopped &mdash; not because the problem was solved but because the programme was cancelled. In April 2026 a crew went back as far as lunar orbit for the first time since.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 460" role="img"
+                             aria-label="An orthographic map of the lunar near side showing the six Apollo landing sites at their real selenographic coordinates. Apollo 15 at Hadley-Apennine and Apollo 17 at Taurus-Littrow lie north of the equator; Apollo 11 in Mare Tranquillitatis sits almost exactly on it; Apollo 12 in Oceanus Procellarum, Apollo 14 at Fra Mauro and Apollo 16 at Descartes lie just south. All six fall within 27 degrees of the equator. The Artemis IV target at the lunar South Pole is marked separately at the bottom limb.">
+
+                            <defs>
+                                <radialGradient id="msMoon" cx="36%" cy="30%" r="76%">
+                                    <stop offset="0%"   stop-color="#cdc8bf"/>
+                                    <stop offset="52%"  stop-color="#9a958c"/>
+                                    <stop offset="84%"  stop-color="#5f5b54"/>
+                                    <stop offset="100%" stop-color="#2b2925"/>
+                                </radialGradient>
+
+                                <clipPath id="msMoonClip">
+                                    <circle cx="380" cy="210" r="170"/>
+                                </clipPath>
+                            </defs>
+
+                            <!-- Diameter, stated. This region measures things. -->
+                            <path class="dim dim--flown" d="M 210 26 L 550 26"/>
+                            <path class="dim__cap dim__cap--flown" d="M 210 20 L 210 32 M 550 20 L 550 32"/>
+                            <text class="dim__text dim__text--flown" x="380" y="16" text-anchor="middle">3,475 km</text>
+
+                            <circle class="moon__disc" cx="380" cy="210" r="170"/>
+
+                            <g clip-path="url(#msMoonClip)">
+                                <!-- Maria: the dark basalt plains, which is
+                                     where five of the six landings went,
+                                     because flat is what a lander needs. -->
+                                <ellipse class="moon__mare" cx="292" cy="214" rx="72" ry="88"/>
+                                <ellipse class="moon__mare" cx="440" cy="205" rx="48" ry="38"/>
+                                <ellipse class="moon__mare" cx="345" cy="126" rx="56" ry="43"/>
+                                <ellipse class="moon__mare" cx="432" cy="152" rx="37" ry="32"/>
+                                <ellipse class="moon__mare" cx="458" cy="258" rx="25" ry="22"/>
+                                <ellipse class="moon__mare" cx="512" cy="178" rx="26" ry="20"/>
+                                <ellipse class="moon__mare" cx="300" cy="310" rx="34" ry="26"/>
+
+                                <g class="moon__crater">
+                                    <circle cx="348" cy="178" r="10"/>
+                                    <circle cx="352" cy="302" r="13"/>
+                                    <circle cx="302" cy="180" r="7"/>
+                                    <circle cx="316" cy="152" r="6"/>
+                                    <circle cx="470" cy="316" r="9"/>
+                                    <circle cx="418" cy="300" r="7"/>
+                                    <circle cx="252" cy="140" r="8"/>
+                                    <circle cx="500" cy="240" r="6"/>
+                                </g>
+                            </g>
+
+                            <circle class="moon__limb" cx="380" cy="210" r="170"/>
+                            <path class="moon__equator" d="M 210 210 L 550 210"/>
+                            <text class="svg-unit" x="204" y="214" text-anchor="end">Equator</text>
+
+                            <!-- ---- The six sites. Real coordinates,
+                                 orthographically projected. Green: flown. -->
+                            <g>
+                                <circle class="moon__halo" cx="390" cy="135" r="9"/>
+                                <circle class="moon__site" cx="390" cy="135" r="3.4"/>
+                                <circle class="moon__halo" cx="462" cy="151" r="9"/>
+                                <circle class="moon__site" cx="462" cy="151" r="3.4"/>
+                                <circle class="moon__halo" cx="448" cy="208" r="9"/>
+                                <circle class="moon__site" cx="448" cy="208" r="3.4"/>
+                                <circle class="moon__halo" cx="313" cy="219" r="9"/>
+                                <circle class="moon__site" cx="313" cy="219" r="3.4"/>
+                                <circle class="moon__halo" cx="329" cy="221" r="9"/>
+                                <circle class="moon__site" cx="329" cy="221" r="3.4"/>
+                                <circle class="moon__halo" cx="425" cy="237" r="9"/>
+                                <circle class="moon__site" cx="425" cy="237" r="3.4"/>
+
+                                <!-- Cyan: not flown. Rule 2, and it is why
+                                     this marker needs no explanation. -->
+                                <circle class="moon__halo moon__halo--planned" cx="380" cy="380" r="9"/>
+                                <circle class="moon__site moon__site--planned" cx="380" cy="380" r="3.4"/>
+                            </g>
+
+                            <!-- ---- Left rail: the two western sites. ----
+                                 The rail has to end at x=204, clear of the
+                                 disc's left limb at x=210. An earlier version
+                                 ended at 250 and the site names ran under the
+                                 Moon. That leaves only ~200 units of width,
+                                 so these two labels carry their date on a
+                                 third line instead of inline. -->
+                            <g>
+                                <path class="svg-leader svg-leader--flown" d="M 313 219 L 252 234 L 204 234"/>
+                                <text class="svg-label svg-label--flown" x="196" y="231" text-anchor="end">Apollo 12</text>
+                                <text class="svg-unit" x="196" y="247" text-anchor="end">Oceanus Procellarum</text>
+                                <text class="svg-unit" x="196" y="263" text-anchor="end">Nov 1969</text>
+
+                                <path class="svg-leader svg-leader--flown" d="M 329 221 L 252 300 L 204 300"/>
+                                <text class="svg-label svg-label--flown" x="196" y="297" text-anchor="end">Apollo 14</text>
+                                <text class="svg-unit" x="196" y="313" text-anchor="end">Fra Mauro</text>
+                                <text class="svg-unit" x="196" y="329" text-anchor="end">Feb 1971</text>
+                            </g>
+
+                            <!-- ---- Right rail: the four eastern sites. -- -->
+                            <g>
+                                <path class="svg-leader svg-leader--flown" d="M 390 135 L 620 106 L 682 106"/>
+                                <text class="svg-label svg-label--flown" x="690" y="103">Apollo 15</text>
+                                <text class="svg-unit" x="690" y="119">Hadley&ndash;Apennine &middot; Jul 1971</text>
+
+                                <path class="svg-leader svg-leader--flown" d="M 462 151 L 620 154 L 682 154"/>
+                                <text class="svg-label svg-label--flown" x="690" y="151">Apollo 17</text>
+                                <text class="svg-unit" x="690" y="167">Taurus&ndash;Littrow &middot; Dec 1972</text>
+
+                                <path class="svg-leader svg-leader--flown" d="M 448 208 L 620 202 L 682 202"/>
+                                <text class="svg-label svg-label--flown" x="690" y="199">Apollo 11</text>
+                                <text class="svg-unit" x="690" y="215">Mare Tranquillitatis &middot; Jul 1969</text>
+
+                                <path class="svg-leader svg-leader--flown" d="M 425 237 L 620 250 L 682 250"/>
+                                <text class="svg-label svg-label--flown" x="690" y="247">Apollo 16</text>
+                                <text class="svg-unit" x="690" y="263">Descartes highlands &middot; Apr 1972</text>
+
+                                <path class="svg-leader svg-leader--planned" d="M 380 382 L 380 400 L 620 400 L 682 400"/>
+                                <text class="svg-label svg-label--planned" x="690" y="397">Artemis IV target</text>
+                                <text class="svg-unit" x="690" y="413">South Pole &middot; planned 2028</text>
+                            </g>
+
+                            <text class="svg-unit" x="1160" y="40" text-anchor="end">Near side &middot; orthographic</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 02</span>
+                        <span class="caption__body">Sites plotted from published selenographic coordinates, so the clustering is real and not a drafting convenience. Every Apollo landing fell within 27 degrees of the equator and on the near side, because a free-return trajectory, a line of sight to Earth for the radio, and a low Sun angle for judging slope on approach are three constraints that between them leave very little of the Moon available. Five of the six went to mare basalt, which is flat. The Artemis target is the opposite choice on every count &mdash; the South Pole is rough, permanently shadowed in places and out of easy communication, and it is where the water ice is.</span>
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">02a</span> What it left</p>
+                        <h3 class="sub-title" style="margin-top:1rem">Instruments that are still reporting</h3>
+                        <p class="copy" style="margin-top:1rem">Apollo 11, 14 and 15 each left a retroreflector array &mdash; a passive panel of corner-cube prisms that returns a laser pulse straight back to its source. Observatories have been bouncing lasers off them for over fifty years, which is how we know the Moon is receding from Earth at 3.8 centimetres a year. No power, no maintenance, no failure mode. They are the longest-running experiment in planetary science and they will outlast everything else on this page.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>Landings</dt><dd>6, of 7 attempts</dd></div>
+                            <div class="spec__row"><dt>People who walked</dt><dd>12</dd></div>
+                            <div class="spec__row"><dt>Samples returned</dt><dd>382 kg &middot; 2,196 items</dd></div>
+                            <div class="spec__row"><dt>Longest stay</dt><dd>Apollo 17 &middot; ~75 hours</dd></div>
+                            <div class="spec__row"><dt>Still in use</dt><dd>3 retroreflector arrays</dd></div>
+                        </dl>
+                    </div>
+
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">02b</span> The return</p>
+                        <h3 class="sub-title" style="margin-top:1rem">Artemis II, April 2026</h3>
+                        <p class="copy" style="margin-top:1rem">Reid Wiseman, Victor Glover and Christina Koch of NASA, with Jeremy Hansen of the Canadian Space Agency, flew a free-return loop around the Moon between 1 and 11 April 2026 and splashed down in the Pacific. It was the first crewed flight beyond low Earth orbit since Apollo 17 in December 1972, and at its farthest point it took them further from Earth than anyone has been. No landing &mdash; that is Artemis IV's job, now scheduled for 2028.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>Flew</dt><dd>1&ndash;11 April 2026</dd></div>
+                            <div class="spec__row"><dt>Crew</dt><dd>4 &middot; NASA and CSA</dd></div>
+                            <div class="spec__row"><dt>Farthest from Earth</dt><dd>~407,000 km</dd></div>
+                            <div class="spec__row"><dt>Profile</dt><dd>Free-return lunar flyby</dd></div>
+                            <div class="spec__row"><dt>First landing</dt><dd>Artemis IV &middot; 2028</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             03 · VOYAGER
+             ============================================================ -->
+        <section class="shell shell--void" id="voyager">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">03</span> Voyager</p>
+                    <h2 class="head__title">Two probes, four planets, and <em>an alignment that will not repeat</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">In the late 1970s Jupiter, Saturn, Uranus and Neptune were arranged so that a single spacecraft could chain gravity assists from one to the next and reach all four on a budget that would otherwise have got it to Jupiter and stopped. The arrangement recurs roughly every 175 years. Voyager 2 took it, and remains the only spacecraft to have visited Uranus or Neptune.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 580" role="img"
+                             aria-label="An edge-on diagram of the Voyager trajectories. The horizontal axis is distance from the Sun on a base-ten scale from 1 to 200 astronomical units; the vertical axis is height above or below the plane of the planets. Voyager 1 flies flat past Jupiter and Saturn and then climbs steeply out of the plane, reaching about 174 astronomical units. Voyager 2 passes Jupiter, Saturn, Uranus and Neptune, dipping progressively below the plane, and reaches about 143 astronomical units. Both crossed the heliopause between 119 and 122 astronomical units. Voyager 1's Pale Blue Dot photograph is marked at 40.5 astronomical units.">
+
+                            <defs>
+                                <radialGradient id="msSun" cx="38%" cy="34%" r="70%">
+                                    <stop offset="0%"   stop-color="#fff0c8"/>
+                                    <stop offset="46%"  stop-color="#ffb648"/>
+                                    <stop offset="100%" stop-color="#b8541a"/>
+                                </radialGradient>
+                            </defs>
+
+                            <!-- Title block, upper left, where an engineering
+                                 drawing would put one. It also states the
+                                 figure's method, which this figure needs. -->
+                            <g>
+                                <text class="svg-label svg-label--flown" x="150" y="64">Voyager 1 &amp; 2</text>
+                                <text class="svg-unit" x="150" y="82">Launched Aug &amp; Sep 1977 &middot; both still transmitting</text>
+                                <text class="svg-unit" x="150" y="98">Edge-on view &middot; x is log distance from the Sun</text>
+                                <text class="svg-unit" x="150" y="114">y is height above or below the planets' plane</text>
+                            </g>
+
+                            <!-- Beyond the heliopause. The label sits above
+                                 Voyager 1's path rather than beside it: at
+                                 x=963 the path is at y=140, so anything in
+                                 the 150-190 band gets a green line drawn
+                                 through it. -->
+                            <rect class="vg__heliosheath" x="963" y="110" width="107" height="390"/>
+                            <path class="vg__heliopause" d="M 963 110 L 963 500"/>
+                            <text class="svg-label svg-label--planned" x="963" y="64" text-anchor="middle">Heliopause</text>
+                            <text class="svg-unit" x="963" y="80" text-anchor="middle">119&ndash;122 AU</text>
+                            <text class="svg-unit" x="963" y="96" text-anchor="middle">V1 2012 &middot; V2 2018</text>
+
+                            <!-- The plane of the planets. -->
+                            <path class="vg__plane" d="M 140 300 L 1070 300"/>
+
+                            <!-- Planet ticks running down to the axis, so the
+                                 plane and the distance scale read as one
+                                 coordinate system. -->
+                            <g class="vg__planet-tick svg-dash">
+                                <path d="M 430 300 L 430 514"/>
+                                <path d="M 534 300 L 534 514"/>
+                                <path d="M 652 300 L 652 514"/>
+                                <path d="M 728 300 L 728 514"/>
+                            </g>
+
+                            <!-- ---- Voyager 2: four encounters ---------- -->
+                            <path class="vg__path vg__path--two vg__path--bloom"
+                                  d="M 150 300 L 424 301 Q 434 301 444 303 L 528 310 Q 540 311 552 314
+                                     L 646 330 Q 658 332 670 336 L 722 348 Q 734 351 746 356
+                                     C 830 386 918 420 993 452"/>
+                            <path class="vg__path vg__path--two"
+                                  d="M 150 300 L 424 301 Q 434 301 444 303 L 528 310 Q 540 311 552 314
+                                     L 646 330 Q 658 332 670 336 L 722 348 Q 734 351 746 356
+                                     C 830 386 918 420 993 452"/>
+
+                            <!-- ---- Voyager 1: flat, then out of plane -- -->
+                            <path class="vg__path vg__path--bloom"
+                                  d="M 150 300 L 424 299 Q 432 299 440 298 L 528 295 Q 540 294 552 286
+                                     C 660 250 870 172 1026 118"/>
+                            <path class="vg__path"
+                                  d="M 150 300 L 424 299 Q 432 299 440 298 L 528 295 Q 540 294 552 286
+                                     C 660 250 870 172 1026 118"/>
+
+                            <!-- Gravity assists. Marked at every encounter,
+                                 because the kink is the reason the Grand Tour
+                                 was affordable at all. -->
+                            <g class="vg__assist">
+                                <circle cx="430" cy="298" r="7"/>
+                                <circle cx="534" cy="294" r="7"/>
+                                <circle cx="430" cy="302" r="7"/>
+                                <circle cx="534" cy="311" r="7"/>
+                                <circle cx="652" cy="331" r="7"/>
+                                <circle cx="728" cy="350" r="7"/>
+                            </g>
+
+                            <!-- The Sun, still amber. Rule 5. -->
+                            <circle class="vg__sun" cx="150" cy="300" r="13"/>
+                            <text class="svg-unit" x="150" y="332" text-anchor="middle">Sun</text>
+
+                            <!-- Planets on the plane. -->
+                            <g class="vg__planet">
+                                <circle cx="430" cy="300" r="5"/>
+                                <circle cx="534" cy="300" r="5"/>
+                                <circle cx="652" cy="300" r="4"/>
+                                <circle cx="728" cy="300" r="4"/>
+                            </g>
+
+                            <!-- Path labels. Both sit in the wedge each curve
+                                 opens up as it leaves the plane, and both are
+                                 kept short enough that their right-hand end
+                                 does not run back into the line. -->
+                            <text class="svg-label svg-label--flown" x="600" y="150">Voyager 1</text>
+                            <text class="svg-unit" x="600" y="166">35&deg; up, after Saturn</text>
+
+                            <text class="svg-label svg-label--flown" x="600" y="400">Voyager 2</text>
+                            <text class="svg-unit" x="600" y="416">48&deg; down, after Neptune</text>
+
+                            <!-- Pale Blue Dot, at the distance it was taken.
+                                 Label hung below the path, where there is
+                                 40-plus units of clear space. -->
+                            <circle class="vg__pbd" cx="779" cy="206" r="6"/>
+                            <path class="svg-leader svg-leader--flown" d="M 780 212 L 792 244"/>
+                            <text class="svg-label svg-label--foil" x="798" y="248">Pale Blue Dot</text>
+                            <text class="svg-unit" x="798" y="264">14 Feb 1990 &middot; 40.5 AU</text>
+
+                            <!-- Current positions. -->
+                            <circle class="vg__craft" cx="1026" cy="118" r="4.5"/>
+                            <text class="svg-value" x="1044" y="122">~174 AU</text>
+                            <circle class="vg__craft" cx="993" cy="452" r="4.5"/>
+                            <text class="svg-value" x="1010" y="470">~143 AU</text>
+
+                            <!-- ---- The axis. Base-10, and it is the
+                                 figure's honesty rather than a footnote. -->
+                            <path class="svg-axis" d="M 140 514 L 1070 514"/>
+                            <g class="svg-tick">
+                                <path d="M 150 508 L 150 520"/>
+                                <path d="M 268 508 L 268 520"/>
+                                <path d="M 423 508 L 423 520"/>
+                                <path d="M 541 508 L 541 520"/>
+                                <path d="M 659 508 L 659 520"/>
+                                <path d="M 815 508 L 815 520"/>
+                                <path d="M 932 508 L 932 520"/>
+                                <path d="M 1050 508 L 1050 520"/>
+                            </g>
+                            <g>
+                                <text class="svg-unit" x="150" y="536" text-anchor="middle">1</text>
+                                <text class="svg-unit" x="268" y="536" text-anchor="middle">2</text>
+                                <text class="svg-unit" x="423" y="536" text-anchor="middle">5</text>
+                                <text class="svg-unit" x="541" y="536" text-anchor="middle">10</text>
+                                <text class="svg-unit" x="659" y="536" text-anchor="middle">20</text>
+                                <text class="svg-unit" x="815" y="536" text-anchor="middle">50</text>
+                                <text class="svg-unit" x="932" y="536" text-anchor="middle">100</text>
+                                <text class="svg-unit" x="1050" y="536" text-anchor="middle">200</text>
+                                <text class="svg-unit" x="1070" y="562" text-anchor="end">Distance from the Sun &middot; AU &middot; base-10</text>
+                            </g>
+                            <g>
+                                <text class="svg-label svg-label--metal" x="430" y="562" text-anchor="middle">Jupiter</text>
+                                <text class="svg-label svg-label--metal" x="534" y="562" text-anchor="middle">Saturn</text>
+                                <text class="svg-label svg-label--metal" x="652" y="562" text-anchor="middle">Uranus</text>
+                                <text class="svg-label svg-label--metal" x="728" y="562" text-anchor="middle">Neptune</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 03</span>
+                        <span class="caption__body"><strong>The horizontal axis is a real base-10 distance scale</strong>, so every horizontal position in this figure is a measured distance and nothing has been squeezed to fit. That is why the view is edge-on rather than from above: a top-down plot running from 1 to 174&nbsp;AU is more than 99 per cent empty paper, and compressing it radially would have meant a caption apologising for the geometry instead of a figure you can read off. Vertical positions are schematic &mdash; the two escape inclinations, 35 degrees up and 48 degrees down, are correct in sign and rough magnitude but the vertical scale is not the horizontal one. The circled kinks are gravity assists.</span>
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div class="prose">
+                        <p>Both spacecraft are powered by the decay of plutonium-238, and both are running out. The generators lose roughly four watts a year, so instruments have been switched off one at a time for decades to keep the rest alive. Voyager 1's round-trip signal time is now about two days: a command sent on Monday gets its acknowledgement on Wednesday, at a received power of around a billion-billionth of a watt.</p>
+                        <p>They will keep going after the transmitters stop. Neither is aimed at anything &mdash; interstellar space is empty enough that aiming is meaningless &mdash; and both carry a gold-plated phonograph record of sounds and images from Earth, on the reasonable assumption that nothing will ever play it.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">Why Voyager has not left the Solar System</span>
+                            <ul class="note__list">
+                                <li><strong>It left the heliosphere,</strong> which is the bubble of particles and magnetic field the Sun blows into the interstellar medium. That boundary is the heliopause, and crossing it in 2012 is what "entered interstellar space" means.</li>
+                                <li><strong>The Sun's gravity reaches much further.</strong> The Oort Cloud &mdash; still bound, still orbiting &mdash; is thought to extend to something like 100,000&nbsp;AU. Voyager 1 at 174&nbsp;AU is roughly two thousandths of the way to its outer edge.</li>
+                                <li><strong>On that definition it has about 30,000 years to go.</strong> Both statements are true at once, which is why the headlines and the mission scientists appeared to disagree in 2013.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             04 · JAMES WEBB SPACE TELESCOPE
+             ============================================================ -->
+        <section class="shell shell--atmos shell--seam" id="webb">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">04</span> James Webb</p>
+                    <h2 class="head__title">A telescope that had to <em>unfold itself correctly</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Webb's mirror is too large to fit inside any rocket fairing ever built, so it launched folded and opened itself over two weeks, a million and a half kilometres from the nearest engineer. The deployment had 344 single-point failures &mdash; steps with no backup, where one jam ends a twenty-five-year programme. All of them worked.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 480" role="img"
+                             aria-label="The primary mirrors of the James Webb Space Telescope and Hubble drawn at the same scale. Webb is 18 gold-coated hexagonal segments arranged as a hexagonal close-pack of 19 positions with the centre position empty, measuring 6.6 metres across the flats. Hubble is a single circular mirror 2.4 metres across with a central obscuration from its secondary mirror. Webb's collecting area is about 25 square metres against Hubble's 4.5, roughly five and a half times the light.">
+
+                            <defs>
+                                <linearGradient id="msGold" x1="0%" y1="0%" x2="60%" y2="100%">
+                                    <stop offset="0%"   stop-color="#ffe9bd"/>
+                                    <stop offset="42%"  stop-color="#ffd9a0"/>
+                                    <stop offset="78%"  stop-color="#d8a049"/>
+                                    <stop offset="100%" stop-color="#8a6222"/>
+                                </linearGradient>
+
+                                <linearGradient id="msSilver" x1="0%" y1="0%" x2="60%" y2="100%">
+                                    <stop offset="0%"   stop-color="#e4eaf5"/>
+                                    <stop offset="46%"  stop-color="#b8c2d4"/>
+                                    <stop offset="82%"  stop-color="#7c8798"/>
+                                    <stop offset="100%" stop-color="#414b5e"/>
+                                </linearGradient>
+
+                                <!-- One segment, defined once and placed 18
+                                     times. Pointy-top hexagon, 1.32 m across
+                                     the flats at 52.8 px per metre. -->
+                                <polygon id="msSeg" class="mir__seg"
+                                         points="0,-40.25 34.85,-20.13 34.85,20.13 0,40.25 -34.85,20.13 -34.85,-20.13"/>
+                            </defs>
+
+                            <!-- ---- WEBB · 18 segments, centre empty -----
+                                 Nineteen hexagonal close-pack positions with
+                                 position (0,0) deliberately absent, which is
+                                 why the real mirror has a gap at its centre.
+                                 Eighteen <use> elements, not nineteen. -->
+                            <g>
+                                <use href="#msSeg" x="369.7" y="200"/>
+                                <use href="#msSeg" x="334.85" y="139.6"/>
+                                <use href="#msSeg" x="265.15" y="139.6"/>
+                                <use href="#msSeg" x="230.3" y="200"/>
+                                <use href="#msSeg" x="265.15" y="260.4"/>
+                                <use href="#msSeg" x="334.85" y="260.4"/>
+                                <use href="#msSeg" x="439.4" y="200"/>
+                                <use href="#msSeg" x="404.55" y="139.6"/>
+                                <use href="#msSeg" x="369.7" y="79.2"/>
+                                <use href="#msSeg" x="300" y="79.2"/>
+                                <use href="#msSeg" x="230.3" y="79.2"/>
+                                <use href="#msSeg" x="195.45" y="139.6"/>
+                                <use href="#msSeg" x="160.6" y="200"/>
+                                <use href="#msSeg" x="195.45" y="260.4"/>
+                                <use href="#msSeg" x="230.3" y="320.8"/>
+                                <use href="#msSeg" x="300" y="320.8"/>
+                                <use href="#msSeg" x="369.7" y="320.8"/>
+                                <use href="#msSeg" x="404.55" y="260.4"/>
+                            </g>
+
+                            <!-- Dimension across the flats. -->
+                            <path class="dim" d="M 125.75 398 L 474.25 398"/>
+                            <path class="dim__cap" d="M 125.75 392 L 125.75 404 M 474.25 392 L 474.25 404"/>
+                            <text class="dim__text" x="300" y="388" text-anchor="middle">6.6 m across the flats</text>
+
+                            <text class="svg-label svg-label--foil" x="300" y="428" text-anchor="middle">James Webb &middot; 2021</text>
+                            <text class="svg-unit" x="300" y="446" text-anchor="middle">18 beryllium segments, gold-coated &middot; 1.32 m each</text>
+                            <text class="svg-unit svg-mixed" x="300" y="462" text-anchor="middle">6.5 m effective aperture &middot; infrared, 0.6&ndash;28.5 &micro;m</text>
+
+                            <!-- ---- HUBBLE · one mirror, same scale ----- -->
+                            <g>
+                                <circle class="mir__hubble" cx="760" cy="200" r="63.4"/>
+                                <path class="mir__strut" d="M 760 136.6 L 760 263.4 M 696.6 200 L 823.4 200"/>
+                                <circle class="mir__obscure" cx="760" cy="200" r="8"/>
+                            </g>
+
+                            <path class="dim dim--flown" d="M 696.6 398 L 823.4 398"/>
+                            <path class="dim__cap dim__cap--flown" d="M 696.6 392 L 696.6 404 M 823.4 392 L 823.4 404"/>
+                            <text class="dim__text dim__text--flown" x="760" y="388" text-anchor="middle">2.4 m</text>
+
+                            <text class="svg-label svg-label--metal" x="760" y="428" text-anchor="middle">Hubble &middot; 1990</text>
+                            <text class="svg-unit" x="760" y="446" text-anchor="middle">One monolithic mirror &middot; still operating</text>
+                            <text class="svg-unit svg-mixed" x="760" y="462" text-anchor="middle">Ultraviolet to near-infrared, 0.1&ndash;1.7 &micro;m</text>
+
+                            <!-- ---- Comparison block, and the metre bar
+                                 that makes the whole figure checkable. -->
+                            <g>
+                                <text class="svg-label" x="940" y="120">Collecting area</text>
+                                <text class="svg-value" x="940" y="146">Webb ~25 m&sup2;</text>
+                                <text class="svg-value" x="940" y="168">Hubble ~4.5 m&sup2;</text>
+                                <text class="svg-label svg-label--flown" x="940" y="196">~5.6&times; the light</text>
+                                <text class="svg-unit" x="940" y="216">2.7&times; the diameter</text>
+                            </g>
+
+                            <path class="mir__scalebar" d="M 940 290 L 1045.6 290 M 940 284 L 940 296 M 1045.6 284 L 1045.6 296"/>
+                            <text class="svg-unit" x="992" y="278" text-anchor="middle">2 metres</text>
+                            <text class="svg-unit" x="992" y="312" text-anchor="middle">Both drawn to this scale</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 04</span>
+                        <span class="caption__body"><strong>True relative scale &mdash; measure it against the bar.</strong> The segment arrangement is the real one: nineteen hexagonal close-pack positions with the centre left empty, which is why Webb's mirror has a hole in the middle of it. Hubble's central obscuration is drawn because the collecting areas quoted here account for it. The two instruments are not competitors and Webb did not replace anything &mdash; they see different wavelengths, Hubble reaches into the ultraviolet where Webb cannot go at all, and as of 2026 both are working.</span>
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">04a</span> The cold side</p>
+                        <h3 class="sub-title" style="margin-top:1rem">A sunshield the size of a tennis court</h3>
+                        <p class="copy" style="margin-top:1rem">An infrared telescope has to be colder than the things it is looking at, or it photographs itself. Webb's five-layer kite-shaped shield keeps the telescope side at around 40 kelvin while the Sun side sits above 350 &mdash; a temperature difference of more than 300 degrees across a few metres of vacuum and aluminised film. That is also why it sits at the second Lagrange point: from there the Sun, Earth and Moon all stay in the same direction, so one shield covers all three.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>Launched</dt><dd>25 Dec 2021 &middot; Ariane 5</dd></div>
+                            <div class="spec__row"><dt>Orbit</dt><dd>Sun&ndash;Earth L2 &middot; 1.5M km</dd></div>
+                            <div class="spec__row"><dt>Cold side</dt><dd>~40 K</dd></div>
+                            <div class="spec__row"><dt>Shield</dt><dd>5 layers &middot; ~21 &times; 14 m</dd></div>
+                            <div class="spec__row"><dt>Single-point failures</dt><dd>344, all survived</dd></div>
+                        </dl>
+                    </div>
+
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">04b</span> Why infrared</p>
+                        <h3 class="sub-title" style="margin-top:1rem">The first galaxies are red now</h3>
+                        <p class="copy" style="margin-top:1rem">Light from the earliest galaxies left them as ultraviolet and visible, and the expansion of the universe has stretched it by a factor of ten or more on the way here. It arrives as infrared, which the atmosphere absorbs and Hubble was never built to see. That single fact is the mission's justification: not a better telescope, a telescope pointed at a part of the spectrum where the objects we most wanted were hiding. The same wavelengths also see straight through the dust that hides star formation, which is why the Nebulae region looks the way it does now.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>Sees</dt><dd>0.6 &ndash; 28.5 &micro;m</dd></div>
+                            <div class="spec__row"><dt>Mirror</dt><dd>Beryllium &middot; ~48 g of gold</dd></div>
+                            <div class="spec__row"><dt>First images</dt><dd>12 July 2022</dd></div>
+                            <div class="spec__row"><dt>Development</dt><dd>~25 years &middot; ~$10 bn</dd></div>
+                            <div class="spec__row"><dt>Servicing</dt><dd>None possible</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             05 · MARS
+             ============================================================ -->
+        <section class="shell shell--void shell--seam" id="mars">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">05</span> Mars</p>
+                    <h2 class="head__title">The atmosphere is thin enough to be a problem <em>and thick enough to be one</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Mars has about one per cent of Earth's surface pressure. That is more than enough to destroy a spacecraft arriving at 20,000 kilometres an hour, and nowhere near enough to stop one with parachutes. Every successful landing has used a hybrid of heat shield, chute and either retro-rockets or airbags, executed autonomously, because the signal takes minutes each way.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 460" role="img"
+                             aria-label="Four Mars rovers drawn to the same scale on a shared ground line, with a 1.8 metre human silhouette for reference. Sojourner of 1997 is 0.65 metres long and knee-high. Spirit and Opportunity of 2004 are 1.6 metres long with a flat solar array and a camera mast. Curiosity of 2012 and Perseverance of 2021 are both 3 metres long and 2.2 metres tall, nuclear powered rather than solar, and roughly car-sized. The Ingenuity helicopter is shown beside Perseverance at its true size.">
+
+                            <defs>
+                                <linearGradient id="msRegolith" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%"   stop-color="#c86a3c" stop-opacity="0.26"/>
+                                    <stop offset="100%" stop-color="#5e2a15" stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+
+                            <rect class="rv__dust" x="0" y="320" width="1180" height="34"/>
+                            <path class="rv__ground" d="M 40 320 L 1140 320"/>
+
+                            <!-- Each vehicle is drawn once at its own true
+                                 size and then translated into place, so the
+                                 spacing between them can be tuned for label
+                                 room without touching a single dimension. The
+                                 labels sit inside the translated group, so
+                                 they stay centred on their subject. -->
+
+                            <!-- ---- HUMAN · 1.8 m, the reference --------- -->
+                            <g transform="translate(-15,0)">
+                                <circle class="rv__human" cx="105" cy="216" r="9"/>
+                                <path class="rv__human"
+                                      d="M 96 227 L 114 227 L 118 262 L 112 262 L 111 320 L 103 320
+                                         L 100 262 L 92 262 Z"/>
+                                <path class="dim dim--flown" d="M 68 208 L 68 320"/>
+                                <path class="dim__cap dim__cap--flown" d="M 62 208 L 74 208 M 62 320 L 74 320"/>
+                                <text class="dim__text dim__text--flown" x="58" y="268" text-anchor="end">1.8 m</text>
+                                <text class="svg-unit" x="105" y="372" text-anchor="middle">For reference</text>
+                            </g>
+
+                            <!-- ---- SOJOURNER · 1997 · 0.65 m ----------- -->
+                            <g transform="translate(5,0)">
+                                <rect class="rv__panel" x="200" y="295" width="40" height="5"/>
+                                <rect class="rv__body" x="203" y="300" width="34" height="13"/>
+                                <g class="rv__wheel">
+                                    <circle cx="208" cy="315" r="5"/>
+                                    <circle cx="220" cy="315" r="5"/>
+                                    <circle cx="232" cy="315" r="5"/>
+                                </g>
+                                <text class="svg-label svg-label--metal" x="220" y="372" text-anchor="middle">Sojourner</text>
+                                <text class="svg-unit" x="220" y="390" text-anchor="middle">1997 &middot; 0.65 m</text>
+                                <text class="svg-unit" x="220" y="406" text-anchor="middle">11.5 kg &middot; 83 sols</text>
+                            </g>
+
+                            <!-- ---- SPIRIT / OPPORTUNITY · 2004 · 1.6 m - -->
+                            <g transform="translate(35,0)">
+                                <rect class="rv__panel" x="300" y="272" width="99" height="7"/>
+                                <rect class="rv__body" x="318" y="279" width="62" height="21"/>
+                                <path class="rv__mast" d="M 350 279 L 350 242"/>
+                                <rect class="rv__head" x="342" y="230" width="16" height="12"/>
+                                <path class="rv__arm" d="M 322 292 L 308 306"/>
+                                <g class="rv__wheel">
+                                    <circle cx="312" cy="312" r="8"/>
+                                    <circle cx="348" cy="312" r="8"/>
+                                    <circle cx="384" cy="312" r="8"/>
+                                </g>
+                                <g class="rv__hub">
+                                    <circle cx="312" cy="312" r="2"/>
+                                    <circle cx="348" cy="312" r="2"/>
+                                    <circle cx="384" cy="312" r="2"/>
+                                </g>
+                                <text class="svg-label svg-label--metal" x="350" y="372" text-anchor="middle">Spirit &amp; Opportunity</text>
+                                <text class="svg-unit" x="350" y="390" text-anchor="middle">2004 &middot; 1.6 m &middot; 185 kg</text>
+                                <text class="svg-unit" x="350" y="406" text-anchor="middle">5,111 sols achieved</text>
+                            </g>
+
+                            <!-- ---- CURIOSITY · 2012 · 3.0 m ------------ -->
+                            <g transform="translate(57,0)">
+                                <rect class="rv__rtg" x="470" y="252" width="26" height="21"/>
+                                <path class="rv__mast" d="M 470 262 L 458 262 M 470 268 L 458 268"/>
+                                <rect class="rv__body" x="496" y="250" width="130" height="44"/>
+                                <path class="rv__mast" d="M 560 250 L 560 198"/>
+                                <rect class="rv__head" x="549" y="184" width="23" height="14"/>
+                                <path class="rv__arm" d="M 630 264 C 652 272, 662 286, 664 300"/>
+                                <g class="rv__wheel">
+                                    <circle cx="486" cy="307" r="13"/>
+                                    <circle cx="546" cy="307" r="13"/>
+                                    <circle cx="626" cy="307" r="13"/>
+                                </g>
+                                <g class="rv__hub">
+                                    <circle cx="486" cy="307" r="3"/>
+                                    <circle cx="546" cy="307" r="3"/>
+                                    <circle cx="626" cy="307" r="3"/>
+                                </g>
+                                <path class="dim dim--flown" d="M 470 340 L 656 340"/>
+                                <path class="dim__cap dim__cap--flown" d="M 470 334 L 470 346 M 656 334 L 656 346"/>
+                                <text class="dim__text dim__text--flown" x="563" y="333" text-anchor="middle">3.0 m</text>
+                                <text class="svg-label svg-label--metal" x="563" y="372" text-anchor="middle">Curiosity</text>
+                                <text class="svg-unit" x="563" y="390" text-anchor="middle">2012 &middot; 3.0 m &middot; 899 kg</text>
+                                <text class="svg-unit" x="563" y="406" text-anchor="middle">Gale crater &middot; nuclear</text>
+                            </g>
+
+                            <!-- ---- PERSEVERANCE · 2021 · 3.0 m --------- -->
+                            <g transform="translate(72,0)">
+                                <rect class="rv__rtg" x="740" y="252" width="26" height="21"/>
+                                <path class="rv__mast" d="M 740 262 L 728 262 M 740 268 L 728 268"/>
+                                <rect class="rv__body" x="766" y="250" width="130" height="44"/>
+                                <path class="rv__mast" d="M 830 250 L 830 194"/>
+                                <rect class="rv__head" x="818" y="180" width="24" height="14"/>
+                                <path class="rv__arm" d="M 900 264 C 922 272, 932 286, 934 300"/>
+                                <g class="rv__wheel">
+                                    <circle cx="756" cy="307" r="13"/>
+                                    <circle cx="816" cy="307" r="13"/>
+                                    <circle cx="896" cy="307" r="13"/>
+                                </g>
+                                <g class="rv__hub">
+                                    <circle cx="756" cy="307" r="3"/>
+                                    <circle cx="816" cy="307" r="3"/>
+                                    <circle cx="896" cy="307" r="3"/>
+                                </g>
+                                <text class="svg-label svg-label--metal" x="833" y="372" text-anchor="middle">Perseverance</text>
+                                <text class="svg-unit" x="833" y="390" text-anchor="middle">2021 &middot; 3.0 m &middot; 1,025 kg</text>
+                                <text class="svg-unit" x="833" y="406" text-anchor="middle">Jezero crater &middot; nuclear</text>
+                            </g>
+
+                            <!-- ---- INGENUITY · at its real size -------- -->
+                            <g transform="translate(85,0)">
+                                <!-- Rotor span 1.2 m at 62 px/m = 74.4 px, so
+                                     the helicopter is at the same true scale
+                                     as the four rovers beside it. -->
+                                <path class="rv__mast" d="M 953 300 L 1027 300 M 990 300 L 990 312"/>
+                                <rect class="rv__body" x="984" y="306" width="12" height="9"/>
+                                <path class="rv__mast" d="M 986 315 L 984 320 M 994 315 L 996 320"/>
+                                <text class="svg-label svg-label--planned" x="990" y="372" text-anchor="middle">Ingenuity</text>
+                                <text class="svg-unit" x="990" y="390" text-anchor="middle">1.2 m rotor &middot; 1.8 kg</text>
+                                <text class="svg-unit" x="990" y="406" text-anchor="middle">72 flights &middot; retired</text>
+                            </g>
+
+                            <!-- The metre bar. Moved above the ground line,
+                                 because at y=340 it sat underneath Ingenuity. -->
+                            <path class="mir__scalebar" d="M 1040 250 L 1102 250 M 1040 244 L 1040 256 M 1102 244 L 1102 256"/>
+                            <text class="svg-unit" x="1071" y="240" text-anchor="middle">1 m</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 05</span>
+                        <span class="caption__body"><strong>True relative scale, one ground line, one metre bar.</strong> Twenty-four years separate the first and last of these and the size progression is the whole point &mdash; Sojourner would fit on Curiosity's back deck with room left over. The other visible change is the power source: the two 2004 rovers carry flat solar arrays, drawn in cyan, and the two later ones carry a radioisotope generator, drawn in gold. That is why Opportunity died in a dust storm in 2018 and Curiosity, which does not care whether the Sun is visible, is still driving. Outlines are schematic line art rather than accurate models; the dimensions they are drawn to are not.</span>
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div class="prose">
+                        <p>Landing is where Mars missions fail. Roughly half of everything ever sent has been lost, and the losses cluster in the seven minutes between the top of the atmosphere and the ground &mdash; a stretch that has to run entirely on software, because at Mars distance a radio round trip takes between eight and forty minutes and the whole descent is over before anyone on Earth knows it started.</p>
+                        <p>What arrives is worth it. Orbiters have mapped the surface to better resolution than much of Earth's seafloor, found the seasonal frosts, tracked the dust storms and traced the ancient shorelines. The rovers have confirmed what the orbiters implied: liquid water stood on this surface for long enough to lay down clay and sulphate beds, in conditions a terrestrial microbe would have found unremarkable.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">The orbiters do the unglamorous half</span>
+                            <ul class="note__list">
+                                <li><strong>They are the relay.</strong> A rover's own antenna is small and its power budget is tight. Most surface data reaches Earth by being handed to an orbiter overhead, which then transmits it with a bigger dish and more watts.</li>
+                                <li><strong>They pick the landing sites.</strong> Every rover destination on this page was chosen from orbital imagery, years in advance, by arguing about rocks at metre resolution.</li>
+                                <li><strong>Some have been there a very long time.</strong> Mars Odyssey arrived in 2001 and is still working, which makes it the longest continuously operating spacecraft at another planet.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             06 · WHAT'S NEXT + MISCONCEPTIONS
+             ============================================================ -->
+        <section class="shell shell--abyss" id="future">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">06</span> What's next</p>
+                    <h2 class="head__title">Six things that are <em>funded, built or flying</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Every item below is hardware that exists or is under construction, with a date attached. Nothing on this list is a concept study, and the two that have already launched are simply in transit &mdash; which is the ordinary condition of a deep-space mission for most of its life.</p>
+                </header>
+
+                <div class="roadmap">
+                    <div>
+                        <p class="copy">The pattern worth noticing is the lead time. Europa Clipper left Earth in October 2024 and does not arrive until 2030; Dragonfly launches in 2028 and reaches Titan in 2034. A mission's cruise is usually longer than its science phase, and the people who will operate it are frequently not the people who designed it.</p>
+                        <p class="copy" style="margin-top:1.25rem">Everything here is drawn from this region's cyan half &mdash; planned rather than flown. Dates on deep-space missions move, and the honest thing to say about any of them is that the arrival year is a good estimate and the launch year is a better one.</p>
+                    </div>
+
+                    <ol class="roadmap__list">
+                        <li>
+                            <b>2027 &middot; Artemis III</b>
+                            Rehearsal in Earth orbit
+                            <small>Crew practise the rendezvous and docking with a commercial landing system that Artemis IV depends on. Reassigned from a landing after the programme's architecture was revised.</small>
+                        </li>
+                        <li>
+                            <b>2028 &middot; Artemis IV</b>
+                            First crewed South Pole landing
+                            <small>The first people on the lunar surface since 1972, and the first anywhere near a pole &mdash; which is where the permanently shadowed water ice is.</small>
+                        </li>
+                        <li>
+                            <b>2028 &middot; Dragonfly launch</b>
+                            A rotorcraft for Titan
+                            <small>Nuclear-powered, eight rotors, flying between sample sites in an atmosphere four times denser than Earth's at one seventh the gravity. Arrives 2034.</small>
+                        </li>
+                        <li>
+                            <b>2030 &middot; Europa Clipper arrives</b>
+                            Forty-nine flybys of an ocean moon
+                            <small>Launched October 2024. It will not orbit Europa &mdash; the radiation would kill it &mdash; so it orbits Jupiter instead and passes close roughly fifty times.</small>
+                        </li>
+                        <li>
+                            <b>2031 &middot; JUICE arrives</b>
+                            Into orbit around Ganymede
+                            <small>ESA's mission, launched April 2023. It will be the first spacecraft to orbit a moon other than our own.</small>
+                        </li>
+                        <li>
+                            <b>Under review &middot; Mars Sample Return</b>
+                            Perseverance's tubes, still on Mars
+                            <small>The samples are cached and waiting. The architecture to collect them has been redesigned repeatedly on cost grounds and currently has no confirmed date.</small>
+                        </li>
+                    </ol>
+                </div>
+
+                <header class="head" style="margin-top:5rem">
+                    <p class="eyebrow eyebrow--bare">Misconceptions</p>
+                    <h2 class="head__title">Six things that sound right <em>and are not</em></h2>
+                    <div class="head__rule"></div>
+                </header>
+
+                <div class="myths">
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Rockets work by pushing against the air.</strong></p>
+                        <p class="myth__truth">They push against <strong>their own exhaust</strong>. A rocket throws mass backwards and is thrown forwards by the same reaction, which needs nothing outside the vehicle at all &mdash; and works measurably <em>better</em> in vacuum, because there is no atmospheric pressure at the nozzle exit fighting the expanding gas. This was argued about in print as late as 1920, when a newspaper editorial informed Robert Goddard that a rocket could not possibly work in space.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Space starts at 100 kilometres, and below that you are not in it.</strong></p>
+                        <p class="myth__truth">The Kármán line is <strong>a convention</strong>, chosen because it is round and roughly where aerodynamic flight stops being possible. The atmosphere does not end there; it thins out over thousands of kilometres. The Space Station orbits at about 400 km and still loses altitude to drag continuously, which is why it needs reboosting several times a year.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Voyager 1 has left the Solar System.</strong></p>
+                        <p class="myth__truth">It left the <strong>heliosphere</strong> in 2012 &mdash; the bubble of solar wind and magnetic field the Sun inflates around itself. The Sun's gravitational domain extends vastly further: the Oort Cloud is thought to reach something like 100,000&nbsp;AU, and Voyager 1 is at 174. Both statements are correct, which is why the 2013 headlines and the mission scientists appeared to be describing different events.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Webb replaced Hubble.</strong></p>
+                        <p class="myth__truth">They observe <strong>different light</strong> and both are working. Hubble covers ultraviolet through near-infrared; Webb starts in the near-infrared and runs out to 28&nbsp;&micro;m. Hubble can see wavelengths Webb physically cannot, and Webb was built cold specifically so it could see wavelengths Hubble's warm optics drown in their own glow. The overlap between them is narrow and mostly deliberate, for cross-calibration.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Landing on Mars is much like landing on the Moon.</strong></p>
+                        <p class="myth__truth">It is the <strong>worst of both</strong>. The Moon has no atmosphere, so you arrive slowly and brake with rockets the whole way. Earth has plenty, so a heat shield and parachutes do nearly all the work. Mars has one per cent of Earth's &mdash; enough to require a heat shield and to make the approach aerodynamically unstable, nowhere near enough to slow you to a survivable speed. Everything that has landed there needed a heat shield <em>and</em> a chute <em>and</em> a powered or airbag-cushioned final stage.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>We have lost the ability to go to the Moon.</strong></p>
+                        <p class="myth__truth">The <strong>knowledge survived; the production line did not</strong>. Saturn V tooling was scrapped, the supplier base dispersed, and the specific engineers retired &mdash; so the hardware genuinely has to be built again rather than restarted, which is most of why Artemis has taken as long as it has. The physics was never the obstacle. Artemis II flew that trajectory in April 2026.</p>
+                    </div>
+                </div>
+
+                <div class="note" style="margin-top:3.5rem">
+                    <span class="note__title">Two that are true and sound false</span>
+                    <ul class="note__list">
+                        <li><strong>The Apollo Guidance Computer had about four kilobytes of writable memory.</strong> It flew nine crews to the Moon on roughly two kilowords of erasable storage and a clock speed near two megahertz, with a rope-core program woven by hand. The constraint that mattered was never processing power; it was that the software had to be correct.</li>
+                        <li><strong>Nothing on this page travelled in a straight line.</strong> Every trajectory here is an orbit &mdash; a fall around the Sun that happens to intersect a destination. Spacecraft do not steer towards planets; they are placed on a path that arrives, and then corrected by a few metres per second at a time.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             ONWARD
+             ============================================================ -->
+        <section class="shell shell--rise shell--seam">
+            <div class="container">
+                <div class="head head--center" style="margin-bottom:0">
+                    <p class="eyebrow eyebrow--bare">End of region 08</p>
+                    <h2 class="head__title">One region left, and it is <em>all of the others at once</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Everything measured by the instruments on this page adds up to a single object with an age, a size, a composition and a history. The Universe region is where the numbers from all eight preceding regions are assembled into one account &mdash; the Big Bang, the dark sector, and the geometry of the whole thing.</p>
+                    <p style="margin-top:2.5rem">
+                        <a href="../universe/index.html" class="btn btn--ghost">
+                            Continue to the Universe
+                            <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                    </p>
+                    <p style="margin-top:1.5rem">
+                        <a href="../cosmic-events/index.html" class="back-link"><span aria-hidden="true">&larr;</span> Back to the Cosmic Events these instruments caught</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p class="footer-text">&copy; 2026 CosmoVerse &mdash; Explore beyond the horizon.</p>
+            <p class="footer-note">Region 08 &middot; Instruments &middot; 6 sections &middot; Figures 01&ndash;05</p>
+        </div>
+    </footer>
+</body>
+</html>

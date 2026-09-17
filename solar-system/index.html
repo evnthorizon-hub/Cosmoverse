@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore our Solar System — the Sun, eight planets, dwarf planets, moons, asteroids, comets, and the frozen archive beyond Neptune.">
+    <meta name="keywords" content="solar system, sun, planets, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, dwarf planets, moons, asteroids, comets, kuiper belt, oort cloud, astronomy">
+    <meta name="author" content="CosmoVerse">
+    <meta name="theme-color" content="#000003">
+    <title>Solar System | CosmoVerse</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/solar-system.css">
+</head>
+<!-- dm-solar sets this page's entire palette. Every component
+     below re-tunes itself from it. -->
+<body class="dm-solar">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <!-- Header / Navigation -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                CosmoVerse
+                <span class="logo-mark">Obs.</span>
+            </a>
+
+            <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+            <label for="mobile-menu-checkbox" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </label>
+
+            <nav class="nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html" class="nav-link active" aria-current="page">Solar System</a></li>
+                    <li><a href="../stars/index.html" class="nav-link">Stars</a></li>
+                    <li><a href="../black-holes/index.html" class="nav-link">Black Holes</a></li>
+                    <li><a href="../galaxies/index.html" class="nav-link">Galaxies</a></li>
+                    <li><a href="../nebulae/index.html" class="nav-link">Nebulae</a></li>
+                    <li><a href="../cosmic-events/index.html" class="nav-link">Cosmic Events</a></li>
+                    <li><a href="../missions/index.html" class="nav-link">Missions</a></li>
+                    <li><a href="../exoplanets/index.html" class="nav-link">Exoplanets</a></li>
+                    <li><a href="../universe/index.html" class="nav-link">Universe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ============================================================
+             ARRIVAL
+             The category hero: left-aligned, bottom-anchored, with the
+             system's vital statistics docked at the horizon line.
+             ============================================================ -->
+        <section class="page-hero">
+            <div class="field field--orbital" aria-hidden="true"></div>
+            <div class="starfield" style="--stars-opacity:0.8" aria-hidden="true"></div>
+            <div class="starfield-streak" aria-hidden="true"></div>
+
+            <div class="container">
+                <p class="eyebrow"><span class="eyebrow__id">01</span> Region &middot; Heliosphere</p>
+                <h1 class="page-hero__title">Our Solar<em>System</em></h1>
+                <p class="page-hero__lede">One ordinary star, eight worlds, and a frozen archive of everything left over from the day they formed. This is the only place in the universe we have ever visited.</p>
+                <p class="page-hero__coords">
+                    <span>Orion Arm</span>
+                    <span>26,000 ly from galactic centre</span>
+                    <span>Orbital velocity 230 km/s</span>
+                </p>
+            </div>
+
+            <div class="page-hero__dock">
+                <div class="container">
+                    <dl class="readout readout--flush">
+                        <div class="readout__cell">
+                            <dt>Star</dt>
+                            <dd>1 <small>G2V</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Planets</dt>
+                            <dd>8</dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Dwarf planets</dt>
+                            <dd>5 <small>IAU</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Planetary moons</dt>
+                            <dd>455 <small>2026</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Age</dt>
+                            <dd>4.568 <small>Gyr</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Outer boundary</dt>
+                            <dd>~100k <small>AU</small></dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             ORIGIN
+             ============================================================ -->
+        <section class="shell shell--abyss shell--seam">
+            <div class="container">
+                <div class="prose prose--lede">
+                    <p>Everything here condensed out of a single collapsing cloud of gas and dust roughly 4.6&nbsp;billion years ago. Gravity pulled most of it into the centre, pressure and temperature climbed until hydrogen began fusing, and a star switched on.</p>
+                    <p>The leftovers — less than a seventh of one percent of the total mass — flattened into a spinning disc and began sticking together. Close to the new star only rock and metal could survive the heat, so the inner worlds came out small and dense. Further out, past the frost line, ice was abundant, and the planets that formed there grew large enough to hold onto hydrogen and helium directly.</p>
+                    <p>That single accident of temperature is why our Solar System has two completely different kinds of planet, and why the boundary between them falls almost exactly where the asteroid belt sits today.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             PLATE — the system in one frame
+             Placed between the origin story and the orrery, so the
+             photograph answers "what does it look like" before the
+             diagram answers "how does it move". Cropped to the clean
+             middle band of the source; see the plate imagery notes in
+             components.css for why nothing shows a whole frame.
+             ============================================================ -->
+        <section class="shell shell--void" style="padding-top:0">
+            <figure class="shot-figure">
+                <div class="shot">
+                    <img class="shot__img"
+                         src="../images/solar-system.png"
+                         alt="The Solar System seen almost edge-on: the Sun at the left throwing light across the plane, with the planets receding in order along the ecliptic."
+                         decoding="async">
+                </div>
+                <div class="container">
+                    <figcaption class="caption">
+                        <span class="caption__id">Plate</span>
+                        Everything in this section fits in one frame only because the distances are compressed. At true scale the Sun would be a pinprick and Neptune would be four kilometres away.
+                    </figcaption>
+                </div>
+            </figure>
+        </section>
+
+
+        <!-- ============================================================
+             ARCHITECTURE — the orrery
+             The page's centrepiece. Orbits are tilted into the ecliptic
+             with a real 3D transform, and each world revolves at a
+             compressed but correctly ordered period.
+             ============================================================ -->
+        <section class="shell shell--void">
+            <div class="field field--orbital" aria-hidden="true"></div>
+            <div class="starfield" style="--stars-opacity:0.55" aria-hidden="true"></div>
+
+            <div class="container">
+                <header class="head head--center">
+                    <p class="eyebrow"><span class="eyebrow__id">02</span> Architecture</p>
+                    <h2 class="head__title">Eight worlds on <em>one plane</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">The planets do not orbit at random angles. They all travel within a few degrees of the same flat disc — a fossil of the spinning cloud they were born from.</p>
+                </header>
+
+                <div class="orrery" role="img" aria-label="Animated diagram of the eight planets orbiting the Sun, viewed at an angle to the ecliptic plane. Inner planets complete their orbits visibly faster than outer planets.">
+                    <div class="orrery__stage" aria-hidden="true">
+                        <div class="orrery__glow"></div>
+                        <div class="orrery__grid"></div>
+
+                        <div class="orrery__belt orrery__belt--asteroid"></div>
+                        <div class="orrery__belt orrery__belt--kuiper"></div>
+
+                        <div class="orbit orbit--mercury">
+                            <div class="orbit__carrier"><div class="orbit__body"><span class="orbit__upright"><span class="orrery-dot"></span></span></div></div>
+                        </div>
+                        <div class="orbit orbit--venus">
+                            <div class="orbit__carrier"><div class="orbit__body"><span class="orbit__upright"><span class="orrery-dot"></span></span></div></div>
+                        </div>
+                        <div class="orbit orbit--earth">
+                            <div class="orbit__carrier"><div class="orbit__body"><span class="orbit__upright"><span class="orrery-dot"></span></span></div></div>
+                        </div>
+                        <div class="orbit orbit--mars">
+                            <div class="orbit__carrier"><div class="orbit__body"><span class="orbit__upright"><span class="orrery-dot"></span></span></div></div>
+                        </div>
+                        <div class="orbit orbit--jupiter">
+                            <div class="orbit__carrier"><div class="orbit__body"><span class="orbit__upright"><span class="orrery-dot"></span></span></div></div>
+                        </div>
+                        <div class="orbit orbit--saturn">
+                            <div class="orbit__carrier"><div class="orbit__body"><span class="orbit__upright"><span class="orrery-dot"></span></span></div></div>
+                        </div>
+                        <div class="orbit orbit--uranus">
+                            <div class="orbit__carrier"><div class="orbit__body"><span class="orbit__upright"><span class="orrery-dot"></span></span></div></div>
+                        </div>
+                        <div class="orbit orbit--neptune">
+                            <div class="orbit__carrier"><div class="orbit__body"><span class="orbit__upright"><span class="orrery-dot"></span></span></div></div>
+                        </div>
+
+                        <div class="orrery__sun"></div>
+                    </div>
+                </div>
+
+                <p class="caption caption--center">
+                    <span class="caption__id">Fig 01</span>
+                    Orbital radii and body sizes compressed for legibility. Revolution periods are scaled but correctly ordered — Mercury really does lap Neptune roughly 686 times.
+                </p>
+
+                <!-- The diagram above compresses distance. The rail below
+                     states it honestly, on a base-10 axis. -->
+                <div class="rail rail--au" role="img" aria-label="Logarithmic distance scale in astronomical units, from Mercury at 0.39 AU to the outer edge of the Kuiper Belt near 50 AU.">
+                    <span class="rail__mark rail__mark--up rail__mark--mercury">
+                        <em class="rail__name">Mercury</em><b class="rail__value">0.39 AU</b><i class="rail__tick"></i>
+                    </span>
+                    <span class="rail__mark rail__mark--down rail__mark--venus">
+                        <em class="rail__name">Venus</em><b class="rail__value">0.72 AU</b><i class="rail__tick"></i>
+                    </span>
+                    <span class="rail__mark rail__mark--up rail__mark--earth">
+                        <em class="rail__name">Earth</em><b class="rail__value">1.00 AU</b><i class="rail__tick"></i>
+                    </span>
+                    <span class="rail__mark rail__mark--down rail__mark--mars">
+                        <em class="rail__name">Mars</em><b class="rail__value">1.52 AU</b><i class="rail__tick"></i>
+                    </span>
+                    <span class="rail__mark rail__mark--up rail__mark--region rail__mark--belt">
+                        <em class="rail__name">Asteroid Belt</em><b class="rail__value">2.1–3.3 AU</b><i class="rail__tick"></i>
+                    </span>
+                    <span class="rail__mark rail__mark--down rail__mark--jupiter">
+                        <em class="rail__name">Jupiter</em><b class="rail__value">5.20 AU</b><i class="rail__tick"></i>
+                    </span>
+                    <span class="rail__mark rail__mark--up rail__mark--saturn">
+                        <em class="rail__name">Saturn</em><b class="rail__value">9.54 AU</b><i class="rail__tick"></i>
+                    </span>
+                    <span class="rail__mark rail__mark--down rail__mark--uranus">
+                        <em class="rail__name">Uranus</em><b class="rail__value">19.2 AU</b><i class="rail__tick"></i>
+                    </span>
+                    <span class="rail__mark rail__mark--up rail__mark--neptune">
+                        <em class="rail__name">Neptune</em><b class="rail__value">30.1 AU</b><i class="rail__tick"></i>
+                    </span>
+                    <span class="rail__mark rail__mark--down rail__mark--region rail__mark--kuiper">
+                        <em class="rail__name">Kuiper edge</em><b class="rail__value">~50 AU</b><i class="rail__tick"></i>
+                    </span>
+                </div>
+
+                <p class="caption caption--center">
+                    <span class="caption__id">Fig 02</span>
+                    True mean distances on a base-10 axis. Origin marks the Sun.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             THE SUN
+             shell--lit: the section is illuminated from above by the
+             object it describes.
+             ============================================================ -->
+        <section class="shell shell--lit">
+            <div class="container">
+                <div class="stellar-block">
+                    <div>
+                        <div class="sun-render" aria-hidden="true">
+                            <span class="sun-render__corona"></span>
+                            <span class="sun-render__prominence"></span>
+                            <span class="sun-render__prominence sun-render__prominence--b"></span>
+                            <span class="sun-render__disc">
+                                <span class="sun-render__granules"></span>
+                                <span class="sun-render__spot"></span>
+                            </span>
+                            <span class="sun-render__rim"></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">03</span> Primary</p>
+                        <h2 class="head__title">The <em>Sun</em></h2>
+                        <p class="chip" style="margin-top:1rem">G2V &middot; Main sequence</p>
+
+                        <p class="head__lede">It holds 99.86% of the mass of the entire Solar System. Every planet, moon, comet and grain of dust you will read about on this page is a rounding error orbiting the leftovers.</p>
+                        <p class="head__lede">Each second, roughly 600 million tonnes of hydrogen fuse into helium in its core. The energy released takes tens of thousands of years to fight its way out to the surface, then eight minutes and twenty seconds to reach your eyes.</p>
+
+                        <dl class="spec" style="margin-top:2rem">
+                            <div class="spec__row"><dt>Diameter</dt><dd>1,391,400 km</dd></div>
+                            <div class="spec__row"><dt>Mass</dt><dd>1.989 × 10³⁰ kg</dd></div>
+                            <div class="spec__row"><dt>Photosphere</dt><dd>5,500 °C</dd></div>
+                            <div class="spec__row"><dt>Core</dt><dd>15,000,000 °C</dd></div>
+                            <div class="spec__row"><dt>Age</dt><dd>4.6 billion years</dd></div>
+                            <div class="spec__row"><dt>Remaining lifetime</dt><dd>~5 billion years</dd></div>
+                        </dl>
+                    </div>
+                </div>
+
+                <p class="caption" style="margin-top:2.5rem">
+                    <span class="caption__id">Fig 03</span>
+                    Rendered representation. Granulation, limb darkening, a sunspot group and two limb prominences are drawn to indicate real photospheric features, not to depict a specific observation.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             THE EIGHT PLANETS
+             Observation plates, not cards: one hairline each, an accent
+             rule that runs on hover, staggered so the grid never reads
+             as a row of equal tiles.
+             ============================================================ -->
+        <section class="shell shell--atmos shell--seam">
+            <div class="field field--banded" aria-hidden="true"></div>
+
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">04</span> Major bodies</p>
+                    <h2 class="head__title">Four rocks, two gas giants, <em>two ice giants</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Read outward. The four terrestrial worlds are small, dense and close together. Past the belt, everything changes character: the giants are enormous, cold, ringed, and surrounded by their own miniature systems of moons.</p>
+                </header>
+
+                <div class="plate-grid plate-grid--tall plate-grid--stagger">
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="orb orb--mercury" aria-hidden="true">
+                                <span class="orb__body"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">01 / 08</span>
+                            <span class="plate__index">0.39 AU</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Mercury</h3>
+                            <span class="chip chip--outline">Terrestrial</span>
+                        </div>
+                        <p class="plate__text">No atmosphere to hold heat, so the day side reaches 430&nbsp;°C while the night side falls to −180&nbsp;°C. The largest temperature swing of any planet.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Diameter</dt><dd>4,879 km</dd></div>
+                            <div class="spec__row"><dt>Year</dt><dd>88 days</dd></div>
+                            <div class="spec__row"><dt>Moons</dt><dd>0</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="orb orb--venus" aria-hidden="true">
+                                <span class="orb__limb"></span>
+                                <span class="orb__body"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">02 / 08</span>
+                            <span class="plate__index">0.72 AU</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Venus</h3>
+                            <span class="chip chip--outline">Terrestrial</span>
+                        </div>
+                        <p class="plate__text">Hotter than Mercury despite being further out. A runaway carbon dioxide greenhouse holds the surface at 465&nbsp;°C under 92 atmospheres of pressure.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Diameter</dt><dd>12,104 km</dd></div>
+                            <div class="spec__row"><dt>Year</dt><dd>225 days</dd></div>
+                            <div class="spec__row"><dt>Rotation</dt><dd>Retrograde</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="orb orb--earth" aria-hidden="true">
+                                <span class="orb__limb"></span>
+                                <span class="orb__body"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">03 / 08</span>
+                            <span class="plate__index">1.00 AU</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Earth</h3>
+                            <span class="chip">Inhabited</span>
+                        </div>
+                        <p class="plate__text">The only world known to hold liquid water at its surface, and the only one known to hold life. Both facts depend on a very narrow range of distance and atmosphere.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Diameter</dt><dd>12,756 km</dd></div>
+                            <div class="spec__row"><dt>Year</dt><dd>365.25 days</dd></div>
+                            <div class="spec__row"><dt>Moons</dt><dd>1</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="orb orb--mars" aria-hidden="true">
+                                <span class="orb__limb"></span>
+                                <span class="orb__body"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">04 / 08</span>
+                            <span class="plate__index">1.52 AU</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Mars</h3>
+                            <span class="chip chip--outline">Terrestrial</span>
+                        </div>
+                        <p class="plate__text">Holds both the tallest volcano and the deepest canyon in the Solar System. Olympus Mons rises 22&nbsp;km; Valles Marineris runs 4,000&nbsp;km long.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Diameter</dt><dd>6,792 km</dd></div>
+                            <div class="spec__row"><dt>Year</dt><dd>687 days</dd></div>
+                            <div class="spec__row"><dt>Moons</dt><dd>2</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="orb orb--jupiter" aria-hidden="true">
+                                <span class="orb__body">
+                                    <span class="orb__mark"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">05 / 08</span>
+                            <span class="plate__index">5.20 AU</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Jupiter</h3>
+                            <span class="chip">Gas giant</span>
+                        </div>
+                        <p class="plate__text">More massive than every other planet combined, twice over. The Great Red Spot is a storm wider than Earth that has been running for at least 190 years.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Diameter</dt><dd>142,984 km</dd></div>
+                            <div class="spec__row"><dt>Year</dt><dd>11.86 years</dd></div>
+                            <div class="spec__row"><dt>Moons</dt><dd>115</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="orb orb--saturn" aria-hidden="true">
+                                <span class="orb__ring orb__ring--back"></span>
+                                <span class="orb__body"></span>
+                                <span class="orb__ring orb__ring--front"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">06 / 08</span>
+                            <span class="plate__index">9.54 AU</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Saturn</h3>
+                            <span class="chip">Gas giant</span>
+                        </div>
+                        <p class="plate__text">The rings span 280,000&nbsp;km but average only about 10&nbsp;metres thick. They are almost pure water ice, and they are probably younger than the dinosaurs.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Diameter</dt><dd>120,536 km</dd></div>
+                            <div class="spec__row"><dt>Year</dt><dd>29.46 years</dd></div>
+                            <div class="spec__row"><dt>Moons</dt><dd>293</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="orb orb--uranus" aria-hidden="true">
+                                <span class="orb__ring orb__ring--far-side"></span>
+                                <span class="orb__limb"></span>
+                                <span class="orb__body"></span>
+                                <span class="orb__ring orb__ring--near-side"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">07 / 08</span>
+                            <span class="plate__index">19.2 AU</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Uranus</h3>
+                            <span class="chip chip--outline">Ice giant</span>
+                        </div>
+                        <p class="plate__text">Tipped 98 degrees, so it rolls along its orbit rather than spinning upright. Its rings run vertically from our point of view, and each pole gets 42 years of darkness.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Diameter</dt><dd>51,118 km</dd></div>
+                            <div class="spec__row"><dt>Year</dt><dd>84 years</dd></div>
+                            <div class="spec__row"><dt>Axial tilt</dt><dd>97.8°</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="orb orb--neptune" aria-hidden="true">
+                                <span class="orb__limb"></span>
+                                <span class="orb__body"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">08 / 08</span>
+                            <span class="plate__index">30.1 AU</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Neptune</h3>
+                            <span class="chip chip--outline">Ice giant</span>
+                        </div>
+                        <p class="plate__text">The windiest place in the Solar System, with storms clocked at 2,100&nbsp;km/h. It was found by mathematics before anyone pointed a telescope at it.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Diameter</dt><dd>49,528 km</dd></div>
+                            <div class="spec__row"><dt>Year</dt><dd>164.8 years</dd></div>
+                            <div class="spec__row"><dt>Moons</dt><dd>16</dd></div>
+                        </dl>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             TRUE SCALE
+             Every other figure on this page compresses something. This
+             one does not, and it says so.
+             ============================================================ -->
+        <section class="shell shell--void">
+            <div class="container">
+                <header class="head head--center">
+                    <p class="eyebrow"><span class="eyebrow__id">05</span> To scale</p>
+                    <h2 class="head__title">The same eight worlds, <em>honestly sized</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Illustrations almost always enlarge the small planets so they stay visible. This one does not. Jupiter is 29 times wider than Mercury, and that is what 29 times actually looks like.</p>
+                </header>
+
+                <div class="scale-figure">
+                    <div class="scale-strip" role="img" aria-label="The eight planets drawn to a single diameter scale. Mercury at 4,879 km is barely visible beside Jupiter at 142,984 km.">
+                        <div class="scale-item scale-item--mercury">
+                            <span class="scale-disc"></span>
+                            <span class="scale-item__label"><b>Mercury</b> <span>4 879 km</span></span>
+                        </div>
+                        <div class="scale-item scale-item--venus">
+                            <span class="scale-disc"></span>
+                            <span class="scale-item__label"><b>Venus</b> <span>12 104 km</span></span>
+                        </div>
+                        <div class="scale-item scale-item--earth">
+                            <span class="scale-disc"></span>
+                            <span class="scale-item__label"><b>Earth</b> <span>12 756 km</span></span>
+                        </div>
+                        <div class="scale-item scale-item--mars">
+                            <span class="scale-disc"></span>
+                            <span class="scale-item__label"><b>Mars</b> <span>6 792 km</span></span>
+                        </div>
+                        <div class="scale-item scale-item--jupiter">
+                            <span class="scale-disc"></span>
+                            <span class="scale-item__label"><b>Jupiter</b> <span>142 984 km</span></span>
+                        </div>
+                        <div class="scale-item scale-item--saturn">
+                            <span class="scale-disc"></span>
+                            <span class="scale-item__label"><b>Saturn</b> <span>120 536 km</span></span>
+                        </div>
+                        <div class="scale-item scale-item--uranus">
+                            <span class="scale-disc"></span>
+                            <span class="scale-item__label"><b>Uranus</b> <span>51 118 km</span></span>
+                        </div>
+                        <div class="scale-item scale-item--neptune">
+                            <span class="scale-disc"></span>
+                            <span class="scale-item__label"><b>Neptune</b> <span>49 528 km</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="caption caption--center">
+                    <span class="caption__id">Fig 04</span>
+                    Equatorial diameters, one shared scale. Distances are not represented — at this size Neptune would sit about four kilometres to the right.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             DWARF PLANETS
+             ============================================================ -->
+        <section class="shell shell--abyss shell--seam">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">06</span> Dwarf planets</p>
+                    <h2 class="head__title">Round, but <em>not alone</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">A dwarf planet orbits the Sun and has enough gravity to pull itself into a sphere, but has never cleared the debris out of its own orbital neighbourhood. That last clause is the entire reason Pluto was reclassified in 2006 — nothing about Pluto changed, only the definition.</p>
+                </header>
+
+                <div class="catalogue">
+                    <div class="catalogue__item">
+                        <div class="catalogue__stage">
+                            <span class="orb orb--pluto" aria-hidden="true"><span class="orb__body"></span></span>
+                        </div>
+                        <h3 class="catalogue__name">Pluto</h3>
+                        <p class="catalogue__where"><b>39.5 AU</b>Kuiper Belt</p>
+                    </div>
+                    <div class="catalogue__item">
+                        <div class="catalogue__stage">
+                            <span class="orb orb--eris" aria-hidden="true"><span class="orb__body"></span></span>
+                        </div>
+                        <h3 class="catalogue__name">Eris</h3>
+                        <p class="catalogue__where"><b>67.8 AU</b>Scattered Disc</p>
+                    </div>
+                    <div class="catalogue__item">
+                        <div class="catalogue__stage">
+                            <span class="orb orb--haumea" aria-hidden="true"><span class="orb__body"></span></span>
+                        </div>
+                        <h3 class="catalogue__name">Haumea</h3>
+                        <p class="catalogue__where"><b>43.1 AU</b>Kuiper Belt</p>
+                    </div>
+                    <div class="catalogue__item">
+                        <div class="catalogue__stage">
+                            <span class="orb orb--makemake" aria-hidden="true"><span class="orb__body"></span></span>
+                        </div>
+                        <h3 class="catalogue__name">Makemake</h3>
+                        <p class="catalogue__where"><b>45.4 AU</b>Kuiper Belt</p>
+                    </div>
+                    <div class="catalogue__item">
+                        <div class="catalogue__stage">
+                            <span class="orb orb--ceres" aria-hidden="true"><span class="orb__body"></span></span>
+                        </div>
+                        <h3 class="catalogue__name">Ceres</h3>
+                        <p class="catalogue__where"><b>2.77 AU</b>Asteroid Belt</p>
+                    </div>
+                </div>
+
+                <p class="caption">
+                    <span class="caption__id">Fig 05</span>
+                    Mean orbital distance shown. Haumea is drawn out of round on purpose — it spins once every four hours and that has genuinely deformed it into an ellipsoid.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             MOONS
+             shell--rise: lit from below, because the subject here sits
+             beneath the giants described above it.
+             ============================================================ -->
+        <section class="shell shell--rise">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">07</span> Natural satellites</p>
+                    <h2 class="head__title">Some moons are <em>bigger than planets</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Ganymede and Titan are both wider than Mercury. Several of these are more promising places to look for life than any planet other than Earth, because tidal heating keeps liquid water under their ice.</p>
+                </header>
+
+                <ol class="ledger ledger--moons" role="img" aria-label="The largest moons in the Solar System compared by diameter, from Ganymede at 5,268 kilometres to Enceladus at 504 kilometres.">
+                    <li class="ledger__row ledger__row--ganymede">
+                        <span class="ledger__label">Ganymede <small>Jupiter</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">5 268 km</span>
+                    </li>
+                    <li class="ledger__row ledger__row--titan">
+                        <span class="ledger__label">Titan <small>Saturn</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">5 150 km</span>
+                    </li>
+                    <li class="ledger__row ledger__row--callisto">
+                        <span class="ledger__label">Callisto <small>Jupiter</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">4 821 km</span>
+                    </li>
+                    <li class="ledger__row ledger__row--io">
+                        <span class="ledger__label">Io <small>Jupiter</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">3 643 km</span>
+                    </li>
+                    <li class="ledger__row ledger__row--moon">
+                        <span class="ledger__label">The Moon <small>Earth</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">3 475 km</span>
+                    </li>
+                    <li class="ledger__row ledger__row--europa">
+                        <span class="ledger__label">Europa <small>Jupiter</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">3 122 km</span>
+                    </li>
+                    <li class="ledger__row ledger__row--triton">
+                        <span class="ledger__label">Triton <small>Neptune</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">2 707 km</span>
+                    </li>
+                    <li class="ledger__row ledger__row--enceladus">
+                        <span class="ledger__label">Enceladus <small>Saturn</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">504 km</span>
+                    </li>
+                </ol>
+
+                <p class="ledger__caption">
+                    <span>Diameter, relative to Ganymede</span>
+                    <span>Mercury = 4 879 km</span>
+                </p>
+
+                <div class="note" style="margin-top:3rem">
+                    <span class="note__title">Why these matter</span>
+                    <ul class="note__list">
+                        <li><strong>Europa</strong> almost certainly holds a salt-water ocean beneath 15–25&nbsp;km of ice, with more liquid water than all of Earth's oceans combined.</li>
+                        <li><strong>Enceladus</strong> vents that ocean straight into space through cracks at its south pole. Cassini flew through the plume and tasted it.</li>
+                        <li><strong>Titan</strong> has a thick nitrogen atmosphere, and rivers, lakes and rain — all made of liquid methane.</li>
+                        <li><strong>Io</strong> is the most volcanically active body known, squeezed and reheated continuously by Jupiter's tides.</li>
+                        <li><strong>Triton</strong> orbits Neptune backwards, which almost certainly means it was captured rather than formed there.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             SMALL BODIES
+             ============================================================ -->
+        <section class="shell shell--void shell--seam">
+            <div class="starfield" style="--stars-opacity:0.5" aria-hidden="true"></div>
+
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">08</span> Small bodies</p>
+                    <h2 class="head__title">The debris that <em>never finished</em></h2>
+                    <div class="head__rule"></div>
+                </header>
+
+                <div class="split">
+                    <div>
+                        <h3 class="sub-title">Asteroids</h3>
+                        <p class="head__lede">Rock and metal that Jupiter's gravity never allowed to assemble into a planet. Millions of bodies, but their entire combined mass is only about 3% of the Moon's — and Ceres alone accounts for a quarter of it.</p>
+
+                        <div class="belt-figure" aria-hidden="true">
+                            <span class="belt-figure__lane"></span>
+                            <span class="belt-figure__major belt-figure__major--ceres"></span>
+                            <span class="belt-figure__major belt-figure__major--vesta"></span>
+                            <span class="belt-figure__tag belt-figure__tag--ceres">Ceres &middot; 940 km</span>
+                            <span class="belt-figure__tag belt-figure__tag--vesta">Vesta &middot; 525 km</span>
+                        </div>
+
+                        <p class="caption">
+                            <span class="caption__id">Fig 06</span>
+                            The main belt is mostly empty space. Spacecraft cross it routinely without manoeuvring.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="sub-title">Comets</h3>
+                        <p class="head__lede">Ice, dust and rock preserved unchanged since the Solar System formed. Approaching the Sun, they sublimate and grow two separate tails that point in two different directions.</p>
+
+                        <div class="comet-figure" aria-hidden="true">
+                            <span class="comet-figure__dust"></span>
+                            <span class="comet-figure__ion"></span>
+                            <span class="comet-figure__coma"></span>
+                            <span class="comet-figure__nucleus"></span>
+                            <span class="comet-figure__sun-cue">To Sun</span>
+                        </div>
+
+                        <p class="caption">
+                            <span class="caption__id">Fig 07</span>
+                            The blue ion tail is blown straight back by the solar wind. The broader dust tail lags along the orbit and curves.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             THE OUTER SYSTEM
+             The journey's end: a log axis, because nothing else can
+             show a boundary four orders of magnitude past Neptune.
+             ============================================================ -->
+        <section class="shell shell--rise">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">09</span> Outer system</p>
+                    <h2 class="head__title">Neptune is not <em>the edge</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Past Neptune the Solar System keeps going for a very long time. The Kuiper Belt is a disc of ice; far beyond it, the Oort Cloud is a spherical shell that reaches roughly a quarter of the way to the next star. Every scale below is a power of ten, because a linear axis would put everything you have read about so far inside the first pixel.</p>
+                </header>
+
+                <ol class="ledger ledger--depth" role="img" aria-label="Logarithmic distance ladder from Earth at 1 astronomical unit out to Proxima Centauri at 268,000 astronomical units.">
+                    <li class="ledger__row ledger__row--earth">
+                        <span class="ledger__label">Earth <small>Reference</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">1 AU</span>
+                    </li>
+                    <li class="ledger__row ledger__row--neptune">
+                        <span class="ledger__label">Neptune <small>Last planet</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">30 AU</span>
+                    </li>
+                    <li class="ledger__row ledger__row--kuiper">
+                        <span class="ledger__label">Kuiper Belt <small>Outer edge</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">50 AU</span>
+                    </li>
+                    <li class="ledger__row ledger__row--heliopause">
+                        <span class="ledger__label">Heliopause <small>Solar wind stops</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">123 AU</span>
+                    </li>
+                    <li class="ledger__row ledger__row--sedna">
+                        <span class="ledger__label">Sedna <small>Aphelion</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">937 AU</span>
+                    </li>
+                    <li class="ledger__row ledger__row--oort-inner">
+                        <span class="ledger__label">Oort Cloud <small>Inner boundary</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">2 000 AU</span>
+                    </li>
+                    <li class="ledger__row ledger__row--oort-outer">
+                        <span class="ledger__label">Oort Cloud <small>Outer boundary</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">100 000 AU</span>
+                    </li>
+                    <li class="ledger__row ledger__row--proxima">
+                        <span class="ledger__label">Proxima Centauri <small>Nearest star</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">268 000 AU</span>
+                    </li>
+                </ol>
+
+                <p class="ledger__caption">
+                    <span>Base-10 axis, 1 AU at origin</span>
+                    <span>1 AU = 149 597 871 km</span>
+                </p>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="note">
+                        <span class="note__title">Kuiper Belt</span>
+                        <ul class="note__list">
+                            <li>A flattened disc of icy bodies from about 30 to 50&nbsp;AU, holding hundreds of thousands of objects wider than 100&nbsp;km.</li>
+                            <li>The first object beyond Pluto was found in 1992, confirming a region predicted decades earlier.</li>
+                            <li>New Horizons reached Pluto in 2015 and the contact binary Arrokoth in 2019 — the most distant object ever visited.</li>
+                            <li>It is the source of short-period comets, including Halley's.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">Oort Cloud</span>
+                        <ul class="note__list">
+                            <li>A spherical shell, not a disc, thought to hold trillions of icy bodies out to roughly 100,000&nbsp;AU.</li>
+                            <li>No object has ever been directly observed there. Its existence is inferred from the orbits of long-period comets.</li>
+                            <li>Named for Jan Oort, who worked out in 1950 where those comets must be coming from.</li>
+                            <li>It marks the practical gravitational boundary of the Sun's influence — the real edge of the Solar System.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             ONWARD
+             ============================================================ -->
+        <section class="shell shell--abyss shell--seam">
+            <div class="container">
+                <div class="head head--center" style="margin-bottom:0">
+                    <p class="eyebrow eyebrow--bare">End of region 01</p>
+                    <h2 class="head__title">The Sun is one of <em>a hundred billion</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Everything on this page orbits a single unremarkable star in one arm of one galaxy. Next, the stars themselves.</p>
+                    <p style="margin-top:2rem">
+                        <a href="../stars/index.html" class="btn btn--ghost">Continue to Stars <span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p class="footer-text">&copy; 2026 CosmoVerse &mdash; Explore beyond the horizon.</p>
+            <p class="footer-note">Region 01 &middot; Heliosphere &middot; Figures 01&ndash;07</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1090 @@
+/* ============================================================
+   COSMOVERSE — COSMIC EVENTS
+   ============================================================
+
+   THE VISUAL REFERENCE
+   --------------------
+   This is the region most at risk of turning into concept art.
+   "Explosion in space" has a hundred years of film language
+   attached to it, almost none of it correct. Five rules keep the
+   page in the observatory.
+
+   1. THE COLOUR OF AN EXPLOSION IS ITS MECHANISM, NOT ITS DRAMA.
+      A blast front is crimson because the shock sweeps up
+      hydrogen and lights it at 656 nm, exactly as in the Nebulae
+      region. The detonation core is white going gold because it
+      is genuinely at millions of kelvin and radiating as a hot
+      body. Relativistic jets are blue-white synchrotron. Thermal
+      X-ray plasma is blue-violet. Nothing is orange because
+      orange looks energetic.
+
+   2. EVERY EVENT HAS A DURATION AND THE DURATION IS THE POINT.
+      A gamma-ray burst is seconds. A supernova is months. A CME
+      transit is days. A remnant is millennia. Silicon burning in
+      a dying star's core lasts about a day. Every figure on this
+      page states a time, because the timescale is what separates
+      these objects from everything else on the site — this is
+      the only region whose subject is change rather than
+      structure.
+
+   3. RADIAL GEOMETRY MEANS "ONE EVENT, EXPANDING". Concentric
+      fronts moving outward from a point. It is never used as
+      ornament, and .field--burst is the shock front itself.
+
+   4. NOTHING IS SYMMETRIC FOR LONG. Real explosions are
+      lopsided: jets are one-sided, ejecta are clumpy, remnants
+      are ragged, and a CME goes off in one direction. A perfect
+      sphere and a perfectly even starburst are the two clearest
+      tells of a stock illustration, so neither appears here.
+
+   5. VIOLET IS STILL RESERVED FOR WHAT CANNOT BE SEEN. Galaxies
+      spends it on dark matter, Black Holes on spacetime
+      geometry. Gravitational waves are the purest case the site
+      has: not light, not sound, not anything travelling through
+      space, but a distortion of space itself, invisible to every
+      instrument except an interferometer. So the merger figure
+      is drawn in violet and the reader who has been through the
+      other regions already knows what that means.
+
+   THE SIGNATURE GEOMETRY
+   ----------------------
+   Two shapes, and between them they cover the whole region.
+
+     THE FRONT — concentric arcs expanding from a point. Used for
+     supernovae, remnants and coronal mass ejections. It says
+     "something happened here, once".
+
+     THE CHIRP — a waveform whose amplitude and frequency both
+     climb to a peak and then ring down. Used for mergers. It
+     says "two things fell together", and it is the only place on
+     the site where the data itself is the illustration.
+
+   THE ONE IDEA THE PAGE IS BUILT AROUND
+   -------------------------------------
+   Everything here is the same physics at different scales, and
+   Fig 01 is the argument: a solar flare and a black-hole merger
+   are both "gravity or magnetism releases stored energy
+   suddenly", separated by twenty-two orders of magnitude and
+   nothing else. Ordering the page by energy rather than by
+   familiarity is what makes that visible.
+
+   Layer 3 of 3. Requires style.css and components.css.
+   ============================================================ */
+
+
+/* ============================================================
+   1. PALETTE
+   ------------------------------------------------------------
+   The accent contract in components.css already sets --accent to
+   #ff5068 and --accent-2 to #ffd9a0 — shock-front crimson into
+   detonation gold. That is the correct pair for this subject, so
+   like Nebulae this page does NOT override the shared heading
+   gradient. What is added here are the specific emission
+   mechanisms.
+   ============================================================ */
+
+.dm-events {
+    /* --- The blast front -----------------------------------
+       Shocked hydrogen. The same 656 nm rose the Nebulae region
+       uses, pushed redder and more saturated because a shock is
+       denser and faster than an H II region. */
+    --shock:       #ff5068;
+    --shock-hot:   #ff92a4;
+    --shock-soft:  rgba(255, 80, 104, 0.4);
+    --shock-deep:  #5c0f20;
+
+    /* --- The detonation ------------------------------------
+       Millions of kelvin, radiating as a hot body. This is the
+       one thing on the page allowed to be pure white. */
+    --detonation:  #fff4de;
+    --deto-2:      #ffd9a0;
+    --deto-soft:   rgba(255, 217, 160, 0.34);
+
+    /* --- Relativistic material ----------------------------
+       Synchrotron radiation from particles moving at very close
+       to c. Broadband, and it reads blue-white. */
+    --jet:         #b9d6ff;
+    --jet-soft:    rgba(185, 214, 255, 0.34);
+    --thermal:     #8fb0ff;   /* thermal X-ray plasma */
+
+    /* --- The Sun ------------------------------------------
+       Deliberately the same amber the Solar System region is
+       built on. Sunlight is one colour across this site, and a
+       flare is sunlight — a reader arriving here from region 01
+       should recognise it without being told. */
+    --corona:      #ffb648;
+    --corona-hot:  #fff0c8;
+    --corona-deep: #46220a;
+
+    /* --- The unseen ---------------------------------------
+       Rule 5. Gravitational waves only. Nothing that emits
+       light is ever this hue anywhere on the site. */
+    --unseen:      #a97cff;
+    --unseen-mid:  rgba(169, 124, 255, 0.44);
+    --unseen-soft: rgba(169, 124, 255, 0.16);
+
+    /* --- The inert core ----------------------------------
+       Iron cannot be fused for profit, so the moment a stellar
+       core is iron the star is already over. Drawn as cold grey
+       because it is the one part of a dying star that is not a
+       light source. */
+    --iron:        #9aa6bd;
+    --iron-deep:   #3a4256;
+
+    /* Height of the sticky local index. Anchor scroll targets are
+       computed from it, so it is declared once. */
+    --subnav-h:    46px;
+}
+
+
+/* ============================================================
+   2. LOCAL INDEX
+   ------------------------------------------------------------
+   The fifth copy of this component; Stars, Black Holes,
+   Galaxies, Exoplanets and Nebulae each carry their own. It
+   belongs in components.css, but promoting it would mean editing
+   a stylesheet six finished pages depend on, so it stays local
+   and the note stays here.
+   ============================================================ */
+
+.subnav {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 900;
+    background: rgba(12, 2, 6, 0.92);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    border-bottom: 1px solid var(--line);
+}
+
+/* A shock front as a 1px rule: white-hot at the point of origin
+   in the middle, cooling to crimson as it runs outward. */
+.subnav::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--shock-deep) 10%,
+        var(--shock) 30%,
+        var(--detonation) 50%,
+        var(--shock) 70%,
+        var(--shock-deep) 90%,
+        transparent 100%);
+    opacity: 0.6;
+}
+
+.subnav__list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+.subnav__list a {
+    position: relative;
+    padding: 0.85rem clamp(0.44rem, 0.95vw, 0.82rem);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+    transition: color var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child {
+    padding-left: 0;
+}
+
+.subnav__list a::after {
+    content: '';
+    position: absolute;
+    left: clamp(0.44rem, 0.95vw, 0.82rem);
+    right: clamp(0.44rem, 0.95vw, 0.82rem);
+    bottom: 0;
+    height: 1px;
+    background: var(--shock);
+    box-shadow: 0 0 8px var(--shock-soft);
+    transform: scaleX(0);
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child::after {
+    left: 0;
+}
+
+.subnav__list a:hover {
+    color: var(--text);
+}
+
+.subnav__list a:hover::after {
+    transform: scaleX(1);
+}
+
+.shell[id],
+.page-hero[id] {
+    scroll-margin-top: calc(var(--header-h) + var(--subnav-h));
+}
+
+
+/* ============================================================
+   3. FIGURE CHROME
+   ------------------------------------------------------------
+   A diagram is a coordinate system. It cannot usefully reflow,
+   so below its natural width it scrolls inside its frame rather
+   than deforming. Restated locally for the same reason the local
+   index is.
+   ============================================================ */
+
+.fig {
+    margin: 0;
+}
+
+.fig__frame {
+    position: relative;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+.fig__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* SVG typography, in the same instrument voice as every other
+   label on the site. Sizes are user units, so they scale with the
+   viewBox instead of fighting it. */
+.svg-label,
+.svg-value,
+.svg-unit {
+    font-family: var(--font-mono);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.svg-label {
+    font-size: 12px;
+    fill: var(--text-2);
+}
+
+.svg-value {
+    font-size: 12px;
+    fill: var(--text);
+    letter-spacing: 0.05em;
+    text-transform: none;
+    font-variant-numeric: tabular-nums;
+}
+
+.svg-unit {
+    font-size: 10px;
+    fill: var(--text-4);
+}
+
+/* For labels sitting over a lit blast front rather than over the
+   page background. Draws the glyph's own outline in the void
+   colour first, which keeps small mono type legible without a
+   solid label box behind it. */
+.svg-onlight {
+    paint-order: stroke fill;
+    stroke: rgba(8, 1, 3, 0.88);
+    stroke-width: 3.4;
+    stroke-linejoin: round;
+}
+
+.svg-label--shock  { fill: var(--shock-hot); }
+.svg-label--deto   { fill: var(--deto-2); }
+.svg-label--jet    { fill: var(--jet); }
+.svg-label--unseen { fill: var(--unseen); }
+.svg-label--corona { fill: var(--corona); }
+.svg-label--iron   { fill: var(--iron); }
+
+.svg-leader {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    opacity: 0.7;
+}
+
+.svg-leader--shock  { stroke: rgba(255, 80, 104, 0.42); }
+.svg-leader--unseen { stroke: var(--unseen-mid); }
+.svg-leader--corona { stroke: rgba(255, 182, 72, 0.4); }
+
+.svg-tick {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+}
+
+.svg-dash {
+    fill: none;
+    stroke-dasharray: 4 5;
+}
+
+.svg-grid {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 1;
+}
+
+.svg-axis {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+}
+
+
+/* ============================================================
+   3b. CAPTION BODY
+   ------------------------------------------------------------
+   .caption is a flex row, so any element inside the caption prose
+   becomes a flex item of its own and a leading <strong> collapses
+   into a stack of one-word lines. Wrapping the prose in a single
+   element makes it one flex item again. Introduced on the Nebulae
+   page; the note in components.css points here too.
+   ============================================================ */
+
+.caption__body {
+    min-width: 0;
+}
+
+
+/* ============================================================
+   4. HERO
+   ------------------------------------------------------------
+   The photograph carries the arrival; the crop and the grade are
+   the plate-imagery component in components.css. What is added
+   here is the horizon, and it is the region's own geometry:
+   Galaxies gets one logarithmic arc, Nebulae gets filaments, and
+   this gets a shock front — four concentric arcs at increasing
+   radii, brightest at the front and fading behind it, because
+   that is what an expanding blast wave looks like from the side.
+   ============================================================ */
+
+.ev-hero__front {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 2;
+    height: min(52%, 400px);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.ev-hero__front svg {
+    position: absolute;
+    left: 50%;
+    bottom: -20%;
+    width: min(1700px, 158%);
+    height: auto;
+    transform: translateX(-50%);
+}
+
+/* The leading edge. The readout docks over the middle of the hero,
+   so only the ends of each arc are ever visible — the weight
+   therefore sits in the bloom, which has no edge to be caught out
+   by, exactly as on the Nebulae hero. */
+.ev-arc {
+    fill: none;
+    stroke: var(--shock);
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    opacity: 0.2;
+    filter: blur(1.1px);
+}
+
+.ev-arc--lead {
+    stroke: var(--deto-2);
+    opacity: 0.26;
+}
+
+.ev-arc--bloom {
+    stroke-width: 26;
+    opacity: 0.09;
+    filter: blur(13px);
+}
+
+/* Ejecta knots riding the front. Clumpy, because rule 4. */
+.ev-knots circle {
+    fill: var(--detonation);
+}
+
+
+/* ============================================================
+   5. .ev — the transient primitive
+   ------------------------------------------------------------
+   The counterpart to .orb and .neb, and much smaller than either
+   because this region has only two objects that need portraits:
+   the two kinds of gamma-ray burst. Both are the same drawing —
+   a central engine firing two opposed relativistic jets — and
+   the differences between them are exactly the differences the
+   plates are there to state.
+
+       <span class="ev ev--long" style="--ev-d:158px" aria-hidden="true">
+           <span class="ev__halo"></span>
+           <span class="ev__jet ev__jet--a"></span>
+           <span class="ev__jet ev__jet--b"></span>
+           <span class="ev__core"></span>
+       </span>
+
+   The jets are cones with their apex at the centre and their open
+   end outward, which is the right way round: a jet is collimated
+   where it launches and spreads as it travels. And the two are
+   deliberately not exactly 180 degrees apart — rule 4.
+   ============================================================ */
+
+.ev {
+    --ev-d: 158px;
+    position: relative;
+    display: block;
+    flex: none;
+    width: var(--ev-d);
+    height: var(--ev-d);
+    isolation: isolate;
+}
+
+/* The progenitor, or what is left of it. */
+.ev__halo {
+    position: absolute;
+    inset: -6%;
+    z-index: 0;
+    background: var(--ev-halo, none);
+    filter: blur(calc(var(--ev-d) * var(--ev-soft, 0.04)));
+}
+
+.ev__jet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    width: var(--jet-w, 40%);
+    height: var(--jet-h, 58%);
+    transform-origin: 50% 100%;
+    transform: translate(-50%, -100%) rotate(var(--jet-rot, 0deg));
+    /* 0deg is bottom-to-top, and the bottom edge is the apex — so
+       the beam is brightest where it launches and fades outward.
+       Synchrotron, so it runs white at the base through blue-white
+       and out. The saturation matters: at lower alpha these read as
+       grey card-stock triangles rather than as anything luminous. */
+    background: var(--ev-jet,
+        linear-gradient(0deg,
+            #ffffff 0%,
+            rgba(223, 234, 255, 0.92) 14%,
+            rgba(185, 214, 255, 0.7) 38%,
+            rgba(143, 176, 255, 0.3) 68%,
+            rgba(143, 176, 255, 0.06) 88%,
+            transparent 100%));
+    clip-path: polygon(50% 100%, 100% 0%, 0% 0%);
+    filter: blur(calc(var(--ev-d) * 0.008));
+}
+
+.ev__core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    width: var(--core-d, 9%);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--core-fill,
+        radial-gradient(circle, #ffffff 0%, var(--detonation) 46%, transparent 100%));
+    box-shadow: 0 0 calc(var(--ev-d) * 0.16) var(--core-glow, rgba(255, 244, 222, 0.9));
+}
+
+/* The two variants have to be distinguishable at a glance, because
+   the plates are a comparison and the whole point of the section is
+   that the two classes are different objects. An earlier version
+   gave them similar jet proportions and differed only in halo
+   colour, which made them read as the same drawing twice. The
+   silhouettes now differ the way the physics does:
+
+     LONG   narrow jet, long reach, big envelope around it
+     SHORT  wide jet, short reach, no envelope at all
+
+   That is not a stylistic choice. A long burst's jet is collimated
+   by the star it is drilling through, so it is narrow and it goes
+   a long way. A short burst has no star to collimate it. */
+
+/* --- LONG BURST · a collapsar -------------------------------
+   A massive star whose core has collapsed to a black hole while
+   the envelope is still in place. The jet has to drill out through
+   the star, and the seconds that takes are the seconds the burst
+   lasts. */
+.ev--long {
+    --jet-w: 20%;
+    --jet-h: 74%;
+    --ev-soft: 0.05;
+    /* The progenitor. Visible, because the jet is drilling through
+       it and that is the only thing distinguishing this from a
+       bare merger. */
+    --ev-halo:
+        radial-gradient(ellipse 26% 34% at 50% 50%, rgba(255, 146, 164, 0.4) 0%, rgba(184, 70, 54, 0.34) 54%, transparent 78%),
+        radial-gradient(ellipse 38% 46% at 50% 50%, rgba(92, 15, 32, 0.62) 0%, rgba(58, 10, 22, 0.3) 60%, transparent 82%);
+    --core-d: 8%;
+}
+
+.ev--long .ev__jet--a { --jet-rot: 17deg; }
+.ev--long .ev__jet--b { --jet-rot: 203deg; }
+
+/* --- SHORT BURST · a compact merger -------------------------
+   Two neutron stars, so there is no envelope to drill through and
+   the whole thing is over in under two seconds. The halo is the
+   kilonova: freshly synthesised heavy elements, which really do
+   glow red as they cool, and really are where a large share of the
+   universe's gold comes from. */
+.ev--short {
+    --jet-w: 58%;
+    --jet-h: 42%;
+    --ev-soft: 0.055;
+    --ev-halo:
+        radial-gradient(circle at 50% 50%, rgba(255, 244, 222, 0.34) 0%, transparent 26%),
+        radial-gradient(circle at 50% 50%, transparent 0 16%, rgba(255, 80, 104, 0.46) 34%, rgba(226, 80, 110, 0.2) 50%, transparent 68%),
+        radial-gradient(circle at 50% 50%, transparent 0 44%, rgba(92, 15, 32, 0.4) 58%, transparent 80%);
+    --core-d: 6.5%;
+}
+
+.ev--short .ev__jet--a { --jet-rot: -13deg; }
+.ev--short .ev__jet--b { --jet-rot: 169deg; }
+
+/* The shared plate stage draws an optical-axis hairline across its
+   middle for aligning drawn bodies. Through a pair of jets it
+   reads as a scratch on the print. */
+.ev-bursts .plate__stage {
+    --stage-h: 214px;
+    background: radial-gradient(ellipse 70% 66% at 50% 52%, var(--mood-low) 0%, transparent 74%);
+}
+
+.ev-bursts .plate__stage::before {
+    display: none;
+}
+
+/* Two plates, side by side, always. The shared auto-fit grid puts
+   them at three columns' width in this container and they stop
+   reading as a comparison. */
+.ev-bursts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+
+/* ============================================================
+   6. Fig 02 — THE SUPERNOVA LIFECYCLE
+   ------------------------------------------------------------
+   Five panels. The colour narrates: blue-white while fusion is
+   winning, red once the envelope has swollen and cooled, grey at
+   the moment the core turns to iron and stops being a light
+   source at all, then white for the bounce and crimson for the
+   front. Nothing in the first three panels is allowed the
+   detonation colour, because nothing has detonated yet.
+   ============================================================ */
+
+.sn__star     { fill: url(#snMain); }
+.sn__giant    { fill: url(#snGiant); }
+.sn__envelope { fill: url(#snEnv); }
+.sn__flash    { fill: url(#snFlash); }
+.sn__front    { fill: url(#snFront); }
+
+/* The onion. Each shell is a ring, and the rings get thinner
+   inward because each successive fuel burns faster and in a
+   smaller volume — hydrogen for millions of years, silicon for
+   about a day. */
+.sn__shell {
+    fill: none;
+    stroke-width: 6;
+    opacity: 0.85;
+}
+
+/* The ramp runs COOL OUTSIDE to HOT INSIDE, which is both the
+   physics and the site's colour language: the Stars region
+   establishes blue-white as hot and red as cool, and a reader who
+   has been through it will read a blue outer envelope as the
+   hottest layer. It is the opposite. Hydrogen burns at the bottom
+   of the envelope at a few tens of millions of kelvin; silicon
+   burns at three billion. So H is a dim red and Si is blue-white,
+   with iron grey because it is not burning at all. */
+.sn__shell--h  { stroke: rgba(184, 70, 54, 0.62); }
+.sn__shell--he { stroke: rgba(255, 122, 47, 0.5); }
+.sn__shell--c  { stroke: rgba(255, 182, 72, 0.55); }
+.sn__shell--o  { stroke: rgba(255, 244, 222, 0.6); }
+.sn__shell--si { stroke: rgba(185, 214, 255, 0.72); }
+
+/* Iron. The only cold thing in the figure. */
+.sn__iron {
+    fill: var(--iron);
+    opacity: 0.9;
+}
+
+/* Collapse, then rebound. Two arrow sets, opposite directions,
+   and the caption gives the times. */
+.sn__infall path {
+    color: var(--iron);
+    fill: none;
+    stroke: var(--iron);
+    stroke-width: 1.2;
+    opacity: 0.7;
+}
+
+.sn__rebound path {
+    color: var(--detonation);
+    fill: none;
+    stroke: var(--detonation);
+    stroke-width: 1.3;
+    opacity: 0.8;
+}
+
+/* Neutrinos. Ninety-nine per cent of the energy leaves this way,
+   so they get drawn — dashed, because they pass through
+   everything including the figure. */
+.sn__neutrino {
+    fill: none;
+    stroke: var(--jet);
+    stroke-width: 1;
+    stroke-dasharray: 2 4;
+    opacity: 0.6;
+}
+
+/* The remnant's expanding shell. Ragged on purpose. */
+.sn__ring {
+    fill: none;
+    stroke: var(--shock);
+    stroke-width: 1.4;
+    opacity: 0.5;
+}
+
+.sn__ring--faint { opacity: 0.24; }
+
+.sn__remnant-core {
+    fill: var(--jet);
+    filter: drop-shadow(0 0 7px rgba(185, 214, 255, 0.9));
+}
+
+.sn__step {
+    color: var(--accent);
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1;
+    opacity: 0.55;
+}
+
+
+/* ============================================================
+   7. Fig 03 — THE MERGER AND ITS WAVEFORM
+   ------------------------------------------------------------
+   The one figure on the site where the illustration IS the data.
+   The waveform is a real chirp shape: amplitude and frequency
+   both climbing to the merger and then ringing down. Its
+   zero-crossings are spaced at decreasing intervals and its peak
+   amplitudes at increasing values, both hand-placed, because a
+   sine wave of constant period would be a different physical
+   claim entirely.
+
+   Everything to do with the waves themselves is violet. Rule 5.
+   ============================================================ */
+
+.gw__body {
+    fill: url(#gwCompact);
+}
+
+/* Orbital tracks. Dashed, because they are a history rather than
+   a thing. */
+.gw__orbit {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+    stroke-dasharray: 3 5;
+    opacity: 0.7;
+}
+
+/* Spacetime, being stretched. Not light — so it is never drawn as
+   a beam or a glow, only as a distortion.
+
+   These are deliberately STATIC. An earlier version expanded and
+   faded them on a loop, which meant that at any given instant some
+   of them were at zero opacity — including, reliably, whenever a
+   screenshot was taken. components.css hits the same problem with
+   .emblem--events and solves it by keeping a static ring underneath
+   the animated one. Here the ripples carry the figure's whole
+   argument, so rather than animate and backstop, they simply hold
+   still and are always legible. */
+.gw__ripple {
+    fill: none;
+    stroke: var(--unseen);
+    stroke-width: 1.2;
+    opacity: 0.5;
+}
+
+.gw__ripple--faint {
+    opacity: 0.24;
+    stroke-dasharray: 5 6;
+}
+
+.gw__merged {
+    fill: url(#gwMerged);
+}
+
+/* The strain trace. */
+.gw__wave {
+    fill: none;
+    stroke: var(--unseen);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 6px var(--unseen-soft));
+}
+
+.gw__wave--bloom {
+    stroke-width: 7;
+    opacity: 0.16;
+    filter: blur(4px);
+}
+
+.gw__phase {
+    fill: none;
+    stroke: var(--unseen-mid);
+    stroke-width: 1;
+    opacity: 0.6;
+}
+
+/* Vertical ties from each scene down to its part of the trace, so
+   the top and bottom halves read as one figure. */
+/* --line-2 is already a 0.14-alpha hairline, so multiplying it by a
+   further 0.55 opacity made these invisible. Tinted with the
+   domain's unseen violet instead, at a strength that actually
+   reaches the screen. */
+.gw__tie {
+    fill: none;
+    stroke: var(--unseen);
+    stroke-width: 1;
+    stroke-dasharray: 2 6;
+    opacity: 0.3;
+}
+
+
+/* ============================================================
+   8. Fig 04 — FLARE AND CORONAL MASS EJECTION
+   ------------------------------------------------------------
+   Amber, because it is the Sun and the Sun is amber everywhere
+   on this site. The one departure is the flare itself, which is
+   white — an X-class flare's soft X-ray plasma is at tens of
+   millions of kelvin and it is not the same colour as the
+   photosphere underneath it.
+
+   The geometry is the physics: a magnetic loop, sheared until the
+   field lines above it pinch together, reconnect, and dump their
+   stored energy downward as a flare and outward as a cloud.
+   ============================================================ */
+
+.cme__limb  { fill: url(#cmeLimb); }
+.cme__corona { fill: url(#cmeCorona); }
+
+/* Magnetic field lines. Closed loops before reconnection, open
+   afterwards. */
+.cme__loop {
+    fill: none;
+    stroke: var(--corona);
+    stroke-width: 1.3;
+    opacity: 0.55;
+}
+
+.cme__loop--open {
+    stroke-dasharray: 5 4;
+    opacity: 0.4;
+}
+
+/* The reconnection point. Where the field breaks and rejoins, and
+   the only reason any of this happens. */
+.cme__xpoint {
+    fill: none;
+    stroke: var(--detonation);
+    stroke-width: 1.4;
+    opacity: 0.85;
+}
+
+/* Flare ribbons: the footpoints where accelerated particles slam
+   back into the chromosphere. This is what brightens in H-alpha
+   and what the GOES X-ray classification actually measures. */
+.cme__ribbon {
+    fill: var(--detonation);
+    opacity: 0.9;
+    filter: drop-shadow(0 0 8px rgba(255, 244, 222, 0.85));
+}
+
+.cme__flare {
+    fill: url(#cmeFlare);
+}
+
+/* The cloud. A bright leading front, a dark cavity behind it and
+   an erupting filament inside — the classic three-part CME. */
+.cme__front {
+    fill: none;
+    stroke: var(--shock);
+    stroke-width: 2.2;
+    opacity: 0.6;
+    filter: drop-shadow(0 0 7px var(--shock-soft));
+}
+
+/* Dark centre, faint warm sheath as its own outer rim. */
+.cme__cavity { fill: url(#cmeCavity); }
+
+/* Edge ramps, so the Sun's disc arrives out of the page black
+   instead of stopping against the figure's boundary. */
+.cme__fade {
+    pointer-events: none;
+}
+
+.cme__filament {
+    fill: none;
+    stroke: var(--shock-hot);
+    stroke-width: 3;
+    stroke-linecap: round;
+    opacity: 0.6;
+}
+
+.cme__earth  { fill: url(#cmeEarth); }
+
+/* Earth's magnetosphere, standing the cloud off. Drawn because the
+   reason a CME is a technology problem rather than a biology one
+   is that this deflects it. */
+.cme__magneto {
+    fill: none;
+    stroke: var(--thermal);
+    stroke-width: 1.2;
+    opacity: 0.5;
+}
+
+.cme__magneto--faint {
+    opacity: 0.24;
+    stroke-dasharray: 4 5;
+}
+
+
+/* ============================================================
+   9. TRANSIT RAIL
+   ------------------------------------------------------------
+   Fig 05, built on the shared .rail. The base component puts the
+   Sun at the origin of every rail, which for once is literally
+   true — this rail's zero is the moment of the flare, and its
+   marks are when each thing it produced reaches Earth.
+
+   Base-10 seconds, because the span runs from eight minutes to
+   four days and a linear axis would put the first three marks on
+   top of each other.
+   ============================================================ */
+
+.rail--transit {
+    height: 168px;
+    margin-top: var(--s-7);
+}
+
+/* Three regimes behind the axis: light, particles, plasma. Bands
+   rather than ticks, because none of them has a sharp edge. */
+.rail--transit::before {
+    top: 50%;
+    height: 16px;
+    transform: translateY(-50%);
+    background: linear-gradient(90deg,
+        rgba(255, 244, 222, 0.5) 0%,
+        rgba(255, 244, 222, 0.34) 17%,
+        rgba(185, 214, 255, 0.26) 26%,
+        rgba(185, 214, 255, 0.2) 40%,
+        rgba(255, 80, 104, 0.2) 62%,
+        rgba(255, 80, 104, 0.3) 82%,
+        rgba(92, 15, 32, 0.26) 100%);
+    opacity: 0.8;
+}
+
+.rail--transit .rail__mark--up {
+    bottom: calc(50% + 8px);
+}
+
+.rail--transit .rail__mark--down {
+    top: calc(50% + 8px);
+}
+
+
+/* ============================================================
+   9b. COLUMN COPY
+   ------------------------------------------------------------
+   Body text inside a two-column .split that is not a .prose
+   passage — the paired comparisons in sections 02 and 05. Sized
+   to sit under a .sub-title rather than under a .head, so it is a
+   step down from .prose > p.
+   ============================================================ */
+
+.copy {
+    font-size: var(--t-base);
+    line-height: 1.72;
+    color: var(--text-2);
+}
+
+
+/* ============================================================
+   10. PULL LINE
+   ------------------------------------------------------------
+   Restated from the Stars page for the same reason the local
+   index is. Uses the shared accent pair rather than a local
+   sequence variable.
+   ============================================================ */
+
+.pull {
+    max-width: 30ch;
+    font-family: var(--font-display);
+    font-size: var(--t-2xl);
+    font-weight: 300;
+    line-height: 1.34;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.pull em {
+    font-style: normal;
+    font-weight: 400;
+    background-image: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+
+/* ============================================================
+   11. MYTH / FACT
+   ------------------------------------------------------------
+   Claim on the left, correction on the right, hairline between.
+   Restated locally; the Galaxies, Black Holes and Nebulae copies
+   are the others.
+   ============================================================ */
+
+.myths {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+}
+
+.myth {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(var(--s-5), 4vw, var(--s-7));
+    padding: clamp(var(--s-5), 3vw, var(--s-6)) 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.myth__claim {
+    position: relative;
+    padding-left: var(--s-5);
+    font-size: var(--t-md);
+    line-height: 1.5;
+    color: var(--text-3);
+}
+
+/* A struck-through bullet: the claim is being withdrawn, and the
+   mark says so before the sentence does. */
+.myth__claim::before {
+    content: '';
+    position: absolute;
+    top: 0.72em;
+    left: 0;
+    width: 10px;
+    height: 1px;
+    background: var(--text-4);
+}
+
+.myth__claim strong {
+    font-weight: 500;
+    color: var(--text-2);
+}
+
+.myth__truth {
+    font-size: var(--t-sm);
+    line-height: 1.72;
+    color: var(--text-3);
+}
+
+.myth__truth strong {
+    font-weight: 500;
+    color: var(--deto-2);
+}
+
+
+/* ============================================================
+   12. MOTION
+   ------------------------------------------------------------
+   One thing moves: the hero shock front drifts outward, because a
+   blast wave is the one subject on this site that is
+   definitionally not static. It carries no information and it
+   stops under prefers-reduced-motion, and because the arcs are
+   drawn at full opacity at rest, stopping it leaves nothing in a
+   state that reads as broken.
+
+   The merger ripples used to expand on a loop as well. They no
+   longer do — see the note on .gw__ripple for why.
+   ============================================================ */
+
+.ev-hero__front svg {
+    animation: front-expand 38s ease-in-out infinite alternate;
+}
+
+@keyframes front-expand {
+    from { transform: translateX(-50%) scale(1); }
+    to   { transform: translateX(-50%) scale(1.035) translateY(-1.2%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ev-hero__front svg {
+        animation: none !important;
+        transform: translateX(-50%);
+    }
+}
+
+
+/* ============================================================
+   13. RESPONSIVE
+   ------------------------------------------------------------
+   Desktop-first. Diagrams are coordinate systems, so below their
+   natural width they scroll inside their frame rather than
+   reflowing; everything that is a grid of prose wraps.
+   ============================================================ */
+
+/* The index becomes a horizontal scroller before it can wrap onto
+   a second row — --subnav-h is fixed at 46px and every section's
+   scroll-margin-top is computed from it, so a two-row bar would
+   land every anchor jump half a bar too low. */
+@media (max-width: 1023px) {
+    .subnav__list {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .subnav__list::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .myth {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--s-4);
+    }
+}
+
+@media (max-width: 860px) {
+    .fig__frame {
+        padding-bottom: var(--s-3);
+    }
+
+    .fig__svg {
+        min-width: 740px;
+    }
+
+    .ev-hero__front {
+        height: min(44%, 280px);
+    }
+}
+
+@media (max-width: 620px) {
+    .ev-bursts {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

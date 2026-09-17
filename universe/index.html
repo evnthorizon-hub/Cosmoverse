@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Universe — what it is, the Big Bang as the expansion of space rather than an explosion in it, Hubble expansion and redshift, why the observable radius is 46.5 billion light years when the universe is 13.8 billion years old, the cosmic timeline, the cosmic web, dark energy and dark matter, the four lines of evidence, and the evidence on its ultimate fate.">
+    <meta name="keywords" content="universe, cosmology, Big Bang, cosmic expansion, Hubble law, redshift, observable universe, particle horizon, cosmic microwave background, CMB, recombination, cosmic timeline, inflation, nucleosynthesis, cosmic web, filaments, voids, dark matter, dark energy, Lambda-CDM, heat death, Big Rip, astronomy">
+    <meta name="author" content="CosmoVerse">
+    <meta name="theme-color" content="#000003">
+    <title>Universe | CosmoVerse</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/universe.css">
+</head>
+<!-- dm-universe sets the domain palette. Its accent pair is already
+     CMB indigo cooling to aqua, so like Nebulae and Cosmic Events this
+     page does not retune the shared heading gradient. universe.css adds
+     the dark sector, the temperature scale and the epochs, and keeps
+     violet where the rest of the site keeps it: for something real
+     that cannot be seen. -->
+<body class="dm-universe">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                CosmoVerse
+                <span class="logo-mark">Obs.</span>
+            </a>
+
+            <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+            <label for="mobile-menu-checkbox" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </label>
+
+            <nav class="nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../solar-system/index.html" class="nav-link">Solar System</a></li>
+                    <li><a href="../stars/index.html" class="nav-link">Stars</a></li>
+                    <li><a href="../black-holes/index.html" class="nav-link">Black Holes</a></li>
+                    <li><a href="../galaxies/index.html" class="nav-link">Galaxies</a></li>
+                    <li><a href="../nebulae/index.html" class="nav-link">Nebulae</a></li>
+                    <li><a href="../cosmic-events/index.html" class="nav-link">Cosmic Events</a></li>
+                    <li><a href="../missions/index.html" class="nav-link">Missions</a></li>
+                    <li><a href="../exoplanets/index.html" class="nav-link">Exoplanets</a></li>
+                    <li><a href="index.html" class="nav-link active" aria-current="page">Universe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ============================================================
+             ARRIVAL
+             Galaxies opens on a logarithmic arc, Nebulae on dust
+             filaments, Cosmic Events on a shock front, Missions on an
+             ascent curve. This opens on the cosmic web seen from inside
+             it — long strands meeting at lit nodes, and most of the
+             frame empty, because most of the universe is.
+             ============================================================ -->
+        <section class="page-hero">
+            <div class="page-hero__shot" aria-hidden="true">
+                <img src="../images/universe.png" alt="" decoding="async">
+            </div>
+            <!-- Held well back. .field--web defaults to 0.55, and at that
+                 strength its three crossing rulings sit right on top of the
+                 photograph, which on this asset is itself large-scale
+                 structure — i.e. the drawn field would be competing with a
+                 better version of itself. It is here to echo the geometry,
+                 not to replace the subject. -->
+            <div class="field field--web" aria-hidden="true" style="--field-opacity:0.2"></div>
+            <div class="starfield" style="--stars-opacity:0.72" aria-hidden="true"></div>
+            <div class="starfield-streak" aria-hidden="true"></div>
+
+            <div class="un-hero__web" aria-hidden="true">
+                <svg viewBox="0 0 1700 440" preserveAspectRatio="xMidYMax meet">
+                    <g class="un-fil un-fil--bloom">
+                        <path d="M -80 452 L 240 330 L 620 250 L 980 300 L 1360 240 L 1780 306"/>
+                        <path d="M 240 330 L 500 420 L 1150 410 L 1360 240"/>
+                        <path d="M 620 250 L 500 420"/>
+                        <path d="M 980 300 L 1150 410"/>
+                        <path d="M 620 250 L 700 44"/>
+                        <path d="M 980 300 L 1044 70"/>
+                        <path d="M 1360 240 L 1508 58"/>
+                        <path d="M 240 330 L 176 96"/>
+                    </g>
+                    <g class="un-fil">
+                        <path d="M -80 452 L 240 330 L 620 250 L 980 300 L 1360 240 L 1780 306"/>
+                        <path d="M 240 330 L 500 420 L 1150 410 L 1360 240"/>
+                        <path d="M 620 250 L 500 420"/>
+                        <path d="M 980 300 L 1150 410"/>
+                        <path d="M 620 250 L 700 44"/>
+                        <path d="M 980 300 L 1044 70"/>
+                        <path d="M 1360 240 L 1508 58"/>
+                        <path d="M 240 330 L 176 96"/>
+                    </g>
+                    <path class="un-fil un-fil--lead" d="M -80 452 L 240 330 L 620 250 L 980 300 L 1360 240 L 1780 306"/>
+                    <g class="un-node un-node--halo">
+                        <circle cx="240" cy="330" r="16"/>
+                        <circle cx="620" cy="250" r="20"/>
+                        <circle cx="980" cy="300" r="15"/>
+                        <circle cx="1360" cy="240" r="18"/>
+                        <circle cx="500" cy="420" r="13"/>
+                        <circle cx="1150" cy="410" r="12"/>
+                    </g>
+                    <g class="un-node">
+                        <circle cx="240" cy="330" r="2.2"/>
+                        <circle cx="620" cy="250" r="2.8"/>
+                        <circle cx="980" cy="300" r="2"/>
+                        <circle cx="1360" cy="240" r="2.4"/>
+                        <circle cx="500" cy="420" r="1.7"/>
+                        <circle cx="1150" cy="410" r="1.6"/>
+                        <circle cx="392" cy="288" r="1.2"/>
+                        <circle cx="806" cy="272" r="1.3"/>
+                        <circle cx="1176" cy="268" r="1.1"/>
+                        <circle cx="672" cy="140" r="1.2"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="container">
+                <p class="eyebrow"><span class="eyebrow__id">09</span> Region &middot; Cosmology</p>
+                <h1 class="page-hero__title">The<em>Universe</em></h1>
+                <p class="page-hero__lede">Everything the other eight regions describe is inside this one. It has an age, a composition, a measurable geometry and a horizon &mdash; and every one of those numbers comes from a single observation made a century ago, that the further away a galaxy is, the redder its light arrives.</p>
+                <p class="page-hero__coords">
+                    <span>CMB 2.7255 K</span>
+                    <span>Flat to within ~0.4 per cent</span>
+                    <span>z = 1090 at last scattering</span>
+                </p>
+            </div>
+
+            <div class="page-hero__dock">
+                <div class="container">
+                    <!-- Labels are kept short enough to stay on one line. A
+                         two-line label in one cell drops that cell's figure
+                         below the other five and the readout stops reading
+                         as a single instrument. -->
+                    <dl class="readout readout--flush">
+                        <div class="readout__cell">
+                            <dt>Age</dt>
+                            <dd>13.79 <small>Gyr</small></dd>
+                        </div>
+                        <!-- "Observable radius" is 17 characters and wrapped
+                             onto a second line in a 180px cell, which dropped
+                             this figure below the other five. "Horizon" is
+                             the same quantity and fits. -->
+                        <div class="readout__cell">
+                            <dt>Horizon</dt>
+                            <dd>46.5 <small>Gly</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Expansion rate</dt>
+                            <dd>67&ndash;73 <small>km/s/Mpc</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Dark energy</dt>
+                            <dd>68.3 <small>per cent</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Dark matter</dt>
+                            <dd>26.8 <small>per cent</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Ordinary matter</dt>
+                            <dd>4.9 <small>per cent</small></dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             LOCAL INDEX
+             ============================================================ -->
+        <nav class="subnav" aria-label="Sections in this region">
+            <div class="subnav__list">
+                <a href="#overview">Overview</a>
+                <a href="#big-bang">Big Bang</a>
+                <a href="#expansion">Expansion</a>
+                <a href="#observable">Observable</a>
+                <a href="#timeline">Timeline</a>
+                <a href="#web">Cosmic Web</a>
+                <a href="#composition">Composition</a>
+                <a href="#evidence">Evidence</a>
+                <a href="#fate">Fate</a>
+            </div>
+        </nav>
+
+
+        <!-- ============================================================
+             01 · WHAT IS THE UNIVERSE
+             ============================================================ -->
+        <section class="shell shell--abyss" id="overview">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">01</span> Overview</p>
+                    <h2 class="head__title">Space, time, matter, energy &mdash; and <em>no outside</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">The universe is not a container with things in it. It is the things and the container together: every particle, every field, and the geometry those particles move through, taken as one object. That is why questions of the form "what is it expanding into" have no answer &mdash; not because the answer is unknown, but because the question assumes an outside that the definition does not provide.</p>
+                </header>
+
+                <div class="split">
+                    <div class="prose prose--lede">
+                        <p>Two words do most of the work on this page, and they do not mean the same thing. The <strong>observable universe</strong> is the part we could in principle have received light from: a sphere centred on any given observer, with a definite radius set by how long light has had to travel and how much the space it crossed has stretched. The <strong>universe</strong> is everything, observable or not, and nothing is known about its total size except that it is at least as large as the part we can see and very probably much larger.</p>
+                        <p>Everything measurable about it is consistent with two assumptions that between them are called the cosmological principle: on large enough scales it looks the same in every direction, and it looks the same from every position. The first has been tested directly &mdash; the microwave background is uniform to about one part in a hundred thousand across the whole sky. The second cannot be tested from one location, and is adopted because the alternative is to claim that we are standing somewhere special.</p>
+                        <p>What follows from that pair is surprisingly strong. If there is no centre and no edge, then the recession of distant galaxies cannot be motion away from a point, and must instead be a property of the space between them. Every other section on this page is a consequence of taking that seriously.</p>
+                    </div>
+
+                    <div>
+                        <p class="pull">The universe is not expanding into anything. Distance itself is <em>getting larger</em>.</p>
+
+                        <div class="note" style="margin-top:2.5rem">
+                            <span class="note__title">Five numbers that fix everything else</span>
+                            <ul class="note__list">
+                                <li><strong>13.787 billion years.</strong> The age, from the microwave background, to a precision of about twenty million years. Every date on this page is measured from that zero.</li>
+                                <li><strong>46.5 billion light years.</strong> The present distance to the furthest matter we can see. Larger than the age in light years, and section 04 is about why that is not a contradiction.</li>
+                                <li><strong>Flat, to within about 0.4 per cent.</strong> Parallel lines stay parallel; the angles of a large triangle add to 180 degrees. This was an open question until 2000 and is now one of the best-measured facts in the subject.</li>
+                                <li><strong>2.7255 kelvin.</strong> The temperature of the sky in microwaves, everywhere, in every direction. It is the leftover heat of the moment the universe stopped being opaque.</li>
+                                <li><strong>Under five per cent.</strong> The fraction of the universe made of the kind of matter that atoms, stars, planets, instruments and people are made of.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">01a</span> Observable</p>
+                        <h3 class="sub-title" style="margin-top:1rem">A sphere, and it is personal</h3>
+                        <p class="copy" style="margin-top:1rem">Every observer sits at the centre of their own observable universe, because every observer has had exactly the same amount of time for light to reach them. That is not a paradox and it is not a coincidence: it is what "no special place" means in practice. A galaxy ten billion light years away has its own sphere of the same radius, overlapping ours, containing regions we will never see.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>Radius</dt><dd>46.5 billion ly</dd></div>
+                            <div class="spec__row"><dt>Diameter</dt><dd>~93 billion ly</dd></div>
+                            <div class="spec__row"><dt>Galaxies inside</dt><dd>~10&#8311; to 2 &times; 10&sup1;&sup2;</dd></div>
+                            <div class="spec__row"><dt>Set by</dt><dd>Light travel time and expansion</dd></div>
+                            <div class="spec__row"><dt>Centred on</dt><dd>Whoever is looking</dd></div>
+                        </dl>
+                    </div>
+
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">01b</span> Entire</p>
+                        <h3 class="sub-title" style="margin-top:1rem">Size unknown, and possibly unanswerable</h3>
+                        <p class="copy" style="margin-top:1rem">Because space is flat to the limit of measurement, there is no observed curvature to close it back on itself, and a flat universe with no boundary is infinite. But "flat to within 0.4 per cent" is not "flat", and a very large finite universe would look flat from inside a small enough patch of it. The honest position is that the total extent is not measured, may not be measurable, and that the number often quoted for the size of the universe is always the size of the observable part.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>Total size</dt><dd>Unmeasured</dd></div>
+                            <div class="spec__row"><dt>Curvature &#8486;&#8342;</dt><dd>0.001 &plusmn; 0.002</dd></div>
+                            <div class="spec__row"><dt>Lower bound</dt><dd>&ge; the observable sphere</dd></div>
+                            <div class="spec__row"><dt>Edge</dt><dd>None observed, none expected</dd></div>
+                            <div class="spec__row"><dt>Centre</dt><dd>None</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             02 · THE BIG BANG
+             shell--lit: the section is illuminated from above by the
+             thing it describes, and this is the one section on the site
+             where that thing is literally the whole sky.
+             ============================================================ -->
+        <section class="shell shell--lit shell--seam" id="big-bang">
+            <div class="field field--web" aria-hidden="true" style="--field-opacity:0.16"></div>
+
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">02</span> The Big Bang</p>
+                    <h2 class="head__title">Not an explosion &mdash; <em>a change of scale</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">The name is a joke that stuck. Fred Hoyle used it dismissively on the radio in 1949 and it outlived the theory he preferred, which is unfortunate, because almost everything wrong in the popular picture of cosmology comes from taking the two words literally.</p>
+                </header>
+
+                <div class="split">
+                    <div class="prose prose--lede">
+                        <p>An explosion is matter flying apart through space from a place where it was concentrated. The Big Bang was not that. It was a state in which the whole of space was hot and dense, and the whole of space then became less so. There was no centre it went off at, no empty room it expanded into, and no location you could travel to and find the site of it. It happened where you are sitting, at the same time as everywhere else.</p>
+                        <p>What the theory actually says is narrower and much better supported than the name suggests: that the universe was once hot enough and dense enough that atoms could not hold together, and that it has been getting larger and cooler ever since. Run the observed expansion backwards and the temperature rises without limit. Everything after that is thermodynamics.</p>
+                        <p>The sequence follows from cooling alone. Above roughly ten trillion kelvin, quarks do not bind, so there are no protons or neutrons. Below that, they do. Above about a billion kelvin, nuclei are broken apart faster than they form, so there are no elements. Below that, for a window of a few minutes, they survive &mdash; and the universe fills with hydrogen and helium in a ratio that can be calculated from first principles and then checked against the oldest gas in the sky. Above about 3,000 kelvin, electrons cannot stay attached to nuclei, so the universe is an ionised plasma and light cannot cross it. Below that, atoms form, the fog clears, and the light released at that moment is still arriving.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">What the theory does not claim</span>
+                            <ul class="note__list">
+                                <li><strong>It does not describe the beginning.</strong> The equations are reliable from roughly a trillionth of a second onward, which is where the physics has been tested in accelerators. Before that they extrapolate, and at the notional instant of zero they fail outright &mdash; general relativity and quantum mechanics give incompatible answers and neither can be trusted.</li>
+                                <li><strong>It does not say where the matter came from.</strong> The theory takes a hot dense state as its starting condition and works forward. Why there was anything, and why there is more matter than antimatter, are open.</li>
+                                <li><strong>It does not put the universe inside anything.</strong> Expansion here is a statement about distances between points, not about a boundary moving through a surrounding void.</li>
+                                <li><strong>It is not a theory of a single event.</strong> "Big Bang" names the whole hot dense early era and the expansion out of it, which is why cosmologists talk about the first three minutes rather than the first instant.</li>
+                            </ul>
+                        </div>
+
+                        <dl class="spec" style="margin-top:2.5rem">
+                            <div class="spec__row"><dt>Named by</dt><dd>Fred Hoyle, 1949 &mdash; as a slight</dd></div>
+                            <div class="spec__row"><dt>Predicted</dt><dd>Lema&icirc;tre 1927, Friedmann 1922</dd></div>
+                            <div class="spec__row"><dt>Element forecast</dt><dd>~75% H, ~25% He by mass</dd></div>
+                            <div class="spec__row"><dt>Confirmed by</dt><dd>CMB, 1965</dd></div>
+                            <div class="spec__row"><dt>Physics trusted from</dt><dd>~10&#8315;&sup1;&sup2; s</dd></div>
+                        </dl>
+                    </div>
+                </div>
+
+                <!-- Fig 01 · The shape of expansion. Deliberately carries
+                     no times: Fig 05 is the timeline and it carries all of
+                     them, and two figures competing to be the same figure
+                     is worse than either alone. -->
+                <figure class="fig" style="margin-top:4.5rem">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 570" role="img"
+                             aria-label="The expansion history of the universe drawn as a widening cone, read left to right. At the far left a brilliant point flares suddenly outward during inflation. The cone then widens steadily through an era of hot structureless particle soup, then through an opaque ionised plasma. At a vertical wall about a third of the way across, atoms form and the microwave background is released; the wall is mottled with hot and cold patches. Beyond it is a dark, empty stretch called the dark ages, then the first stars appear as blue-white points, then galaxies appear and spread further apart as the cone continues to widen, opening slightly faster towards the right where dark energy dominates. Beneath the cone an axis names seven eras and eight events, from the Big Bang to today.">
+
+                            <defs>
+                                <!-- The cone's own light. Hot and white at the
+                                     left because the early universe genuinely
+                                     was a light source; indigo and dark at the
+                                     right because the present one is mostly
+                                     empty space. -->
+                                <linearGradient id="coneFill" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%"   stop-color="#fff4de" stop-opacity="0.5"/>
+                                    <stop offset="6%"   stop-color="#ffcfae" stop-opacity="0.34"/>
+                                    <stop offset="18%"  stop-color="#ffab94" stop-opacity="0.26"/>
+                                    <stop offset="34%"  stop-color="#97a4ff" stop-opacity="0.2"/>
+                                    <stop offset="46%"  stop-color="#1a1f56" stop-opacity="0.5"/>
+                                    <stop offset="62%"  stop-color="#151a4a" stop-opacity="0.42"/>
+                                    <stop offset="100%" stop-color="#04051a" stop-opacity="0.55"/>
+                                </linearGradient>
+
+                                <radialGradient id="coneFlash" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.95"/>
+                                    <stop offset="26%"  stop-color="#fff4de" stop-opacity="0.6"/>
+                                    <stop offset="60%"  stop-color="#ffab94" stop-opacity="0.22"/>
+                                    <stop offset="100%" stop-color="#ffab94" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <!-- Between nucleosynthesis and recombination
+                                     the universe was genuinely not transparent,
+                                     so this band is genuinely fogged. -->
+                                <linearGradient id="coneOpaque" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%"   stop-color="#ffab94" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="#ffab94" stop-opacity="0.12"/>
+                                </linearGradient>
+
+                                <!-- The surface of last scattering. Everything
+                                     to its left is permanently unobservable in
+                                     light, not because it is far but because it
+                                     is behind a fog. -->
+                                <linearGradient id="coneWall" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%"   stop-color="#97a4ff" stop-opacity="0.12"/>
+                                    <stop offset="45%"  stop-color="#cfe1ff" stop-opacity="0.6"/>
+                                    <stop offset="100%" stop-color="#97a4ff" stop-opacity="0.1"/>
+                                </linearGradient>
+
+                                <clipPath id="coneClip">
+                                    <path d="M 92 223 L 150 180 C 196 166, 224 158, 262 154 C 320 148, 356 140, 404 132 C 470 122, 512 116, 566 108 C 626 100, 674 93, 724 86 C 790 77, 850 69, 902 62 C 980 52, 1058 42, 1122 32 L 1122 424 C 1058 414, 980 404, 902 394 C 850 387, 790 379, 724 370 C 674 363, 626 356, 566 348 C 512 340, 470 334, 404 324 C 356 316, 320 308, 262 302 C 224 298, 196 290, 150 276 L 92 233 Z"/>
+                                </clipPath>
+                            </defs>
+
+                            <!-- ---- THE CONE ------------------------------
+                                 Half-height is the scale factor. The profile
+                                 flares almost vertically during inflation,
+                                 then grows more slowly than linearly while
+                                 gravity is winning, then bends upward again in
+                                 the last third where dark energy takes over. -->
+                            <path class="cone__body" d="M 92 223 L 150 180 C 196 166, 224 158, 262 154 C 320 148, 356 140, 404 132 C 470 122, 512 116, 566 108 C 626 100, 674 93, 724 86 C 790 77, 850 69, 902 62 C 980 52, 1058 42, 1122 32 L 1122 424 C 1058 414, 980 404, 902 394 C 850 387, 790 379, 724 370 C 674 363, 626 356, 566 348 C 512 340, 470 334, 404 324 C 356 316, 320 308, 262 302 C 224 298, 196 290, 150 276 L 92 233 Z"/>
+
+                            <g clip-path="url(#coneClip)">
+                                <!-- Inflation. The one thing in this figure
+                                     drawn as a flash, and it is not an
+                                     explosion — it is the scale factor
+                                     multiplying by at least 10²⁶ in a
+                                     fraction of a second. -->
+                                <circle class="cone__flash" cx="106" cy="228" r="78"/>
+
+                                <!-- Particle soup: hot, relativistic,
+                                     structureless. Nothing is bound to
+                                     anything. -->
+                                <g class="cone__quark">
+                                    <circle cx="168" cy="200" r="2"/>
+                                    <circle cx="182" cy="252" r="2"/>
+                                    <circle cx="196" cy="286" r="2"/>
+                                    <circle cx="210" cy="192" r="2"/>
+                                    <circle cx="224" cy="240" r="2"/>
+                                    <circle cx="238" cy="278" r="2"/>
+                                    <circle cx="252" cy="214" r="2"/>
+                                    <circle cx="176" cy="228" r="2"/>
+                                    <circle cx="206" cy="262" r="2"/>
+                                    <circle cx="232" cy="196" r="2"/>
+                                    <circle cx="246" cy="252" r="2"/>
+                                    <circle cx="160" cy="244" r="2"/>
+                                </g>
+
+                                <!-- Opaque ionised plasma. Light exists and
+                                     cannot travel. -->
+                                <rect class="cone__opaque" x="262" y="120" width="142" height="216"/>
+
+                                <!-- Recombination. -->
+                                <rect class="cone__wall" x="398" y="120" width="13" height="216"/>
+                                <g class="cone__mottle">
+                                    <circle cx="401" cy="146" r="2.6"/>
+                                    <circle cx="406" cy="168" r="2.6"/>
+                                    <circle cx="403" cy="190" r="2.6"/>
+                                    <circle cx="407" cy="212" r="2.6"/>
+                                    <circle cx="402" cy="234" r="2.6"/>
+                                    <circle cx="405" cy="256" r="2.6"/>
+                                    <circle cx="404" cy="278" r="2.6"/>
+                                    <circle cx="406" cy="300" r="2.6"/>
+                                    <circle cx="402" cy="318" r="2.6"/>
+                                </g>
+
+                                <!-- Dark ages: deliberately nothing at all
+                                     between x=411 and x=566. The first stars
+                                     had not formed and the CMB had already
+                                     redshifted out of visible light, so the
+                                     universe was genuinely dark. -->
+
+                                <!-- First stars. Metal-free, enormous,
+                                     blue-white, and short-lived. -->
+                                <g class="cone__star">
+                                    <circle cx="584" cy="180" r="2.2"/>
+                                    <circle cx="600" cy="330" r="2.2"/>
+                                    <circle cx="618" cy="240" r="2.2"/>
+                                    <circle cx="636" cy="132" r="2.2"/>
+                                    <circle cx="654" cy="320" r="2.2"/>
+                                    <circle cx="672" cy="200" r="2.2"/>
+                                    <circle cx="690" cy="268" r="2.2"/>
+                                    <circle cx="708" cy="160" r="2.2"/>
+                                    <circle cx="700" cy="348" r="2.2"/>
+                                </g>
+
+                                <!-- Galaxies. Drawn at the same size all the
+                                     way across, and spreading apart, because
+                                     galaxies are not what expands. -->
+                                <g class="cone__galaxy">
+                                    <ellipse cx="746" cy="150" rx="6" ry="2.6" transform="rotate(-18 746 150)"/>
+                                    <ellipse cx="762" cy="318" rx="6" ry="2.6" transform="rotate(22 762 318)"/>
+                                    <ellipse cx="790" cy="214" rx="6" ry="2.6" transform="rotate(-6 790 214)"/>
+                                    <ellipse cx="812" cy="360" rx="6" ry="2.6" transform="rotate(34 812 360)"/>
+                                    <ellipse cx="840" cy="128" rx="6" ry="2.6" transform="rotate(-28 840 128)"/>
+                                    <ellipse cx="858" cy="272" rx="6" ry="2.6" transform="rotate(12 858 272)"/>
+                                    <ellipse cx="886" cy="186" rx="6" ry="2.6" transform="rotate(-14 886 186)"/>
+                                    <ellipse cx="904" cy="346" rx="6" ry="2.6" transform="rotate(26 904 346)"/>
+                                    <ellipse cx="932" cy="240" rx="6" ry="2.6" transform="rotate(-2 932 240)"/>
+                                    <ellipse cx="950" cy="110" rx="6" ry="2.6" transform="rotate(18 950 110)"/>
+                                    <ellipse cx="978" cy="300" rx="6" ry="2.6" transform="rotate(-24 978 300)"/>
+                                    <ellipse cx="1000" cy="168" rx="6" ry="2.6" transform="rotate(8 1000 168)"/>
+                                    <ellipse cx="1024" cy="392" rx="6" ry="2.6" transform="rotate(-16 1024 392)"/>
+                                    <ellipse cx="1046" cy="236" rx="6" ry="2.6" transform="rotate(30 1046 236)"/>
+                                    <ellipse cx="1072" cy="120" rx="6" ry="2.6" transform="rotate(-10 1072 120)"/>
+                                    <ellipse cx="1096" cy="320" rx="6" ry="2.6" transform="rotate(16 1096 320)"/>
+                                    <ellipse cx="1108" cy="196" rx="6" ry="2.6" transform="rotate(-30 1108 196)"/>
+                                    <ellipse cx="1080" cy="410" rx="6" ry="2.6" transform="rotate(6 1080 410)"/>
+                                </g>
+
+                                <!-- Era boundaries, drawn inside the cone. -->
+                                <g class="cone__divide">
+                                    <path d="M 150 176 L 150 280"/>
+                                    <path d="M 262 150 L 262 306"/>
+                                    <path d="M 566 104 L 566 352"/>
+                                    <path d="M 724 82 L 724 374"/>
+                                    <path d="M 902 58 L 902 398"/>
+                                </g>
+                            </g>
+
+                            <!-- Cone outline, drawn over the interior so the
+                                 edge stays crisp where the fill is bright. -->
+                            <path class="cone__edge" fill="none" d="M 92 223 L 150 180 C 196 166, 224 158, 262 154 C 320 148, 356 140, 404 132 C 470 122, 512 116, 566 108 C 626 100, 674 93, 724 86 C 790 77, 850 69, 902 62 C 980 52, 1058 42, 1122 32"/>
+                            <path class="cone__edge" fill="none" d="M 92 233 L 150 276 C 196 290, 224 298, 262 302 C 320 308, 356 316, 404 324 C 470 334, 512 340, 566 348 C 626 356, 674 363, 724 370 C 790 379, 850 387, 902 394 C 980 404, 1058 414, 1122 424"/>
+                            <path class="cone__edge" d="M 1122 32 L 1122 424"/>
+
+                            <!-- ---- LEADERS AND AXIS ---------------------- -->
+                            <g class="svg-leader">
+                                <path d="M 150 284 L 150 478"/>
+                                <path d="M 404 328 L 404 478"/>
+                                <path d="M 724 374 L 724 478"/>
+                                <path d="M 262 306 L 262 512"/>
+                                <path d="M 566 352 L 566 512"/>
+                                <path d="M 902 398 L 902 512"/>
+                            </g>
+
+                            <path class="svg-axis" d="M 92 472 L 1122 472"/>
+                            <circle class="exp__here" cx="92" cy="472" r="3"/>
+                            <circle class="exp__here" cx="1122" cy="472" r="3"/>
+
+                            <!-- Eras, above the axis, centred in their bands. -->
+                            <g class="svg-unit cone__era">
+                                <!-- The inflation band is only 58 units wide,
+                                     which will not centre a nine-glyph label
+                                     without it reaching into its neighbour.
+                                     Anchored to the band's own edge instead. -->
+                                <text x="147" y="452" text-anchor="end">Inflation</text>
+                                <text x="210" y="452" text-anchor="middle">Particle soup</text>
+                                <text x="333" y="452" text-anchor="middle">Opaque plasma</text>
+                                <text x="485" y="452" text-anchor="middle">Dark ages</text>
+                                <text x="645" y="452" text-anchor="middle">Cosmic dawn</text>
+                                <text x="813" y="452" text-anchor="middle">Galaxy assembly</text>
+                                <text x="1012" y="452" text-anchor="middle">Accelerating</text>
+                            </g>
+
+                            <!-- Events, below the axis, on two rows so no two
+                                 labels can collide. -->
+                            <text class="svg-label" x="150" y="492" text-anchor="middle">Inflation ends</text>
+                            <text class="svg-label svg-label--cmb" x="404" y="492" text-anchor="middle">Atoms form &middot; CMB</text>
+                            <text class="svg-label svg-label--baryon" x="724" y="492" text-anchor="middle">First galaxies</text>
+
+                            <text class="svg-label svg-label--hot" x="92" y="526">Big Bang</text>
+                            <text class="svg-label" x="262" y="526" text-anchor="middle">Nuclei form</text>
+                            <text class="svg-label svg-label--dawn" x="566" y="526" text-anchor="middle">First stars</text>
+                            <text class="svg-label" x="902" y="526" text-anchor="middle">Solar System</text>
+                            <text class="svg-label" x="1122" y="526" text-anchor="end">Today</text>
+
+                            <text class="svg-unit" x="92" y="552">Hot &middot; dense &middot; opaque</text>
+                            <text class="svg-unit" x="1122" y="552" text-anchor="end">Cold &middot; sparse &middot; transparent</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 01</span>
+                        <span class="caption__body"><strong>Not to scale in time, and carrying no times on purpose.</strong> The horizontal axis is compressed logarithmically and unevenly so that all seven eras are visible at once; drawn linearly, the first six of them would occupy less than one pixel of the axis and the figure would be a single rectangle. <strong>Fig&nbsp;05 is the timeline</strong> and it states every duration honestly on two properly labelled axes. What this figure shows instead is the <em>shape</em>: the near-vertical flare of inflation, then a long stretch where the cone widens more slowly than a straight line because gravity is slowing the expansion down, then a visible reopening in the last third where dark energy takes over. Vertical half-height is the scale factor, not a physical size &mdash; the cone is not a picture of an object with an edge, and the space above and below it is not "outside the universe", it is simply off the diagram. One detail is exact: the galaxies are drawn at the same size all the way across while the distances between them grow. Bound systems do not expand.</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             03 · COSMIC EXPANSION
+             The mechanism section. Fig 02 is the mechanism drawn; Fig 03
+             is the measurement it was inferred from. In that order,
+             because the measurement is meaningless without the picture
+             and the picture is unsupported without the measurement.
+             ============================================================ -->
+        <section class="shell shell--void" id="expansion">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">03</span> Cosmic expansion</p>
+                    <h2 class="head__title">Nothing is moving. The <em>distances</em> are changing</h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">In 1929 Edwin Hubble published a plot of forty-six galaxies: how far away each one was, against how much its light was shifted towards the red. The points fell on a straight line through the origin. Twice as far, twice as fast. That single graph is the foundation of everything on this page, and its shape &mdash; a line through the origin rather than any other curve &mdash; is what rules out the galaxies simply flying apart.</p>
+                </header>
+
+                <!-- Fig 02 · Rule 1 of this region, stated as plainly as
+                     the page can state it. -->
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 620" role="img"
+                             aria-label="Two panels of the same coordinate grid at two different times. The left panel, labelled earlier with a scale factor of 0.63, shows a four-by-four lattice with six galaxies and an observer marked at the centre. The right panel, labelled today with a scale factor of one, shows the same lattice with every cell 1.6 times wider, the same six galaxies at exactly the same grid coordinates and drawn at exactly the same size, and the same observer still at the centre. Arrows attached to each galaxy in the right panel point directly away from the observer, and each arrow is longer the further its galaxy is from the observer. Below the two panels, the same light wave is drawn twice: short-wavelength under the left panel, and under the right panel the same number of cycles stretched out by the same factor of 1.6.">
+
+                            <defs>
+                                    <!-- Two markers with explicit fills rather than
+                                     one marker using currentColor. Markers
+                                     resolve currentColor against their own
+                                     inherited colour rather than the
+                                     referencing element's in some engines, and
+                                     this figure needs two different arrow
+                                     colours to mean two different things:
+                                     indigo for the operation being applied,
+                                     red for the recession it produces. -->
+                                <marker id="expArrow" viewBox="0 0 10 10" refX="8" refY="5"
+                                        markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 1 L 9 5 L 0 9 z" fill="#97a4ff"/>
+                                </marker>
+                                <marker id="expFlee" viewBox="0 0 10 10" refX="8" refY="5"
+                                        markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 1 L 9 5 L 0 9 z" fill="#ff9a72"/>
+                                </marker>
+                            </defs>
+
+                            <!-- ---- PANEL A · EARLIER ---------------------- -->
+                            <text class="svg-label" x="204" y="120" text-anchor="middle">Earlier</text>
+                            <text class="svg-unit" x="204" y="136" text-anchor="middle">Scale factor a = 0.63</text>
+
+                            <g class="exp__grid">
+                                <path d="M 80 150 L 80 398"/>
+                                <path d="M 142 150 L 142 398"/>
+                                <path d="M 204 150 L 204 398"/>
+                                <path d="M 266 150 L 266 398"/>
+                                <path d="M 328 150 L 328 398"/>
+                                <path d="M 80 150 L 328 150"/>
+                                <path d="M 80 212 L 328 212"/>
+                                <path d="M 80 274 L 328 274"/>
+                                <path d="M 80 336 L 328 336"/>
+                                <path d="M 80 398 L 328 398"/>
+                            </g>
+                            <rect class="exp__frame" x="80" y="150" width="248" height="248"/>
+
+                            <g class="exp__galaxy">
+                                <ellipse cx="241" cy="255" rx="8" ry="3.4" transform="rotate(-22 241 255)"/>
+                                <ellipse cx="148" cy="305" rx="8" ry="3.4" transform="rotate(14 148 305)"/>
+                                <ellipse cx="291" cy="218" rx="8" ry="3.4" transform="rotate(-8 291 218)"/>
+                                <ellipse cx="117" cy="348" rx="8" ry="3.4" transform="rotate(28 117 348)"/>
+                                <ellipse cx="316" cy="373" rx="8" ry="3.4" transform="rotate(-34 316 373)"/>
+                                <ellipse cx="105" cy="181" rx="8" ry="3.4" transform="rotate(8 105 181)"/>
+                            </g>
+
+                            <circle class="exp__here-ring" cx="204" cy="274" r="10"/>
+                            <circle class="exp__here" cx="204" cy="274" r="3.4"/>
+
+                            <!-- ---- THE OPERATION ------------------------- -->
+                            <text class="svg-label" x="426" y="240" text-anchor="middle">Expansion</text>
+                            <text class="svg-unit" x="426" y="256" text-anchor="middle">Scale factor &times;1.6</text>
+                            <path class="exp__step" d="M 366 274 L 486 274" marker-end="url(#expArrow)"/>
+
+                            <!-- ---- PANEL B · TODAY ----------------------- -->
+                            <text class="svg-label" x="718" y="42" text-anchor="middle">Today</text>
+                            <text class="svg-unit" x="718" y="58" text-anchor="middle">Scale factor a = 1</text>
+
+                            <g class="exp__grid">
+                                <path d="M 520 76 L 520 472"/>
+                                <path d="M 619 76 L 619 472"/>
+                                <path d="M 718 76 L 718 472"/>
+                                <path d="M 817 76 L 817 472"/>
+                                <path d="M 916 76 L 916 472"/>
+                                <path d="M 520 76 L 916 76"/>
+                                <path d="M 520 175 L 916 175"/>
+                                <path d="M 520 274 L 916 274"/>
+                                <path d="M 520 373 L 916 373"/>
+                                <path d="M 520 472 L 916 472"/>
+                            </g>
+                            <rect class="exp__frame" x="520" y="76" width="396" height="396"/>
+
+                            <!-- Recession arrows. Length is proportional to
+                                 distance from the observer, which is Hubble's
+                                 law drawn rather than plotted — and it is a
+                                 consequence of the grid stretching uniformly,
+                                 not an extra assumption. -->
+                            <g class="exp__flee">
+                                <path d="M 777 244 L 793 236" marker-end="url(#expFlee)"/>
+                                <path d="M 629 324 L 606 337" marker-end="url(#expFlee)"/>
+                                <path d="M 857 185 L 893 162" marker-end="url(#expFlee)"/>
+                                <path d="M 579 393 L 543 424" marker-end="url(#expFlee)"/>
+                                <path d="M 896 432 L 944 475" marker-end="url(#expFlee)"/>
+                                <path d="M 560 126 L 517 86" marker-end="url(#expFlee)"/>
+                            </g>
+
+                            <!-- Same rotations, same radii, same grid
+                                 coordinates. Only the lattice changed. -->
+                            <g class="exp__galaxy">
+                                <ellipse cx="777" cy="244" rx="8" ry="3.4" transform="rotate(-22 777 244)"/>
+                                <ellipse cx="629" cy="324" rx="8" ry="3.4" transform="rotate(14 629 324)"/>
+                                <ellipse cx="857" cy="185" rx="8" ry="3.4" transform="rotate(-8 857 185)"/>
+                                <ellipse cx="579" cy="393" rx="8" ry="3.4" transform="rotate(28 579 393)"/>
+                                <ellipse cx="896" cy="432" rx="8" ry="3.4" transform="rotate(-34 896 432)"/>
+                                <ellipse cx="560" cy="126" rx="8" ry="3.4" transform="rotate(8 560 126)"/>
+                            </g>
+
+                            <circle class="exp__here-ring" cx="718" cy="274" r="10"/>
+                            <circle class="exp__here" cx="718" cy="274" r="3.4"/>
+
+                            <text class="svg-unit" x="718" y="496" text-anchor="middle">Any observer &mdash; the centre of the figure is arbitrary</text>
+
+                            <!-- ---- THE SAME PHOTON, TWICE ---------------
+                                 Sixteen half-cycles in both waves. The count
+                                 is identical and the spacing is not, which is
+                                 exactly what cosmological redshift is: a
+                                 wavelength carried along by a stretching
+                                 grid, not a Doppler shift from motion. -->
+                            <path class="svg-axis svg-dash" d="M 80 530 L 328 530"/>
+                            <path class="svg-axis svg-dash" d="M 520 530 L 916 530"/>
+
+                            <path class="exp__wave exp__wave--short"
+                                  d="M 80 530 Q 87.75 508 95.5 530 Q 103.25 552 111 530 Q 118.75 508 126.5 530
+                                     Q 134.25 552 142 530 Q 149.75 508 157.5 530 Q 165.25 552 173 530
+                                     Q 180.75 508 188.5 530 Q 196.25 552 204 530 Q 211.75 508 219.5 530
+                                     Q 227.25 552 235 530 Q 242.75 508 250.5 530 Q 258.25 552 266 530
+                                     Q 273.75 508 281.5 530 Q 289.25 552 297 530 Q 304.75 508 312.5 530
+                                     Q 320.25 552 328 530"/>
+
+                            <path class="exp__step" d="M 366 530 L 486 530" marker-end="url(#expArrow)"/>
+
+                            <path class="exp__wave exp__wave--long"
+                                  d="M 520 530 Q 532.375 508 544.75 530 Q 557.125 552 569.5 530 Q 581.875 508 594.25 530
+                                     Q 606.625 552 619 530 Q 631.375 508 643.75 530 Q 656.125 552 668.5 530
+                                     Q 680.875 508 693.25 530 Q 705.625 552 718 530 Q 730.375 508 742.75 530
+                                     Q 755.125 552 767.5 530 Q 779.875 508 792.25 530 Q 804.625 552 817 530
+                                     Q 829.375 508 841.75 530 Q 854.125 552 866.5 530 Q 878.875 508 891.25 530
+                                     Q 903.625 552 916 530"/>
+
+                            <text class="svg-label svg-label--blue" x="204" y="578" text-anchor="middle">Light leaves</text>
+                            <text class="svg-unit" x="204" y="594" text-anchor="middle">Eight cycles, short</text>
+                            <text class="svg-label svg-label--red" x="718" y="578" text-anchor="middle">Light arrives</text>
+                            <text class="svg-unit" x="718" y="594" text-anchor="middle">Eight cycles, stretched &times;1.6 &mdash; z = 0.6</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 02</span>
+                        <span class="caption__body"><strong>Schematic, and exact in the three things that matter.</strong> The lattice is a <em>comoving</em> coordinate grid: the galaxies keep the same coordinates in both panels, so by construction none of them travels anywhere. What changes is the conversion from coordinates to distance, and it changes by the same factor everywhere at once. Three consequences follow from that alone, and all three are drawn rather than asserted. First, each galaxy's recession speed is proportional to its distance, because a uniform stretch adds more length to a longer gap &mdash; which is why the arrows grow with distance. Second, the observer at the centre is arbitrary; put the marker on any galaxy in the right-hand panel and every other galaxy still recedes from it, so the figure has no privileged point and neither does the universe. Third, a wave in flight is carried along by the stretch, so its wavelength grows by exactly the factor the grid did. That is cosmological redshift, and it is the reason the two waves below have the same number of cycles. The factor here is 1.6, chosen to be visible; the most distant galaxies observed arrived stretched by a factor of about fifteen.</span>
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div class="prose">
+                        <p>The distinction between a stretch and a flight is not pedantry &mdash; it makes different predictions, and the predictions differ in ways that have been checked. If galaxies were simply moving apart through fixed space, their light would be Doppler-shifted, the shift would be capped by the speed of light, and nothing could be observed with a redshift above one. Objects with redshifts of eight, ten and fourteen have been observed. Under the stretching picture there is no cap, because nothing is moving through anything: a galaxy's <em>recession</em> can exceed the speed of light without anything locally exceeding it, and light emitted from such a galaxy can still reach us as long as the space between shrinks in comoving terms faster than the galaxy retreats.</p>
+                        <p>The stretch also has a boundary. Expansion is a competition between the recession of space and the gravitational binding of whatever is in it, and gravity wins easily on small scales. Atoms are not growing. Earth's orbit is not lengthening. The Milky Way is not expanding, and neither is the Local Group &mdash; Andromeda is approaching us at about 110 kilometres per second and will merge with us in roughly four and a half billion years. Expansion only shows up beyond about ten million light years, where no structure is bound to anything.</p>
+                        <p>One number in this section is genuinely unsettled. Measured from the microwave background, the expansion rate comes out near 67.4 kilometres per second per megaparsec. Measured from Cepheid variables and Type Ia supernovae in the nearby universe, it comes out near 73. Both measurements have shrunk their error bars for two decades and the gap has not closed. That disagreement &mdash; the Hubble tension &mdash; is the most conspicuous open problem in observational cosmology.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">What "receding faster than light" does and does not mean</span>
+                            <ul class="note__list">
+                                <li><strong>It is a real, standard consequence.</strong> Beyond a redshift of about 1.5, a galaxy's recession velocity exceeds <em>c</em>. This is not a fringe claim; it is what the equations give and it is in every textbook on the subject.</li>
+                                <li><strong>Nothing is breaking relativity.</strong> The prohibition is on anything overtaking light <em>through</em> space, locally. These galaxies are stationary in their own patch of space; the distance between us is what is growing.</li>
+                                <li><strong>They are still visible.</strong> Superluminal recession does not hide a galaxy. Photons emitted towards us keep making progress through the grid, and for a long stretch of cosmic history the grid ahead of them shrinks in comoving terms faster than the source retreats.</li>
+                                <li><strong>But there is a limit.</strong> Objects beyond roughly 16 billion light years today emit light that will never reach us, because acceleration keeps carrying them away faster than their photons can close the gap. That boundary &mdash; the cosmic event horizon &mdash; is not the same as the edge of the observable universe.</li>
+                            </ul>
+                        </div>
+
+                        <dl class="spec" style="margin-top:2.5rem">
+                            <div class="spec__row"><dt>H&#8320; from CMB</dt><dd>67.4 &plusmn; 0.5 km/s/Mpc</dd></div>
+                            <div class="spec__row"><dt>H&#8320; from Cepheids</dt><dd>73.0 &plusmn; 1.0 km/s/Mpc</dd></div>
+                            <div class="spec__row"><dt>Disagreement</dt><dd>~5&sigma; &mdash; unresolved</dd></div>
+                            <div class="spec__row"><dt>Expansion starts to show</dt><dd>Beyond ~10 million ly</dd></div>
+                            <div class="spec__row"><dt>v = c at</dt><dd>z &asymp; 1.5</dd></div>
+                            <div class="spec__row"><dt>Highest z observed</dt><dd>~14.4 &mdash; JWST, 2024</dd></div>
+                        </dl>
+                    </div>
+                </div>
+
+                <!-- Fig 03 · The measurement itself. The only figure on the
+                     page with linear axes on both sides, because the
+                     relation genuinely is a straight line through the
+                     origin and a log axis would hide that. -->
+                <figure class="fig" style="margin-top:4.5rem">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 440" role="img"
+                             aria-label="A Hubble diagram: recession velocity in kilometres per second on the vertical axis against distance in millions of light years on the horizontal axis, both linear. Nine galaxy clusters are plotted, from the Virgo Cluster at 54 million light years and about 1,050 kilometres per second up to the Hercules Cluster at 500 million light years and about 11,000 kilometres per second. The points lie close to a straight line through the origin whose slope corresponds to 70 kilometres per second per megaparsec. A tenth point, the Andromeda Galaxy at 2.5 million light years, sits below the axis at minus 110 kilometres per second, because it is gravitationally bound to us and is approaching.">
+
+                            <!-- ---- AXES ---------------------------------- -->
+                            <path class="svg-axis" d="M 140 60 L 140 340"/>
+                            <path class="svg-axis" d="M 140 340 L 1100 340"/>
+
+                            <g class="svg-tick">
+                                <path d="M 140 340 L 134 340"/>
+                                <path d="M 140 275 L 134 275"/>
+                                <path d="M 140 211 L 134 211"/>
+                                <path d="M 140 146 L 134 146"/>
+                                <path d="M 140 82 L 134 82"/>
+                                <path d="M 140 340 L 140 346"/>
+                                <path d="M 300 340 L 300 346"/>
+                                <path d="M 460 340 L 460 346"/>
+                                <path d="M 620 340 L 620 346"/>
+                                <path d="M 780 340 L 780 346"/>
+                                <path d="M 940 340 L 940 346"/>
+                                <path d="M 1100 340 L 1100 346"/>
+                            </g>
+
+                            <g class="svg-unit">
+                                <text x="128" y="344" text-anchor="end">0</text>
+                                <text x="128" y="279" text-anchor="end">3,000</text>
+                                <text x="128" y="215" text-anchor="end">6,000</text>
+                                <text x="128" y="150" text-anchor="end">9,000</text>
+                                <text x="128" y="86" text-anchor="end">12,000</text>
+                                <text x="140" y="362" text-anchor="middle">0</text>
+                                <text x="300" y="362" text-anchor="middle">100</text>
+                                <text x="460" y="362" text-anchor="middle">200</text>
+                                <text x="620" y="362" text-anchor="middle">300</text>
+                                <text x="780" y="362" text-anchor="middle">400</text>
+                                <text x="940" y="362" text-anchor="middle">500</text>
+                                <text x="1100" y="362" text-anchor="middle">600</text>
+                            </g>
+
+                            <text class="svg-label" x="140" y="40">Recession velocity &middot; km/s</text>
+                            <text class="svg-unit" x="620" y="410" text-anchor="middle">Distance &middot; millions of light years</text>
+
+                            <!-- ---- THE FIT ------------------------------- -->
+                            <path class="hub__fit-bloom" d="M 140 340 L 1100 62"/>
+                            <path class="hub__fit" d="M 140 340 L 1100 62"/>
+
+                            <!-- Held high and to the left of the fit, and the
+                                 leader lands between Perseus and Norma rather
+                                 than on either of them. -->
+                            <path class="svg-leader" d="M 470 172 L 546 212"/>
+                            <text class="svg-label svg-label--cmb" x="450" y="142">H&#8320; &asymp; 70 km/s per megaparsec</text>
+                            <text class="svg-unit" x="450" y="160">&asymp; 21.5 km/s per million light years</text>
+
+                            <!-- ---- THE CLUSTERS -------------------------- -->
+                            <g class="hub__point">
+                                <circle cx="226" cy="317" r="4.6"/>
+                                <circle cx="239" cy="309" r="4.6"/>
+                                <circle cx="393" cy="259" r="4.6"/>
+                                <circle cx="412" cy="267" r="4.6"/>
+                                <circle cx="492" cy="235" r="4.6"/>
+                                <circle cx="524" cy="224" r="4.6"/>
+                                <circle cx="654" cy="191" r="4.6"/>
+                                <circle cx="812" cy="144" r="4.6"/>
+                                <circle cx="940" cy="103" r="4.6"/>
+                            </g>
+
+                            <g class="svg-unit">
+                                <text x="226" y="303" text-anchor="middle">Virgo</text>
+                                <text x="256" y="333">Fornax</text>
+                                <text x="380" y="245" text-anchor="end">Hydra</text>
+                                <text x="424" y="285">Centaurus</text>
+                                <text x="480" y="221" text-anchor="end">Norma</text>
+                                <text x="536" y="248">Perseus</text>
+                                <text x="654" y="177" text-anchor="middle">Coma</text>
+                                <text x="800" y="130" text-anchor="end">Abell 2199</text>
+                                <text x="940" y="89" text-anchor="middle">Hercules</text>
+                            </g>
+
+                            <!-- ---- ANDROMEDA ----------------------------
+                                 The one point on the figure that disproves
+                                 "everything is rushing away from us". -->
+                            <circle class="hub__point hub__point--bound" cx="144" cy="342" r="4.6"/>
+                            <path class="svg-leader" d="M 168 372 L 148 348"/>
+                            <text class="svg-label svg-label--blue" x="172" y="382">Andromeda &middot; &minus;110 km/s</text>
+                            <text class="svg-unit" x="172" y="398">Bound to us, so it is approaching, not receding</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 03</span>
+                        <span class="caption__body"><strong>Linear on both axes, and it has to be.</strong> Everything else on this page uses a base-10 axis, but the whole content of this figure is that the relation is a <em>straight line through the origin</em>, and a log axis turns every power law into a straight line and so destroys the only information present. Velocities are published recession values; the scatter around the fit is real and is mostly peculiar motion &mdash; each cluster's own drift through space, a few hundred kilometres per second, on top of the expansion. Two honest caveats. The distances at the far end of this plot are themselves partly derived from redshift, so the figure is best read as illustrating the relation rather than independently establishing it; what anchors the near end are distances measured a different way entirely, from Cepheid variables and the tip of the red-giant branch. And the slope drawn here, 70 kilometres per second per megaparsec, sits deliberately between the two competing measurements described above, because at this scale the figure cannot distinguish 67.4 from 73 &mdash; the difference would be about four pixels at the right-hand edge.</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             04 · THE OBSERVABLE UNIVERSE
+             The section that exists to defuse one apparent contradiction,
+             and the answer is already drawn in Fig 02: the grid stretched
+             while the light was in flight.
+             ============================================================ -->
+        <section class="shell shell--atmos shell--seam" id="observable">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">04</span> Observable universe</p>
+                    <h2 class="head__title">13.8 billion years old, and <em>46.5 billion light years</em> across the radius</h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Read quickly, those two numbers look like an error. If nothing outruns light and light has had 13.8 billion years, surely nothing can be further than 13.8 billion light years away. The resolution is the whole subject of this page: the distance a photon travelled and the distance to where it started are not the same quantity, because the space in between did not hold still while the photon was crossing it.</p>
+                </header>
+
+                <div class="split">
+                    <div class="prose prose--lede">
+                        <p>Take the oldest light there is. It set out 13.8 billion years ago, from matter that was then about 42 million light years away &mdash; close, because the universe was small. It has been travelling ever since, and while it travelled, every stretch of space it had already crossed and every stretch still ahead of it grew. It arrives having spent 13.8 billion years in transit, which is why the age and the <em>light-travel distance</em> agree. But the matter that emitted it has been carried along by the same expansion, and is now about 46.5 billion light years away.</p>
+                        <p>Both numbers are correct and they answer different questions. Light-travel distance answers "how long was this light in flight". Comoving distance answers "where is that object now". Cosmologists quote the second, because it is the one that describes the universe rather than the journey. The ratio between them &mdash; about 3.4 &mdash; is a direct measure of how much the universe has grown since that light was released.</p>
+                        <p>What sets the size of the sphere is therefore not a wall and not an edge. It is a clock. The observable universe is bounded by the fact that the universe is a finite age, and its boundary &mdash; the particle horizon &mdash; grows every year. There is no reason to expect anything different on the other side of it. The horizon is a fact about us, not about the universe.</p>
+                    </div>
+
+                    <div>
+                        <p class="pull">The horizon is a statement about <em>how long we have been here</em>, not about how big anything is.</p>
+
+                        <div class="note" style="margin-top:2.5rem">
+                            <span class="note__title">Three horizons, routinely confused</span>
+                            <ul class="note__list">
+                                <li><strong>The particle horizon &mdash; 46.5 billion light years.</strong> The furthest matter whose light has had time to reach us. This is what "the observable universe" means, and it expands as the universe ages.</li>
+                                <li><strong>The last-scattering surface &mdash; about 45.6 billion light years.</strong> Slightly inside the particle horizon, and the furthest we can see <em>in light</em>. Before recombination the universe was an opaque fog, so this is an optical wall, not a distance limit. Neutrinos and gravitational waves are not stopped by it.</li>
+                                <li><strong>The cosmic event horizon &mdash; about 16 billion light years.</strong> Much closer, and the only one of the three that is genuinely a limit. Light leaving anything beyond it <em>today</em> will never reach us, because accelerated expansion will keep the gap opening faster than the photon can close it. Objects inside our particle horizon can be outside our event horizon, which is why we can see galaxies we can never signal.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fig 04 · One true, uncompressed scale for the page, per
+                     the honesty rules: a base-10 axis with the real
+                     numbers on it and no drawing to be misread. -->
+                <figure class="fig" style="margin-top:4.5rem">
+                    <!-- Eighteen decades rather than seventeen. On a 10⁻⁵
+                         axis the first mark landed at 1.2 per cent and its
+                         centred label hung 32px off the left end of the rail;
+                         widening the axis by one decade at each end pulls both
+                         extremes inboard without changing any figure. -->
+                    <div class="rail rail--scale" role="img"
+                         aria-label="Radii of nested structures on a base-10 axis in light years, spanning eighteen decades from ten to the minus six to ten to the twelve light years: the Earth-Sun distance at 1.6 times ten to the minus five light years, Neptune's orbit at 4.7 times ten to the minus four, Proxima Centauri at 4.24 light years, the radius of the Milky Way's disc at about fifty thousand light years, the radius of the Local Group at about five million light years, the Laniakea supercluster at about two hundred and fifty million light years, and the radius of the observable universe at 46.5 billion light years.">
+                        <span class="rail__mark rail__mark--up" style="--pos:6.7%">
+                            <em class="rail__name">Earth to Sun</em><b class="rail__value">1.6 &times; 10&#8315;&#8309; ly</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down" style="--pos:14.9%">
+                            <em class="rail__name">Neptune's orbit</em><b class="rail__value">4.7 &times; 10&#8315;&#8308; ly</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--up" style="--pos:36.8%">
+                            <em class="rail__name">Proxima Centauri</em><b class="rail__value">4.24 ly</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down" style="--pos:59.4%">
+                            <em class="rail__name">Milky Way disc</em><b class="rail__value">~50,000 ly</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--up rail__mark--region" style="--pos:70.6%">
+                            <em class="rail__name">Local Group</em><b class="rail__value">~5 million ly</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down rail__mark--region" style="--pos:80%">
+                            <em class="rail__name">Laniakea</em><b class="rail__value">~250 million ly</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--up rail__mark--region" style="--pos:92.6%">
+                            <em class="rail__name">Observable radius</em><b class="rail__value">46.5 billion ly</b><i class="rail__tick"></i>
+                        </span>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 04</span>
+                        <span class="caption__body"><strong>Base-10 axis, 10&#8315;&#8310; to 10&sup1;&sup2; light years &mdash; eighteen decades.</strong> Each equal step along the rail is a factor of ten, and the axis is logarithmic because the span requires it: drawn linearly, everything from the Earth&ndash;Sun distance to the Laniakea supercluster would sit inside the leftmost half of one per cent of the rail, which is to say inside a single pixel. Two of the entries are softer than they look. "Milky Way disc" is a radius to where the stars effectively run out, and the galaxy has no sharp edge &mdash; its dark matter halo reaches several times further. Laniakea is a <em>proposed</em> supercluster, defined by which way the local galaxies are flowing rather than by gravitational binding, and it is probably not a bound structure at all: most of it will be carried apart by expansion rather than falling together. The last mark is the only figure on the rail that will be out of date next year, because the particle horizon grows as the universe ages.</span>
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">04a</span> Light-travel distance</p>
+                        <h3 class="sub-title" style="margin-top:1rem">How long the photon was flying</h3>
+                        <p class="copy" style="margin-top:1rem">The lookback time multiplied by the speed of light. It is capped at the age of the universe by construction, which is why no light-travel distance can exceed 13.8 billion light years and why press coverage that quotes this number never sounds paradoxical. It is a fact about the photon's journey, and it says nothing about where the source is now.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>To the CMB</dt><dd>13.8 billion ly</dd></div>
+                            <div class="spec__row"><dt>Maximum possible</dt><dd>The age, in light years</dd></div>
+                            <div class="spec__row"><dt>Answers</dt><dd>How old is this light</dd></div>
+                        </dl>
+                    </div>
+
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">04b</span> Comoving distance</p>
+                        <h3 class="sub-title" style="margin-top:1rem">Where the source is today</h3>
+                        <p class="copy" style="margin-top:1rem">The present separation, with the expansion that happened during the flight added back in. It has no cap, and for the oldest light it comes out 3.4 times larger than the light-travel distance because that is how much the universe grew in the meantime. This is the number cosmologists mean by the size of the observable universe, and it is the number on the rail above.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>To the CMB</dt><dd>45.6 billion ly</dd></div>
+                            <div class="spec__row"><dt>Particle horizon</dt><dd>46.5 billion ly</dd></div>
+                            <div class="spec__row"><dt>Answers</dt><dd>Where is it now</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             05 · COSMIC TIMELINE
+             ============================================================ -->
+        <section class="shell shell--void shell--seam" id="timeline">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">05</span> Cosmic timeline</p>
+                    <h2 class="head__title">Thirteen point eight billion years, <em>badly proportioned</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Almost every irreversible decision the universe ever made was taken in the first twenty minutes. Everything since &mdash; all the stars, all the galaxies, all the chemistry, all of geology and biology and this sentence &mdash; happened in the leftover time, using material whose proportions were fixed before the universe was half an hour old.</p>
+                </header>
+
+                <!-- Fig 05 · Two bands, because one axis cannot do this job
+                     honestly. A log axis buries the recent past; a linear
+                     axis buries the entire early universe. -->
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 460" role="img"
+                             aria-label="A two-band timeline of the universe. The upper band is a base-10 axis in seconds spanning fifty decades, from ten to the minus thirty-six seconds to ten to the fourteen seconds, and it marks inflation from ten to the minus thirty-six to ten to the minus thirty-two seconds, the quark-gluon plasma up to ten to the minus twelve seconds, protons and neutrons forming at ten to the minus six seconds, atomic nuclei forming between three and twenty minutes, and neutral atoms forming with the microwave background released at 380,000 years. The lower band is a linear axis in billions of years spanning the full 13.8 billion year history, and it marks the Big Bang at zero, the first stars and galaxies between 0.18 and 0.65 billion years, peak star formation at about 3.5 billion years, the onset of accelerated expansion at about 7.6 billion years, the formation of the Solar System at 9.2 billion years, dark energy overtaking matter at about 10.2 billion years, and today at 13.8 billion years.">
+
+                            <!-- ============ BAND A ============ -->
+                            <text class="svg-label svg-label--hot" x="100" y="36">A &middot; The first 380,000 years</text>
+                            <text class="svg-unit" x="1120" y="36" text-anchor="end">Base-10 axis in seconds &middot; 50 decades</text>
+
+                            <path class="tl__axis" d="M 100 112 L 1120 112"/>
+
+                            <!-- Decade scale. Minor marks every five decades,
+                                 labels every ten. -->
+                            <g class="tl__decade">
+                                <path d="M 120 112 L 120 118"/>
+                                <path d="M 222 112 L 222 118"/>
+                                <path d="M 324 112 L 324 118"/>
+                                <path d="M 426 112 L 426 118"/>
+                                <path d="M 528 112 L 528 118"/>
+                                <path d="M 630 112 L 630 118"/>
+                                <path d="M 732 112 L 732 118"/>
+                                <path d="M 834 112 L 834 118"/>
+                                <path d="M 936 112 L 936 118"/>
+                                <path d="M 1038 112 L 1038 118"/>
+                            </g>
+                            <g class="svg-unit">
+                                <text x="222" y="132" text-anchor="middle">10&#8315;&sup3;&#8304; s</text>
+                                <text x="426" y="132" text-anchor="middle">10&#8315;&sup2;&#8304; s</text>
+                                <text x="630" y="132" text-anchor="middle">10&#8315;&sup1;&#8304; s</text>
+                                <text x="834" y="132" text-anchor="middle">1 s</text>
+                                <text x="1038" y="132" text-anchor="middle">10&sup1;&#8304; s</text>
+                            </g>
+
+                            <!-- Events with a duration get a bar; events that
+                                 are effectively instantaneous get a dot. -->
+                            <path class="tl__span" d="M 100 112 L 182 112"/>
+                            <path class="tl__span" d="M 880 112 L 897 112"/>
+                            <circle class="tl__dot" cx="590" cy="112" r="3.4"/>
+                            <circle class="tl__dot" cx="712" cy="112" r="3.4"/>
+                            <circle class="tl__dot tl__dot--cmb" cx="1101" cy="112" r="4.2"/>
+
+                            <!-- Above the axis -->
+                            <g class="tl__tick">
+                                <path d="M 141 92 L 141 112"/>
+                                <path d="M 712 92 L 712 112"/>
+                                <path d="M 1101 92 L 1101 112"/>
+                            </g>
+                            <text class="svg-label" x="141" y="68" text-anchor="middle">Inflation</text>
+                            <text class="svg-unit" x="141" y="84" text-anchor="middle">10&#8315;&sup3;&#8310; to 10&#8315;&sup3;&sup2; s</text>
+                            <text class="svg-label" x="712" y="68" text-anchor="middle">Protons and neutrons</text>
+                            <text class="svg-unit" x="712" y="84" text-anchor="middle">~10&#8315;&#8310; seconds</text>
+                            <text class="svg-label svg-label--cmb" x="1101" y="68" text-anchor="middle">Atoms form &middot; CMB</text>
+                            <text class="svg-unit" x="1101" y="84" text-anchor="middle">380,000 years</text>
+
+                            <!-- Below the axis -->
+                            <g class="tl__tick">
+                                <path d="M 590 112 L 590 150"/>
+                                <path d="M 888 112 L 888 150"/>
+                            </g>
+                            <text class="svg-label svg-label--hot" x="590" y="166" text-anchor="middle">Quark&ndash;gluon plasma</text>
+                            <text class="svg-unit" x="590" y="182" text-anchor="middle">Up to 10&#8315;&sup1;&sup2; seconds</text>
+                            <text class="svg-label" x="888" y="166" text-anchor="middle">Nuclei form</text>
+                            <text class="svg-unit" x="888" y="182" text-anchor="middle">3 to 20 minutes</text>
+
+                            <text class="svg-unit" x="100" y="204">t = 0 is not on this axis &mdash; a base-10 scale has no zero, only smaller and smaller numbers</text>
+
+                            <!-- ============ BAND B ============ -->
+                            <text class="svg-label svg-label--baryon" x="100" y="250">B &middot; All 13.8 billion years</text>
+                            <text class="svg-unit" x="1120" y="250" text-anchor="end">Linear axis in billions of years</text>
+
+                            <path class="tl__axis" d="M 100 340 L 1120 340"/>
+
+                            <g class="tl__decade">
+                                <path d="M 100 340 L 100 346"/>
+                                <path d="M 248 340 L 248 346"/>
+                                <path d="M 396 340 L 396 346"/>
+                                <path d="M 543 340 L 543 346"/>
+                                <path d="M 691 340 L 691 346"/>
+                                <path d="M 839 340 L 839 346"/>
+                                <path d="M 987 340 L 987 346"/>
+                                <path d="M 1120 340 L 1120 346"/>
+                            </g>
+                            <g class="svg-unit">
+                                <text x="100" y="360" text-anchor="middle">0</text>
+                                <text x="248" y="360" text-anchor="middle">2</text>
+                                <text x="396" y="360" text-anchor="middle">4</text>
+                                <text x="543" y="360" text-anchor="middle">6</text>
+                                <text x="691" y="360" text-anchor="middle">8</text>
+                                <text x="839" y="360" text-anchor="middle">10</text>
+                                <text x="987" y="360" text-anchor="middle">12</text>
+                                <text x="1120" y="360" text-anchor="middle">13.8</text>
+                            </g>
+
+                            <path class="tl__span tl__span--dawn" d="M 113 340 L 148 340"/>
+                            <circle class="tl__dot tl__dot--baryon" cx="359" cy="340" r="3.4"/>
+                            <circle class="tl__dot tl__dot--de" cx="662" cy="340" r="3.4"/>
+                            <circle class="tl__dot tl__dot--baryon" cx="780" cy="340" r="3.4"/>
+                            <circle class="tl__dot tl__dot--de" cx="854" cy="340" r="3.4"/>
+                            <circle class="tl__dot" cx="1120" cy="340" r="4.2"/>
+
+                            <!-- Above the axis -->
+                            <g class="tl__tick">
+                                <path d="M 100 320 L 100 340"/>
+                                <path d="M 359 320 L 359 340"/>
+                                <path d="M 780 320 L 780 340"/>
+                                <path d="M 1120 320 L 1120 340"/>
+                            </g>
+                            <text class="svg-label svg-label--hot" x="100" y="292">Big Bang</text>
+                            <text class="svg-unit" x="100" y="308">t = 0</text>
+                            <text class="svg-label" x="359" y="292" text-anchor="middle">Peak star formation</text>
+                            <text class="svg-unit" x="359" y="308" text-anchor="middle">~3.5 Gyr &middot; z &asymp; 1.9</text>
+                            <text class="svg-label svg-label--baryon" x="780" y="292" text-anchor="middle">Solar System forms</text>
+                            <text class="svg-unit" x="780" y="308" text-anchor="middle">9.2 Gyr &middot; z &asymp; 0.42</text>
+                            <text class="svg-label" x="1120" y="292" text-anchor="end">Today</text>
+                            <text class="svg-unit" x="1120" y="308" text-anchor="end">13.8 Gyr &middot; z = 0</text>
+
+                            <!-- Below the axis -->
+                            <g class="tl__tick">
+                                <path d="M 130 340 L 130 378"/>
+                                <path d="M 662 340 L 662 378"/>
+                                <path d="M 854 340 L 854 378"/>
+                            </g>
+                            <text class="svg-label svg-label--dawn" x="112" y="396">First stars and galaxies</text>
+                            <text class="svg-unit" x="112" y="412">0.18 to 0.65 Gyr &middot; z &asymp; 20 to 8</text>
+                            <text class="svg-label svg-label--dm" x="662" y="396" text-anchor="middle">Expansion accelerates</text>
+                            <text class="svg-unit" x="662" y="412" text-anchor="middle">~7.6 Gyr &middot; z &asymp; 0.63</text>
+                            <text class="svg-label svg-label--dm" x="854" y="396" text-anchor="middle">&Lambda; overtakes matter</text>
+                            <text class="svg-unit" x="854" y="412" text-anchor="middle">~10.2 Gyr &middot; z &asymp; 0.30</text>
+
+                            <text class="svg-unit" x="100" y="440">The whole of band A fits inside the first 0.03 px of band B</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 05</span>
+                        <span class="caption__body"><strong>Two axes, two scales, and neither one can be dropped.</strong> Band A is base-10 in seconds and spans fifty decades; band B is linear and spans 13.8 billion years. They are separate figures rather than one because a single axis cannot show both halves of this history: on band B's linear scale, every event in band A &mdash; inflation, the quark epoch, nucleosynthesis, recombination, the entire first 380,000 years &mdash; sits within three hundredths of a pixel of the origin, and on a base-10 scale the last ten billion years occupy under a tenth of the width. The two bands share exactly one event, the release of the microwave background, which is the final mark on A and effectively the origin of B. Three notes. The <strong>first stars</strong> bar is the least certain thing here: no individual first-generation star has ever been observed, and the range is inferred from simulations plus the earliest galaxies JWST has found, currently out to a redshift of about 14.4 at roughly 290 million years. <strong>"Expansion accelerates"</strong> and <strong>"&Lambda; overtakes matter"</strong> are two different events, about 2.6 billion years apart: acceleration begins when dark energy's push exceeds matter's pull on the expansion rate, which happens while matter is still the larger share of the total. And redshift is printed beside every date because that, not the date, is what an observation actually measures.</span>
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">05a</span> The first twenty minutes</p>
+                        <h3 class="sub-title" style="margin-top:1rem">Where the ingredients were decided</h3>
+                        <p class="copy" style="margin-top:1rem">Between about three and twenty minutes, protons and neutrons fused into the lightest nuclei and then stopped, because the universe had cooled and thinned past the point where fusion could continue. The result was roughly three quarters hydrogen and one quarter helium by mass, with traces of deuterium and lithium and nothing heavier. That mixture is calculable from first principles with essentially one free parameter, and it is measured in the oldest, least contaminated gas clouds astronomers can find. The two agree. It is one of the strongest results in the subject.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>Window</dt><dd>~3 to 20 minutes</dd></div>
+                            <div class="spec__row"><dt>Hydrogen</dt><dd>~75% by mass</dd></div>
+                            <div class="spec__row"><dt>Helium-4</dt><dd>~25% by mass</dd></div>
+                            <div class="spec__row"><dt>Deuterium</dt><dd>~2.5 &times; 10&#8315;&#8309;</dd></div>
+                            <div class="spec__row"><dt>Anything heavier</dt><dd>Made later, in stars</dd></div>
+                        </dl>
+                    </div>
+
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">05b</span> The dark ages</p>
+                        <h3 class="sub-title" style="margin-top:1rem">A hundred million years of nothing</h3>
+                        <p class="copy" style="margin-top:1rem">After recombination the universe was transparent and completely dark. The microwave background had already redshifted out of visible light, and no star had yet formed. What happened in that gap is that slight overdensities in the dark matter &mdash; the same ones printed on the microwave background as hot and cold spots &mdash; pulled gas towards themselves until the first clouds were dense enough to ignite. Those first stars then reionised the gas around them, and by about a billion years the universe was transparent to ultraviolet again. This is the era JWST was built to look at, and its earliest galaxies have come out brighter and more assembled than most models expected.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>Begins</dt><dd>380,000 years</dd></div>
+                            <div class="spec__row"><dt>First stars</dt><dd>~150 to 250 Myr</dd></div>
+                            <div class="spec__row"><dt>Earliest galaxy seen</dt><dd>z = 14.4, ~290 Myr</dd></div>
+                            <div class="spec__row"><dt>Reionisation done</dt><dd>~1 Gyr, z &asymp; 6</dd></div>
+                            <div class="spec__row"><dt>Directly observed</dt><dd>Only the tail end of it</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             06 · THE COSMIC WEB
+             ============================================================ -->
+        <section class="shell shell--lit shell--seam" id="web">
+            <div class="field field--web" aria-hidden="true" style="--field-opacity:0.18"></div>
+
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">06</span> Cosmic web</p>
+                    <h2 class="head__title">Galaxies did not choose <em>where to be</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Map enough galaxies and they do not come out scattered. They come out on strands: long filaments meeting at dense knots, with volumes hundreds of millions of light years across in between holding almost nothing. This is the largest structure that exists, and its shape was set by density variations printed on the universe before there were any galaxies to trace them.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 660" role="img"
+                             aria-label="A schematic map of large-scale structure across roughly 600 million light years. Twelve bright nodes, each a galaxy cluster, are connected by nineteen long slightly curved filaments, each drawn as a wide soft violet halo of dark matter with a thinner indigo strand inside it and a line of small warm dots along it representing galaxy groups. A faint triangular sheet spans three of the filaments. Between the filaments are large near-empty voids, two of them labelled, each containing only a few isolated galaxies. A scale bar at the bottom marks one hundred million light years.">
+
+                            <defs>
+                                <radialGradient id="webNode" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.95"/>
+                                    <stop offset="22%"  stop-color="#e6ecff" stop-opacity="0.7"/>
+                                    <stop offset="56%"  stop-color="#a97cff" stop-opacity="0.35"/>
+                                    <stop offset="100%" stop-color="#a97cff" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <!-- Each filament is declared once and drawn
+                                     three times, so the dark matter halo, the
+                                     strand and the galaxies along it can never
+                                     drift out of register. -->
+                                <path id="wf1"  d="M 180 140 C 260 108, 350 96, 430 90"/>
+                                <path id="wf2"  d="M 430 90 C 520 100, 620 138, 700 170"/>
+                                <path id="wf3"  d="M 700 170 C 790 148, 900 118, 980 110"/>
+                                <path id="wf4"  d="M 180 140 C 150 220, 128 300, 120 380"/>
+                                <path id="wf5"  d="M 120 380 C 210 366, 310 344, 390 330"/>
+                                <path id="wf6"  d="M 390 330 C 480 288, 600 216, 700 170"/>
+                                <path id="wf7"  d="M 390 330 C 360 400, 320 480, 300 540"/>
+                                <path id="wf8"  d="M 390 330 C 470 366, 570 408, 650 430"/>
+                                <path id="wf9"  d="M 650 430 C 730 408, 830 372, 900 350"/>
+                                <path id="wf10" d="M 900 350 C 850 292, 780 224, 700 170"/>
+                                <path id="wf11" d="M 900 350 C 930 280, 962 180, 980 110"/>
+                                <path id="wf12" d="M 900 350 C 950 380, 1030 440, 1080 470"/>
+                                <path id="wf13" d="M 650 430 C 680 480, 730 540, 760 570"/>
+                                <path id="wf14" d="M 300 540 C 400 560, 640 582, 760 570"/>
+                                <path id="wf15" d="M 520 210 C 500 250, 460 300, 390 330"/>
+                                <path id="wf16" d="M 520 210 C 500 170, 470 120, 430 90"/>
+                                <path id="wf17" d="M 120 380 C 160 440, 240 500, 300 540"/>
+                                <path id="wf18" d="M 1080 470 C 1000 510, 860 552, 760 570"/>
+                                <path id="wf19" d="M 980 110 C 1050 180, 1078 320, 1080 470"/>
+                            </defs>
+
+                            <!-- ---- SHEET -------------------------------
+                                 Filaments are where two sheets meet; nodes
+                                 are where filaments meet. One sheet is drawn
+                                 so the hierarchy is visible; drawing them all
+                                 would fill the voids and destroy the figure. -->
+                            <polygon class="web__sheet" points="700,170 900,350 650,430"/>
+
+                            <!-- ---- LAYER 1 · DARK MATTER --------------- -->
+                            <g class="web__halo">
+                                <use href="#wf1"/><use href="#wf2"/><use href="#wf3"/>
+                                <use href="#wf4"/><use href="#wf5"/><use href="#wf6"/>
+                                <use href="#wf7"/><use href="#wf8"/><use href="#wf9"/>
+                                <use href="#wf10"/><use href="#wf11"/><use href="#wf12"/>
+                                <use href="#wf13"/><use href="#wf14"/><use href="#wf15"/>
+                                <use href="#wf16"/><use href="#wf17"/><use href="#wf18"/>
+                                <use href="#wf19"/>
+                            </g>
+
+                            <g class="web__node-halo">
+                                <circle cx="180" cy="140" r="23"/>
+                                <circle cx="430" cy="90"  r="18"/>
+                                <circle cx="700" cy="170" r="31"/>
+                                <circle cx="980" cy="110" r="21"/>
+                                <circle cx="120" cy="380" r="18"/>
+                                <circle cx="390" cy="330" r="26"/>
+                                <circle cx="650" cy="430" r="21"/>
+                                <circle cx="900" cy="350" r="34"/>
+                                <circle cx="1080" cy="470" r="18"/>
+                                <circle cx="300" cy="540" r="21"/>
+                                <circle cx="760" cy="570" r="16"/>
+                                <circle cx="520" cy="210" r="13"/>
+                            </g>
+
+                            <!-- ---- LAYER 2 · THE STRAND ---------------- -->
+                            <g class="web__thread">
+                                <use href="#wf1"/><use href="#wf2"/><use href="#wf3"/>
+                                <use href="#wf4"/><use href="#wf5"/><use href="#wf6"/>
+                                <use href="#wf7"/><use href="#wf8"/><use href="#wf9"/>
+                                <use href="#wf10"/><use href="#wf11"/><use href="#wf12"/>
+                                <use href="#wf13"/><use href="#wf14"/><use href="#wf15"/>
+                                <use href="#wf16"/><use href="#wf17"/><use href="#wf18"/>
+                                <use href="#wf19"/>
+                            </g>
+
+                            <!-- ---- LAYER 3 · THE GALAXIES -------------
+                                 Each dash is a schematic galaxy group, drawn
+                                 on the filament rather than scattered freely.
+                                 That placement is the entire argument of the
+                                 figure. -->
+                            <g class="web__galaxies">
+                                <use href="#wf1"/><use href="#wf2"/><use href="#wf3"/>
+                                <use href="#wf4"/><use href="#wf5"/><use href="#wf6"/>
+                                <use href="#wf7"/><use href="#wf8"/><use href="#wf9"/>
+                                <use href="#wf10"/><use href="#wf11"/><use href="#wf12"/>
+                                <use href="#wf13"/><use href="#wf14"/><use href="#wf15"/>
+                                <use href="#wf16"/><use href="#wf17"/><use href="#wf18"/>
+                                <use href="#wf19"/>
+                            </g>
+
+                            <!-- ---- NODES ------------------------------- -->
+                            <g class="web__node">
+                                <circle cx="180" cy="140" r="9"/>
+                                <circle cx="430" cy="90"  r="7"/>
+                                <circle cx="700" cy="170" r="12"/>
+                                <circle cx="980" cy="110" r="8"/>
+                                <circle cx="120" cy="380" r="7"/>
+                                <circle cx="390" cy="330" r="10"/>
+                                <circle cx="650" cy="430" r="8"/>
+                                <circle cx="900" cy="350" r="13"/>
+                                <circle cx="1080" cy="470" r="7"/>
+                                <circle cx="300" cy="540" r="8"/>
+                                <circle cx="760" cy="570" r="6"/>
+                                <circle cx="520" cy="210" r="5"/>
+                            </g>
+
+                            <!-- ---- VOID GALAXIES ----------------------
+                                 Voids are not perfectly empty, and drawing
+                                 them that way would be the easiest error on
+                                 this figure to make. -->
+                            <g class="web__lonely">
+                                <circle cx="215" cy="196" r="1.6"/>
+                                <circle cx="196" cy="304" r="1.4"/>
+                                <circle cx="338" cy="302" r="1.3"/>
+                                <circle cx="500" cy="440" r="1.5"/>
+                                <circle cx="462" cy="528" r="1.3"/>
+                                <circle cx="596" cy="522" r="1.4"/>
+                            </g>
+
+                            <!-- ---- LABELS ----------------------------- -->
+                            <path class="svg-leader svg-leader--node" d="M 140 72 L 174 132"/>
+                            <text class="svg-label svg-label--node" x="60" y="44">Node &middot; galaxy cluster</text>
+                            <text class="svg-unit" x="60" y="60">Hundreds to thousands of galaxies &middot; ~10&sup1;&#8308; M&#9737;</text>
+
+                            <path class="svg-leader svg-leader--dm" d="M 194 250 L 146 258"/>
+                            <text class="svg-label svg-label--dm" x="200" y="240">Filament</text>
+                            <text class="svg-unit" x="200" y="256">Dark matter, with galaxies strung along it</text>
+
+                            <!-- Nudged up and shortened. At y=452 the longer
+                                 caption ran straight through the filament
+                                 joining the two lower-left nodes, which at
+                                 that height crosses x=183. -->
+                            <text class="svg-label" x="255" y="418" text-anchor="middle">Void</text>
+                            <text class="svg-unit" x="255" y="434" text-anchor="middle">~150 million ly</text>
+
+                            <text class="svg-label" x="520" y="478" text-anchor="middle">Void</text>
+                            <text class="svg-unit" x="520" y="494" text-anchor="middle">A few isolated galaxies live here</text>
+
+                            <text class="svg-label svg-label--dm svg-onlight" x="762" y="314" text-anchor="middle">Sheet</text>
+                            <text class="svg-unit svg-onlight" x="762" y="330" text-anchor="middle">Two sheets meet at a filament</text>
+
+                            <!-- ---- SCALE ------------------------------ -->
+                            <g class="web__scale">
+                                <path d="M 100 630 L 297 630"/>
+                                <path d="M 100 624 L 100 636"/>
+                                <path d="M 297 624 L 297 636"/>
+                            </g>
+                            <text class="svg-unit" x="198" y="650" text-anchor="middle">100 million light years</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 06</span>
+                        <span class="caption__body"><strong>Schematic, and a slice.</strong> The frame is roughly 600 million light years across, marked by the bar; the node and filament positions are invented rather than surveyed, and the structure is drawn flat when the real thing is three-dimensional &mdash; a real survey slice looks stringier than this because filaments crossing at other angles project onto it. What is faithful is the hierarchy and the order it formed in. Read the three layers as causality: the violet bloom is the dark matter, which is where the mass actually is; the indigo strand is the filament that gas settled into; the warm dots are the galaxies, and they are drawn <em>on</em> the strand because that is where they light up. Galaxies are a tracer, not the structure &mdash; the map is a map of gravity, and the visible part is under five per cent of what is drawing it. Each dot is a schematic galaxy group rather than one measured galaxy. Two things are true and easy to miss: voids are not empty, they hold isolated galaxies with no neighbours for tens of millions of light years, and the whole pattern is a magnified copy of the density variations visible on the microwave background, which is why Fig&nbsp;01 puts hot and cold mottling on the last-scattering wall.</span>
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div class="prose">
+                        <p>The structure grew by a mechanism with no cleverness in it at all. Slightly denser regions pull slightly harder, so they gather slightly more matter, so they become denser still. Left alone for thirteen billion years, that runaway turns variations of one part in a hundred thousand into the contrast between a galaxy cluster and a void. The starting variations are not hypothetical: they are photographed directly as the hot and cold spots of the microwave background, and their statistical pattern is measured well enough that the structure it grows into can be simulated and compared with surveys.</p>
+                        <p>Which is where dark matter becomes unavoidable. Ordinary matter could not have done this in the time available. Before recombination it was coupled to radiation, which resisted being compressed, so its clumping was suppressed until 380,000 years in. Dark matter does not interact with light, so it was free to start collapsing much earlier, and had already built a scaffold of gravitational wells by the time the gas was released. Every filament in the figure above is a dark matter structure with luminous matter settled into it afterwards.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">Four features of the web, with sizes</span>
+                            <ul class="note__list">
+                                <li><strong>Nodes.</strong> Galaxy clusters, where filaments cross &mdash; hundreds to thousands of galaxies in a few tens of millions of light years, bound and going nowhere. These are the densest structures in the universe and the only ones that will survive its expansion indefinitely.</li>
+                                <li><strong>Filaments.</strong> Strands tens to hundreds of millions of light years long. Most galaxies in the universe live in one, including ours.</li>
+                                <li><strong>Voids.</strong> Roughly spherical regions between the strands, typically 100 to 300 million light years across, containing a small fraction of the average density. They occupy most of the volume of the universe.</li>
+                                <li><strong>Walls.</strong> Sheets of galaxies bounding the voids. The Sloan Great Wall spans about 1.4 billion light years, and objects of this size are at the outer limit of what a universe of this age is expected to produce &mdash; which makes them a genuine test rather than a curiosity.</li>
+                            </ul>
+                        </div>
+
+                        <dl class="spec" style="margin-top:2.5rem">
+                            <div class="spec__row"><dt>Our filament</dt><dd>Local Sheet &#8594; Virgo</dd></div>
+                            <div class="spec__row"><dt>Nearest large void</dt><dd>Local Void, ~150 Mly</dd></div>
+                            <div class="spec__row"><dt>Typical void</dt><dd>100&ndash;300 Mly across</dd></div>
+                            <div class="spec__row"><dt>Largest wall</dt><dd>Sloan Great Wall, ~1.4 Gly</dd></div>
+                            <div class="spec__row"><dt>Homogeneous above</dt><dd>~300 Mly</dd></div>
+                            <div class="spec__row"><dt>Seeded by</dt><dd>&#916;T/T &asymp; 10&#8315;&#8309;</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             07 · COMPOSITION
+             ============================================================ -->
+        <section class="shell shell--abyss" id="composition">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">07</span> Composition</p>
+                    <h2 class="head__title">Ninety-five per cent of it is <em>two things we cannot name</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">The budget is measured well and understood badly. Three numbers account for the total energy content of the universe to within about half a per cent, and two of the three refer to substances whose identity is unknown. They are called dark not because they are black but because nobody has anything better to call them.</p>
+                </header>
+
+                <!-- Fig 07 · True proportion, with the smallest segment
+                     drawn brightest. Rule 2: brightness here means
+                     "emits light", not "matters most". -->
+                <figure class="fig">
+                    <div class="comp">
+                        <div class="comp__bar" role="img"
+                             aria-label="A bar divided at true proportion into three segments: dark energy at 68.3 per cent, dark matter at 26.8 per cent, and ordinary matter at 4.9 per cent.">
+                            <span class="comp__seg comp__seg--de" style="--w:68.3">
+                                <em>Dark energy</em>
+                                <b>68.3<small>%</small></b>
+                            </span>
+                            <span class="comp__seg comp__seg--dm" style="--w:26.8">
+                                <em>Dark matter</em>
+                                <b>26.8<small>%</small></b>
+                            </span>
+                            <span class="comp__seg comp__seg--om" style="--w:4.9"></span>
+                        </div>
+                        <p class="comp__callout"><b>Ordinary matter &mdash; 4.9%</b></p>
+                    </div>
+
+                    <ol class="ledger" style="margin-top:2.5rem" role="img"
+                        aria-label="The same three components with their measured values: dark energy 68.3 per cent, causing accelerated expansion, smooth and structureless; dark matter 26.8 per cent, gravitating and clumping but not interacting with light; ordinary matter 4.9 per cent, everything made of atoms.">
+                        <li class="ledger__row" style="--reach:68.3%">
+                            <span class="ledger__label">Dark energy <small>Pushes &mdash; smooth, structureless</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">68.3%</span>
+                        </li>
+                        <li class="ledger__row" style="--reach:26.8%">
+                            <span class="ledger__label">Dark matter <small>Pulls &mdash; clumps, builds the web</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">26.8%</span>
+                        </li>
+                        <li class="ledger__row" style="--reach:4.9%">
+                            <span class="ledger__label">Ordinary matter <small>Everything made of atoms</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">4.9%</span>
+                        </li>
+                    </ol>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 07</span>
+                        <span class="caption__body"><strong>True proportion, linear, no compression at all &mdash; and it is the only figure on the page that needs none.</strong> Values are the Planck 2018 fit to the microwave background: dark energy 68.3, dark matter 26.8 and ordinary matter 4.9 per cent of the total energy density, each to within a few tenths of a per cent. Three things about the drawing are deliberate. The largest segment is the <em>dimmest</em>, because dark energy is smooth to the limits of measurement and has no structure to draw; the middle one is mottled, because dark matter clumps and that clumping is the cosmic web; and the smallest is the only one lit from inside, because ordinary matter is the only entry on the list that emits anything at all. Two caveats. These are today's proportions and they are not constants &mdash; dark energy's share grows as the universe dilutes, and it only overtook matter about 3.5 billion years ago, which is the mark in Fig&nbsp;05. And "per cent" here means per cent of energy density, using mass&ndash;energy equivalence to put matter and dark energy on the same axis; radiation is on this budget too, at about five thousandths of one per cent, which is too small to draw.</span>
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">07a</span> Dark matter</p>
+                        <h3 class="sub-title" style="margin-top:1rem">It gravitates, and that is all it does</h3>
+                        <p class="copy" style="margin-top:1rem">Something with mass is present in and around galaxies that does not emit, absorb or scatter light. It was inferred from the rotation of galaxies, confirmed by the way clusters bend light from behind them, and is required by the microwave background and by the existence of the cosmic web on the timescale available. It is not dim ordinary matter &mdash; the amount of ordinary matter is independently fixed by the abundance of deuterium and by the shape of the CMB's peaks, and there is not enough. No particle has been detected despite forty years of increasingly sensitive experiments.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>Effect</dt><dd>Gravitational attraction</dd></div>
+                            <div class="spec__row"><dt>Interacts with light</dt><dd>Not detectably</dd></div>
+                            <div class="spec__row"><dt>Distribution</dt><dd>Clumped &mdash; haloes and filaments</dd></div>
+                            <div class="spec__row"><dt>First inferred</dt><dd>Zwicky 1933, Rubin 1970s</dd></div>
+                            <div class="spec__row"><dt>Detected directly</dt><dd>Never</dd></div>
+                        </dl>
+                    </div>
+
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow__id">07b</span> Dark energy</p>
+                        <h3 class="sub-title" style="margin-top:1rem">It pushes, and it does not dilute</h3>
+                        <p class="copy" style="margin-top:1rem">The expansion is speeding up, which requires something with negative pressure spread evenly through space. The simplest candidate is a cosmological constant &mdash; an energy density that stays the same as space grows, so its influence increases relative to everything else as matter thins out. Measurements of its equation of state give a value indistinguishable from that constant, within a few per cent. The uncomfortable part is that the natural theoretical estimate of its size, from quantum field theory, is wrong by dozens of orders of magnitude, which is generally regarded as the worst prediction in physics.</p>
+                        <dl class="spec" style="margin-top:1.75rem">
+                            <div class="spec__row"><dt>Effect</dt><dd>Accelerated expansion</dd></div>
+                            <div class="spec__row"><dt>Distribution</dt><dd>Smooth &mdash; no structure</dd></div>
+                            <div class="spec__row"><dt>Equation of state w</dt><dd>&minus;1.03 &plusmn; 0.03</dd></div>
+                            <div class="spec__row"><dt>Discovered</dt><dd>1998 &mdash; Type Ia supernovae</dd></div>
+                            <div class="spec__row"><dt>Explained</dt><dd>No</dd></div>
+                        </dl>
+                    </div>
+                </div>
+
+                <div class="note" style="margin-top:3.5rem">
+                    <span class="note__title">Where the 4.9 per cent actually is</span>
+                    <ul class="note__list">
+                        <li><strong>Almost none of it is in stars.</strong> Roughly nine tenths of the ordinary matter in the universe is diffuse ionised gas, most of it strung along filaments between the galaxies rather than inside them. Stars account for a few per cent of the ordinary matter, which puts them at a few hundredths of one per cent of the universe.</li>
+                        <li><strong>Planets and dust round to zero.</strong> On this budget every rocky body, every grain of interstellar dust and every atom that has ever been part of anything solid is a rounding error on a rounding error.</li>
+                        <li><strong>The total was fixed before the first star.</strong> How much ordinary matter exists is set by the first twenty minutes, and is measured two independent ways &mdash; from the deuterium abundance in ancient gas, and from the relative heights of the peaks in the microwave background. They agree, which is the reason nobody suspects the answer is simply "more ordinary matter we have not found".</li>
+                        <li><strong>Some of it went missing and was found.</strong> For years the census of ordinary matter in the nearby universe came up about a third short of what the CMB required. Most of that gap has since been closed by detecting the warm&ndash;hot intergalactic medium &mdash; gas at a million kelvin, too diffuse to see easily in any single line of sight.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             08 · HOW WE KNOW
+             Every other section states conclusions. This one states the
+             instruments, because the whole page is otherwise a series of
+             extraordinary claims about something no one can stand outside
+             of and look at.
+             ============================================================ -->
+        <section class="shell shell--void shell--seam" id="evidence">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">08</span> How we know</p>
+                    <h2 class="head__title">Four measurements, and they <em>agree with each other</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">None of these four probes the same physics, uses the same instruments or shares the same systematic errors. They come from different decades, different wavelengths and different objects. They land on the same age, the same geometry and the same composition, and that convergence is the actual reason the account on this page is believed.</p>
+                </header>
+
+                <div class="plate-grid ev-grid" style="margin-top:1rem">
+
+                    <article class="plate">
+                        <div class="plate__stage" style="--stage-h:170px">
+                            <span class="sig sig--cmb" aria-hidden="true">
+                                <span class="sig__field"></span>
+                                <span class="sig__mark"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">Probe 01</span>
+                            <span class="plate__index">1965 &middot; 1992 &middot; 2003 &middot; 2013</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Microwave background</h3>
+                            <span class="chip">2.7255 K</span>
+                        </div>
+                        <p class="plate__text">A photograph of the universe at 380,000 years old, taken in microwaves, covering the entire sky. Penzias and Wilson found it by accident in 1965 while chasing noise in a radio antenna; COBE resolved its temperature variations in 1992; WMAP and Planck measured their statistical pattern to a precision that turned cosmology into a numerical science. The <em>heights</em> of the peaks in that pattern fix how much ordinary matter and how much dark matter there is. Their <em>positions</em> fix the geometry, which is how the universe was shown to be flat.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Tells us</dt><dd>Age, geometry, composition</dd></div>
+                            <div class="spec__row"><dt>Looks at</dt><dd>z &asymp; 1090</dd></div>
+                            <div class="spec__row"><dt>Anisotropy</dt><dd>&#916;T/T &asymp; 10&#8315;&#8309;</dd></div>
+                            <div class="spec__row"><dt>Spectrum</dt><dd>The best blackbody ever measured</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage" style="--stage-h:170px">
+                            <span class="sig sig--redshift" aria-hidden="true">
+                                <span class="sig__field"></span>
+                                <span class="sig__mark"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">Probe 02</span>
+                            <span class="plate__index">1912 &middot; 1927 &middot; 1929</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Galaxy redshift</h3>
+                            <span class="chip chip--outline">Hubble&ndash;Lema&icirc;tre</span>
+                        </div>
+                        <p class="plate__text">Every element absorbs and emits at fixed wavelengths, so a galaxy's spectrum arrives carrying a barcode whose spacing is known in advance. In distant galaxies that whole barcode is displaced towards longer wavelengths, by the same proportion at every line &mdash; which is the signature of a stretch rather than a change in temperature or composition. Slipher measured the velocities from 1912, Lema&icirc;tre derived the relation in 1927 and Hubble published the plot in 1929. It is the observation the expansion was deduced from, and it is still how distances beyond the local universe are assigned.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Tells us</dt><dd>That space expands, and how fast</dd></div>
+                            <div class="spec__row"><dt>Measures</dt><dd>1 + z = &lambda;&#8338;&#8347;&#8348;/&lambda;&#8337;&#8337;&#8348;&#8348;</dd></div>
+                            <div class="spec__row"><dt>Highest observed</dt><dd>z &asymp; 14.4</dd></div>
+                            <div class="spec__row"><dt>Weakness</dt><dd>Needs independent distances</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage" style="--stage-h:170px">
+                            <span class="sig sig--candle" aria-hidden="true">
+                                <span class="sig__field"></span>
+                                <span class="sig__mark"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">Probe 03</span>
+                            <span class="plate__index">1998 &middot; Nobel 2011</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Type Ia supernovae</h3>
+                            <span class="chip">Standard candles</span>
+                        </div>
+                        <p class="plate__text">A white dwarf pushed to about 1.4 solar masses detonates, and because the trigger mass is always about the same, so is the peak brightness. That makes each one a bulb of known wattage at an unknown distance, which is exactly what is needed to measure distances independently of redshift. In 1998 two competing teams found that the distant ones came out systematically fainter than a decelerating universe allows. The expansion was speeding up. Nobody was looking for that, and both teams initially assumed they had made a mistake.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Tells us</dt><dd>Expansion is accelerating</dd></div>
+                            <div class="spec__row"><dt>Method</dt><dd>Known brightness &#8594; distance</dd></div>
+                            <div class="spec__row"><dt>Useful to</dt><dd>z &asymp; 2</dd></div>
+                            <div class="spec__row"><dt>Also gives</dt><dd>H&#8320; = 73 &plusmn; 1, the high value</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage" style="--stage-h:170px">
+                            <span class="sig sig--web" aria-hidden="true">
+                                <span class="sig__field"></span>
+                                <span class="sig__mark"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">Probe 04</span>
+                            <span class="plate__index">2000 &middot; 2005 &middot; 2024</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Large-scale structure</h3>
+                            <span class="chip chip--outline">BAO</span>
+                        </div>
+                        <p class="plate__text">Sound waves travelling through the plasma of the early universe froze into place at recombination, leaving a preferred separation between galaxies of about 490 million light years. That length is calculable from the microwave background, which turns it into a ruler of known size that can be laid down at any distance &mdash; and measuring how long it looks at each redshift maps the expansion history directly. Surveys from SDSS through DESI have done this for tens of millions of galaxies, and it is the measurement currently hinting that dark energy may not be perfectly constant.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Tells us</dt><dd>Expansion history, structure growth</dd></div>
+                            <div class="spec__row"><dt>Standard ruler</dt><dd>~490 million ly comoving</dd></div>
+                            <div class="spec__row"><dt>Set by</dt><dd>Sound in the pre-atomic plasma</dd></div>
+                            <div class="spec__row"><dt>Current tension</dt><dd>Possible evolving dark energy</dd></div>
+                        </dl>
+                    </article>
+                </div>
+
+                <p class="caption" style="margin-top:2.5rem">
+                    <span class="caption__id">Plates</span>
+                    <span class="caption__body">Schematics of what each instrument sees, not photographs. The microwave background patch has its temperature variation exaggerated by about four orders of magnitude &mdash; at the real amplitude of one part in a hundred thousand the panel would be a flat grey rectangle &mdash; and the colours are the conventional anisotropy scale, blue cold and red hot, not visible colour. The redshift panel shows the same set of absorption lines twice with the lower set displaced, and the displacement is drawn much larger than the shift it represents. The supernova panel shows three explosions of identical true brightness at increasing distance, with the expected track and the measured, fainter one. The survey panel is the same three-strand geometry as Fig&nbsp;06 at plate scale.</span>
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             09 · ULTIMATE FATE, AND MISCONCEPTIONS
+             The page's only genuinely speculative section, and it is
+             labelled as such. Fig 08 draws five models; only one of them
+             is favoured, and the caption says by how much.
+             ============================================================ -->
+        <section class="shell shell--abyss" id="fate">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">09</span> Ultimate fate</p>
+                    <h2 class="head__title">It depends on <em>one number</em>, and we have measured it</h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">For most of the twentieth century the fate of the universe was a question about how much matter it contained: enough to halt the expansion and reverse it, or not enough. Since 1998 the question has been a different one entirely, about whether dark energy stays constant, weakens, or strengthens. The measured answer, so far, is that it stays constant &mdash; and that answer implies expansion forever, at an accelerating rate.</p>
+                </header>
+
+                <!-- Fig 08 · Five models, all normalised to the same
+                     present, because that is the only thing they are
+                     required to agree on. -->
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 460" role="img"
+                             aria-label="Five possible expansion histories plotted as scale factor against time, from the Big Bang to fifty billion years. All five curves are normalised to pass through the same point today, at 13.8 billion years and a scale factor of one. The Big Rip curve rises steeply and turns vertical at about twenty-nine billion years. The accelerating Lambda-CDM curve, drawn brightest as the favoured model, rises and curves gradually upward, reaching a scale factor of four at about thirty-seven billion years. A coasting curve for an empty universe is a straight line. A decelerating curve for a matter-only universe flattens gradually. A recollapse curve rises to a peak scale factor of about 1.28 at twenty-two billion years and then falls back to zero at about forty-four billion years.">
+
+                            <!-- ---- AXES ---------------------------------- -->
+                            <path class="svg-axis" d="M 140 60 L 140 380"/>
+                            <path class="svg-axis" d="M 140 380 L 1100 380"/>
+
+                            <g class="svg-tick">
+                                <path d="M 140 380 L 134 380"/>
+                                <path d="M 140 300 L 134 300"/>
+                                <path d="M 140 220 L 134 220"/>
+                                <path d="M 140 140 L 134 140"/>
+                                <path d="M 140 60 L 134 60"/>
+                                <path d="M 140 380 L 140 386"/>
+                                <path d="M 332 380 L 332 386"/>
+                                <path d="M 524 380 L 524 386"/>
+                                <path d="M 716 380 L 716 386"/>
+                                <path d="M 908 380 L 908 386"/>
+                                <path d="M 1100 380 L 1100 386"/>
+                            </g>
+
+                            <g class="svg-unit">
+                                <text x="128" y="384" text-anchor="end">0</text>
+                                <text x="128" y="304" text-anchor="end">1</text>
+                                <text x="128" y="224" text-anchor="end">2</text>
+                                <text x="128" y="144" text-anchor="end">3</text>
+                                <text x="128" y="64" text-anchor="end">4</text>
+                                <text x="140" y="398" text-anchor="middle">0</text>
+                                <text x="332" y="398" text-anchor="middle">10</text>
+                                <text x="524" y="398" text-anchor="middle">20</text>
+                                <text x="716" y="398" text-anchor="middle">30</text>
+                                <text x="908" y="398" text-anchor="middle">40</text>
+                                <text x="1100" y="398" text-anchor="middle">50</text>
+                            </g>
+
+                            <text class="svg-label" x="140" y="34">Scale factor a &mdash; the relative size of the universe</text>
+                            <text class="svg-unit" x="620" y="436" text-anchor="middle">Time since the Big Bang &middot; billions of years</text>
+
+                            <!-- ---- TODAY -------------------------------- -->
+                            <path class="fate__now" d="M 405 380 L 405 292"/>
+                            <path class="fate__now" d="M 140 300 L 405 300"/>
+
+                            <!-- ---- 05 · BIG RIP ------------------------- -->
+                            <path class="fate__curve fate__curve--rip"
+                                  d="M 140 380 C 172 362, 188 358, 203 354
+                                     C 232 345, 258 338, 278 334
+                                     C 322 324, 370 311, 405 300
+                                     C 448 286, 492 264, 524 240
+                                     C 556 216, 584 192, 601 172
+                                     C 624 146, 648 122, 658 108
+                                     C 670 92, 682 72, 687 60"/>
+
+                            <!-- ---- 01 · ACCELERATING · ΛCDM -------------
+                                 Brighter than the other four, and the only
+                                 one with a bloom, because it is the one the
+                                 data prefer. -->
+                            <path class="fate__bloom"
+                                  d="M 140 380 C 165 366, 186 358, 203 353
+                                     C 228 346, 258 338, 278 333
+                                     C 320 323, 366 311, 405 300
+                                     C 445 289, 488 274, 524 261
+                                     C 592 236, 664 200, 716 167
+                                     C 764 136, 818 92, 850 60"/>
+                            <path class="fate__curve fate__curve--lcdm"
+                                  d="M 140 380 C 165 366, 186 358, 203 353
+                                     C 228 346, 258 338, 278 333
+                                     C 320 323, 366 311, 405 300
+                                     C 445 289, 488 274, 524 261
+                                     C 592 236, 664 200, 716 167
+                                     C 764 136, 818 92, 850 60"/>
+
+                            <!-- ---- 02 · COASTING ----------------------- -->
+                            <path class="fate__curve" d="M 140 380 L 1100 90"/>
+
+                            <!-- ---- 03 · DECELERATING ------------------- -->
+                            <path class="fate__curve"
+                                  d="M 140 380 C 170 362, 188 355, 203 349
+                                     C 232 340, 258 333, 278 328
+                                     C 322 318, 368 308, 405 300
+                                     C 448 291, 490 284, 524 278
+                                     C 590 267, 662 254, 716 246
+                                     C 782 236, 856 225, 908 217
+                                     C 960 210, 1050 197, 1100 191"/>
+
+                            <!-- ---- 04 · RECOLLAPSE --------------------- -->
+                            <path class="fate__curve fate__curve--crunch"
+                                  d="M 140 380 C 172 360, 188 356, 203 351
+                                     C 232 342, 258 335, 278 330
+                                     C 324 320, 370 308, 405 300
+                                     C 432 293, 464 287, 486 284
+                                     C 510 281, 542 279, 562 278
+                                     C 590 278, 652 283, 678 286
+                                     C 726 293, 780 303, 812 312
+                                     C 848 322, 884 333, 908 342
+                                     C 934 352, 968 372, 985 380"/>
+
+                            <circle class="fate__here" cx="405" cy="300" r="4"/>
+                            <text class="svg-unit" x="405" y="398" text-anchor="middle">Today</text>
+                            <text class="svg-unit" x="405" y="412" text-anchor="middle">13.8 Gyr &middot; a = 1</text>
+
+                            <!-- ---- CURVE LABELS ----------------------- -->
+                            <text class="svg-label svg-label--red" x="687" y="44" text-anchor="middle">Big Rip</text>
+                            <text class="svg-label svg-label--cmb" x="856" y="44">Accelerating &middot; &Lambda;CDM</text>
+                            <text class="svg-unit" x="856" y="60">What the data currently prefer</text>
+                            <text class="svg-label" x="1096" y="82" text-anchor="end">Coasting &middot; empty</text>
+                            <text class="svg-label" x="1096" y="183" text-anchor="end">Decelerating &middot; matter only</text>
+                            <text class="svg-label svg-label--dm" x="995" y="368">Recollapse</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 08</span>
+                        <span class="caption__body"><strong>Linear on both axes, and four of the five curves are wrong.</strong> Every curve is normalised to pass through the same point today &mdash; 13.8 billion years, scale factor 1 &mdash; because that is the only constraint all five models share; they therefore disagree about the past as well as the future, which is why they fan out on both sides of the marker. The bright curve is &Lambda;CDM with a cosmological constant, computed from the Planck parameters, and it is drawn brightest because the measured equation of state, w = &minus;1.03 &plusmn; 0.03, is consistent with it and the flatness and supernova data are too. <strong>Recollapse</strong> requires enough matter to close the universe, and the geometry measurement rules it out. <strong>Coasting</strong> and <strong>decelerating</strong> are what the universe would do with no dark energy at all, and the 1998 supernova result rules them out. <strong>Big Rip</strong> needs w to be meaningfully below &minus;1, which is within about one and a half standard deviations of the current best fit &mdash; not favoured, but not excluded either, and the reason it is drawn. Beyond the right-hand edge the &Lambda;CDM curve becomes exponential, which is the "heat death" scenario described below. Everything past the marker is extrapolation, and it assumes dark energy behaves in the future as it has been measured to behave over the last few billion years.</span>
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div class="prose prose--lede">
+                        <p>If dark energy is a true constant, the long-term picture is not violent. The expansion never stops and never reverses; it simply becomes exponential, and everything not gravitationally bound is carried out of reach. In roughly a hundred billion years every galaxy outside the Local Group will have crossed our cosmic event horizon, and an observer here would see a single merged galaxy in an otherwise empty sky, with no way left to discover that the universe expands at all. The evidence this page is built on is temporary.</p>
+                        <p>After that, thermodynamics runs its course over spans that make the current age irrelevant. Star formation ends when the gas is exhausted, in something like a hundred trillion years. The remaining stellar remnants cool. If protons decay &mdash; which has never been observed and may not happen &mdash; matter itself eventually disperses. Black holes evaporate by Hawking radiation, the largest of them on timescales around 10&#8313;&#8310; years. What is left is a cold, dilute, nearly featureless expanse at a temperature approaching but never reaching zero. That end state is usually called the heat death, and it is the boring answer, which is a reasonable heuristic for it being the right one.</p>
+                        <p>One caveat should be stated plainly. Since 2024 the DESI survey's baryon acoustic oscillation measurements have shown a persistent preference &mdash; not yet decisive, and not yet independently confirmed &mdash; for a dark energy whose strength changes with time rather than staying constant. If that holds up, the extrapolation above changes, and the fate becomes an open question again rather than a settled one. It is the most interesting live result in the field, and it is exactly the kind of thing that ought to be flagged rather than smoothed over.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">Timescales, in order</span>
+                            <ul class="note__list">
+                                <li><strong>~4.5 billion years.</strong> The Milky Way and Andromeda merge. Both are bound to each other, so expansion is irrelevant to this.</li>
+                                <li><strong>~100 billion years.</strong> Every galaxy outside the Local Group has receded beyond the cosmic event horizon. The observable universe becomes almost empty.</li>
+                                <li><strong>~10&sup1;&#8308; years.</strong> The last stars burn out. No gas is left cold and dense enough to form new ones.</li>
+                                <li><strong>~10&sup1;&#8309; years and beyond.</strong> Planetary systems have been dissolved by stellar encounters; galaxies have evaporated their own stars.</li>
+                                <li><strong>~10&#8313;&#8310; years.</strong> The largest black holes finish evaporating. This is the longest process in standard physics with a calculable end date.</li>
+                                <li><strong>Indefinitely.</strong> A cold, dilute, expanding space, cooling towards a temperature it never reaches.</li>
+                            </ul>
+                        </div>
+
+                        <dl class="spec" style="margin-top:2.5rem">
+                            <div class="spec__row"><dt>Favoured</dt><dd>Eternal accelerated expansion</dd></div>
+                            <div class="spec__row"><dt>Requires</dt><dd>w &asymp; &minus;1, flat geometry</dd></div>
+                            <div class="spec__row"><dt>Ruled out</dt><dd>Big Crunch &mdash; not enough matter</dd></div>
+                            <div class="spec__row"><dt>Not ruled out</dt><dd>Big Rip, if w &lt; &minus;1</dd></div>
+                            <div class="spec__row"><dt>Live question</dt><dd>Is w constant? DESI says maybe not</dd></div>
+                        </dl>
+                    </div>
+                </div>
+
+
+                <!-- ---- MISCONCEPTIONS ------------------------------- -->
+                <h3 class="sub-title" style="margin-top:5rem">Seven things that sound right and are not</h3>
+                <p class="copy" style="margin-top:1rem;max-width:60ch">Every one of these follows from taking the words "big bang" literally, which is a reasonable thing to do and wrong in seven separate ways.</p>
+
+                <div class="myths" style="margin-top:2.5rem">
+                    <div class="myth">
+                        <p class="myth__claim"><strong>The Big Bang was an explosion in empty space.</strong></p>
+                        <p class="myth__truth">There was no empty space for it to happen in. The Big Bang describes <strong>the expansion of space itself</strong>, everywhere at once &mdash; a hot dense state that became a cooler sparser one. An explosion has a location, an outward direction and a surrounding void, and this had none of the three. Fig&nbsp;02 is the correct picture: a grid whose spacing grows, with nothing moving through it.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>There is a point in space where it happened.</strong></p>
+                        <p class="myth__truth">It happened <strong>everywhere</strong>, including exactly where you are. If the expansion has no centre &mdash; and every measurement says it does not &mdash; then running it backwards does not converge on a place, it converges on a <em>time</em> when everywhere was dense. The microwave background is the clearest demonstration: it arrives from every direction at the same temperature, which is only possible if the hot early state filled the whole sky rather than sitting in one part of it.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>A 13.8-billion-year-old universe cannot be 46.5 billion light years in radius.</strong></p>
+                        <p class="myth__truth">It can, because <strong>the space the light crossed kept growing while it crossed</strong>. The photon spent 13.8 billion years in flight, which is why the light-travel distance matches the age exactly. But its source was carried along by the expansion and is now 46.5 billion light years away. Two different distances answering two different questions; section 04 separates them, and Fig&nbsp;02 shows the mechanism as a stretched wave.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Galaxies are flying away from us through space.</strong></p>
+                        <p class="myth__truth">Their actual motion through space &mdash; peculiar velocity &mdash; is <strong>a few hundred kilometres per second in random directions</strong>, and it is small. What produces the observed redshift is the growth of the distance between us, not travel. The clearest single counterexample is on this page: Andromeda is <em>approaching</em> at about 110 kilometres per second, because it is bound to us and expansion does not act inside bound systems.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>If everything is expanding, atoms and orbits are expanding too.</strong></p>
+                        <p class="myth__truth">They are not, and the reason is simple: <strong>gravity and the other forces win easily on small scales</strong>. Expansion is only detectable where nothing is bound &mdash; beyond about ten million light years. Earth's orbit is not lengthening, the Solar System is not growing, the Milky Way is not expanding, and neither is the Local Group. A ruler stays the same length, which is what makes the expansion measurable at all.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>The microwave background is light from the Big Bang.</strong></p>
+                        <p class="myth__truth">It is light from <strong>380,000 years afterwards</strong> &mdash; the moment the universe cooled enough for atoms to form and the fog of free electrons to clear. Everything before that is permanently hidden in light, not because it is far away but because it is behind an opaque plasma. It is the oldest light there is, and it is nothing like the oldest thing there was.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Dark matter and dark energy are two names for the same mystery.</strong></p>
+                        <p class="myth__truth">They do <strong>opposite things and behave in opposite ways</strong>. Dark matter has mass, gravitates, clumps into haloes and filaments, and is what pulled the cosmic web together. Dark energy has negative pressure, pushes, is smooth to the limits of measurement, and does not dilute as space grows. They are also measured by different features of the data, and the two figures are independent. The only thing they share is the adjective.</p>
+                    </div>
+                </div>
+
+                <div class="note" style="margin-top:3.5rem">
+                    <span class="note__title">Three that are true and sound false</span>
+                    <ul class="note__list">
+                        <li><strong>An analogue television tuned to a dead channel was showing you the early universe.</strong> A small fraction of the static in old UHF snow was genuine cosmic microwave background &mdash; the same photons Penzias and Wilson could not get rid of, arriving in a domestic aerial. Most of the noise was terrestrial and the CMB share was a few per cent, but it was there.</li>
+                        <li><strong>Almost every hydrogen atom in your body is 13.8 billion years old.</strong> Hydrogen was made in the first twenty minutes and has never been made in bulk since. The oxygen it is bonded to in every water molecule was made in a star, and the iron in your blood in a supernova or a neutron-star merger &mdash; but the hydrogen itself predates all of them by billions of years.</li>
+                        <li><strong>We can see galaxies we could never send a message to.</strong> Anything beyond about 16 billion light years today lies outside our cosmic event horizon: light we emit now will never arrive there, and light it emits now will never arrive here. We are watching photons that left before the gap became uncrossable. The observable universe and the reachable universe are different volumes, and the second is shrinking.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             ONWARD
+             The last region, so this closes the whole site rather than
+             pointing at the next one.
+             ============================================================ -->
+        <section class="shell shell--rise shell--seam">
+            <div class="container">
+                <div class="head head--center" style="margin-bottom:0">
+                    <p class="eyebrow eyebrow--bare">End of region 09 &middot; All nine charted</p>
+                    <h2 class="head__title">Nine regions, and they were <em>one object all along</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">The Solar System is one star's worth of leftover disc. The stars are the objects that made the elements it is built from. The black holes are what the largest of them became, the galaxies are what they collect into, the nebulae are the material passing between those states, the cosmic events are the transitions themselves, and the missions are how any of it came to be known. All of it sits inside one filament of the web in Fig&nbsp;06, in a universe 13.8 billion years old that is still getting larger as you read this.</p>
+                    <p style="margin-top:2.5rem">
+                        <a href="../missions/index.html" class="back-link"><span aria-hidden="true">&larr;</span> Back to the instruments that measured all of this</a>
+                    </p>
+                    <p style="margin-top:1.5rem">
+                        <a href="../index.html" class="btn btn--ghost">
+                            Return to the index
+                            <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p class="footer-text">&copy; 2026 CosmoVerse &mdash; Explore beyond the horizon.</p>
+            <p class="footer-note">Region 09 &middot; Cosmology &middot; 9 sections &middot; Figures 01&ndash;08</p>
+        </div>
+    </footer>
+</body>
+</html>

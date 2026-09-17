@@ -1,0 +1,1061 @@
+/* ============================================================
+   CosmoVerse — Core Foundation
+   ------------------------------------------------------------
+   Layer 1 of 3.  Load order:
+     1. style.css        → tokens, reset, shell, starfield, home hero
+     2. components.css   → reusable cosmic visual language
+     3. <page>.css       → page-specific visuals
+
+   HTML5 + CSS3 only. No JavaScript. No frameworks. No libraries.
+   ============================================================ */
+
+
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
+
+:root {
+    /* --- Void & atmosphere ------------------------------------
+       CosmoVerse is never pure grey-black. Every surface carries
+       a faint blue-violet cast so the page reads as *space*,
+       not as a dark-mode dashboard.                            */
+    --void:            #000003;
+    --abyss:           #020209;
+    --deep:            #04040e;
+    --surface:         #070713;
+    --surface-raised:  #0b0b1a;
+
+    /* --- CosmoVerse identity ---------------------------------
+       These never change per section. They are the through-line
+       that keeps nine different subjects feeling like one site. */
+    --core-cyan:   #7fe4ff;
+    --core-blue:   #4a86ff;
+    --core-indigo: #6c6cf5;
+
+    /* --- Ink -------------------------------------------------- */
+    --text:    #f4f5ff;
+    --text-2:  #a9afcd;
+    --text-3:  #6a7092;
+    --text-4:  #464b68;
+
+    /* --- Hairlines -------------------------------------------
+       Precision instrument feel: thin, cool, never boxy.        */
+    --line:        rgba(180, 200, 255, 0.075);
+    --line-2:      rgba(180, 200, 255, 0.14);
+    --line-strong: rgba(200, 220, 255, 0.26);
+
+    /* --- Domain accent contract -------------------------------
+       Every reusable component reads ONLY these variables.
+       A section gives itself a personality by overriding them
+       (see components.css → "Domain Themes"). Defaults below
+       are the neutral CosmoVerse blue used by the home page.    */
+    --accent:        #7fd4ff;
+    --accent-2:      #4a86ff;
+    --accent-deep:   #16255c;
+    --accent-ink:    #03030b;
+    --accent-glow:   rgba(127, 212, 255, 0.22);
+    --accent-wash:   rgba(74, 134, 255, 0.10);
+    --mood-high:     rgba(28, 42, 96, 0.50);
+    --mood-low:      rgba(108, 108, 245, 0.10);
+    --field-opacity: 0.6;
+
+    /* --- Typography ------------------------------------------
+       System stacks only (no webfonts = no external libraries).
+       Display  → tight, cinematic headline voice
+       Body     → comfortable reading voice
+       Mono     → the "instrument" voice: labels, data, units    */
+    --font-display: 'Segoe UI Variable Display', 'Segoe UI', system-ui,
+                    -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    --font-body:    'Segoe UI Variable Text', 'Segoe UI', system-ui,
+                    -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    --font-mono:    'Cascadia Mono', 'Cascadia Code', Consolas, 'SF Mono',
+                    ui-monospace, 'Roboto Mono', monospace;
+
+    /* Fluid type scale */
+    --t-micro: 0.6875rem;
+    --t-xs:    0.75rem;
+    --t-sm:    0.8125rem;
+    --t-base:  0.9375rem;
+    --t-md:    1rem;
+    --t-lg:    clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+    --t-xl:    clamp(1.1875rem, 1.1rem + 0.5vw, 1.4375rem);
+    --t-2xl:   clamp(1.4375rem, 1.28rem + 0.9vw, 1.9375rem);
+    --t-3xl:   clamp(1.75rem, 1.42rem + 1.7vw, 2.75rem);
+    --t-4xl:   clamp(2.125rem, 1.6rem + 2.6vw, 3.5rem);
+    --t-hero:  clamp(2.625rem, 1.5rem + 5.6vw, 5.75rem);
+
+    /* Tracking presets */
+    --track-display: -0.035em;
+    --track-tight:   -0.02em;
+    --track-label:   0.22em;
+    --track-mono:    0.08em;
+
+    /* --- Spacing --------------------------------------------- */
+    --s-1:  0.25rem;
+    --s-2:  0.5rem;
+    --s-3:  0.75rem;
+    --s-4:  1rem;
+    --s-5:  1.5rem;
+    --s-6:  2rem;
+    --s-7:  3rem;
+    --s-8:  4rem;
+    --s-9:  6rem;
+    --s-10: 8rem;
+
+    /* Legacy aliases (kept so nothing already written breaks) */
+    --spacing-xs:  var(--s-1);
+    --spacing-sm:  var(--s-2);
+    --spacing-md:  var(--s-4);
+    --spacing-lg:  var(--s-5);
+    --spacing-xl:  var(--s-6);
+    --spacing-2xl: var(--s-7);
+    --spacing-3xl: var(--s-8);
+    --spacing-4xl: var(--s-9);
+    --font-size-xs:   var(--t-xs);
+    --font-size-sm:   var(--t-sm);
+    --font-size-base: var(--t-base);
+    --font-size-lg:   var(--t-lg);
+    --font-size-xl:   var(--t-xl);
+    --font-size-2xl:  var(--t-2xl);
+    --font-size-3xl:  var(--t-3xl);
+    --font-size-4xl:  var(--t-4xl);
+    --color-text-primary:   var(--text);
+    --color-text-secondary: var(--text-2);
+    --color-text-muted:     var(--text-3);
+    --color-border:         var(--line);
+    --color-void:           var(--void);
+    --color-bg-deep:        var(--abyss);
+    --color-bg-card:        var(--surface);
+    --color-cyan:           var(--core-cyan);
+    --color-cyan-soft:      var(--core-blue);
+
+    /* --- Layout ---------------------------------------------- */
+    --measure:      1180px;   /* page gutter width      */
+    --measure-text: 46rem;    /* comfortable prose      */
+    --header-h:     68px;
+
+    /* --- Motion ---------------------------------------------- */
+    --ease-out:  cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-cine: cubic-bezier(0.16, 0.84, 0.28, 1);
+    --dur-fast:  160ms;
+    --dur-base:  320ms;
+    --dur-slow:  620ms;
+
+    /* --- Radii -----------------------------------------------
+       Deliberately minimal. Big rounded rectangles are what make
+       a page look like a template, so CosmoVerse stays sharp.   */
+    --r-xs: 2px;
+    --r-sm: 3px;
+    --r-md: 5px;
+    --r-pill: 999px;
+}
+
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: var(--t-base);
+    line-height: 1.65;
+    color: var(--text-2);
+    background-color: var(--void);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+    text-wrap: balance;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+dl,
+dd {
+    margin: 0;
+}
+
+strong,
+b {
+    font-weight: 600;
+    color: var(--text);
+}
+
+
+/* ============================================================
+   3. ACCESSIBILITY
+   ============================================================ */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: var(--r-xs);
+}
+
+.skip-link {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -110%);
+    z-index: 2000;
+    padding: var(--s-3) var(--s-5);
+    font: 600 var(--t-sm)/1 var(--font-mono);
+    letter-spacing: var(--track-mono);
+    color: var(--accent-ink);
+    background: var(--accent);
+    border-radius: 0 0 var(--r-md) var(--r-md);
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.skip-link:focus {
+    transform: translate(-50%, 0);
+}
+
+/* Motion is decorative throughout CosmoVerse — it can always go. */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* ============================================================
+   4. LAYOUT PRIMITIVES
+   ============================================================ */
+
+.container {
+    width: 100%;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+.container--narrow {
+    max-width: 860px;
+}
+
+/* Prose column — used for every explanatory passage on the site.
+   Sized in rem, not ch: the lede paragraph runs at a much larger
+   size than the container's own font, so a ch-based measure would
+   set far too narrow a line for it. */
+.prose {
+    max-width: var(--measure-text);
+}
+
+.prose > p {
+    font-size: var(--t-lg);
+    line-height: 1.8;
+    color: var(--text-2);
+}
+
+.prose > p + p {
+    margin-top: var(--s-5);
+}
+
+/* First paragraph of a passage gets a lifted, cinematic weight. */
+.prose--lede > p:first-child {
+    font-size: var(--t-xl);
+    line-height: 1.65;
+    color: #cfd5ee;
+    letter-spacing: -0.005em;
+}
+
+
+/* ============================================================
+   5. HEADER / NAVIGATION
+   ============================================================ */
+
+.header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: var(--header-h);
+    z-index: 1000;
+    background: linear-gradient(180deg, rgba(2, 2, 10, 0.88) 0%, rgba(2, 2, 10, 0.62) 100%);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-bottom: 1px solid var(--line);
+}
+
+/* A single hairline of accent light under the header ties the
+   chrome to whichever cosmic domain you are currently inside. */
+.header::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--accent-glow) 30%,
+        var(--accent) 50%,
+        var(--accent-glow) 70%,
+        transparent 100%);
+    opacity: 0.5;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-family: var(--font-display);
+    font-size: var(--t-md);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--text);
+}
+
+/* Logo mark: a star with an orbit — the site's smallest signature. */
+.logo::before {
+    content: '';
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 34%, #ffffff 0%, var(--accent) 55%, var(--accent-2) 100%);
+    box-shadow: 0 0 10px var(--accent-glow), 0 0 0 4px rgba(255, 255, 255, 0.03);
+    flex: none;
+    transition: box-shadow var(--dur-base) var(--ease-out);
+}
+
+.logo:hover::before {
+    box-shadow: 0 0 16px var(--accent), 0 0 0 6px rgba(255, 255, 255, 0.05);
+}
+
+.logo-mark {
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: var(--track-label);
+    text-transform: uppercase;
+}
+
+/* Ten regions plus Home is 86 characters of label. At the old gap of
+   2rem the bar needed about 1010px next to a 182px logo, which did not
+   fit the 1084px gutter — two-word labels broke onto a second line and
+   the first item collided with the logo mark. The gap and the tracking
+   are both tightened, and nowrap makes a label break the bar's width
+   budget visibly rather than silently stacking. */
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.55rem, 1.15vw, 1.05rem);
+}
+
+.nav-link {
+    position: relative;
+    display: inline-block;
+    padding-block: var(--s-2);
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--text-3);
+    transition: color var(--dur-base) var(--ease-out);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+    transition: width var(--dur-base) var(--ease-out);
+}
+
+.nav-link:hover {
+    color: var(--text);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: var(--text);
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Active page also gets a leading tick, so state is not colour-only. */
+.nav-link.active::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+}
+
+
+/* ------------------------------------------------------------
+   CSS-only mobile navigation (checkbox technique)
+   ------------------------------------------------------------ */
+
+.mobile-menu-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 16px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger-line {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform var(--dur-base) var(--ease-out),
+                opacity var(--dur-fast) linear;
+}
+
+.mobile-menu-checkbox:checked ~ .mobile-menu-toggle .hamburger-line:nth-child(1) {
+    transform: translateY(7.25px) rotate(45deg);
+}
+
+.mobile-menu-checkbox:checked ~ .mobile-menu-toggle .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-checkbox:checked ~ .mobile-menu-toggle .hamburger-line:nth-child(3) {
+    transform: translateY(-7.25px) rotate(-45deg);
+}
+
+.mobile-menu-checkbox:focus-visible ~ .mobile-menu-toggle {
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+}
+
+
+/* ============================================================
+   6. STARFIELD  (reusable — every section can host one)
+   ------------------------------------------------------------
+   Three parallax depths built from radial-gradients:
+     ::before → faint distant dust, slowest
+     element  → mid-field stars
+     ::after  → near, brighter stars with a slow twinkle
+   Density is tuned by --stars-opacity so a section can dial the
+   sky down behind dense content.
+   ============================================================ */
+
+.starfield {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: var(--stars-opacity, 1);
+    background-image:
+        radial-gradient(1px 1px at 25px 50px,   rgba(255, 255, 255, 0.62), transparent),
+        radial-gradient(1px 1px at 75px 25px,   rgba(214, 232, 255, 0.55), transparent),
+        radial-gradient(1px 1px at 120px 92px,  rgba(255, 255, 255, 0.48), transparent),
+        radial-gradient(1px 1px at 172px 45px,  rgba(226, 236, 255, 0.58), transparent),
+        radial-gradient(1px 1px at 213px 131px, rgba(255, 255, 255, 0.42), transparent),
+        radial-gradient(1px 1px at 261px 70px,  rgba(206, 226, 255, 0.52), transparent),
+        radial-gradient(1px 1px at 302px 112px, rgba(255, 255, 255, 0.46), transparent),
+        radial-gradient(1px 1px at 341px 34px,  rgba(232, 240, 255, 0.6),  transparent);
+    background-size: 381px 163px;
+    animation: drift-mid 150s linear infinite;
+}
+
+.starfield::before,
+.starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+.starfield::before {
+    background-image:
+        radial-gradient(0.5px 0.5px at 11px 21px,  rgba(255, 255, 255, 0.38), transparent),
+        radial-gradient(0.5px 0.5px at 52px 83px,  rgba(255, 255, 255, 0.3),  transparent),
+        radial-gradient(0.5px 0.5px at 93px 41px,  rgba(255, 255, 255, 0.34), transparent),
+        radial-gradient(0.5px 0.5px at 141px 124px, rgba(255, 255, 255, 0.24), transparent),
+        radial-gradient(0.5px 0.5px at 184px 62px, rgba(255, 255, 255, 0.36), transparent),
+        radial-gradient(0.5px 0.5px at 231px 152px, rgba(255, 255, 255, 0.28), transparent),
+        radial-gradient(0.5px 0.5px at 283px 31px, rgba(255, 255, 255, 0.33), transparent),
+        radial-gradient(0.5px 0.5px at 324px 101px, rgba(255, 255, 255, 0.22), transparent);
+    background-size: 347px 179px;
+    animation: drift-far 260s linear infinite;
+}
+
+.starfield::after {
+    background-image:
+        radial-gradient(1.6px 1.6px at 41px 71px,  rgba(212, 230, 255, 0.85), transparent),
+        radial-gradient(1.6px 1.6px at 101px 29px, rgba(255, 246, 226, 0.72), transparent),
+        radial-gradient(2px 2px   at 163px 111px, rgba(226, 238, 255, 0.9),  transparent),
+        radial-gradient(1.6px 1.6px at 221px 56px, rgba(255, 255, 255, 0.68), transparent),
+        radial-gradient(1.6px 1.6px at 291px 96px, rgba(206, 224, 255, 0.78), transparent),
+        radial-gradient(2px 2px   at 352px 24px,  rgba(255, 240, 214, 0.82), transparent);
+    background-size: 401px 141px;
+    animation: drift-near 96s linear infinite,
+               twinkle 7s ease-in-out infinite alternate;
+}
+
+@keyframes drift-far  { to { background-position: 347px 179px; } }
+@keyframes drift-mid  { to { background-position: 381px 163px; } }
+@keyframes drift-near { to { background-position: 401px 141px; } }
+
+@keyframes twinkle {
+    0%   { opacity: 0.55; }
+    100% { opacity: 1; }
+}
+
+/* Optional companion layer: a single slow shooting star.
+   Rare enough to feel like a real observation, not an effect. */
+.starfield-streak {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.starfield-streak::before {
+    content: '';
+    position: absolute;
+    top: 14%;
+    left: -10%;
+    width: 160px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+    opacity: 0;
+    transform: rotate(14deg);
+    animation: streak 21s linear infinite;
+}
+
+@keyframes streak {
+    0%,  88%  { opacity: 0; transform: translate3d(0, 0, 0) rotate(14deg); }
+    90%       { opacity: 0.9; }
+    100%      { opacity: 0; transform: translate3d(115vw, 34vh, 0) rotate(14deg); }
+}
+
+
+/* ============================================================
+   7. HOME HERO  (cinematic opening frame)
+   ============================================================ */
+
+.hero {
+    position: relative;
+    min-height: min(100svh, 940px);
+    display: grid;
+    place-items: center;
+    padding: calc(var(--header-h) + var(--s-8)) 0 var(--s-9);
+    background: var(--void);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Atmospheric wash: a galaxy core glow high-left, a cool limb
+   low-right. Two competing light sources read as "space", where a
+   single centred glow reads as "gradient hero". */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse 62% 42% at 18% 12%, rgba(108, 108, 245, 0.16) 0%, transparent 62%),
+        radial-gradient(ellipse 52% 38% at 84% 74%, rgba(74, 134, 255, 0.11) 0%, transparent 60%),
+        radial-gradient(ellipse 90% 55% at 50% 108%, rgba(127, 212, 255, 0.1) 0%, transparent 64%),
+        radial-gradient(ellipse 120% 80% at 50% 0%, rgba(16, 18, 48, 0.7) 0%, transparent 70%);
+}
+
+/* Planetary horizon: the curved limb of an unnamed world rising
+   into the bottom of the frame, with atmospheric scatter along it.
+   Anchored by `top` rather than `bottom` so the arc lands at a
+   predictable height whatever the viewport does. */
+.hero__horizon {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    z-index: 1;
+    width: 260vw;
+    height: 260vw;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 50% 1.5%,
+            rgba(30, 40, 96, 0.9) 0%,
+            rgba(10, 12, 34, 1) 6%,
+            rgba(2, 3, 10, 1) 14%);
+    box-shadow:
+        0 -1px 0 0 rgba(190, 220, 255, 0.34),
+        0 -10px 40px -6px rgba(127, 212, 255, 0.35),
+        0 -34px 120px 0 rgba(74, 134, 255, 0.18);
+    pointer-events: none;
+}
+
+.hero__content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: clamp(var(--s-5), 4vw, var(--s-7));
+    text-align: center;
+}
+
+/* Eyebrow: the "instrument label" voice, used site-wide. */
+.hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    margin-bottom: var(--s-5);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: var(--track-label);
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.hero__eyebrow::before,
+.hero__eyebrow::after {
+    content: '';
+    width: clamp(18px, 6vw, 52px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line-strong));
+}
+
+.hero__eyebrow::after {
+    background: linear-gradient(90deg, var(--line-strong), transparent);
+}
+
+.hero__title {
+    font-size: var(--t-hero);
+    font-weight: 300;
+    line-height: 0.96;
+    letter-spacing: var(--track-display);
+    color: var(--text);
+}
+
+/* Two-tone headline: the first line is stated, the second is lit.
+   Gives the title a cinematic reveal without any animation. */
+.hero__title em {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    background-image: linear-gradient(96deg,
+        #ffffff 0%,
+        #cfe4ff 34%,
+        var(--core-cyan) 68%,
+        var(--core-indigo) 100%);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+    .hero__title em {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+}
+
+.hero__lede {
+    max-width: 46ch;
+    margin: var(--s-5) auto 0;
+    font-size: var(--t-lg);
+    line-height: 1.75;
+    color: var(--text-2);
+}
+
+.hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-4);
+    margin-top: var(--s-7);
+}
+
+/* --- Buttons ------------------------------------------------- */
+
+.btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    padding: 0.8rem 1.6rem;
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: var(--r-sm);
+    transition: transform var(--dur-base) var(--ease-out),
+                border-color var(--dur-base) var(--ease-out),
+                color var(--dur-base) var(--ease-out),
+                box-shadow var(--dur-base) var(--ease-out);
+}
+
+.btn--primary {
+    color: var(--accent-ink);
+    background: linear-gradient(135deg, #ffffff 0%, var(--accent) 46%, var(--accent-2) 100%);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18),
+                0 10px 34px -12px var(--accent-glow);
+}
+
+.btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28),
+                0 16px 44px -10px var(--accent);
+}
+
+.btn--ghost {
+    color: var(--text-2);
+    border: 1px solid var(--line-2);
+    background: rgba(255, 255, 255, 0.015);
+}
+
+.btn--ghost:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    box-shadow: inset 0 0 24px -12px var(--accent-glow);
+    transform: translateY(-2px);
+}
+
+/* Arrow that advances on hover — small, and it earns its keep. */
+.btn__arrow {
+    display: inline-block;
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.btn:hover .btn__arrow {
+    transform: translateX(3px);
+}
+
+.btn--down:hover .btn__arrow {
+    transform: translateY(3px);
+}
+
+/* --- Hero telemetry strip -----------------------------------
+   Grounds the poetry in numbers. Scientific counterweight to a
+   cinematic headline.                                          */
+.hero__telemetry {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    margin-top: clamp(var(--s-7), 7vh, var(--s-9));
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.hero__telemetry > div {
+    flex: 1 1 140px;
+    padding: var(--s-4) var(--s-4);
+    text-align: center;
+    border-left: 1px solid var(--line);
+}
+
+.hero__telemetry > div:first-child {
+    border-left: 0;
+}
+
+.hero__telemetry dt {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.hero__telemetry dd {
+    margin-top: var(--s-1);
+    font-family: var(--font-display);
+    font-size: var(--t-xl);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+}
+
+.hero__telemetry dd small {
+    font-size: var(--t-xs);
+    font-weight: 400;
+    color: var(--text-3);
+}
+
+/* --- Scroll cue --------------------------------------------- */
+
+.hero__cue {
+    position: absolute;
+    left: 50%;
+    bottom: var(--s-5);
+    z-index: 3;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: var(--track-label);
+    text-transform: uppercase;
+    color: var(--text-4);
+    writing-mode: vertical-rl;
+    padding-bottom: 46px;
+}
+
+.hero__cue::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 1px;
+    height: 38px;
+    background: linear-gradient(180deg, var(--line-strong), transparent);
+    transform: translateX(-50%);
+    animation: cue-pull 2.6s var(--ease-cine) infinite;
+}
+
+@keyframes cue-pull {
+    0%, 100% { transform: translateX(-50%) scaleY(0.4); opacity: 0.3; transform-origin: top; }
+    50%      { transform: translateX(-50%) scaleY(1);   opacity: 1;   transform-origin: top; }
+}
+
+
+/* ============================================================
+   8. FOOTER
+   ============================================================ */
+
+.footer {
+    position: relative;
+    padding: var(--s-8) 0 var(--s-6);
+    background: var(--void);
+    border-top: 1px solid var(--line);
+    overflow: hidden;
+}
+
+/* A last horizon glow, so the page fades out instead of stopping. */
+.footer::before {
+    content: '';
+    position: absolute;
+    inset: -60% 0 auto 0;
+    height: 100%;
+    background: radial-gradient(ellipse 60% 100% at 50% 100%, var(--accent-wash) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.footer-inner {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+}
+
+.footer-text {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    letter-spacing: var(--track-mono);
+    color: var(--text-3);
+}
+
+.footer-note {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+
+/* ============================================================
+   9. RESPONSIVE
+   ============================================================ */
+
+/* 1120px, not 860px. With nine regions the horizontal bar still fitted
+   a small laptop; with ten it needs about 930px of gutter, so below
+   roughly 1120px the drawer is the honest layout rather than a bar that
+   overlaps its own logo. Everything in this block is nav chrome and
+   reads --header-h from the variable, so the other two stylesheets'
+   860px breakpoints — which are about figures and photographs — are
+   unaffected by the move. */
+@media (max-width: 1120px) {
+    :root {
+        --header-h: 60px;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .nav {
+        position: fixed;
+        inset: var(--header-h) 0 auto 0;
+        padding: var(--s-5) clamp(var(--s-5), 6vw, var(--s-7)) var(--s-6);
+        background: rgba(2, 2, 10, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--line-2);
+        transform: translateY(-102%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform var(--dur-base) var(--ease-cine),
+                    opacity var(--dur-base) var(--ease-out),
+                    visibility var(--dur-base) linear;
+    }
+
+    .mobile-menu-checkbox:checked ~ .nav {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .nav-list li + li {
+        border-top: 1px solid var(--line);
+    }
+
+    .nav-link {
+        display: block;
+        padding: var(--s-4) 0;
+        font-size: var(--t-sm);
+    }
+
+    .nav-link.active::before {
+        left: auto;
+        right: 2px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .hero__cue {
+        display: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero {
+        min-height: auto;
+        padding-bottom: var(--s-8);
+    }
+
+    /* Shorter hero, so the limb drops further to stay clear of the
+       telemetry strip instead of cutting through it. */
+    .hero__horizon {
+        top: 96%;
+        width: 300vw;
+        height: 300vw;
+    }
+
+    .hero__actions .btn {
+        flex: 1 1 100%;
+        justify-content: center;
+    }
+
+    .hero__telemetry > div {
+        flex-basis: 50%;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+    }
+
+    .hero__telemetry > div:nth-child(-n+2) {
+        border-top: 0;
+    }
+
+    .hero__telemetry > div:nth-child(even) {
+        border-left: 1px solid var(--line);
+    }
+
+    /* Two columns means some labels wrap and some do not. Reserve
+       two lines for all of them so the figures stay on one baseline. */
+    .hero__telemetry dt {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        min-height: 2.6em;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+    }
+}

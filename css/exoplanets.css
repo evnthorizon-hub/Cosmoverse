@@ -1,0 +1,2086 @@
+/* ============================================================
+   COSMOVERSE — EXOPLANETS
+   ============================================================
+
+   THE VISUAL REFERENCE
+   --------------------
+   This region is about worlds nobody has ever seen resolved.
+   Almost every image of an exoplanet in circulation is an
+   artist's impression, and most of them are wrong in the same
+   way: they light an alien world with our Sun. Five rules keep
+   this page honest.
+
+   1. A WORLD IS LIT BY THE COLOUR OF ITS OWN STAR. This is the
+      identity of the domain. A G-type star like ours casts
+      white light; a K dwarf casts amber; an M dwarf casts a
+      deep red-orange and nothing else. Most small planets we
+      have found orbit M dwarfs, so most of the worlds on this
+      page are red-lit — not for atmosphere, because that is
+      what they actually look like.
+
+   2. MEASUREMENT IS CYAN. THE OBJECT NEVER IS. Light curves,
+      velocity curves, spectra, error bars, axes and detection
+      annotations are all drawn in one instrument cyan. Nothing
+      physical on this page is cyan. Every exoplanet fact was
+      won by an instrument rather than by looking, and the
+      colour split says so before the captions do.
+
+   3. GREEN IS RESERVED FOR THE HABITABLE ZONE. Nothing else on
+      the page is ever green — not a planet, not an ocean, not a
+      plant. The Galaxies region reserves violet for what cannot
+      be seen and Black Holes reserves it for spacetime; this is
+      the same discipline applied to the one band on a diagram
+      that people over-read the most.
+
+   4. THE DOPPLER PAIR MEANS ONE THING ONLY. Blue is approach,
+      red is recession, and the pair appears only in the radial
+      velocity section. It is a measurement, not a mood.
+
+   5. NO FANTASY SURFACES. No continents, no city lights, no
+      improbable ring systems, no lens flare. Where a surface is
+      unknown — which is nearly always — it is drawn ambiguous
+      and the caption says the word "impression".
+
+   THE SIGNATURE GEOMETRY
+   ----------------------
+   The transit light curve: a flat baseline, a trapezoidal dip
+   with sloped ingress and egress and a flat floor, then the
+   baseline again. It is stated in the hero as a single swept
+   trace before any diagram uses it, and section 03 is built out
+   of it at full size. The depth of that dip is (Rp/R*)², which
+   is the single most productive equation in the field.
+
+   THE ONE IDEA THE PAGE IS BUILT AROUND
+   -------------------------------------
+   We have found six thousand planets and directly seen almost
+   none of them. Sections 02 through 04 walk from "here is what
+   is measurable" to "here is the shadow, at real depth" to
+   "here is the wobble, at real amplitude" — and both figures
+   end on how far below those signals an Earth around a Sun
+   actually sits. The page is about the gap between what has
+   been detected and what could be.
+   ============================================================ */
+
+
+/* ============================================================
+   1. PALETTE + ILLUMINATION
+   ------------------------------------------------------------
+   components.css defines nine domain themes and this is not one
+   of them: exoplanets were folded into .dm-planets there. That
+   palette is reflected-daylight blue, which is the right answer
+   for Jupiter seen from Earth and the wrong one for a region
+   whose whole subject is starlight measured at a distance. So
+   .dm-exo is declared here instead of being added to
+   components.css — a fourth region page must not require
+   editing a stylesheet the finished ones depend on.
+   ============================================================ */
+
+.dm-exo {
+    /* --- The accent contract ------------------------------
+       Cyan is the instrument, gold is the starlight it reads.
+       Every shared component retunes off these six. */
+    --accent:      #63d2e4;
+    --accent-2:    #ffcb85;
+    --accent-deep: #0a2f3a;
+    --accent-ink:  #02100f;
+    --accent-glow: rgba(99, 210, 228, 0.26);
+    --accent-wash: rgba(255, 203, 133, 0.08);
+    --mood-high:   rgba(10, 38, 52, 0.55);
+    --mood-low:    rgba(99, 210, 228, 0.07);
+
+    /* --- Starlight by spectral class ----------------------
+       Rule 1. These are the only light sources on the page,
+       and every world's skin is built from one of them.
+
+       G is our Sun: 5,772 K, white with a warm bias. K is an
+       orange dwarf, 4,000-5,000 K. M is a red dwarf, 2,300-
+       3,800 K, and TRAPPIST-1 at 2,566 K puts out almost all
+       of its light in the infrared — the visible part that is
+       left is deep orange-red. */
+    --star-g-core: #fffdf6;
+    --star-g:      #ffeec4;
+    --star-g-mid:  #ffd894;
+    --star-g-deep: #d9a44e;
+
+    --star-k-core: #fff2dc;
+    --star-k:      #ffc978;
+    --star-k-mid:  #f0a049;
+    --star-k-deep: #a85f22;
+
+    --star-m-core: #ffe3cf;
+    --star-m:      #ff9457;
+    --star-m-mid:  #e2622c;
+    --star-m-deep: #8e2f11;
+    --star-m-edge: #4a1608;
+
+    /* --- Measurement -------------------------------------
+       Rule 2. Curves, axes, error bars, apertures, annotations.
+       Nothing physical is ever this hue. */
+    --flux:        #7fdcec;
+    --flux-mid:    #4fbcd0;
+    --flux-deep:   #1d6b7d;
+    --flux-soft:   rgba(127, 220, 236, 0.42);
+    --flux-wash:   rgba(127, 220, 236, 0.12);
+    --flux-faint:  rgba(127, 220, 236, 0.06);
+
+    /* --- The habitable zone ------------------------------
+       Rule 3. Reserved. Deliberately a restrained sage rather
+       than a saturated green: the band is a rough estimate
+       with soft edges, and a vivid green implies a precision
+       the concept does not have. */
+    --hz:          #7fd6a4;
+    --hz-mid:      rgba(127, 214, 164, 0.4);
+    --hz-soft:     rgba(127, 214, 164, 0.16);
+    --hz-wash:     rgba(127, 214, 164, 0.07);
+
+    /* --- The Doppler pair --------------------------------
+       Rule 4. Section 04 only. */
+    --shift-blue:  #8ab4ff;
+    --shift-red:   #ff8a8a;
+
+    /* --- World materials ---------------------------------
+       Neutral base tints. Each world's skin then multiplies
+       these against its own star's light, which is why there
+       is no single "rock colour" below. */
+    --rock:        #8d8578;
+    --rock-dark:   #3a352f;
+    --rock-pale:   #c4b8a4;
+    --haze:        #9fb0bc;
+    --haze-deep:   #3d4c58;
+    --ice:         #d8e6ee;
+    --ink:         #05060c;
+
+    /* Height of the sticky local index. */
+    --subnav-h:    46px;
+}
+
+/* Headings run cyan into gold: the instrument, then the star it
+   is pointed at. The shared default runs --accent to --accent-2,
+   which is already that pair — but it crosses through a muddy
+   middle, so a white waypoint is added to keep the transition
+   clean at display sizes. */
+.dm-exo .head__title em,
+.dm-exo .page-hero__title em {
+    background-image: linear-gradient(96deg,
+        var(--flux) 0%, #eaf6f8 34%, var(--star-g) 68%, var(--accent-2) 100%);
+}
+
+
+/* ============================================================
+   2. LOCAL INDEX
+   ------------------------------------------------------------
+   The fourth copy of this component; Stars, Black Holes and
+   Galaxies each carry their own, and galaxies.css carries the
+   note explaining why it has not been promoted to
+   components.css. The reason still holds — promoting it now
+   would mean editing a stylesheet four finished pages depend
+   on — so this stays local too.
+   ============================================================ */
+
+.subnav {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 900;
+    background: rgba(2, 8, 12, 0.92);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    border-bottom: 1px solid var(--line);
+}
+
+/* The domain's two colours as a 1px rule: instrument cyan at
+   the edges, starlight gold through the middle. */
+.subnav::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--flux-deep) 10%,
+        var(--flux-mid) 26%,
+        var(--star-g) 50%,
+        var(--flux-mid) 74%,
+        var(--flux-deep) 90%,
+        transparent 100%);
+    opacity: 0.55;
+}
+
+.subnav__list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+/* Twelve items, so the padding sits between the Galaxies copy
+   (fifteen items, tightest) and the Stars one (nine, loosest).
+   Measured at 1280 and 1440: one row, 46px, which is what
+   --subnav-h and every anchor's scroll-margin-top assume. */
+.subnav__list a {
+    position: relative;
+    padding: 0.85rem clamp(0.32rem, 0.7vw, 0.6rem);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+    transition: color var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child {
+    padding-left: 0;
+}
+
+.subnav__list a::after {
+    content: '';
+    position: absolute;
+    left: clamp(0.34rem, 0.8vw, 0.7rem);
+    right: clamp(0.34rem, 0.8vw, 0.7rem);
+    bottom: 0;
+    height: 1px;
+    background: var(--flux);
+    box-shadow: 0 0 8px rgba(127, 220, 236, 0.45);
+    transform: scaleX(0);
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child::after {
+    left: 0;
+}
+
+.subnav__list a:hover {
+    color: var(--text);
+}
+
+.subnav__list a:hover::after {
+    transform: scaleX(1);
+}
+
+.shell[id],
+.page-hero[id] {
+    scroll-margin-top: calc(var(--header-h) + var(--subnav-h));
+}
+
+
+/* ============================================================
+   3. FIGURE CHROME
+   ------------------------------------------------------------
+   A diagram is a coordinate system. It cannot usefully reflow,
+   so below its natural width it scrolls inside its frame rather
+   than deforming. Same contract as the other three regions.
+   ============================================================ */
+
+.fig {
+    margin: 0;
+}
+
+.fig__frame {
+    position: relative;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+.fig__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* SVG typography, in the same instrument voice as every other
+   label on the site. Sizes are user units, so they scale with
+   the viewBox instead of fighting it. */
+.svg-label,
+.svg-value,
+.svg-unit {
+    font-family: var(--font-mono);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.svg-label {
+    font-size: 12px;
+    fill: var(--text-2);
+}
+
+.svg-value {
+    font-size: 12px;
+    fill: var(--text);
+    letter-spacing: 0.05em;
+    text-transform: none;
+    font-variant-numeric: tabular-nums;
+}
+
+.svg-unit {
+    font-size: 10px;
+    fill: var(--text-4);
+}
+
+/* For labels that have to sit on top of a lit star or a filled
+   band rather than on the page background. Draws the glyph's own
+   outline in the void colour first, which keeps small mono type
+   readable without a solid label box behind it. */
+.svg-onlight {
+    paint-order: stroke fill;
+    stroke: rgba(1, 4, 8, 0.88);
+    stroke-width: 3.4;
+    stroke-linejoin: round;
+}
+
+.svg-label--flux  { fill: var(--flux); }
+.svg-label--star  { fill: var(--star-g); }
+.svg-label--m     { fill: var(--star-m); }
+.svg-label--hz    { fill: var(--hz); }
+.svg-label--blue  { fill: var(--shift-blue); }
+.svg-label--red   { fill: var(--shift-red); }
+
+/* Leader lines. Every callout elbows from the feature to a
+   shared vertical rail, so labels sit at fixed intervals down
+   that rail and cannot collide however tightly the features
+   themselves are packed. */
+.svg-leader {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    opacity: 0.7;
+}
+
+.svg-leader--flux { stroke: rgba(127, 220, 236, 0.44); }
+.svg-leader--star { stroke: rgba(255, 222, 164, 0.4); }
+.svg-leader--hz   { stroke: var(--hz-mid); }
+
+.svg-tick {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    fill: none;
+}
+
+.svg-dash {
+    fill: none;
+    stroke-dasharray: 4 5;
+}
+
+.svg-grid {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 1;
+}
+
+.svg-axis {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+}
+
+/* Error bars. Rule 2 — they are measurement, so they are cyan,
+   and they appear wherever the page plots a real observation
+   rather than a model. Their presence is the difference between
+   a chart and an illustration of a chart. */
+.svg-err {
+    stroke: var(--flux-mid);
+    stroke-width: 1.2;
+    fill: none;
+    opacity: 0.85;
+}
+
+/* --- Caption layout override -------------------------------
+   The shared .caption is a flex row, which is fine for a plain
+   sentence and wrong the moment the prose contains any inline
+   markup: every <strong> and <em> inside it becomes a flex item
+   of its own, and the text either side becomes another. A caption
+   reading "<strong>Logarithmic scale</strong> — four factors of
+   ten…" therefore rendered as three narrow columns instead of one
+   paragraph, with "LOGARITHMIC SCALE" stacked in a gutter of its
+   own.
+
+   Several captions on this page need to emphasise the word that
+   carries an honesty caveat, so rather than wrapping the body of
+   every one of them in a span, the hanging indent is rebuilt
+   without flex: a negative text-indent pulls the first line back
+   by the width of the figure number, the padding pushes every
+   later line in by the same amount, and the result is
+   indistinguishable from the flex version while treating the
+   prose as one run of text. */
+.dm-exo .caption {
+    display: block;
+    padding-left: 5.4em;
+    text-indent: -5.4em;
+}
+
+.dm-exo .caption .caption__id {
+    display: inline-block;
+    width: 5.4em;
+    text-indent: 0;
+}
+
+
+/* ============================================================
+   4. FIELD TEXTURE
+   ------------------------------------------------------------
+   The other eight regions each have a field in components.css
+   whose geometry is its physics. This region's physics is a
+   transit, which needs two things a planetary band texture
+   cannot give: orbits seen close to edge-on, because that is
+   the only geometry in which a transit happens at all, and the
+   regular vertical sampling of a photometric time series.
+   Declared here for the same reason as the palette.
+   ============================================================ */
+
+.field--transit {
+    --field-opacity: 0.5;
+    background-image:
+        /* Orbit shells, flattened hard. A transiting system is
+           one we happen to view within a degree or two of its
+           orbital plane, so the shells are 26% as tall as they
+           are wide rather than circular. */
+        repeating-radial-gradient(ellipse 108% 26% at 50% 52%,
+            transparent 0 78px,
+            var(--field-line) 78px 79px,
+            transparent 79px 158px),
+        /* Photometric sampling: a regular cadence of exposures,
+           which is what a light curve is actually made of. */
+        repeating-linear-gradient(90deg,
+            transparent 0 122px,
+            var(--flux-faint) 122px 123px,
+            transparent 123px 246px);
+    -webkit-mask-image: radial-gradient(ellipse 80% 64% at 50% 52%, #000 8%, rgba(0, 0, 0, 0.5) 46%, transparent 78%);
+            mask-image: radial-gradient(ellipse 80% 64% at 50% 52%, #000 8%, rgba(0, 0, 0, 0.5) 46%, transparent 78%);
+}
+
+
+/* ============================================================
+   5. HERO
+   ------------------------------------------------------------
+   Solar System opens on a planetary limb, Stars on a dispersed
+   spectrum, Black Holes on the Gargantua frame, Galaxies on a
+   logarithmic arc. Exoplanets opens on the measurement: one
+   light curve swept across the foot of the frame, baseline to
+   dip to baseline, so the page states its signature geometry
+   before any diagram is built from it.
+   ============================================================ */
+
+/* Spans the whole hero rather than a band at its foot. The band
+   was the first attempt and it clipped the star: the trace's
+   transit event sits well above the curve's own baseline, and a
+   box sized to the curve cut the top off the thing causing it. */
+.xp-hero__trace {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Anchored to the hero's bottom edge so the curve's baseline lands
+   in the gap between the coordinate line and the readout dock. The
+   dock's cells are opaque, so a baseline any lower than this is
+   simply not on screen. */
+.xp-hero__trace svg {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: min(1700px, 152%);
+    height: auto;
+    transform: translateX(-50%);
+}
+
+.xp-trace {
+    fill: none;
+    stroke: url(#xpTraceRamp);
+    stroke-width: 1.6;
+    opacity: 0.62;
+}
+
+.xp-trace--soft {
+    stroke-width: 8;
+    opacity: 0.1;
+    filter: blur(6px);
+}
+
+/* The sampled points the trace is drawn through. A light curve
+   is a set of exposures, not a continuous line, and at hero
+   scale there is room to say so. */
+.xp-trace__pt {
+    fill: var(--flux);
+    opacity: 0.5;
+}
+
+/* The transiting body, parked at mid-transit above the floor of
+   its own dip. Static: the hero is a held frame, and section 03
+   is where the crossing is animated. */
+.xp-hero__body {
+    fill: var(--ink);
+    stroke: var(--flux-soft);
+    stroke-width: 1.2;
+}
+
+
+/* ============================================================
+   6. WORLDS — the bodies on this page
+   ------------------------------------------------------------
+   Built on the shared .orb primitive from components.css rather
+   than on a new one, because a planet is exactly what .orb is
+   for and ARCHITECTURE.md names exoplanets in its contract.
+
+   Every skin below obeys rule 1. The gradient's bright pole is
+   the substellar point and it carries the host star's colour;
+   the terminator falls away to that star's deep tone and then
+   to --ink. No skin uses hard colour stops: against the
+   antialiased edge of a globe a hard stop stair-steps and reads
+   as a printed stripe rather than as a cloud band.
+
+   Rule 5 applies throughout. None of these worlds has been
+   resolved, so none of them has a feature that is claimed to be
+   real. What is claimed is the light.
+   ============================================================ */
+
+/* The shared specular highlight is white, which is correct for a
+   world lit by our Sun and wrong for every M-dwarf planet here.
+   --orb-shine-rgb lets a body tint its own highlight to the star
+   that is actually lighting it. */
+.dm-exo .orb__body::after {
+    background: radial-gradient(circle at 42% 42%,
+        rgba(var(--orb-shine-rgb, 255 255 255) / var(--orb-shine, 0.26)) 0%,
+        transparent 68%);
+}
+
+/* --- Hot Jupiter -------------------------------------------
+   A gas giant a twentieth of an AU from its star, tidally
+   locked, with a dayside at 1,000-2,400 K. It is not lit so
+   much as glowing: at those temperatures the planet emits its
+   own visible light, which is why the substellar point here is
+   brighter than reflection alone could make it. Bands are
+   drawn because a fast-rotating fluid envelope will have them,
+   and kept low in contrast because no one has resolved one. */
+.orb--hot-jupiter {
+    --orb-d: 148px;
+    --orb-skin:
+        radial-gradient(circle at 30% 28%,
+            rgba(255, 238, 208, 0.62) 0%,
+            rgba(255, 186, 116, 0.34) 26%,
+            rgba(255, 138, 70, 0.12) 46%,
+            transparent 64%),
+        linear-gradient(174deg,
+            #2c0a06 0%,
+            #4a1509 8%,
+            #7b2a0d 17%,
+            #ab4310 26%,
+            #cf5f16 34%,
+            #e1791f 41%,
+            #b94a11 49%,
+            #8d310c 57%,
+            #bb5413 65%,
+            #d96e1b 73%,
+            #a83f0f 82%,
+            #6b220a 90%,
+            #341006 100%);
+    --orb-halo: rgba(255, 128, 56, 0.42);
+    --orb-air: rgba(255, 150, 84, 0.3);
+    --orb-shine: 0.2;
+    --orb-shine-rgb: 255 226 190;
+}
+
+/* --- Super-Earth -------------------------------------------
+   Rocky, 1.3-1.8 Earth radii, high gravity, and in most cases
+   orbiting a K or M dwarf. Drawn as bare high-relief rock with
+   a thin atmosphere: the composition is genuinely unknown, so
+   the surface is texture without geography. */
+.orb--super-earth {
+    --orb-d: 118px;
+    --orb-skin:
+        radial-gradient(circle at 32% 26%,
+            rgba(255, 226, 196, 0.4) 0%,
+            rgba(214, 168, 132, 0.22) 30%,
+            transparent 58%),
+        radial-gradient(ellipse 58% 42% at 66% 62%,
+            rgba(58, 46, 40, 0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 48% 36% at 26% 70%,
+            rgba(150, 122, 98, 0.3) 0%, transparent 72%),
+        linear-gradient(168deg,
+            #241d18 0%,
+            #3c3027 6%,
+            #4e3e33 16%,
+            #6d5847 28%,
+            #8a7059 40%,
+            #6f5844 54%,
+            #543f31 68%,
+            #3a2b22 82%,
+            #1d1612 100%);
+    --orb-halo: rgba(214, 160, 116, 0.18);
+    --orb-air: rgba(228, 178, 138, 0.2);
+    --orb-shine: 0.16;
+    --orb-shine-rgb: 255 222 188;
+}
+
+/* --- Mini-Neptune ------------------------------------------
+   The commonest kind of planet we know of, and the one there is
+   least to see on. Every mini-Neptune whose spectrum has been
+   taken well came back flatter than expected: a high-altitude
+   haze deck sits above the weather and mutes everything under
+   it. So this one is deliberately featureless. The blankness is
+   the observation. */
+.orb--mini-neptune {
+    --orb-d: 128px;
+    --orb-skin:
+        radial-gradient(circle at 31% 27%,
+            rgba(226, 240, 248, 0.34) 0%,
+            rgba(158, 186, 204, 0.2) 32%,
+            transparent 62%),
+        linear-gradient(172deg,
+            #131c24 0%,
+            #1d2b36 10%,
+            #2c414f 22%,
+            #3e5867 34%,
+            #4d6b7b 45%,
+            #43606f 56%,
+            #354d5c 68%,
+            #253744 82%,
+            #141d25 100%);
+    --orb-halo: rgba(122, 168, 194, 0.24);
+    --orb-air: rgba(168, 200, 220, 0.3);
+    --orb-shine: 0.14;
+    --orb-shine-rgb: 226 240 248;
+}
+
+/* --- Earth-sized world, M-dwarf lit ------------------------
+   The prize, and the hardest to say anything about. Rocky, near
+   Earth's radius, and almost always found round a red dwarf
+   because that is where a small planet's signal is big enough
+   to catch. Lit deep orange-red, per rule 1, and given a hard
+   terminator because a tidally locked world has a permanent
+   one. No ocean, no cloud pattern, no continents: nothing about
+   any of those is known. */
+.orb--earth-size {
+    --orb-d: 112px;
+    --orb-skin:
+        radial-gradient(circle at 30% 28%,
+            rgba(255, 214, 178, 0.46) 0%,
+            rgba(233, 132, 76, 0.28) 28%,
+            rgba(158, 66, 30, 0.12) 50%,
+            transparent 66%),
+        radial-gradient(ellipse 54% 40% at 68% 66%,
+            rgba(30, 12, 8, 0.55) 0%, transparent 72%),
+        linear-gradient(166deg,
+            #1c0a05 0%,
+            #2e1108 9%,
+            #4e1e0c 20%,
+            #75320f 32%,
+            #9a4715 43%,
+            #7c3510 55%,
+            #5a2410 68%,
+            #3a1509 82%,
+            #180803 100%);
+    --orb-halo: rgba(226, 108, 56, 0.22);
+    --orb-air: rgba(255, 150, 96, 0.18);
+    --orb-shine: 0.14;
+    --orb-shine-rgb: 255 206 168;
+}
+
+/* --- Earth, for the comparison section ---------------------
+   The one world on this page whose appearance is not an
+   inference. It is here as the control, and it is the only body
+   allowed real surface features — because they have been
+   photographed. Rule 3 is not broken by the continents: they
+   are drawn in the ochre and umber of land, not in green. */
+.orb--earth {
+    --orb-d: 112px;
+    --orb-skin:
+        radial-gradient(circle at 30% 26%,
+            rgba(255, 255, 255, 0.4) 0%,
+            rgba(180, 214, 246, 0.2) 30%,
+            transparent 60%),
+        radial-gradient(ellipse 34% 26% at 62% 38%,
+            rgba(150, 128, 86, 0.72) 0%,
+            rgba(122, 104, 68, 0.4) 52%,
+            transparent 78%),
+        radial-gradient(ellipse 26% 34% at 34% 68%,
+            rgba(138, 120, 82, 0.6) 0%,
+            rgba(110, 96, 64, 0.3) 54%,
+            transparent 80%),
+        radial-gradient(ellipse 44% 20% at 50% 12%,
+            rgba(244, 250, 255, 0.42) 0%, transparent 74%),
+        radial-gradient(ellipse 44% 18% at 50% 92%,
+            rgba(240, 248, 255, 0.34) 0%, transparent 76%),
+        linear-gradient(168deg,
+            #0a1626 0%,
+            #10233c 10%,
+            #1a3a5e 24%,
+            #24537f 38%,
+            #2b6394 48%,
+            #24537f 60%,
+            #182f4c 76%,
+            #0b1524 100%);
+    --orb-halo: rgba(120, 180, 240, 0.3);
+    --orb-air: rgba(150, 200, 255, 0.4);
+    --orb-shine: 0.24;
+    --orb-shine-rgb: 255 255 255;
+}
+
+/* --- Proxima Centauri b ------------------------------------
+   The nearest exoplanet there is, round the nearest star there
+   is, and it has never been seen. An M5.5 dwarf at 3,042 K
+   gives it a duller, redder light than the M8 cases; it takes
+   flare radiation constantly, which is the reason nobody will
+   commit to it having an atmosphere. Drawn bare. */
+.orb--proxima-b {
+    --orb-d: 132px;
+    --orb-skin:
+        radial-gradient(circle at 29% 27%,
+            rgba(255, 202, 166, 0.42) 0%,
+            rgba(214, 112, 62, 0.24) 30%,
+            transparent 60%),
+        radial-gradient(ellipse 50% 38% at 70% 68%,
+            rgba(24, 9, 5, 0.62) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 40% 44%,
+            rgba(120, 74, 48, 0.28) 0%, transparent 74%),
+        linear-gradient(164deg,
+            #170803 0%,
+            #291006 8%,
+            #451a0a 19%,
+            #66290d 31%,
+            #863a12 42%,
+            #6b2c0f 55%,
+            #4d1e0c 69%,
+            #2f1207 83%,
+            #140602 100%);
+    --orb-halo: rgba(206, 94, 48, 0.2);
+    --orb-shine: 0.12;
+    --orb-shine-rgb: 255 198 160;
+}
+
+/* --- TRAPPIST-1 e ------------------------------------------
+   Closest thing to an Earth analogue by bulk properties, round
+   a 2,566 K ultracool dwarf — the reddest illumination on the
+   page. JWST's first look is consistent either with no
+   atmosphere or with a secondary one; a faint limb is drawn to
+   keep the open question visible rather than settled. */
+.orb--trappist-e {
+    --orb-d: 120px;
+    --orb-skin:
+        radial-gradient(circle at 30% 28%,
+            rgba(255, 194, 158, 0.4) 0%,
+            rgba(206, 96, 52, 0.24) 30%,
+            transparent 60%),
+        radial-gradient(ellipse 52% 40% at 70% 66%,
+            rgba(20, 7, 4, 0.6) 0%, transparent 72%),
+        linear-gradient(166deg,
+            #150702 0%,
+            #260d05 9%,
+            #401708 20%,
+            #5f2409 32%,
+            #7d3410 43%,
+            #64270d 56%,
+            #481b0a 70%,
+            #2b1006 84%,
+            #120501 100%);
+    --orb-halo: rgba(196, 84, 42, 0.2);
+    --orb-air: rgba(226, 120, 72, 0.14);
+    --orb-shine: 0.12;
+    --orb-shine-rgb: 255 190 152;
+}
+
+/* --- Kepler-186f -------------------------------------------
+   An M1 dwarf at about 3,800 K: still red, but the warmest of
+   the red-dwarf hosts here, so its light carries more gold than
+   TRAPPIST-1's. It sits near the outer edge of its habitable
+   zone and gets about a third of the flux Earth does, which is
+   why the illuminated side is drawn dimmer than the others. */
+.orb--kepler-186f {
+    --orb-d: 118px;
+    --orb-skin:
+        radial-gradient(circle at 31% 27%,
+            rgba(255, 216, 172, 0.36) 0%,
+            rgba(214, 132, 68, 0.2) 30%,
+            transparent 60%),
+        radial-gradient(ellipse 52% 40% at 70% 66%,
+            rgba(22, 12, 7, 0.58) 0%, transparent 72%),
+        linear-gradient(168deg,
+            #17100a 0%,
+            #281709 9%,
+            #42260e 20%,
+            #613914 32%,
+            #7d4b1c 43%,
+            #653a15 56%,
+            #482910 70%,
+            #2c190a 84%,
+            #130c05 100%);
+    --orb-halo: rgba(196, 122, 58, 0.18);
+    --orb-shine: 0.12;
+    --orb-shine-rgb: 255 214 172;
+}
+
+/* --- Kepler-442b ------------------------------------------
+   A K5 dwarf host at about 4,400 K, so this is the one amber
+   world on the page — between the white of a Sun and the deep
+   red of the M dwarfs, and the reason the comparison section
+   reads as five different lights rather than one. K dwarfs are
+   currently argued to be the best place to look: long-lived like
+   an M dwarf, but calmer and with a habitable zone far enough
+   out to escape tidal locking. */
+.orb--kepler-442b {
+    --orb-d: 129px;
+    --orb-skin:
+        radial-gradient(circle at 31% 27%,
+            rgba(255, 232, 198, 0.42) 0%,
+            rgba(226, 160, 96, 0.24) 30%,
+            transparent 60%),
+        radial-gradient(ellipse 52% 40% at 70% 66%,
+            rgba(24, 16, 9, 0.56) 0%, transparent 72%),
+        linear-gradient(167deg,
+            #1b140c 0%,
+            #2e2011 9%,
+            #4b3318 20%,
+            #6d4a1f 32%,
+            #8a6029 43%,
+            #6f4a20 56%,
+            #513418 70%,
+            #31200e 84%,
+            #150e07 100%);
+    --orb-halo: rgba(214, 150, 74, 0.2);
+    --orb-shine: 0.14;
+    --orb-shine-rgb: 255 230 194;
+}
+
+/* --- 51 Pegasi b ------------------------------------------
+   The first planet found around an ordinary star, and the one
+   that broke the model: half Jupiter's mass at a twentieth of
+   an AU, where nothing was supposed to be able to form. Its
+   host is a G-type star very like the Sun, so unusually for a
+   hot Jupiter its illumination is close to white — which makes
+   the glow of its own dayside easier to separate by eye from
+   the light it merely reflects. */
+.orb--51peg-b {
+    --orb-d: 156px;
+    --orb-skin:
+        radial-gradient(circle at 30% 27%,
+            rgba(255, 248, 226, 0.6) 0%,
+            rgba(255, 206, 148, 0.32) 26%,
+            rgba(226, 132, 66, 0.12) 48%,
+            transparent 66%),
+        linear-gradient(176deg,
+            #2a1006 0%,
+            #48200a 8%,
+            #74380e 17%,
+            #a04f13 26%,
+            #c46a1a 34%,
+            #d8831f 41%,
+            #ae5714 49%,
+            #863c0e 57%,
+            #b26216 65%,
+            #cf7c1d 73%,
+            #a04c11 82%,
+            #67270b 90%,
+            #311105 100%);
+    --orb-halo: rgba(255, 150, 70, 0.38);
+    --orb-air: rgba(255, 176, 108, 0.26);
+    --orb-shine: 0.24;
+    --orb-shine-rgb: 255 246 222;
+}
+
+/* Stage heights. Every stage in a grid must share one height or
+   the titles below them stop aligning across a row, so the
+   tallest body in each grid sets it once. */
+.xp-types .plate__stage  { --stage-h: 214px; }
+.xp-famous .plate__stage { --stage-h: 226px; }
+
+/* The shared plate stage draws an optical-axis hairline across
+   its middle for aligning drawn bodies. Through a lit globe it
+   reads as a scratch on the print, so it is suppressed on the
+   grids that hold world portraits. */
+.xp-types .plate__stage::before,
+.xp-famous .plate__stage::before {
+    display: none;
+}
+
+/* Four type plates want two across, not three: the shared
+   auto-fit grid fits three columns in this container and would
+   orphan the fourth on its own row. */
+.xp-types {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 760px) {
+    .xp-types {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* A world's host star, stated on the plate that shows it. The
+   swatch is the actual illumination the body above was drawn
+   with, so the rule-1 claim is checkable rather than asserted. */
+.xp-host {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    margin-bottom: var(--s-4);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.xp-host i {
+    flex: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--sw, var(--star-g));
+    box-shadow: 0 0 10px -1px var(--sw, var(--star-g));
+}
+
+.xp-host--g i { --sw: var(--star-g); }
+.xp-host--k i { --sw: var(--star-k); }
+.xp-host--m i { --sw: var(--star-m); }
+
+
+/* ============================================================
+   7. DETECTION METHODS
+   ------------------------------------------------------------
+   Four panels, and the honest hierarchy between them is the
+   point: three-quarters of all known planets came from transits
+   and about one in seventy from direct imaging. The panels are
+   therefore not equal in the text even though they are equal on
+   the grid, and each carries its own share as a figure.
+   ============================================================ */
+
+.det {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(var(--s-5), 3vw, var(--s-7));
+}
+
+.det__panel {
+    position: relative;
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line-2);
+    min-width: 0;
+}
+
+.det__panel::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 38px;
+    height: 1px;
+    background: var(--flux);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.det__stage {
+    position: relative;
+    height: 210px;
+    margin-bottom: var(--s-5);
+    background: radial-gradient(ellipse 74% 68% at 50% 50%,
+        rgba(8, 28, 38, 0.5) 0%, transparent 74%);
+    overflow: hidden;
+    -webkit-mask-image: radial-gradient(ellipse 82% 88% at 50% 50%,
+        #000 52%, transparent 100%);
+            mask-image: radial-gradient(ellipse 82% 88% at 50% 50%,
+        #000 52%, transparent 100%);
+}
+
+.det__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+    margin-bottom: var(--s-3);
+}
+
+.det__id {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    color: var(--text-4);
+    font-variant-numeric: tabular-nums;
+}
+
+/* The share of all known planets this method is responsible
+   for. Set as a percentage bar rather than only as a number,
+   because "three-quarters versus one-and-a-half per cent" is
+   the single most useful thing on the grid. */
+.det__share {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--s-3);
+    /* Needs its own top margin. Sitting directly under the title
+       the bar read as an underline of the heading and clipped its
+       descenders. */
+    margin-top: var(--s-4);
+    margin-bottom: var(--s-4);
+}
+
+.det__share-track {
+    position: relative;
+    height: 2px;
+    background: var(--line);
+}
+
+.det__share-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--share, 10%);
+    min-width: 4px;
+    background: linear-gradient(90deg, var(--flux-deep), var(--flux));
+    box-shadow: 0 0 12px -2px var(--accent-glow);
+}
+
+.det__share-value {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    font-variant-numeric: tabular-nums;
+    color: var(--flux);
+}
+
+.det__title {
+    font-size: var(--t-xl);
+    font-weight: 500;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.det__text {
+    margin-top: var(--s-3);
+    font-size: var(--t-sm);
+    line-height: 1.68;
+    color: var(--text-3);
+}
+
+/* What the method can and cannot tell you. Every technique here
+   measures one thing and infers the rest, and the pairing of
+   "gives" against "cannot give" is what stops the section
+   reading as four ways of doing the same job. */
+.det__yield {
+    margin-top: var(--s-4);
+}
+
+.det__yield div {
+    display: flex;
+    gap: var(--s-3);
+    padding: 0.42rem 0;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+}
+
+/* 5em, not 4.2. "CANNOT" is six uppercase mono characters plus
+   tracking and overran 4.2em, which pushed its value a few pixels
+   right of "GIVES" above it and made the pair look unaligned. */
+.det__yield dt {
+    flex: none;
+    width: 5em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.det__yield dd {
+    color: var(--text-2);
+}
+
+.det__yield .det__no dd {
+    color: var(--text-4);
+}
+
+/* --- Shared parts of the four schematics ------------------- */
+.det__orbit {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+    stroke-dasharray: 3 5;
+    opacity: 0.6;
+}
+
+.det__sight {
+    fill: none;
+    stroke: var(--flux-soft);
+    stroke-width: 1;
+    stroke-dasharray: 5 4;
+}
+
+.det__body {
+    fill: var(--ink);
+    stroke: var(--flux-soft);
+    stroke-width: 1;
+}
+
+.det__curve {
+    fill: none;
+    stroke: var(--flux);
+    stroke-width: 1.8;
+    stroke-linejoin: round;
+}
+
+.det__curve-soft {
+    fill: none;
+    stroke: var(--flux);
+    stroke-width: 6;
+    opacity: 0.16;
+    filter: blur(3px);
+}
+
+.det__baseline {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+    stroke-dasharray: 2 4;
+}
+
+/* The coronagraph mask in the direct-imaging panel. It is drawn
+   as an occulted disk with a hard edge because that is what it
+   is: a piece of metal that physically blocks the star. */
+.det__mask {
+    fill: var(--ink);
+    stroke: var(--flux-mid);
+    stroke-width: 1.2;
+    stroke-dasharray: 3 3;
+}
+
+.det__speckle {
+    fill: var(--flux);
+    opacity: 0.3;
+}
+
+
+/* ============================================================
+   8. TRANSIT LIGHT CURVE
+   ------------------------------------------------------------
+   The page's central figure. The star sits directly above the
+   plot and shares its x axis, so the planet's position and the
+   point on the curve it is responsible for are always in the
+   same column. That alignment is the whole pedagogy: the dip is
+   not a graph next to a picture, it is the picture's shadow.
+
+   Both the crossing and the marker run off one duration and one
+   set of breakpoints, computed from the geometry below:
+
+       star centre  x = 590,  R* = 60
+       planet       Rp = 11
+       ingress starts   590 - (60+11) = 519  →  42.45%
+       ingress ends     590 - (60-11) = 541  →  44.79%
+       egress starts    590 + (60-11) = 639  →  55.21%
+       egress ends      590 + (60+11) = 661  →  57.55%
+
+   of a sweep from x=120 to x=1060. Changing any radius means
+   recomputing all four, so they are written out here rather
+   than left implicit in the keyframes.
+   ============================================================ */
+
+.lc__star-glow {
+    fill: url(#xpStarGlow);
+}
+
+.lc__star {
+    fill: url(#xpStarG);
+}
+
+/* Limb darkening. A real stellar disk is measurably dimmer at
+   its edge than at its centre, which is why a transit floor is
+   never perfectly flat — the planet blocks brighter light in
+   the middle of its crossing than at the edges. Drawn, because
+   the curve below has that curvature in it. */
+.lc__limb {
+    fill: url(#xpLimbDark);
+}
+
+/* The planet. A dark disk with a thin cyan outline — the disk
+   is the physical body, the outline is an annotation so that it
+   stays findable when it is off the stellar disk and would in
+   reality be invisible. */
+.lc__planet {
+    fill: var(--ink);
+    stroke: var(--flux-soft);
+    stroke-width: 1.2;
+}
+
+.lc__cross {
+    animation: xp-cross var(--lc-t, 14s) linear infinite;
+}
+
+@keyframes xp-cross {
+    from { transform: translateX(-470px); }
+    to   { transform: translateX(470px); }
+}
+
+/* The read head: a hairline dropped from the planet to the plot
+   so the eye is never asked to remember a horizontal position. */
+.lc__read {
+    fill: none;
+    stroke: var(--flux-soft);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+}
+
+.lc__curve {
+    fill: none;
+    stroke: var(--flux);
+    stroke-width: 2.4;
+    stroke-linejoin: round;
+}
+
+.lc__curve-bloom {
+    fill: none;
+    stroke: var(--flux);
+    stroke-width: 9;
+    opacity: 0.14;
+    filter: blur(4px);
+}
+
+.lc__base {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+    stroke-dasharray: 3 5;
+}
+
+/* The measured points, with error bars. Photometry is noisy and
+   a light curve is a fit through scatter, not a drawn shape. */
+.lc__pt {
+    fill: var(--flux);
+}
+
+.lc__marker {
+    fill: var(--star-g-core);
+    stroke: var(--flux);
+    stroke-width: 1.4;
+}
+
+/* Vertical position of the marker, stepped to the same four
+   breakpoints as the crossing. 60 user units is the plotted
+   depth of the dip. */
+.lc__marker-y {
+    animation: xp-dip var(--lc-t, 14s) linear infinite;
+}
+
+@keyframes xp-dip {
+    0%, 42.45%     { transform: translateY(0); }
+    44.79%, 55.21% { transform: translateY(60px); }
+    57.55%, 100%   { transform: translateY(0); }
+}
+
+/* The depth bracket, and the band it measures across. */
+.lc__depth {
+    fill: var(--flux-wash);
+}
+
+.lc__bracket {
+    fill: none;
+    stroke: var(--flux-mid);
+    stroke-width: 1;
+}
+
+
+/* ============================================================
+   9. RADIAL VELOCITY
+   ------------------------------------------------------------
+   A star and its planet both orbit their common centre of mass,
+   so one rotating group holds both bodies at opposite radii and
+   the geometry is exact by construction rather than by two
+   animations being kept in step.
+
+   The curve marker is a sine sampled at eight points, and its
+   phase is fixed by the diagram's convention: the observer is
+   off to the left, so with the star at angle θ from the +x axis
+   its velocity towards us is proportional to sin θ, and the
+   plotted value — positive upwards means receding, as in every
+   published RV curve — is −sin θ.
+   ============================================================ */
+
+/* The barycentre is not the centre of the viewBox — the orbit
+   diagram shares its SVG with the velocity curve to its right —
+   so the rotation origin is given in user units per instance
+   rather than as a percentage. transform-box: view-box makes
+   those px resolve against the viewBox.
+
+   The obvious alternative, fill-box, is the origin of the
+   group's own bounding box: correct for a centred ring, and
+   silently wrong here, because this group holds a star at +46
+   and a planet at -168 and its box is not centred on the point
+   they both orbit. */
+.rv__spin {
+    transform-box: view-box;
+    transform-origin: var(--ox, 50%) var(--oy, 50%);
+    animation: xp-orbit var(--rv-t, 16s) linear infinite;
+}
+
+@keyframes xp-orbit {
+    to { transform: rotate(360deg); }
+}
+
+.rv__star {
+    fill: url(#xpStarG);
+}
+
+.rv__star-glow {
+    fill: url(#xpStarGlow);
+}
+
+.rv__planet {
+    fill: url(#xpGiant);
+}
+
+.rv__bary {
+    fill: none;
+    stroke: var(--flux-mid);
+    stroke-width: 1;
+    opacity: 0.8;
+}
+
+/* Two orbits, wildly different in size and identical in period.
+   The star's is the one that is measurable, and it is 1/1047 of
+   the planet's for a Sun-and-Jupiter pair — drawn far larger
+   than that here, which the caption states. */
+.rv__path {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+    stroke-dasharray: 3 5;
+    opacity: 0.55;
+}
+
+.rv__path--star {
+    stroke: var(--flux-soft);
+    stroke-dasharray: 2 3;
+    opacity: 0.9;
+}
+
+.rv__sight {
+    fill: none;
+    stroke: var(--flux-soft);
+    stroke-width: 1;
+    stroke-dasharray: 5 4;
+}
+
+.rv__curve {
+    fill: none;
+    stroke: var(--flux);
+    stroke-width: 2.4;
+}
+
+.rv__curve-bloom {
+    fill: none;
+    stroke: var(--flux);
+    stroke-width: 9;
+    opacity: 0.13;
+    filter: blur(4px);
+}
+
+.rv__marker {
+    fill: var(--star-g-core);
+    stroke: var(--flux);
+    stroke-width: 1.4;
+}
+
+/* The marker needs both axes: x advances linearly with time
+   across exactly one plotted period, y follows the sine. Two
+   nested groups rather than one, because a single element cannot
+   run two transforms off two different timing functions. */
+.rv__marker-x {
+    animation: xp-sweep var(--rv-t, 16s) linear infinite;
+}
+
+@keyframes xp-sweep {
+    from { transform: translateX(0); }
+    to   { transform: translateX(460px); }
+}
+
+.rv__marker-y {
+    animation: xp-sine var(--rv-t, 16s) linear infinite;
+}
+
+/* Amplitude 70 user units. Eight samples is enough that the
+   turning points land on the curve's own extremes rather than
+   cutting the corners off them. */
+@keyframes xp-sine {
+    0%     { transform: translateY(0); }
+    12.5%  { transform: translateY(49.5px); }
+    25%    { transform: translateY(70px); }
+    37.5%  { transform: translateY(49.5px); }
+    50%    { transform: translateY(0); }
+    62.5%  { transform: translateY(-49.5px); }
+    75%    { transform: translateY(-70px); }
+    87.5%  { transform: translateY(-49.5px); }
+    100%   { transform: translateY(0); }
+}
+
+/* --- The spectrum strips ---------------------------------
+   Static, at the two extremes of the curve. Animating them
+   would put a third thing in motion for no gain: the shift is
+   a state at a phase, not a process. Rule 4 — the only blue
+   and red on the page. */
+.rv__spectrum {
+    fill: rgba(255, 255, 255, 0.045);
+    stroke: var(--line-2);
+    stroke-width: 1;
+}
+
+.rv__line {
+    stroke-width: 2;
+}
+
+.rv__line--rest  { stroke: var(--text-2); }
+.rv__line--blue  { stroke: var(--shift-blue); }
+.rv__line--red   { stroke: var(--shift-red); }
+
+.rv__arrow--blue { fill: var(--shift-blue); }
+.rv__arrow--red  { fill: var(--shift-red); }
+
+
+/* ============================================================
+   10. HABITABLE ZONE
+   ------------------------------------------------------------
+   Three stars on one shared AU axis, which is the only
+   arrangement in which the finding is visible: the habitable
+   zone of an M dwarf is not a smaller version of ours, it is
+   about a fortieth of the distance out, close enough in that
+   everything inside it is tidally locked and inside the star's
+   flare radius. On a shared axis that band is a sliver, so it
+   is magnified in an inset rather than drawn at a second scale
+   without saying so.
+   ============================================================ */
+
+.hz__band {
+    fill: var(--hz-soft);
+}
+
+.hz__edge {
+    fill: none;
+    stroke: var(--hz-mid);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+}
+
+/* The optimistic zone, outside the conservative one. Drawn
+   fainter and dashed because it depends on assumptions about
+   cloud cover and greenhouse gases that the conservative
+   estimate does not make. Two bands, because there is not one
+   number. */
+.hz__band--wide {
+    fill: var(--hz-wash);
+}
+
+.hz__star-g { fill: url(#xpStarG); }
+.hz__star-k { fill: url(#xpStarK); }
+.hz__star-m { fill: url(#xpStarM); }
+
+.hz__glow-g { fill: url(#xpStarGlow); }
+.hz__glow-k { fill: url(#xpGlowK); }
+.hz__glow-m { fill: url(#xpGlowM); }
+
+.hz__track {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+    opacity: 0.5;
+}
+
+.hz__world {
+    fill: var(--rock);
+    stroke: rgba(0, 0, 0, 0.5);
+    stroke-width: 0.6;
+}
+
+.hz__world--in {
+    fill: var(--hz);
+}
+
+.hz__row-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    fill: var(--text-2);
+}
+
+.hz__inset {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+}
+
+/* Faint on purpose. These two lines have to cross the distance
+   axis and its tick labels to reach the inset, so at full
+   strength they competed with the axis they were passing
+   through. */
+.hz__inset-tie {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+    opacity: 0.32;
+}
+
+/* The tidal-locking boundary, which is the reason the M-dwarf
+   panel is not simply good news. Inside it a planet's rotation
+   has been braked into synchrony with its orbit long ago. */
+.hz__lock {
+    fill: none;
+    stroke: var(--star-m);
+    stroke-width: 1;
+    stroke-dasharray: 2 4;
+    opacity: 0.7;
+}
+
+
+/* ============================================================
+   11. EARTH AGAINST THE CANDIDATES
+   ------------------------------------------------------------
+   A table would be the honest format and a row of globes would
+   be the memorable one, so this is both: bodies at true
+   relative radius above a hairline spec grid. The column that
+   matters is the last one, which is what is actually known
+   about each — and for four of the five entries the answer is
+   almost nothing.
+   ============================================================ */
+
+.cmp {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(var(--s-4), 2vw, var(--s-5));
+}
+
+.cmp__col {
+    position: relative;
+    min-width: 0;
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line-2);
+}
+
+/* Earth is the control, so its column is marked rather than
+   left to be found. */
+.cmp__col--ref::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--star-g), transparent);
+    box-shadow: 0 0 10px rgba(255, 222, 164, 0.4);
+}
+
+/* Bodies are placed on a shared baseline and sized by true
+   radius ratio, so the stage has to be tall enough for the
+   largest and aligned at the bottom for all of them. */
+.cmp__stage {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 150px;
+    margin-bottom: var(--s-4);
+}
+
+.cmp__name {
+    font-size: var(--t-md);
+    font-weight: 500;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.cmp__host {
+    display: block;
+    margin-top: 2px;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.cmp__spec {
+    margin-top: var(--s-4);
+}
+
+.cmp__spec div {
+    display: grid;
+    gap: 1px;
+    padding: 0.44rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.cmp__spec dt {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.cmp__spec dd {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-2);
+}
+
+/* An unknown is a result. Where a value has not been measured
+   the cell says so in the instrument voice rather than being
+   left blank or filled with a plausible guess. */
+.cmp__unknown {
+    color: var(--text-4) !important;
+    font-style: normal;
+}
+
+
+/* ============================================================
+   12. ATMOSPHERES — TRANSMISSION SPECTROSCOPY
+   ------------------------------------------------------------
+   The most indirect measurement on the page and the one doing
+   the most work right now. During a transit a sliver of
+   starlight passes through the planet's limb; molecules in that
+   ring absorb at their own wavelengths; so the planet looks
+   very slightly larger at those wavelengths than at others.
+   What is plotted is therefore not brightness but transit depth
+   against wavelength, and the y axis is a planetary radius.
+   ============================================================ */
+
+.ts__annulus {
+    fill: none;
+    stroke: url(#xpAirRing);
+}
+
+.ts__ray {
+    fill: none;
+    stroke: var(--star-g);
+    stroke-width: 1;
+    opacity: 0.5;
+}
+
+.ts__ray--through {
+    stroke: var(--star-k);
+    opacity: 0.85;
+    stroke-width: 1.4;
+}
+
+.ts__spectrum {
+    fill: none;
+    stroke: var(--flux);
+    stroke-width: 2.2;
+    stroke-linejoin: round;
+}
+
+.ts__spectrum-bloom {
+    fill: none;
+    stroke: var(--flux);
+    stroke-width: 8;
+    opacity: 0.13;
+    filter: blur(4px);
+}
+
+.ts__pt {
+    fill: var(--flux);
+}
+
+/* Molecular band labels. Kept as tick-and-name pairs above the
+   feature they mark rather than inline in the curve, because
+   the water bands are wide and overlapping and inline labels
+   collided at every width. */
+.ts__band {
+    fill: var(--flux-wash);
+}
+
+.ts__band-tick {
+    stroke: var(--flux-mid);
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+    fill: none;
+}
+
+/* A flat spectrum is the commonest real result and the one
+   worth drawing next to the textbook one: high cloud mutes
+   every feature and the measurement comes back a straight
+   line. Drawn dashed and dim, as the counterexample. */
+.ts__flat {
+    fill: none;
+    stroke: var(--text-3);
+    stroke-width: 1.6;
+    stroke-dasharray: 6 5;
+    opacity: 0.75;
+}
+
+
+/* ============================================================
+   13. DISCOVERY TIMELINE
+   ------------------------------------------------------------
+   Cumulative, on a linear axis, because the explosion is the
+   subject. A log axis would flatten exactly the feature worth
+   showing — that two-thirds of everything known arrived in one
+   decade, and a good deal of it on four specific days when
+   Kepler's team validated planets in batches.
+   ============================================================ */
+
+.tl__area {
+    fill: url(#xpTimeFill);
+}
+
+.tl__line {
+    fill: none;
+    stroke: var(--flux);
+    stroke-width: 2.4;
+    stroke-linejoin: round;
+}
+
+.tl__line-bloom {
+    fill: none;
+    stroke: var(--flux);
+    stroke-width: 10;
+    opacity: 0.12;
+    filter: blur(5px);
+}
+
+.tl__pt {
+    fill: var(--flux);
+}
+
+/* Mission service bars along the foot of the chart, so the
+   steps in the curve can be read against the instrument that
+   caused them rather than merely annotated. */
+.tl__era {
+    height: 3px;
+}
+
+.tl__era-bar {
+    fill: var(--flux-mid);
+    opacity: 0.34;
+}
+
+.tl__era-bar--live {
+    fill: var(--flux);
+    opacity: 0.5;
+}
+
+.tl__milestone {
+    fill: var(--star-g-core);
+    stroke: var(--star-g-deep);
+    stroke-width: 1;
+}
+
+.tl__stem {
+    fill: none;
+    stroke: rgba(255, 222, 164, 0.4);
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+}
+
+
+/* ============================================================
+   14. TRUE SCALE
+   ------------------------------------------------------------
+   The page's uncompressed figure, per the honesty rules: one
+   axis in AU, nothing exaggerated, no inset and no break. All
+   seven TRAPPIST-1 planets orbit inside 0.062 AU, and Mercury —
+   the tightest orbit in our own system — is at 0.387. The
+   entire seven-planet system fits in a sixth of the radius of
+   the smallest orbit we have at home, and the only way to show
+   that is to refuse to help the reader.
+   ============================================================ */
+
+.sys {
+    position: relative;
+}
+
+.sys__axis {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+}
+
+.sys__star-g { fill: url(#xpStarG); }
+.sys__star-m { fill: url(#xpStarM); }
+
+.sys__orbit {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+    opacity: 0.42;
+}
+
+.sys__world {
+    fill: var(--rock-pale);
+}
+
+.sys__world--m {
+    fill: var(--star-m);
+}
+
+.sys__brace {
+    fill: none;
+    stroke: var(--flux-mid);
+    stroke-width: 1;
+}
+
+.sys__hz {
+    fill: var(--hz-soft);
+}
+
+
+/* ============================================================
+   15. LEDGER TINTS
+   ------------------------------------------------------------
+   The shared .ledger reads the accent contract, which on this
+   page is cyan — correct, because every quantity it is used for
+   here is a measured signal strength rather than a property of
+   a body.
+   ============================================================ */
+
+.ledger--flux .ledger__fill {
+    background: linear-gradient(90deg,
+        var(--flux-deep) 0%, var(--flux-mid) 58%, var(--flux) 100%);
+    box-shadow: 0 0 14px -3px var(--accent-glow);
+}
+
+.ledger--flux .ledger__fill::after {
+    background: #eaf9fc;
+    box-shadow: 0 0 12px var(--flux);
+}
+
+/* Rows for a signal that is below the instrument's reach are
+   marked rather than merely short. The Earth-around-a-Sun row
+   is the whole reason these ledgers exist. */
+.ledger__row--under .ledger__label {
+    color: var(--text-2);
+}
+
+.ledger__row--under .ledger__fill {
+    background: linear-gradient(90deg,
+        rgba(127, 220, 236, 0.2) 0%, rgba(127, 220, 236, 0.45) 100%);
+    box-shadow: none;
+}
+
+.ledger__row--under .ledger__fill::after {
+    background: transparent;
+    box-shadow: 0 0 0 1px var(--flux-mid);
+}
+
+.ledger__row--under .ledger__value {
+    color: var(--flux);
+}
+
+/* The detection floor, drawn across the ledger as a rule at the
+   position of current instrumental precision. */
+.ledger__floor {
+    position: relative;
+    height: 0;
+}
+
+.ledger__floor span {
+    position: absolute;
+    top: calc(var(--s-3) * -1);
+    left: var(--at, 50%);
+    padding-left: var(--s-2);
+    border-left: 1px dashed var(--flux-mid);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--flux);
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   16. MYTH / FACT
+   ------------------------------------------------------------
+   Claim on the left, correction on the right, hairline between.
+   Restated locally; the Black Holes and Galaxies copies are the
+   others.
+   ============================================================ */
+
+.myths {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+}
+
+.myth {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(var(--s-5), 4vw, var(--s-7));
+    padding: clamp(var(--s-5), 3vw, var(--s-6)) 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.myth__claim {
+    position: relative;
+    padding-left: var(--s-5);
+    font-size: var(--t-md);
+    line-height: 1.5;
+    color: var(--text-3);
+}
+
+/* A struck-through bullet: the claim is being withdrawn, and the
+   mark says so before the sentence does. */
+.myth__claim::before {
+    content: '';
+    position: absolute;
+    top: 0.72em;
+    left: 0;
+    width: 10px;
+    height: 1px;
+    background: var(--text-4);
+}
+
+.myth__claim strong {
+    font-weight: 500;
+    color: var(--text-2);
+}
+
+.myth__truth {
+    font-size: var(--t-sm);
+    line-height: 1.72;
+    color: var(--text-3);
+}
+
+.myth__truth strong {
+    font-weight: 500;
+    color: var(--star-g);
+}
+
+
+/* ============================================================
+   17. REDUCED MOTION
+   ------------------------------------------------------------
+   Everything that moves on this page is illustrative, so all of
+   it can stop. The global rule in style.css collapses
+   durations; these overrides make sure nothing is left frozen
+   in a state that reads as broken or, worse, in a state that
+   misstates the physics.
+
+   Two figures need care. The transit parks at mid-transit with
+   the marker on the floor of its own dip, which is the
+   informative phase rather than an arbitrary one.
+
+   The velocity figure parks a quarter of the way round, where
+   the star's motion points straight at the observer: maximum
+   approach, maximum blueshift, and the extreme of the curve
+   rather than its zero crossing. Freezing at phase zero would
+   have put the star on the line of sight with no radial velocity
+   at all, which is the one phase at which the figure's whole
+   subject is invisible.
+
+   The three frozen values are one state and have to agree:
+   rotate(90deg) is φ = 90°, where translateY = +A·sin φ = +70,
+   and the marker is a quarter of the way along a 460-unit
+   period, so translateX = 115.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .lc__cross {
+        animation: none !important;
+        transform: translateX(0);
+    }
+
+    .lc__marker-y {
+        animation: none !important;
+        transform: translateY(60px);
+    }
+
+    .rv__spin {
+        animation: none !important;
+        transform: rotate(90deg);
+    }
+
+    .rv__marker-x {
+        animation: none !important;
+        transform: translateX(115px);
+    }
+
+    .rv__marker-y {
+        animation: none !important;
+        transform: translateY(70px);
+    }
+}
+
+
+/* ============================================================
+   18. RESPONSIVE
+   ------------------------------------------------------------
+   Desktop-first. Diagrams that are coordinate systems scroll
+   inside their frame rather than reflowing; everything that is
+   a grid of prose wraps.
+   ============================================================ */
+
+@media (max-width: 1180px) {
+    .cmp {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: var(--s-7);
+    }
+}
+
+@media (max-width: 1023px) {
+    /* The index becomes a horizontal scroller before it wraps.
+       Twelve items fit on one row down to about 1080; below
+       that they would wrap to two rows and silently double the
+       sticky bar's height while --subnav-h, which every
+       section's scroll-margin-top is computed from, still says
+       46px — so every anchor jump would land half a bar low.
+       Same failure galaxies.css documents at fifteen items. */
+    .subnav__list {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .subnav__list::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .det {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: var(--s-7);
+    }
+
+    .myth {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--s-4);
+    }
+}
+
+@media (max-width: 860px) {
+    /* Diagrams get a floor width and scroll inside their frame
+       rather than compressing their own labels into each other. */
+    .fig__frame {
+        padding-bottom: var(--s-3);
+    }
+
+    .fig__svg {
+        min-width: 700px;
+    }
+
+    .xp-types .plate__stage,
+    .xp-famous .plate__stage {
+        --stage-h: 196px;
+    }
+}
+
+@media (max-width: 720px) {
+    .cmp {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* Two columns of bodies at true relative radius need less
+       headroom than five did, and the stage was leaving a band
+       of dead space above every small world. */
+    .cmp__stage {
+        height: 128px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cmp {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .cmp__stage {
+        height: 150px;
+    }
+}

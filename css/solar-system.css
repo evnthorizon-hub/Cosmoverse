@@ -1,0 +1,1081 @@
+/* ============================================================
+   CosmoVerse — Solar System
+   ------------------------------------------------------------
+   Layer 3 of 3. Requires style.css + components.css.
+
+   Everything here is either (a) a body skin declared through the
+   .orb contract, or (b) a visual that only the Solar System
+   needs: the orrery, the Sun render, the true-scale comparison,
+   the comet and the belt.
+
+   The page reads as one continuous outward journey — Sun,
+   planets, dwarf planets, moons, small bodies, then the cold
+   outer archive — so the light in each section cools as you
+   descend. That structural idea is the template every future
+   category page should follow.
+   ============================================================ */
+
+
+/* ============================================================
+   1. ORRERY
+   ------------------------------------------------------------
+   A real orrery, tilted into the ecliptic plane with a 3D
+   transform rather than faked with an ellipse. Each orbit is a
+   circle in that plane; each planet counter-rotates twice — once
+   against its own revolution, once against the plane tilt — so
+   it always faces the viewer while riding a genuinely elliptical
+   projected path.
+
+   Periods are compressed but ordered: inner worlds visibly
+   outrun outer ones, which is the one thing a static diagram of
+   the Solar System can never show.
+   ============================================================ */
+
+.orrery {
+    /* --u is the orrery's own unit. Every radius is a multiple of
+       it, so the whole instrument scales from one value. */
+    --u: clamp(1.9px, 0.56vw, 3.05px);
+    --tilt: 63deg;
+    --orbit-far: rgba(190, 210, 255, 0.07);
+    --orbit-near: rgba(200, 220, 255, 0.17);
+
+    position: relative;
+    width: calc(var(--u) * 192);
+    max-width: 100%;
+    height: calc(var(--u) * 112);
+    margin-inline: auto;
+    perspective: 1500px;
+}
+
+.orrery__stage {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--tilt));
+}
+
+/* --- Light spilling across the ecliptic plane --------------- */
+.orrery__glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--u) * 150);
+    height: calc(var(--u) * 150);
+    margin: calc(var(--u) * -75) 0 0 calc(var(--u) * -75);
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(255, 186, 92, 0.22) 0%,
+        rgba(255, 140, 50, 0.09) 26%,
+        rgba(120, 90, 200, 0.05) 52%,
+        transparent 72%);
+    filter: blur(8px);
+    pointer-events: none;
+}
+
+/* --- Ecliptic reference spokes ------------------------------
+   Every 30° of heliocentric longitude. Turns the illustration
+   into an instrument. */
+.orrery__grid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--u) * 172);
+    height: calc(var(--u) * 172);
+    margin: calc(var(--u) * -86) 0 0 calc(var(--u) * -86);
+    border-radius: 50%;
+    background: repeating-conic-gradient(from 0deg,
+        var(--line) 0deg 0.14deg,
+        transparent 0.14deg 30deg);
+    -webkit-mask-image: radial-gradient(circle, transparent 12%, #000 40%, #000 96%, transparent 100%);
+            mask-image: radial-gradient(circle, transparent 12%, #000 40%, #000 96%, transparent 100%);
+    opacity: 0.85;
+    pointer-events: none;
+}
+
+/* --- The Sun at the barycentre -----------------------------
+   Kept small on purpose. A large glowing disc at the centre of an
+   orrery swallows the inner four orbits, which is exactly the
+   part of the diagram people most need to read. */
+.orrery__sun {
+    --sun-d: calc(var(--u) * 9.5);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--sun-d);
+    height: var(--sun-d);
+    margin: calc(var(--sun-d) / -2) 0 0 calc(var(--sun-d) / -2);
+    border-radius: 50%;
+    background: radial-gradient(circle at 36% 32%,
+        #fffdf2 0%, #ffe9a8 22%, #ffb648 52%, #ff7a2f 82%, #d24d10 100%);
+    box-shadow:
+        0 0 calc(var(--u) * 5) rgba(255, 200, 110, 0.9),
+        0 0 calc(var(--u) * 13) rgba(255, 140, 50, 0.42),
+        0 0 calc(var(--u) * 30) rgba(255, 110, 40, 0.16);
+    /* Counter-tilt so the Sun faces the viewer instead of lying
+       flat in the plane. */
+    transform: rotateX(calc(-1 * var(--tilt)));
+    animation: helios 9s ease-in-out infinite;
+}
+
+@keyframes helios {
+    0%, 100% { filter: brightness(1); }
+    50%      { filter: brightness(1.12); }
+}
+
+/* --- Orbits ------------------------------------------------- */
+
+.orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--u) * var(--d));
+    height: calc(var(--u) * var(--d));
+    /* Layout-based centring keeps `transform` free for 3D work. */
+    margin: calc(var(--u) * var(--d) / -2) 0 0 calc(var(--u) * var(--d) / -2);
+    border: 1px solid var(--orbit-far);
+    border-bottom-color: var(--orbit-near);
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    pointer-events: none;
+}
+
+.orbit__carrier {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    animation: revolve var(--period) linear infinite;
+    animation-delay: calc(var(--period) * -1 * var(--phase));
+}
+
+@keyframes revolve {
+    to { transform: rotate(360deg); }
+}
+
+/* Zero-size hub pinned to the orbit path; children overflow and
+   sit centred on the point. */
+.orbit__body {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    animation: revolve var(--period) linear infinite reverse;
+    animation-delay: calc(var(--period) * -1 * var(--phase));
+}
+
+/* Cancels the plane tilt so the body itself is a circle again. */
+.orbit__upright {
+    display: flex;
+    transform: rotateX(calc(-1 * var(--tilt)));
+    transform-style: preserve-3d;
+}
+
+.orrery-dot {
+    display: block;
+    width: var(--dot);
+    height: var(--dot);
+    border-radius: 50%;
+    background: var(--dot-skin);
+    box-shadow: 0 0 calc(var(--u) * 2.6) var(--dot-halo, transparent),
+                inset -1px -1px 2px rgba(0, 0, 6, 0.6);
+}
+
+/* Orbit geometry: --d is diameter in orrery units, --period the
+   compressed revolution time, --phase the starting longitude. */
+.orbit--mercury { --d: 28;  --period: 6s;   --phase: 0.10; }
+.orbit--venus   { --d: 40;  --period: 9.4s; --phase: 0.62; }
+.orbit--earth   { --d: 52;  --period: 12s;  --phase: 0.34; }
+.orbit--mars    { --d: 64;  --period: 16.5s;--phase: 0.78; }
+.orbit--jupiter { --d: 96;  --period: 41s;  --phase: 0.18; }
+.orbit--saturn  { --d: 120; --period: 65s;  --phase: 0.56; }
+.orbit--uranus  { --d: 144; --period: 110s; --phase: 0.88; }
+.orbit--neptune { --d: 168; --period: 154s; --phase: 0.42; }
+
+.orbit--mercury .orrery-dot { --dot: calc(var(--u) * 1.6); --dot-skin: #a49c92; }
+.orbit--venus   .orrery-dot { --dot: calc(var(--u) * 2.4); --dot-skin: #f0d49a; --dot-halo: rgba(240, 212, 154, 0.5); }
+.orbit--earth   .orrery-dot { --dot: calc(var(--u) * 2.5); --dot-skin: #6fb0e8; --dot-halo: rgba(111, 176, 232, 0.6); }
+.orbit--mars    .orrery-dot { --dot: calc(var(--u) * 2);   --dot-skin: #cf6242; --dot-halo: rgba(207, 98, 66, 0.45); }
+.orbit--jupiter .orrery-dot { --dot: calc(var(--u) * 4.6); --dot-skin: #dcae7c; --dot-halo: rgba(220, 174, 124, 0.4); }
+.orbit--saturn  .orrery-dot { --dot: calc(var(--u) * 4);   --dot-skin: #ecdcb0; --dot-halo: rgba(236, 220, 176, 0.4); }
+.orbit--uranus  .orrery-dot { --dot: calc(var(--u) * 3.2); --dot-skin: #b6e2ea; --dot-halo: rgba(182, 226, 234, 0.4); }
+.orbit--neptune .orrery-dot { --dot: calc(var(--u) * 3.1); --dot-skin: #5a86cc; --dot-halo: rgba(90, 134, 204, 0.5); }
+
+/* --- Belts -------------------------------------------------- */
+
+.orrery__belt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--u) * var(--d));
+    height: calc(var(--u) * var(--d));
+    margin: calc(var(--u) * var(--d) / -2) 0 0 calc(var(--u) * var(--d) / -2);
+    border-radius: 50%;
+    border: calc(var(--u) * var(--band, 4)) solid var(--band-fill, rgba(198, 178, 152, 0.1));
+    box-shadow:
+        inset 0 0 0 1px rgba(198, 178, 152, 0.14),
+        0 0 0 1px rgba(198, 178, 152, 0.1);
+    pointer-events: none;
+}
+
+.orrery__belt--asteroid {
+    --d: 78;
+    --band: 3.2;
+}
+
+/* Kept faint. Rendered at full strength it becomes a heavy rim
+   that frames the whole instrument instead of sitting inside it. */
+.orrery__belt--kuiper {
+    --d: 184;
+    --band: 4;
+    --band-fill: rgba(150, 190, 235, 0.035);
+    box-shadow:
+        inset 0 0 0 1px rgba(150, 190, 235, 0.07),
+        0 0 0 1px rgba(150, 190, 235, 0.05);
+}
+
+/* --- Reduced motion ----------------------------------------
+   Freeze the orrery at a scattered, physically plausible set of
+   longitudes rather than snapping every planet to conjunction. */
+@media (prefers-reduced-motion: reduce) {
+    .orbit__carrier {
+        animation: none !important;
+        transform: rotate(var(--frozen, 0deg));
+    }
+
+    .orbit__body {
+        animation: none !important;
+        transform: rotate(calc(-1 * var(--frozen, 0deg)));
+    }
+
+    .orbit--mercury { --frozen: 36deg; }
+    .orbit--venus   { --frozen: 223deg; }
+    .orbit--earth   { --frozen: 122deg; }
+    .orbit--mars    { --frozen: 281deg; }
+    .orbit--jupiter { --frozen: 65deg; }
+    .orbit--saturn  { --frozen: 202deg; }
+    .orbit--uranus  { --frozen: 317deg; }
+    .orbit--neptune { --frozen: 151deg; }
+
+    .orrery__sun {
+        animation: none !important;
+    }
+}
+
+
+/* ============================================================
+   2. AU SCALE RAIL
+   ------------------------------------------------------------
+   The orrery compresses distance to stay legible; this rail
+   states the truth immediately underneath it, on a base-10
+   axis. Positions are pre-computed as percentages of
+   log10(0.3 AU → 50 AU).
+   ============================================================ */
+
+.rail--au .rail__mark--mercury { --pos: 4.9%; }
+.rail--au .rail__mark--venus   { --pos: 17.1%; }
+.rail--au .rail__mark--earth   { --pos: 23.4%; }
+.rail--au .rail__mark--mars    { --pos: 31.7%; }
+.rail--au .rail__mark--belt    { --pos: 42.8%; }
+.rail--au .rail__mark--jupiter { --pos: 55.7%; }
+.rail--au .rail__mark--saturn  { --pos: 67.5%; }
+.rail--au .rail__mark--uranus  { --pos: 81.2%; }
+.rail--au .rail__mark--neptune { --pos: 90%; }
+.rail--au .rail__mark--kuiper  { --pos: 99.4%; }
+
+
+/* ============================================================
+   3. THE SUN — full render
+   ------------------------------------------------------------
+   Photosphere with limb darkening, a rotating granulation layer,
+   a chromospheric rim, prominences at the limb and a corona that
+   breathes on a nine-second cycle.
+   ============================================================ */
+
+.sun-render {
+    position: relative;
+    width: clamp(176px, 24vw, 288px);
+    aspect-ratio: 1;
+    flex: none;
+    margin-inline: auto;
+    isolation: isolate;
+}
+
+.sun-render__corona {
+    position: absolute;
+    inset: -46%;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle,
+            rgba(255, 214, 140, 0.34) 30%,
+            rgba(255, 150, 60, 0.16) 41%,
+            rgba(255, 110, 40, 0.06) 54%,
+            transparent 72%);
+    filter: blur(10px);
+    animation: corona 9s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes corona {
+    0%, 100% { transform: scale(1);    opacity: 0.85; }
+    50%      { transform: scale(1.06); opacity: 1; }
+}
+
+.sun-render__disc {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: radial-gradient(circle at 38% 33%,
+        #fffdf4 0%,
+        #fff0c2 14%,
+        #ffd066 36%,
+        #ffa235 60%,
+        #f26a17 82%,
+        #b8420a 100%);
+    /* Limb darkening — the real reason the Sun's edge is dimmer. */
+    box-shadow:
+        inset 0 0 34px 10px rgba(190, 62, 8, 0.45),
+        0 0 40px rgba(255, 176, 76, 0.5),
+        0 0 110px rgba(255, 122, 47, 0.3);
+}
+
+.sun-render__granules {
+    position: absolute;
+    inset: -12%;
+    border-radius: 50%;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    background-image:
+        radial-gradient(circle at 22% 30%, rgba(255, 255, 240, 0.7) 0%, transparent 9%),
+        radial-gradient(circle at 44% 18%, rgba(180, 60, 0, 0.55) 0%, transparent 8%),
+        radial-gradient(circle at 66% 34%, rgba(255, 255, 240, 0.6) 0%, transparent 7%),
+        radial-gradient(circle at 30% 58%, rgba(190, 70, 0, 0.5) 0%, transparent 9%),
+        radial-gradient(circle at 58% 66%, rgba(255, 250, 226, 0.6) 0%, transparent 8%),
+        radial-gradient(circle at 78% 54%, rgba(180, 60, 0, 0.45) 0%, transparent 7%),
+        radial-gradient(circle at 40% 80%, rgba(255, 250, 230, 0.5) 0%, transparent 8%),
+        radial-gradient(circle at 16% 46%, rgba(200, 80, 10, 0.4) 0%, transparent 7%);
+    animation: granulate 140s linear infinite;
+}
+
+@keyframes granulate {
+    to { transform: rotate(360deg); }
+}
+
+/* Sunspot group — one dark, one penumbral. */
+.sun-render__spot {
+    position: absolute;
+    top: 58%;
+    left: 26%;
+    width: 13%;
+    height: 8%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 50% 50%,
+        rgba(74, 20, 0, 0.85) 0%,
+        rgba(140, 50, 4, 0.5) 58%,
+        transparent 100%);
+    transform: rotate(-12deg);
+    z-index: 2;
+}
+
+/* Chromosphere: the thin red rim just above the photosphere. */
+.sun-render__rim {
+    position: absolute;
+    inset: -2.5%;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        transparent 68%,
+        rgba(255, 96, 40, 0.4) 82%,
+        transparent 96%);
+    pointer-events: none;
+}
+
+/* Prominences: plasma arcs following magnetic field lines.
+   They must hug the limb. Pushed further out they stop reading as
+   plasma leaving the surface and start reading as stray rings. */
+.sun-render__prominence {
+    position: absolute;
+    inset: -4.5%;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top-color: rgba(255, 112, 52, 0.6);
+    filter: blur(2.5px);
+    transform: rotate(-42deg);
+    clip-path: polygon(18% 0, 62% 0, 62% 30%, 18% 30%);
+    pointer-events: none;
+}
+
+.sun-render__prominence--b {
+    inset: -2.5%;
+    border-width: 3px;
+    border-top-color: rgba(255, 170, 92, 0.5);
+    transform: rotate(136deg);
+    clip-path: polygon(26% 0, 58% 0, 58% 24%, 26% 24%);
+}
+
+/* Layout for the Sun feature block. */
+.stellar-block {
+    display: grid;
+    gap: clamp(var(--s-6), 5vw, var(--s-8));
+    align-items: center;
+}
+
+@media (min-width: 900px) {
+    .stellar-block {
+        grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.15fr);
+    }
+}
+
+
+/* ============================================================
+   4. PLANET SKINS
+   ------------------------------------------------------------
+   Declared purely as .orb variables. Sizes here are illustrative
+   and chosen for composition, not scale — the true scale claim
+   is made once, by the comparison strip in section 5, and the
+   caption says so explicitly.
+   ============================================================ */
+
+.orb--mercury {
+    --orb-d: 56px;
+    --orb-shine: 0.2;
+    --orb-skin:
+        radial-gradient(circle at 66% 24%, rgba(20, 16, 12, 0.5) 0%, transparent 13%),
+        radial-gradient(circle at 30% 62%, rgba(24, 20, 16, 0.45) 0%, transparent 11%),
+        radial-gradient(circle at 52% 78%, rgba(28, 24, 18, 0.4) 0%, transparent 9%),
+        radial-gradient(circle at 32% 28%, #bdb7ae 0%, #8e877e 28%, #5c564e 62%, #2e2a25 100%);
+    --orb-halo: rgba(160, 152, 142, 0.16);
+}
+
+.orb--venus {
+    --orb-d: 78px;
+    --orb-shine: 0.3;
+    --orb-skin:
+        repeating-linear-gradient(166deg,
+            rgba(255, 244, 214, 0.14) 0 7px,
+            transparent 7px 17px),
+        radial-gradient(circle at 34% 30%, #fff6da 0%, #f4dda2 24%, #dcae57 58%, #9c6f26 100%);
+    --orb-halo: rgba(244, 221, 162, 0.3);
+    --orb-air: rgba(255, 232, 176, 0.28);
+}
+
+.orb--earth {
+    --orb-d: 82px;
+    --orb-shine: 0.22;
+    --orb-skin:
+        /* cloud systems */
+        radial-gradient(ellipse 26% 10% at 62% 22%, rgba(255, 255, 255, 0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 20% 8% at 30% 68%, rgba(255, 255, 255, 0.42) 0%, transparent 72%),
+        radial-gradient(ellipse 30% 9% at 48% 46%, rgba(255, 255, 255, 0.3) 0%, transparent 74%),
+        /* landmasses */
+        radial-gradient(ellipse 18% 22% at 34% 38%, #3f7d46 0%, #2f6438 62%, transparent 74%),
+        radial-gradient(ellipse 14% 18% at 62% 62%, #47823f 0%, #315f33 60%, transparent 74%),
+        radial-gradient(ellipse 10% 12% at 70% 30%, #55813c 0%, transparent 70%),
+        /* ocean + ice */
+        radial-gradient(ellipse 40% 12% at 50% 2%, #dfeef7 0%, transparent 80%),
+        radial-gradient(circle at 34% 30%, #6fb6e8 0%, #2f7fbe 34%, #1c5590 68%, #0d2c50 100%);
+    --orb-halo: rgba(111, 182, 232, 0.4);
+    --orb-air: rgba(140, 200, 255, 0.42);
+}
+
+.orb--mars {
+    --orb-d: 64px;
+    --orb-shine: 0.2;
+    --orb-skin:
+        radial-gradient(ellipse 34% 11% at 50% 3%, rgba(240, 246, 250, 0.85) 0%, transparent 80%),
+        radial-gradient(ellipse 26% 9% at 50% 98%, rgba(232, 240, 246, 0.55) 0%, transparent 82%),
+        radial-gradient(ellipse 22% 14% at 38% 52%, rgba(92, 40, 24, 0.55) 0%, transparent 72%),
+        radial-gradient(circle at 32% 28%, #e08a63 0%, #c25f3c 26%, #93412a 60%, #4e1f14 100%);
+    --orb-halo: rgba(207, 98, 66, 0.28);
+    --orb-air: rgba(224, 138, 99, 0.16);
+}
+
+/* Band edges are interpolated, never hard-stopped. Hard stops read
+   as printed stripes and they stair-step badly where they meet the
+   antialiased edge of the globe. Real cloud belts have soft shear
+   boundaries, and the softer gradient renders cleanly too. */
+.orb--jupiter {
+    --orb-d: 132px;
+    --orb-shine: 0.18;
+    --orb-skin:
+        repeating-linear-gradient(177deg,
+            #e9cca1 0%,
+            #c39c6c 4.2%,
+            #f2e0bc 8.4%,
+            #a67c4f 12.6%,
+            #dcb887 16.8%,
+            #8d6440 21%,
+            #e9cca1 25.2%);
+    --orb-halo: rgba(220, 184, 135, 0.26);
+}
+
+.orb--jupiter .orb__mark {
+    --mark-x: 20%;
+    --mark-y: 57%;
+    --mark-w: 27%;
+    --mark-h: 13%;
+    --mark-rot: -4deg;
+    --mark-fill: radial-gradient(ellipse at 50% 50%,
+        #c9502e 0%, #a63c22 52%, rgba(166, 60, 34, 0) 100%);
+}
+
+.orb--saturn {
+    --orb-d: 108px;
+    --orb-shine: 0.2;
+    --orb-skin:
+        repeating-linear-gradient(178deg,
+            #f2e2ba 0%,
+            #d4bf88 7.5%,
+            #f7ebc8 15%,
+            #c7b07c 22.5%,
+            #f2e2ba 30%);
+    --orb-halo: rgba(236, 220, 176, 0.24);
+    --ring-w: 238%;
+    --ring-h: 58%;
+    --ring-t: 7px;
+    --ring-tilt: -17deg;
+    --ring-far: rgba(246, 234, 202, 0.5);
+    --ring-mid: rgba(224, 208, 168, 0.32);
+    --ring-near: rgba(198, 180, 140, 0.26);
+}
+
+.orb--uranus {
+    --orb-d: 88px;
+    --orb-shine: 0.26;
+    --orb-skin:
+        radial-gradient(circle at 34% 30%, #dcf6fa 0%, #a6dce8 28%, #6fb6c8 62%, #2f6d80 100%);
+    --orb-halo: rgba(166, 220, 232, 0.3);
+    --orb-air: rgba(190, 236, 246, 0.3);
+    /* Uranus is tipped 98°, so its rings run almost vertically
+       rather than round its waist. Drawing that correctly is the
+       single detail that makes the planet identifiable. */
+    --ring-w: 58%;
+    --ring-h: 236%;
+    --ring-t: 2px;
+    --ring-tilt: -9deg;
+    --ring-far: rgba(190, 232, 244, 0.34);
+    --ring-mid: rgba(160, 210, 226, 0.2);
+    --ring-near: rgba(200, 240, 250, 0.3);
+}
+
+/* Vertical ring: the bright limb is the outer edge, not the top. */
+.orb--uranus .orb__ring {
+    border-top-color: var(--ring-mid);
+    border-bottom-color: var(--ring-mid);
+    border-left-color: var(--ring-far);
+    border-right-color: var(--ring-near);
+}
+
+.orb--neptune {
+    --orb-d: 86px;
+    --orb-shine: 0.22;
+    --orb-skin:
+        radial-gradient(ellipse 22% 12% at 40% 58%, rgba(10, 24, 62, 0.72) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 8% at 58% 34%, rgba(226, 240, 255, 0.24) 0%, transparent 74%),
+        radial-gradient(circle at 34% 30%, #7fb4f0 0%, #3f76d4 28%, #2450a8 62%, #10214f 100%);
+    --orb-halo: rgba(90, 134, 204, 0.38);
+    --orb-air: rgba(130, 180, 255, 0.3);
+}
+
+/* --- Dwarf planets ----------------------------------------- */
+
+.orb--pluto {
+    --orb-d: 46px;
+    --orb-shine: 0.22;
+    --orb-skin:
+        radial-gradient(ellipse 30% 22% at 58% 62%, rgba(240, 226, 198, 0.75) 0%, transparent 72%),
+        radial-gradient(circle at 32% 28%, #d6c4ae 0%, #a08b74 30%, #6b5a49 64%, #35291f 100%);
+    --orb-halo: rgba(214, 196, 174, 0.16);
+}
+
+.orb--eris {
+    --orb-d: 42px;
+    --orb-shine: 0.3;
+    --orb-skin: radial-gradient(circle at 32% 28%, #f2f4f6 0%, #c2c6cc 30%, #82878f 66%, #3a3d44 100%);
+    --orb-halo: rgba(226, 230, 236, 0.18);
+}
+
+.orb--haumea {
+    --orb-d: 50px;
+    --orb-shine: 0.24;
+    --orb-skin: radial-gradient(circle at 32% 28%, #eae2d6 0%, #b8ab9a 32%, #7d7263 66%, #38312a 100%);
+    --orb-halo: rgba(214, 204, 190, 0.14);
+    /* Haumea's rapid rotation genuinely deforms it into an
+       ellipsoid, so the orb is drawn out of round on purpose. */
+    --orb-squash: 0.66;
+}
+
+.orb--makemake {
+    --orb-d: 40px;
+    --orb-shine: 0.22;
+    --orb-skin: radial-gradient(circle at 32% 28%, #e0b79c 0%, #b08468 32%, #77543f 66%, #34231a 100%);
+    --orb-halo: rgba(208, 166, 138, 0.14);
+}
+
+.orb--ceres {
+    --orb-d: 36px;
+    --orb-shine: 0.2;
+    --orb-skin:
+        radial-gradient(circle at 60% 40%, rgba(255, 255, 250, 0.6) 0%, transparent 9%),
+        radial-gradient(circle at 32% 28%, #a8a49e 0%, #7c7872 32%, #514e49 66%, #26241f 100%);
+    --orb-halo: rgba(168, 164, 158, 0.14);
+}
+
+/* Non-spherical bodies. Applied to the body, not the orb box, so
+   the halo and limb stay circular-ish and only the globe squashes. */
+.orb--haumea .orb__body {
+    transform: scaleY(var(--orb-squash, 1));
+}
+
+
+/* ============================================================
+   5. TRUE-SCALE COMPARISON STRIP
+   ------------------------------------------------------------
+   The one honest-scale figure on the page. --dia is the body's
+   equatorial diameter in thousands of kilometres; --k converts
+   it to screen pixels. Change --k and the entire figure rescales
+   while staying internally correct.
+   ============================================================ */
+
+.scale-figure {
+    --k: clamp(0.6px, 0.148vw, 1.7px);
+    position: relative;
+    padding-bottom: var(--s-5);
+    border-bottom: 1px solid var(--line-2);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+.scale-strip {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(10px, 1.8vw, 26px);
+    /* width, not min-width: the strip must shrink-wrap its content
+       so margin-inline:auto can actually centre it. */
+    width: max-content;
+    margin-inline: auto;
+    padding-inline: var(--s-3);
+}
+
+.scale-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-3);
+}
+
+/* Fixed label height. Without it, items with longer names get taller
+   label blocks and — because the strip aligns on item bottoms — the
+   discs stop sitting on a common baseline. A comparison chart with a
+   drifting baseline is not a comparison chart. */
+.scale-item__label {
+    height: 132px;
+}
+
+.scale-strip::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(132px + var(--s-3));
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line), var(--line), transparent);
+}
+
+.scale-disc {
+    position: relative;
+    width: calc(var(--dia) * var(--k));
+    height: calc(var(--dia) * var(--k));
+    min-width: 3px;
+    min-height: 3px;
+    border-radius: 50%;
+    background: var(--disc-skin);
+    box-shadow:
+        inset calc(var(--dia) * var(--k) * -0.16) calc(var(--dia) * var(--k) * -0.1)
+              calc(var(--dia) * var(--k) * 0.26) rgba(0, 0, 5, 0.75),
+        0 0 calc(var(--dia) * var(--k) * 0.32) var(--disc-halo, transparent);
+}
+
+/* Sphericity pass. Banded skins are flat by construction, so the
+   terminator and the specular have to be laid over the top or
+   Jupiter reads as a striped coin rather than a globe. */
+.scale-disc::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 33% 27%, rgba(255, 255, 255, 0.2) 0%, transparent 36%),
+        radial-gradient(circle at 44% 40%, transparent 46%, rgba(0, 0, 6, 0.5) 100%);
+}
+
+.scale-item__label {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    /* Vertical so a 9-pixel Mercury can still be labelled without
+       the strip turning into a wall of collided text. */
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+}
+
+.scale-item__label b {
+    color: var(--text);
+    font-weight: 500;
+}
+
+.scale-item__label span {
+    color: var(--text-4);
+    font-variant-numeric: tabular-nums;
+}
+
+.scale-item--mercury { --dia: 4.879;   --disc-skin: radial-gradient(circle at 32% 28%, #bdb7ae, #8e877e 30%, #4a453e 100%); }
+.scale-item--venus   { --dia: 12.104;  --disc-skin: radial-gradient(circle at 32% 28%, #fff6da, #dcae57 42%, #8e6320 100%); --disc-halo: rgba(244, 221, 162, 0.4); }
+.scale-item--earth   { --dia: 12.756;  --disc-skin: radial-gradient(circle at 32% 28%, #6fb6e8, #2f7fbe 38%, #123259 100%); --disc-halo: rgba(111, 182, 232, 0.5); }
+.scale-item--mars    { --dia: 6.792;   --disc-skin: radial-gradient(circle at 32% 28%, #e08a63, #b3522f 42%, #522014 100%); }
+.scale-item--jupiter { --dia: 142.984; --disc-skin: repeating-linear-gradient(177deg, #e9cca1 0%, #c39c6c 4.2%, #f2e0bc 8.4%, #a67c4f 12.6%, #dcb887 16.8%, #8d6440 21%, #e9cca1 25.2%); --disc-halo: rgba(220, 184, 135, 0.3); }
+.scale-item--saturn  { --dia: 120.536; --disc-skin: repeating-linear-gradient(178deg, #f2e2ba 0%, #d4bf88 7.5%, #f7ebc8 15%, #c7b07c 22.5%, #f2e2ba 30%); --disc-halo: rgba(236, 220, 176, 0.28); }
+.scale-item--uranus  { --dia: 51.118;  --disc-skin: radial-gradient(circle at 32% 28%, #dcf6fa, #6fb6c8 46%, #2a6376 100%); --disc-halo: rgba(166, 220, 232, 0.34); }
+.scale-item--neptune { --dia: 49.528;  --disc-skin: radial-gradient(circle at 32% 28%, #7fb4f0, #2f63c0 44%, #0e1d47 100%); --disc-halo: rgba(90, 134, 204, 0.42); }
+
+
+/* ============================================================
+   6. MOON LEDGER
+   ------------------------------------------------------------
+   --reach is diameter as a percentage of Ganymede, the largest
+   moon in the Solar System. Earth's Moon is included as the
+   reference every reader already has an instinct for.
+   ============================================================ */
+
+.ledger--moons .ledger__row--ganymede { --reach: 100%; }
+.ledger--moons .ledger__row--titan    { --reach: 97.9%; }
+.ledger--moons .ledger__row--callisto { --reach: 91.4%; }
+.ledger--moons .ledger__row--io       { --reach: 69.1%; }
+.ledger--moons .ledger__row--moon     { --reach: 65.9%; }
+.ledger--moons .ledger__row--europa   { --reach: 59.3%; }
+.ledger--moons .ledger__row--triton   { --reach: 51.3%; }
+.ledger--moons .ledger__row--enceladus{ --reach: 9.6%; }
+
+
+/* ============================================================
+   7. OUTER-SYSTEM DISTANCE LADDER
+   ------------------------------------------------------------
+   --reach is log10(distance in AU) as a percentage of
+   log10(268,000 AU), the distance to Proxima Centauri. A linear
+   axis would put every Solar System object in the first pixel;
+   the logarithm is the only honest way to show a boundary that
+   sits four orders of magnitude past Neptune.
+   ============================================================ */
+
+.ledger--depth .ledger__row--earth      { --reach: 0%; }
+.ledger--depth .ledger__row--neptune    { --reach: 27.2%; }
+.ledger--depth .ledger__row--kuiper     { --reach: 31.3%; }
+.ledger--depth .ledger__row--heliopause { --reach: 38.5%; }
+.ledger--depth .ledger__row--sedna      { --reach: 54.6%; }
+.ledger--depth .ledger__row--oort-inner { --reach: 60.8%; }
+.ledger--depth .ledger__row--oort-outer { --reach: 92.0%; }
+.ledger--depth .ledger__row--proxima    { --reach: 100%; }
+
+.ledger--depth .ledger__row--proxima .ledger__fill {
+    background: linear-gradient(90deg, var(--accent-2) 0%, var(--accent) 62%, #cfe1ff 100%);
+}
+
+
+/* ============================================================
+   8. SMALL BODIES
+   ============================================================ */
+
+/* --- Asteroid belt band -------------------------------------
+   Roughly two hundred rocks placed with a single box-shadow
+   list. No JavaScript, no images, no repeated markup.          */
+.belt-figure {
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.belt-figure__lane {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: #cbb89e;
+    box-shadow:
+         14px  -22px 0 rgba(203, 184, 158, 0.9),  38px   11px 0 -0.5px rgba(180, 162, 138, 0.7),
+         61px  -34px 0 -0.5px rgba(214, 196, 170, 0.8),  85px    6px 0 rgba(168, 150, 128, 0.65),
+        108px   26px 0 -1px rgba(203, 184, 158, 0.6), 131px  -14px 0 rgba(224, 206, 180, 0.85),
+        156px   33px 0 -0.5px rgba(180, 162, 138, 0.7), 178px  -29px 0 rgba(198, 178, 152, 0.75),
+        203px    3px 0 -1px rgba(214, 196, 170, 0.55), 226px   19px 0 rgba(188, 170, 146, 0.8),
+        249px  -38px 0 -0.5px rgba(203, 184, 158, 0.65), 272px   -6px 0 rgba(232, 214, 188, 0.9),
+        298px   29px 0 -1px rgba(174, 156, 132, 0.6), 321px  -18px 0 -0.5px rgba(210, 192, 166, 0.75),
+        344px   14px 0 rgba(192, 174, 150, 0.7), 368px  -31px 0 -1px rgba(203, 184, 158, 0.55),
+        391px    8px 0 rgba(220, 202, 176, 0.85), 415px   36px 0 -0.5px rgba(180, 162, 138, 0.65),
+        438px  -11px 0 rgba(198, 178, 152, 0.8), 462px   22px 0 -1px rgba(214, 196, 170, 0.6),
+        486px  -26px 0 -0.5px rgba(188, 170, 146, 0.7), 509px    1px 0 rgba(228, 210, 184, 0.88),
+        533px   31px 0 -1px rgba(174, 156, 132, 0.58), 557px  -16px 0 rgba(206, 188, 162, 0.78),
+        580px   17px 0 -0.5px rgba(192, 174, 150, 0.68), 604px  -35px 0 rgba(216, 198, 172, 0.8),
+        628px    9px 0 -1px rgba(184, 166, 142, 0.6), 651px   27px 0 rgba(200, 182, 156, 0.75),
+        675px  -21px 0 -0.5px rgba(222, 204, 178, 0.85), 699px    4px 0 -1px rgba(178, 160, 136, 0.55),
+        722px   34px 0 rgba(210, 192, 166, 0.8), 746px  -13px 0 -0.5px rgba(194, 176, 152, 0.7),
+        770px   20px 0 rgba(226, 208, 182, 0.88), 793px  -30px 0 -1px rgba(182, 164, 140, 0.6),
+        817px   12px 0 rgba(204, 186, 160, 0.76), 841px   25px 0 -0.5px rgba(190, 172, 148, 0.66),
+        864px   -8px 0 rgba(218, 200, 174, 0.84), 888px  -37px 0 -1px rgba(176, 158, 134, 0.56),
+        912px   16px 0 rgba(208, 190, 164, 0.79), 935px   30px 0 -0.5px rgba(196, 178, 154, 0.69),
+        959px  -24px 0 rgba(230, 212, 186, 0.86), 983px    6px 0 -1px rgba(180, 162, 138, 0.58),
+        1007px  23px 0 rgba(212, 194, 168, 0.77), 1030px -19px 0 -0.5px rgba(198, 180, 156, 0.67),
+        1054px  35px 0 rgba(224, 206, 180, 0.83), 1078px  -4px 0 -1px rgba(184, 166, 142, 0.57);
+}
+
+/* Ceres and Vesta, the two bodies that hold most of the belt's mass. */
+.belt-figure__major {
+    position: absolute;
+    top: 50%;
+    left: var(--at);
+    width: var(--size);
+    height: var(--size);
+    margin-top: calc(var(--size) / -2 + var(--off, 0px));
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 28%, #b4b0aa 0%, #7c7872 34%, #35322d 100%);
+    box-shadow: inset -3px -2px 5px rgba(0, 0, 5, 0.7), 0 0 14px rgba(180, 176, 170, 0.28);
+}
+
+.belt-figure__major--ceres { --at: 33%; --size: 22px; --off: -14px; }
+.belt-figure__major--vesta { --at: 62%; --size: 13px; --off: 20px; }
+
+.belt-figure__tag {
+    position: absolute;
+    top: 50%;
+    left: var(--at);
+    margin-top: var(--tag-off, 0px);
+    padding-left: var(--s-3);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+}
+
+.belt-figure__tag::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1px;
+    height: 18px;
+    background: var(--line-2);
+    transform: translateY(-50%);
+}
+
+.belt-figure__tag--ceres { --at: calc(33% + 22px); --tag-off: -26px; }
+.belt-figure__tag--vesta { --at: calc(62% + 15px); --tag-off: 24px; }
+
+/* --- Comet -------------------------------------------------
+   Two tails, because a comet has two and they point different
+   ways: the ion tail is swept straight back by the solar wind,
+   the dust tail lags along the orbit and curves.
+   ============================================================ */
+
+.comet-figure {
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+}
+
+.comet-figure__nucleus {
+    position: absolute;
+    top: 50%;
+    right: 16%;
+    width: 9px;
+    height: 9px;
+    margin-top: -4.5px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 34%, #ffffff 0%, #dff2ff 44%, #7fb6e0 100%);
+    box-shadow: 0 0 14px #ffffff, 0 0 34px rgba(160, 220, 255, 0.8);
+    z-index: 4;
+}
+
+.comet-figure__coma {
+    position: absolute;
+    top: 50%;
+    right: 16%;
+    width: 62px;
+    height: 62px;
+    margin: -31px -26.5px 0 0;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(190, 232, 255, 0.5) 0%,
+        rgba(140, 200, 245, 0.18) 42%,
+        transparent 72%);
+    filter: blur(4px);
+    z-index: 3;
+}
+
+/* Ion tail — straight, blue, anti-sunward. */
+.comet-figure__ion {
+    position: absolute;
+    top: 50%;
+    right: 18%;
+    left: 6%;
+    height: 16px;
+    margin-top: -8px;
+    background: linear-gradient(270deg,
+        rgba(180, 226, 255, 0.85) 0%,
+        rgba(120, 190, 255, 0.34) 34%,
+        rgba(90, 150, 240, 0.1) 66%,
+        transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 40%, #000 60%, transparent);
+            mask-image: linear-gradient(180deg, transparent, #000 40%, #000 60%, transparent);
+    filter: blur(3px);
+    z-index: 2;
+}
+
+/* Dust tail — broader, warmer, and curved, because the grains keep
+   their orbital momentum instead of being swept straight back.
+   Drawn as the lower arc of a wide ellipse so the fan trails away
+   from the nucleus rather than looping over it. */
+.comet-figure__dust {
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    width: 78%;
+    height: 130px;
+    margin-top: -118px;
+    border-radius: 50%;
+    border-bottom: 15px solid rgba(255, 226, 186, 0.13);
+    border-left: 6px solid rgba(255, 226, 186, 0.03);
+    border-right: 6px solid rgba(255, 226, 186, 0.05);
+    filter: blur(7px);
+    transform: rotate(3deg);
+    z-index: 1;
+}
+
+.comet-figure__sun-cue {
+    position: absolute;
+    top: 50%;
+    right: 2%;
+    transform: translateY(-50%);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-4);
+    writing-mode: vertical-rl;
+}
+
+
+/* ============================================================
+   9. DWARF-PLANET CATALOGUE STRIP
+   ============================================================ */
+
+.catalogue {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border-block: 1px solid var(--line);
+}
+
+.catalogue__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-3);
+    padding: var(--s-6) var(--s-4) var(--s-5);
+    background: var(--abyss);
+    text-align: center;
+    transition: background var(--dur-base) var(--ease-out);
+}
+
+.catalogue__item:hover {
+    background: var(--deep);
+}
+
+.catalogue__stage {
+    display: grid;
+    place-items: center;
+    height: 72px;
+}
+
+.catalogue__name {
+    font-size: var(--t-md);
+    font-weight: 500;
+    color: var(--text);
+}
+
+.catalogue__where {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.catalogue__where b {
+    display: block;
+    margin-bottom: 2px;
+    font-weight: 400;
+    color: var(--accent);
+    opacity: 0.85;
+}
+
+
+/* ============================================================
+   10. RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+    .sun-render {
+        width: clamp(160px, 42vw, 230px);
+    }
+}
+
+@media (max-width: 860px) {
+    /* Stages shorten on narrow screens, so the giants come down
+       with them rather than overflowing. */
+    .orb--jupiter { --orb-d: 116px; }
+    .orb--saturn  { --orb-d: 94px; }
+    .orb--uranus  { --orb-d: 78px; }
+    .orb--neptune { --orb-d: 76px; }
+}
+
+@media (max-width: 620px) {
+    .orrery {
+        /* Sized so the outermost belt (192 units plus its border)
+           still clears the container gutters instead of being
+           clipped by the shell's overflow. */
+        --u: clamp(1.25px, 0.45vw, 1.8px);
+        --tilt: 68deg;
+    }
+
+    .belt-figure,
+    .comet-figure {
+        height: 120px;
+    }
+
+    .belt-figure__tag {
+        display: none;
+    }
+
+    .comet-figure__dust {
+        height: 92px;
+        margin-top: -60px;
+    }
+}
+
+@media (max-width: 420px) {
+    .scale-figure {
+        --k: clamp(0.42px, 0.34vw, 0.9px);
+    }
+}

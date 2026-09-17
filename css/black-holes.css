@@ -1,0 +1,1467 @@
+/* ============================================================
+   CosmoVerse — Black Holes
+   ------------------------------------------------------------
+   Layer 3. Requires style.css + components.css.
+
+   THE VISUAL REFERENCE
+   --------------------
+   Every black hole on this page is drawn to the Gargantua look
+   from Interstellar, which matters because that look was not an
+   art direction — it was a physics simulation. Kip Thorne's
+   equations drove Double Negative's renderer, and the result is
+   still the most accurate depiction of a rotating black hole a
+   general audience has seen.
+
+   Four rules follow from that, and they are what keep these
+   visuals out of sci-fi-portal territory:
+
+   1. The disk is WARM WHITE, not coloured. An accretion disk is
+      thermal emission at millions of kelvin. It reads as white
+      with amber edges. There is no purple, no cyan, no neon.
+
+   2. The shadow is absolute black. #000000, no gradient, no
+      "dark blue centre". It occludes the starfield completely,
+      because it is the absence of light.
+
+   3. The disk must bend over the top and under the bottom. That
+      vertical arc is the lensed image of the disk's far side,
+      and it is the single detail that separates a real black
+      hole render from a ring-around-a-ball.
+
+   4. --accent-2 (violet) is reserved for SPACETIME GEOMETRY
+      annotations only — ergosphere, frame dragging, coordinate
+      grids. It never touches the disk. Giving the violet a
+      strict job is what stops it reading as decoration.
+   ============================================================ */
+
+
+/* ============================================================
+   1. PALETTE + GEOMETRY
+   ============================================================ */
+
+.dm-holes {
+    /* --- Accretion disk temperature ramp ------------------
+       Inner edge is optically thick gas at ~10⁷ K falling to
+       ~10³ K at the outer rim. That is a blackbody sequence, so
+       it runs white → cream → amber → ember, exactly like the
+       stellar sequence on the Stars page but compressed into a
+       single object.                                        */
+    --disk-core: #fffdf7;
+    --disk-hot:  #fff4de;
+    --disk-mid:  #ffe3b0;
+    --disk-warm: #ffc781;
+    --disk-cool: #eda058;
+    --disk-far:  #b87338;
+    --disk-edge: #74431f;
+
+    /* Lensed light: the photon ring and the Einstein arcs. The
+       brightest thing in the frame, and pure warm white. */
+    --ring:      #fff8e8;
+    --ring-soft: rgba(255, 240, 214, 0.5);
+
+    /* Synchrotron jets really are blue-white — this is the one
+       cool colour on the page and it is earned. */
+    --jet:       #d4e4ff;
+    --jet-soft:  rgba(180, 210, 255, 0.42);
+
+    /* Geometry annotations only. See rule 4 above. */
+    --geo:       #a866ff;
+    --geo-soft:  rgba(168, 102, 255, 0.35);
+
+    /* Height of the sticky local index. */
+    --subnav-h:  46px;
+}
+
+/* Headings run orange into warm white rather than into the domain's
+   violet accent-2. Rule 4 reserves violet for spacetime geometry,
+   and a violet headline would spend the one colour this page uses
+   to mean "this is a property of the geometry, not of the gas". */
+.dm-holes .head__title em,
+.dm-holes .page-hero__title em {
+    background-image: linear-gradient(96deg,
+        #ffffff 0%, var(--ring) 34%, var(--accent) 100%);
+}
+
+
+/* ============================================================
+   2. LOCAL INDEX
+   ------------------------------------------------------------
+   Same pattern the Stars domain uses. Promotion candidate for
+   components.css once a third domain wants it; kept local for
+   now so building this page could not disturb the other two.
+   ============================================================ */
+
+.subnav {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 900;
+    background: rgba(1, 1, 4, 0.92);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    border-bottom: 1px solid var(--line);
+}
+
+/* The disk's own temperature ramp as a 1px rule. */
+.subnav::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--disk-edge) 12%,
+        var(--disk-warm) 34%,
+        var(--ring) 50%,
+        var(--disk-warm) 66%,
+        var(--disk-edge) 88%,
+        transparent 100%);
+    opacity: 0.6;
+}
+
+.subnav__list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+.subnav__list a {
+    position: relative;
+    padding: 0.85rem clamp(0.42rem, 0.95vw, 0.8rem);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+    transition: color var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child {
+    padding-left: 0;
+}
+
+.subnav__list a::after {
+    content: '';
+    position: absolute;
+    left: clamp(0.42rem, 0.95vw, 0.8rem);
+    right: clamp(0.42rem, 0.95vw, 0.8rem);
+    bottom: 0;
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+    transform: scaleX(0);
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child::after {
+    left: 0;
+}
+
+.subnav__list a:hover {
+    color: var(--text);
+}
+
+.subnav__list a:hover::after {
+    transform: scaleX(1);
+}
+
+.shell[id],
+.page-hero[id] {
+    scroll-margin-top: calc(var(--header-h) + var(--subnav-h));
+}
+
+
+/* ============================================================
+   3. FIGURE CHROME
+   ------------------------------------------------------------
+   Shared wrapper for every SVG diagram on the page. A diagram is
+   a coordinate system: it cannot usefully reflow, so below its
+   natural width it scrolls rather than deforming.
+   ============================================================ */
+
+.fig {
+    margin: 0;
+}
+
+.fig__frame {
+    position: relative;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+.fig__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* SVG typography. Kept in the instrument voice like every other
+   label on the site. Sizes are in user units, so they scale with
+   the viewBox. */
+.svg-label,
+.svg-value,
+.svg-unit {
+    font-family: var(--font-mono);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.svg-label {
+    font-size: 12px;
+    fill: var(--text-2);
+}
+
+.svg-value {
+    font-size: 12px;
+    fill: var(--text);
+    letter-spacing: 0.05em;
+    text-transform: none;
+    font-variant-numeric: tabular-nums;
+}
+
+.svg-unit {
+    font-size: 10px;
+    fill: var(--text-4);
+}
+
+.svg-label--lit  { fill: var(--accent); }
+.svg-label--geo  { fill: var(--geo); }
+.svg-label--jet  { fill: var(--jet); }
+.svg-label--ring { fill: var(--ring); }
+
+/* Leader lines. Every callout on this page uses an elbow from the
+   feature to a shared vertical rail, so labels can be spread down
+   the rail at fixed intervals and can never collide however
+   tightly the features themselves are packed. */
+.svg-leader {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    opacity: 0.7;
+}
+
+.svg-leader--lit {
+    stroke: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.svg-leader--geo {
+    stroke: var(--geo-soft);
+}
+
+.svg-tick {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+}
+
+.svg-dash {
+    fill: none;
+    stroke-dasharray: 4 5;
+}
+
+.svg-grid {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 1;
+}
+
+.svg-axis {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+}
+
+
+/* ============================================================
+   4. HERO — the Gargantua frame
+   ------------------------------------------------------------
+   A hand-built SVG render used to live here, about 200 lines of
+   ellipse strokes, masks and Keplerian animation. It is gone: the
+   hero is now the photograph. Everything that drawing was for —
+   separating the five layers, showing inner bands outrunning outer
+   ones — is still on the page in the anatomy, lensing, escape-cone
+   and accretion-disk figures, which is where an explanatory
+   diagram belongs. The hero's job is to be the thing itself.
+
+   The source frame is 1920x1080. Measured off it, the shadow sits
+   dead centre and spans 35%-65% of the width and 24%-77% of the
+   height; the disk crosses in front at 52%-58%; the lensed arcs
+   run 5%-24% above and 76%-95% below. So there is no dead area to
+   crop into — nearly the whole frame is subject, and the crop has
+   to keep nearly all of it.
+
+   Two modes, because one does not survive both orientations:
+
+     · Landscape fills the hero with object-fit: cover. A 1440x846
+       hero is about 1.70 against the frame's 1.78, so cover trims
+       roughly 2% off each side and keeps the full height: both
+       arcs, the shadow and the disk all present.
+
+     · Under 900px the viewport goes portrait and cover turns
+       vicious — at 390x700 it would show a vertical slice about a
+       third of the frame wide. The shadow would fill it and the
+       disk would be gone off both edges, which is the one thing
+       this image is here to show. So the picture stops filling the
+       hero and becomes a 16:9 band across the top, with the hero
+       reserving that height in its own padding so the copy flows
+       underneath instead of over it.
+
+   object-fit: cover throughout, never width and height at 100%
+   without it, and never a non-uniform scale. The disk reading as
+   a circle seen at a shallow angle is the entire image.
+   ============================================================ */
+
+.bh-hero {
+    position: relative;
+    min-height: min(94svh, 940px);
+    display: grid;
+    align-content: end;
+    padding: calc(var(--header-h) + var(--s-7)) 0 0;
+    background: #000000;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.bh-hero__stage {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bh-hero__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Just above centre. At landscape ratios cover crops width, so
+       the vertical value idles; it earns its place on very wide
+       windows, where it keeps the lower lensed arc and gives up a
+       sliver of the upper one instead — the lower arc is the more
+       legible of the two because the disk crosses in front of it. */
+    object-position: 50% 46%;
+    /* The frame is already graded for the film. A small lift stops
+       it sinking into a page whose background is true #000000. */
+    filter: contrast(1.04) saturate(1.02);
+}
+
+/* Above both the picture (1) and the grade (2). Without this the
+   copy inherits auto stacking, paints under the scrim, and the
+   whole headline disappears into the gradient. */
+.bh-hero > .container {
+    position: relative;
+    z-index: 3;
+}
+
+/* Legibility grade. Three ramps rather than one flat veil: the top
+   edge only has to meet the header, the bottom carries the whole
+   copy block, and the left-hand ramp buys the title and lede some
+   contrast without dimming the shadow or the bright side of the
+   disk, which both sit right of centre. */
+.bh-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.66) 0%, transparent 13%),
+        linear-gradient(0deg,
+            rgba(0, 0, 0, 0.97) 0%,
+            rgba(0, 0, 0, 0.93) 22%,
+            rgba(0, 0, 0, 0.78) 40%,
+            rgba(0, 0, 0, 0.46) 58%,
+            rgba(0, 0, 0, 0.14) 72%,
+            transparent 82%),
+        linear-gradient(90deg,
+            rgba(0, 0, 0, 0.66) 0%,
+            rgba(0, 0, 0, 0.34) 32%,
+            transparent 62%);
+}
+
+.bh-hero__dock {
+    position: relative;
+    z-index: 3;
+    margin-top: clamp(var(--s-6), 5vh, var(--s-8));
+}
+
+
+/* ============================================================
+   5. .bh — the compact CSS black hole
+   ------------------------------------------------------------
+   For plates and inline use, where a full SVG render would be
+   wasteful. Same five-layer logic as the SVG, same rules, built
+   from clipped ellipse halves — the technique the Solar System
+   page uses for Saturn's rings.
+   ============================================================ */
+
+.bh {
+    --bh-d: 120px;
+    position: relative;
+    flex: none;
+    width: var(--bh-d);
+    height: var(--bh-d);
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+}
+
+/* Layers 1 and 5: the disk, split at the equator.
+
+   A filled elliptical gradient, not a bordered ellipse. Borders
+   give two thin arcs that read as an outline; what is wanted is a
+   lit band, brightest along its midline and fading to nothing at
+   the rim — the same shape the hero's annulus gradient produces.
+
+   No box-shadow here: clip-path would cut the shadow's rounded
+   rectangle into a visible straight-edged box around the disk. */
+.bh__disk {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 262%;
+    height: 26%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(closest-side ellipse at 50% 50%,
+        #ffffff 0%,
+        var(--disk-hot) 22%,
+        var(--disk-warm) 46%,
+        rgba(184, 115, 56, 0.4) 72%,
+        transparent 100%);
+    filter: blur(calc(var(--bh-d) * 0.008));
+    pointer-events: none;
+}
+
+.bh__disk--far  { z-index: 1; clip-path: polygon(-2% -2%, 102% -2%, 102% 50%, -2% 50%); }
+.bh__disk--near { z-index: 4; clip-path: polygon(-2% 50%, 102% 50%, 102% 102%, -2% 102%); }
+
+/* Layer 2 + 3: shadow and photon ring. */
+.bh__shadow {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #000000;
+    box-shadow:
+        0 0 0 1.5px var(--ring),
+        0 0 calc(var(--bh-d) * 0.14) calc(var(--bh-d) * 0.01) var(--ring-soft);
+}
+
+/* Layer 4: the lensed arc over the top and under the bottom.
+
+   Masked away across the middle band. Left as a closed ring it
+   becomes a circle drawn around a ball, which is the exact
+   failure mode rule 3 exists to prevent — the arc has to read as
+   two arcs meeting the disk plane, not as a hoop. */
+.bh__arc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    width: 158%;
+    height: 140%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    /* Diffuse, not a stroked outline. At 80–150px a hard 4px ring
+       plus the photon ring gives two concentric circles and the
+       whole thing reads as wireframe. A soft band of light keeps
+       the lensing impression without the outline. */
+    background: radial-gradient(closest-side ellipse at 50% 50%,
+        transparent 60%,
+        color-mix(in srgb, var(--disk-warm) 24%, transparent) 71%,
+        color-mix(in srgb, var(--ring) 64%, transparent) 82%,
+        color-mix(in srgb, var(--disk-cool) 26%, transparent) 92%,
+        transparent 100%);
+    filter: blur(calc(var(--bh-d) * 0.016));
+    -webkit-mask-image: linear-gradient(180deg,
+        #000 0%, #000 32%, transparent 43%,
+        transparent 57%, #000 68%, #000 100%);
+            mask-image: linear-gradient(180deg,
+        #000 0%, #000 32%, transparent 43%,
+        transparent 57%, #000 68%, #000 100%);
+    pointer-events: none;
+}
+
+
+/* The shared plate stage clips its contents, and the disk of a .bh
+   is 2.6 times wider than the shadow — wider than a three-up plate
+   column. The clip landed while the disk was still at around a
+   third of full brightness, leaving a hard vertical edge down both
+   sides of every plate. Fading the stage's own edges turns that cut
+   into a falloff, which is what the render wants anyway: the disk
+   should run out of the frame, not stop at it.
+
+   Scoped to .dm-holes rather than added to components.css so the
+   other domains keep the plain clip they were designed against. */
+.dm-holes .plate__stage {
+    -webkit-mask-image: linear-gradient(90deg,
+        transparent 0%, #000 12%, #000 88%, transparent 100%);
+            mask-image: linear-gradient(90deg,
+        transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+
+
+/* ============================================================
+   6. ANATOMY
+   ============================================================ */
+
+.anatomy__horizon    { fill: #000000; stroke: var(--ring); stroke-width: 1.5; }
+.anatomy__photon     { fill: none; stroke: var(--ring); stroke-width: 1.5; stroke-dasharray: 6 6; opacity: 0.85; }
+.anatomy__isco       { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 3 7; opacity: 0.8; }
+.anatomy__ergo       { fill: color-mix(in srgb, var(--geo) 9%, transparent); stroke: var(--geo); stroke-width: 1.2; stroke-dasharray: 5 4; }
+.anatomy__disk       { fill: none; stroke: var(--band-c, var(--disk-mid)); stroke-width: var(--band-w, 7); opacity: 0.9; }
+/* No `fill` here on purpose. These elements carry a gradient as a
+   presentation attribute, and a CSS fill would win over it and
+   flatten the jets into grey cardboard wedges. */
+.anatomy__jet        { opacity: 0.9; }
+
+/* The singularity is not a small ball. It is where the theory
+   stops returning answers, so it is drawn as an absence with a
+   question mark rather than as an object. */
+.anatomy__sing {
+    fill: none;
+    stroke: var(--geo);
+    stroke-width: 1.2;
+    stroke-dasharray: 2 3;
+}
+
+
+/* ============================================================
+   7. LENSING
+   ============================================================ */
+
+.lens__ray {
+    fill: none;
+    stroke: var(--ring);
+    stroke-width: 1.6;
+    opacity: 0.9;
+}
+
+.lens__ray-glow {
+    fill: none;
+    stroke: var(--ring);
+    stroke-width: 6;
+    opacity: 0.12;
+}
+
+/* The ray that neither escapes nor falls straight in: it enters
+   the photon sphere and circles. Dotted, because it has no exit. */
+.lens__ray--critical {
+    stroke: var(--accent);
+    stroke-dasharray: 5 4;
+}
+
+.lens__ray--captured {
+    stroke: var(--accent);
+    opacity: 0.55;
+}
+
+.lens__horizon { fill: #000000; stroke: var(--ring); stroke-width: 1.5; }
+.lens__photon  { fill: none; stroke: var(--ring); stroke-width: 1.2; stroke-dasharray: 5 5; opacity: 0.7; }
+
+/* Travelling pulse, so the rays read as light in flight and the
+   direction of travel is never ambiguous. */
+.lens__pulse {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-dasharray: 16 2000;
+    opacity: 0.85;
+    animation: lens-fly 5.5s linear infinite;
+    animation-delay: var(--delay, 0s);
+}
+
+@keyframes lens-fly {
+    from { stroke-dashoffset: 0; }
+    to   { stroke-dashoffset: -1400; }
+}
+
+/* Einstein ring companion figure. */
+.ering__source { fill: none; stroke: var(--geo); stroke-width: 1.4; stroke-dasharray: 4 4; }
+.ering__ring   { fill: none; stroke: var(--ring); stroke-width: 3.5; opacity: 0.9; }
+.ering__ring-bloom { fill: none; stroke: var(--ring); stroke-width: 12; opacity: 0.14; }
+.ering__arc    { fill: none; stroke: var(--ring); stroke-width: 5; opacity: 0.95; }
+
+
+/* ============================================================
+   8. ESCAPE CONES
+   ------------------------------------------------------------
+   Six local observers at fixed radii. The wedge is the set of
+   directions a photon can be emitted in and still get out; its
+   half-angle comes from the exact Schwarzschild expression
+
+       sin ψ = (3√3/2)(Rs/r)·√(1 − Rs/r)
+
+   with the >90° branch taken inside the photon sphere. At the
+   horizon the wedge closes completely. Laid out as separate
+   panels rather than along a radial line, because in a true
+   radial layout all six would land inside two Schwarzschild
+   radii and overlap into mush.
+   ============================================================ */
+
+.cones {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+}
+
+.cone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-3);
+    padding: var(--s-5) var(--s-3) var(--s-4);
+    background: var(--abyss);
+    text-align: center;
+    transition: background var(--dur-base) var(--ease-out);
+}
+
+.cone:hover {
+    background: var(--deep);
+}
+
+/* Warm rather than grey: this wedge is escaping starlight, and it
+   belongs to the same colour family as everything else that emits
+   on this page. */
+.cone__wedge      { fill: color-mix(in srgb, var(--disk-mid) 30%, transparent); }
+.cone__edge       { fill: none; stroke: var(--ring); stroke-width: 1.2; opacity: 0.75; }
+.cone__emitter    { fill: var(--ring); }
+.cone__inward     { fill: none; stroke: var(--geo); stroke-width: 1.2; }
+.cone__inward-tip { fill: var(--geo); }
+
+.cone__r {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+}
+
+.cone__a {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.cone__note {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+.cone--horizon .cone__a { color: var(--text); }
+.cone--horizon { background: linear-gradient(180deg, rgba(255, 122, 61, 0.07), transparent), var(--void); }
+
+
+/* ============================================================
+   9. ACCRETION DISK
+   ------------------------------------------------------------
+   A more open inclination than the hero, so the annulus is
+   readable. Lensing is deliberately omitted here — the hero and
+   the lensing figure carry that, and a lensed disk at this
+   inclination would hide the very structure this figure exists
+   to show. The caption says so.
+   ============================================================ */
+
+.disk__band {
+    fill: none;
+    stroke: var(--band-c, var(--disk-mid));
+    stroke-width: var(--band-w, 12);
+    opacity: 0.92;
+}
+
+.disk__flow {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: var(--band-w, 12);
+    stroke-dasharray: var(--band-dash, 60 200);
+    opacity: 0.3;
+    /* Keplerian: --band-t scales as r^1.5, set per band. */
+    animation: disk-spin var(--band-t, 12s) linear infinite;
+}
+
+@keyframes disk-spin {
+    to { stroke-dashoffset: -260; }
+}
+
+.disk__bloom {
+    fill: none;
+    stroke: var(--band-c, var(--disk-warm));
+    stroke-width: calc(var(--band-w, 12) * 2.8);
+    opacity: 0.1;
+}
+
+.disk__horizon { fill: #000000; stroke: var(--ring); stroke-width: 1.5; }
+.disk__isco    { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 4 6; opacity: 0.85; }
+
+
+/* ============================================================
+   10. RELATIVISTIC JETS
+   ============================================================ */
+
+.jet__beam {
+    fill: url(#jetGrad);
+}
+
+.jet__sheath {
+    fill: none;
+    stroke: var(--jet-soft);
+    stroke-width: 1.2;
+}
+
+/* Helical magnetic field, the thing doing the collimating. */
+.jet__helix {
+    fill: none;
+    stroke: var(--geo);
+    stroke-width: 1.3;
+    opacity: 0.5;
+}
+
+/* Knots of plasma travelling out at a good fraction of c. */
+.jet__knot {
+    fill: var(--jet);
+    opacity: 0;
+    animation: jet-climb var(--knot-t, 6s) linear infinite;
+    animation-delay: var(--knot-d, 0s);
+}
+
+@keyframes jet-climb {
+    0%   { opacity: 0;    transform: translateY(0) scale(0.5); }
+    12%  { opacity: 0.95; }
+    70%  { opacity: 0.5; }
+    100% { opacity: 0;    transform: translateY(var(--knot-y, -250px)) scale(1.5); }
+}
+
+.jet__knot--down {
+    animation-name: jet-dive;
+}
+
+@keyframes jet-dive {
+    0%   { opacity: 0;    transform: translateY(0) scale(0.5); }
+    12%  { opacity: 0.95; }
+    70%  { opacity: 0.5; }
+    100% { opacity: 0;    transform: translateY(calc(var(--knot-y, -250px) * -1)) scale(1.5); }
+}
+
+
+/* ============================================================
+   11. FORMATION TRACK
+   ------------------------------------------------------------
+   Five stages of a core collapse on a single timeline.
+
+   This component was first built for the Stars page and its rules
+   live in stars.css, which this page does not load — so without
+   this block the whole timeline rendered as an unstyled stack:
+   timestamps welded onto stage names, scenes centred, copy running
+   the full container width. Restated here rather than promoted into
+   components.css, on the same reasoning as the local index above:
+   nothing outside the Black Holes domain gets edited. Both copies
+   are promotion candidates.
+
+   The one substantive difference is the scene wash, which is warm
+   here rather than the Stars page's cold blue.
+   ============================================================ */
+
+.track {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--s-5);
+    counter-reset: stage;
+}
+
+.track__step {
+    position: relative;
+    counter-increment: stage;
+    padding-top: var(--s-6);
+}
+
+/* The timeline rule itself, threaded through the node dots. */
+.track__step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: calc(var(--s-5) * -1);
+    height: 1px;
+    background: var(--line-2);
+}
+
+/* The last segment has no next node to reach, so it fades out
+   instead of stopping against nothing. */
+.track__step:last-child::before {
+    right: 0;
+    background: linear-gradient(90deg, var(--line-2) 0%, transparent 100%);
+}
+
+.track__step::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--void);
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.track__time {
+    display: block;
+    margin-bottom: var(--s-5);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.9;
+}
+
+/* The stage name goes on its own line under the timestamp. Left
+   inline the two run together into one unreadable string. */
+.track__time b {
+    display: block;
+    margin-top: 3px;
+    font-weight: 400;
+    color: var(--text-4);
+}
+
+/* Taller than the Stars version, and soft-edged. These five scenes
+   are lit objects with wide box-shadow bloom — a 76px star carries
+   70px of glow — and a plain overflow clip cut that bloom off with a
+   straight edge on all four sides, drawing a visible rectangle round
+   every stage. The mask fades the cell to nothing at its own
+   boundary, so the light runs out instead of stopping. */
+.track__scene {
+    position: relative;
+    height: 148px;
+    margin-bottom: var(--s-4);
+    background: radial-gradient(ellipse 70% 70% at 50% 52%,
+        rgba(58, 30, 14, 0.5) 0%, transparent 72%);
+    overflow: hidden;
+    -webkit-mask-image: radial-gradient(ellipse 76% 84% at 50% 50%,
+        #000 46%, transparent 100%);
+            mask-image: radial-gradient(ellipse 76% 84% at 50% 50%,
+        #000 46%, transparent 100%);
+}
+
+.track__label {
+    font-size: var(--t-md);
+    font-weight: 500;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.track__label::before {
+    content: counter(stage, decimal-leading-zero) ' ';
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    color: var(--text-4);
+}
+
+.track__text {
+    margin-top: var(--s-3);
+    font-size: var(--t-sm);
+    line-height: 1.62;
+    color: var(--text-3);
+}
+
+
+/* ============================================================
+   12. TIDAL STRETCHING
+   ------------------------------------------------------------
+   Δg = 2GMh/r³, evaluated at the horizon, reduces to
+
+       Δg = h·c⁶ / (4G²M²)
+
+   — it falls as 1/M². The counter-intuitive result is that a
+   supermassive black hole is survivable to the horizon and a
+   stellar-mass one is not, which is what this figure is for.
+   ============================================================ */
+
+.tide {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+}
+
+.tide__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-6) var(--s-4) var(--s-5);
+    background: var(--abyss);
+    text-align: center;
+}
+
+.tide__body   { fill: var(--disk-hot); }
+.tide__outline{ fill: none; stroke: var(--ring); stroke-width: 1; opacity: 0.5; }
+.tide__arrow  { fill: none; stroke: var(--accent); stroke-width: 1.4; }
+.tide__tip    { fill: var(--accent); }
+
+.tide__r {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    color: var(--text);
+}
+
+.tide__dg {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.tide__verdict {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-4);
+}
+
+
+/* ============================================================
+   13. TIME DILATION
+   ============================================================ */
+
+.dilate {
+    display: grid;
+    gap: clamp(var(--s-6), 4vw, var(--s-8));
+    align-items: center;
+}
+
+@media (min-width: 900px) {
+    .dilate {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+    }
+}
+
+.clocks {
+    display: flex;
+    justify-content: center;
+    gap: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+.clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-4);
+}
+
+.clock__face {
+    position: relative;
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    border: 1px solid var(--line-2);
+    background:
+        radial-gradient(circle at 50% 42%, rgba(255, 200, 150, 0.05), transparent 70%),
+        var(--void);
+}
+
+/* Twelve hour ticks, drawn once with a repeating conic gradient
+   masked to a thin annulus. */
+.clock__face::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: repeating-conic-gradient(from 0deg,
+        var(--line-strong) 0deg 0.7deg,
+        transparent 0.7deg 30deg);
+    -webkit-mask-image: radial-gradient(circle, transparent 78%, #000 80%, #000 100%);
+            mask-image: radial-gradient(circle, transparent 78%, #000 80%, #000 100%);
+}
+
+.clock__hand {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    width: 2px;
+    height: 40%;
+    background: linear-gradient(0deg, var(--accent), var(--ring));
+    border-radius: 1px;
+    transform-origin: 50% 100%;
+    /* Explicit static transform so the hand is centred on the pivot
+       even with animations suppressed. The keyframes below restate
+       the translate for the same reason — an implicit `from` would
+       resolve to `none` and slide the hand sideways on each cycle. */
+    transform: translateX(-50%) rotate(0deg);
+    animation: clock-run var(--tick, 4s) linear infinite;
+}
+
+.clock__hand--slow {
+    height: 30%;
+    width: 2px;
+    background: var(--text-3);
+    animation-duration: calc(var(--tick, 4s) * 12);
+    /* Started part-way through its cycle. Both hands share a zero
+       origin, so without an offset they sit exactly on top of one
+       another at load and each dial appears to have one hand. */
+    animation-delay: calc(var(--tick, 4s) * -2.4);
+}
+
+@keyframes clock-run {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(360deg); }
+}
+
+.clock__pivot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    margin: -2.5px 0 0 -2.5px;
+    border-radius: 50%;
+    background: var(--ring);
+}
+
+.clock__label {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--text-3);
+}
+
+.clock__label b {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.clock--near .clock__label b {
+    color: var(--accent);
+}
+
+.dilate__curve {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+}
+
+.dilate__curve-bloom {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 9;
+    opacity: 0.15;
+}
+
+.dilate__fill {
+    fill: color-mix(in srgb, var(--accent) 10%, transparent);
+    stroke: none;
+}
+
+.dilate__asymptote {
+    stroke: var(--ring);
+    stroke-width: 1.2;
+    stroke-dasharray: 5 5;
+    opacity: 0.6;
+    fill: none;
+}
+
+
+/* ============================================================
+   14. BLACK HOLE vs NEUTRON STAR
+   ------------------------------------------------------------
+   The comparison is worth drawing to scale because the answer is
+   surprising: a 1.4 M☉ neutron star is about 10 km across and a
+   3 M☉ black hole's horizon is about 9 km. They are almost the
+   same size. Everything else about them differs completely.
+   ============================================================ */
+
+.versus {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+}
+
+@media (min-width: 760px) {
+    .versus {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+}
+
+.versus__side {
+    padding: clamp(var(--s-5), 3vw, var(--s-6));
+    background: var(--abyss);
+}
+
+.versus__stage {
+    display: grid;
+    place-items: center;
+    height: 190px;
+    margin-bottom: var(--s-5);
+}
+
+.versus__title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+    margin-bottom: var(--s-4);
+}
+
+.versus__title h3 {
+    font-size: var(--t-xl);
+    font-weight: 500;
+}
+
+/* Neutron star: a hard-surfaced object, so it is rendered as a
+   surface — the opposite of the shadow beside it. */
+.nstar {
+    position: relative;
+    width: var(--ns-d, 96px);
+    height: var(--ns-d, 96px);
+    border-radius: 50%;
+    background: radial-gradient(circle at 42% 38%,
+        #ffffff 0%, #e6f0ff 22%, #9dc0ff 52%, #4a6ec0 82%, #1e2c58 100%);
+    box-shadow:
+        0 0 calc(var(--ns-d, 96px) * 0.4) rgba(150, 195, 255, 0.6),
+        0 0 calc(var(--ns-d, 96px) * 1) rgba(110, 160, 255, 0.28);
+}
+
+/* Magnetic axis, offset from the spin axis — which is why pulsars
+   pulse at all. */
+.nstar::before,
+.nstar::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 62%;
+    background: linear-gradient(0deg, rgba(190, 220, 255, 0.9), transparent);
+    transform-origin: 50% 100%;
+}
+
+.nstar::before { bottom: 50%; transform: translateX(-50%) rotate(18deg); }
+
+/* Both halves rotate by the same 18°, about the same point — the
+   centre of the star — so they read as one axis running through it.
+   Rotating the lower half by 198° swung it back up over the sphere,
+   leaving a single line poking out of the top that looked like a
+   stray hairline rather than a magnetic axis. The gradient is also
+   flipped, so this half is bright at the surface and fades outward
+   like the other one. */
+.nstar::after {
+    top: 50%;
+    transform-origin: 50% 0;
+    transform: translateX(-50%) rotate(18deg);
+    background: linear-gradient(180deg, rgba(190, 220, 255, 0.9), transparent);
+}
+
+
+/* ============================================================
+   15. MYTH / FACT
+   ============================================================ */
+
+.myths {
+    display: grid;
+    border-top: 1px solid var(--line-2);
+}
+
+.myth {
+    display: grid;
+    gap: var(--s-3) clamp(var(--s-5), 3vw, var(--s-7));
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 820px) {
+    .myth {
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        align-items: start;
+    }
+}
+
+.myth__claim,
+.myth__truth {
+    position: relative;
+    padding-left: var(--s-6);
+    font-size: var(--t-base);
+    line-height: 1.68;
+}
+
+.myth__claim {
+    color: var(--text-3);
+}
+
+.myth__truth {
+    color: var(--text-2);
+}
+
+.myth__claim strong,
+.myth__truth strong {
+    color: var(--text);
+}
+
+/* A struck-through cross for the claim, an accent tick for the
+   correction. Marked by shape as well as colour. */
+.myth__claim::before,
+.myth__truth::before {
+    position: absolute;
+    left: 0;
+    top: 0.05em;
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+}
+
+.myth__claim::before {
+    content: '\00D7';
+    font-size: var(--t-md);
+    line-height: 1.2;
+    color: var(--text-4);
+}
+
+.myth__truth::before {
+    content: '\2713';
+    font-size: var(--t-sm);
+    line-height: 1.6;
+    color: var(--accent);
+}
+
+
+/* ============================================================
+   16. LEDGER TINTS
+   ============================================================ */
+
+/* Mass. reach% = log10(M / M☉) / 11 · 100, axis 1 → 10¹¹ M☉ */
+.ledger--mass .ledger__row--m3     { --reach: 7.5%; }
+.ledger--mass .ledger__row--m21    { --reach: 12.1%; }
+.ledger--mass .ledger__row--m100   { --reach: 19.6%; }
+.ledger--mass .ledger__row--m1e5   { --reach: 45.5%; }
+.ledger--mass .ledger__row--sgra   { --reach: 60.3%; }
+.ledger--mass .ledger__row--m87    { --reach: 89.2%; }
+.ledger--mass .ledger__row--ton618 { --reach: 98.4%; }
+
+/* Horizon radius. Rs = 2.95 km × M/M☉, so this axis is the mass
+   axis shifted and rescaled — which is exactly the point being
+   made: horizon size is nothing but mass expressed in metres.
+   reach% = log10(Rs in km) / 12 · 100, axis 1 km → 10¹² km */
+.ledger--rs .ledger__row--m3     { --reach: 10.7%; }
+.ledger--rs .ledger__row--m21    { --reach: 15.0%; }
+.ledger--rs .ledger__row--m100   { --reach: 21.9%; }
+.ledger--rs .ledger__row--m1e5   { --reach: 45.6%; }
+.ledger--rs .ledger__row--sgra   { --reach: 59.2%; }
+.ledger--rs .ledger__row--m87    { --reach: 85.7%; }
+.ledger--rs .ledger__row--ton618 { --reach: 94.1%; }
+
+.ledger--warm .ledger__fill {
+    background: linear-gradient(90deg, var(--disk-far) 0%, var(--disk-warm) 62%, var(--ring) 100%);
+    box-shadow: 0 0 14px -3px var(--accent-glow);
+}
+
+.ledger--warm .ledger__fill::after {
+    background: var(--ring);
+    box-shadow: 0 0 12px var(--ring);
+}
+
+
+/* ============================================================
+   17. REDUCED MOTION
+   ------------------------------------------------------------
+   Everything that moves on this page is illustrative, so all of
+   it can stop. The global rule in style.css collapses durations;
+   these overrides make sure nothing is left mid-animation in a
+   state that reads as broken — travelling knots and light pulses
+   are hidden outright rather than frozen somewhere arbitrary.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .disk__flow {
+        animation: none !important;
+        stroke-dasharray: none;
+        opacity: 0.2;
+    }
+
+    .lens__pulse,
+    .jet__knot {
+        animation: none !important;
+        display: none;
+    }
+
+    /* Frozen at a moment that still tells the story: the distant
+       clock has run 292 degrees, the deep one 0.30 of that. The
+       short hands are parked at a twelfth of each, so the two
+       hands never sit on top of one another. */
+    .clock__hand {
+        animation: none !important;
+        transform: translateX(-50%) rotate(292deg);
+    }
+
+    .clock__hand--slow {
+        transform: translateX(-50%) rotate(24deg);
+    }
+
+    .clock--near .clock__hand {
+        transform: translateX(-50%) rotate(88deg);
+    }
+
+    .clock--near .clock__hand--slow {
+        transform: translateX(-50%) rotate(7deg);
+    }
+}
+
+
+/* ============================================================
+   18. RESPONSIVE
+   ------------------------------------------------------------
+   Desktop-first. These rules keep the page unbroken and free of
+   horizontal overflow on smaller viewports; diagrams that are
+   coordinate systems scroll rather than reflow.
+   ============================================================ */
+
+@media (max-width: 1180px) {
+    .cones {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1024px) {
+    .bh-hero {
+        min-height: min(86svh, 800px);
+    }
+
+    /* Five columns of body copy stop being readable well before the
+       grid stops fitting, so the timeline wraps early. */
+    .track {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: var(--s-7);
+    }
+}
+
+@media (max-width: 860px) {
+    .track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .subnav__list {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .subnav__list::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Diagrams get a floor width and scroll inside their frame. */
+    .fig__frame {
+        padding-bottom: var(--s-3);
+    }
+
+    .fig__svg {
+        min-width: 680px;
+    }
+}
+
+/* Portrait mode for the hero. object-fit: cover is the right tool
+   for a landscape window and the wrong one for a tall narrow one —
+   at 390x700 it would crop the Gargantua frame to a vertical strip
+   roughly a third of its width, filling the screen with the shadow
+   and throwing the accretion disk off both edges. So the picture
+   stops filling the hero: it becomes a 16:9 band across the top,
+   whole and uncropped, and the hero reserves that band's height in
+   its own top padding so the copy starts underneath it.
+
+   56.25vw is 9/16 of the viewport width — the band's exact height,
+   which is what makes the reservation match it at every width. */
+@media (max-width: 900px) {
+    .bh-hero {
+        min-height: 0;
+        padding-top: calc(56.25vw + var(--s-6));
+    }
+
+    /* An explicit height, not aspect-ratio. The image inside is
+       sized height: 100%, and a percentage height needs a definite
+       parent height to resolve against — a height derived from
+       aspect-ratio does not qualify, so the picture collapsed to
+       zero and the hero showed a 432px hole where it should have
+       been. 56.25vw is the same number the ratio would have given. */
+    .bh-hero__stage {
+        inset: 0 0 auto 0;
+        height: 56.25vw;
+    }
+
+    .bh-hero__img {
+        object-position: 50% 50%;
+    }
+
+    /* The band now ends inside the hero rather than at its edge, so
+       it needs its own fade or the photograph stops against the
+       copy on a hard horizontal line. */
+    .bh-hero__stage::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg,
+            #000000 0%, rgba(0, 0, 0, 0.72) 12%,
+            rgba(0, 0, 0, 0.2) 26%, transparent 42%);
+    }
+
+    /* The full-height grade was drawn for copy sitting on top of
+       the image. Nothing sits on it now, and the left-hand ramp
+       would only dim the picture for no reason. */
+    .bh-hero::after {
+        background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0.66) 0%, transparent 13%);
+    }
+}
+
+@media (max-width: 620px) {
+    .cones {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .clocks {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .versus__stage {
+        height: 150px;
+    }
+}
+
+@media (max-width: 560px) {
+    .track {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* On a phone the whole 16:9 frame is only about 220px tall, and
+       the shadow inside it gets small enough to lose the point of
+       opening on it. This crops to 4:3 instead: cover trims the
+       outer quarter of the width, which costs the far ends of the
+       disk but keeps the shadow, the bright crossing and both
+       lensed arcs, and lets the disk run off both edges the way it
+       does on desktop. Still a uniform crop, still no distortion. */
+    .bh-hero {
+        padding-top: calc(75vw + var(--s-6));
+    }
+
+    .bh-hero__stage {
+        height: 75vw;
+    }
+}

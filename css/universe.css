@@ -1,0 +1,1405 @@
+/* ============================================================
+   COSMOVERSE — UNIVERSE
+   ============================================================
+
+   THE VISUAL REFERENCE
+   --------------------
+   This is region 09, and it is the only one whose subject has no
+   outside. Every other page can draw its object against a black
+   sky; this page's object *is* the sky. Five rules keep it from
+   collapsing into wallpaper.
+
+   1. EXPANSION IS DRAWN AS A GRID, NEVER AS A FIREBALL. The one
+      idea this whole region rests on is that the Big Bang was
+      not an explosion into empty space — it was, and is, the
+      stretching of the distances between things. So every
+      expansion figure on this page is a coordinate grid whose
+      spacing grows while the objects pinned to it stay the same
+      size. Nothing here ever radiates outward from a point,
+      because that is the misconception the page exists to fix.
+
+   2. THREE INGREDIENTS, THREE LIGHT LEVELS. Ordinary matter is
+      warm and bright because it is the only part of the universe
+      that emits anything. Dark matter is violet, which is this
+      site's colour for something real that cannot be seen —
+      Galaxies uses it for haloes, Black Holes for spacetime
+      geometry, Cosmic Events for gravitational waves. Dark
+      energy is the dimmest of the three on purpose: it is
+      perfectly smooth, it has no structure, and a featureless
+      thing should not be the brightest thing in the figure.
+
+   3. THE CMB IS DRAWN IN THE CONVENTIONAL COLOUR SCALE. Cold
+      spots blue, hot spots red, exactly as every published
+      anisotropy map since COBE. The amplitude is exaggerated —
+      the real variation is about one part in a hundred thousand
+      and would be invisible — and every caption that shows it
+      says so.
+
+   4. REDSHIFT IS A STRETCH, NOT A SPEED. Where the page draws
+      light from a distant source it draws the wavelength getting
+      longer by the same factor the grid grew by, side by side,
+      in the same figure. That is the actual mechanism, and it is
+      what makes the 46.5-billion-light-year radius stop sounding
+      like a contradiction.
+
+   5. LOG AXES ARE LABELLED AS LOG AXES. This region spans 54
+      orders of magnitude in time and 16 in distance. Nothing on
+      it can be drawn linearly, so every compressed axis states
+      its base and its endpoints, and where a linear axis would
+      hide something important the figure carries two axes rather
+      than one.
+
+   THE SIGNATURE GEOMETRY
+   ----------------------
+   Two shapes.
+
+     THE GRID — a lattice whose spacing grows. Comoving
+     coordinates. It says "nothing moved; the distances changed".
+
+     THE WEB — long filaments meeting at bright nodes with
+     near-empty volumes between them. It is the largest structure
+     that exists, it is what .field--web already draws, and it is
+     what the hero opens on.
+
+   Nebulae also draws filaments, and these are not those: a
+   nebular filament is a wisp of dust a few light years across
+   drawn soft and blurred, and a cosmic filament is a
+   hundred-million-light-year strand of dark matter with galaxies
+   strung along it, drawn straight and threaded. The difference in
+   treatment is deliberate.
+
+   THE ONE IDEA THE PAGE IS BUILT AROUND
+   -------------------------------------
+   Everything here is a consequence of one measurement: distant
+   galaxies are redshifted in proportion to their distance. The
+   age, the horizon, the composition, the structure and the fate
+   all fall out of that single observation plus the assumption
+   that we are not standing anywhere special. Fig 03 is the
+   measurement; the rest of the page is the consequence.
+
+   Layer 3 of 3. Requires style.css and components.css.
+   ============================================================ */
+
+
+/* ============================================================
+   1. PALETTE
+   ------------------------------------------------------------
+   components.css already sets --accent to #97a4ff and --accent-2
+   to #5fe7ff — CMB indigo cooling to aqua. That is the correct
+   pair for this subject, so this page does not override the
+   shared heading gradient. What is added here is the dark sector,
+   the temperature scale and the epochs.
+   ============================================================ */
+
+.dm-universe {
+    /* --- The three ingredients ------------------------------
+       Ordered by how much of the universe they are, and lit in
+       inverse order, because brightness here means "emits light"
+       rather than "matters most". */
+
+    /* Ordinary matter. Every atom, every star, every planet,
+       every instrument that has ever measured any of this. Warm
+       and bright because it is the only thing on the list that
+       radiates. Deliberately the same warm cream the Solar
+       System region is built on. */
+    --baryon:      #ffdca8;
+    --baryon-hot:  #fff4de;
+    --baryon-soft: rgba(255, 220, 168, 0.32);
+
+    /* Dark matter. Violet, the site's reserved hue for something
+       real that cannot be seen. It clumps, it has structure, and
+       it is what the cosmic web is actually made of. */
+    --dm:          #a97cff;
+    --dm-mid:      rgba(169, 124, 255, 0.46);
+    --dm-soft:     rgba(169, 124, 255, 0.16);
+
+    /* Dark energy. The dimmest and flattest colour on the page,
+       and that is the physics: it is smooth to the limits of
+       measurement, it does not clump, it has no features. A
+       featureless thing drawn brightly would be a lie about what
+       it is. */
+    --de:          #565fc4;
+    --de-mid:      rgba(86, 95, 196, 0.42);
+    --de-soft:     rgba(86, 95, 196, 0.14);
+
+    /* --- The temperature scale ------------------------------
+       The conventional CMB anisotropy palette, unchanged since
+       COBE: cold blue, hot red. Never used for anything else on
+       this page. */
+    --cmb:         #97a4ff;
+    --cmb-cold:    #4a86ff;
+    --cmb-hot:     #ff7a6a;
+    --cmb-soft:    rgba(151, 164, 255, 0.3);
+
+    /* --- The epochs -----------------------------------------
+       The early universe is hot, dense and opaque; then it is
+       cold, sparse and clear. Those are two different lighting
+       conditions and they get two different colours. */
+    --hot:         #fff4de;   /* the first fraction of a second */
+    --plasma:      #ffab94;   /* ionised, opaque, 3,000 K and up */
+    --dawn:        #cfe1ff;   /* the first stars */
+
+    /* --- Redshift ------------------------------------------
+       A stretch, not a Doppler shift. The pair is used only where
+       a wavelength is being drawn longer. */
+    --shift-blue:  #8fb0ff;
+    --shift-red:   #ff9a72;
+
+    /* --- Large-scale structure ----------------------------- */
+    --filament:    #97a4ff;
+    --node:        #e6ecff;
+    --node-soft:   rgba(230, 236, 255, 0.38);
+
+    /* Height of the sticky local index. Anchor scroll targets are
+       computed from it, so it is declared once. */
+    --subnav-h:    46px;
+}
+
+
+/* ============================================================
+   2. LOCAL INDEX
+   ------------------------------------------------------------
+   The seventh copy of this component; Stars, Black Holes,
+   Galaxies, Exoplanets, Nebulae and Cosmic Events each carry
+   their own. It belongs in components.css, but promoting it now
+   would mean editing a stylesheet eight finished pages depend on,
+   so it stays local and the note stays here.
+   ============================================================ */
+
+.subnav {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 900;
+    background: rgba(4, 5, 22, 0.92);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    border-bottom: 1px solid var(--line);
+}
+
+/* A filament as a 1px rule: indigo strand with two bright nodes
+   on it, cooling to aqua at the ends. */
+.subnav::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--de) 8%,
+        var(--filament) 24%,
+        var(--node) 34%,
+        var(--filament) 46%,
+        var(--accent-2) 58%,
+        var(--node) 68%,
+        var(--filament) 80%,
+        transparent 100%);
+    opacity: 0.55;
+}
+
+.subnav__list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+.subnav__list a {
+    position: relative;
+    padding: 0.85rem clamp(0.4rem, 0.9vw, 0.78rem);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+    transition: color var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child {
+    padding-left: 0;
+}
+
+.subnav__list a::after {
+    content: '';
+    position: absolute;
+    left: clamp(0.4rem, 0.9vw, 0.78rem);
+    right: clamp(0.4rem, 0.9vw, 0.78rem);
+    bottom: 0;
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+    transform: scaleX(0);
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child::after {
+    left: 0;
+}
+
+.subnav__list a:hover {
+    color: var(--text);
+}
+
+.subnav__list a:hover::after {
+    transform: scaleX(1);
+}
+
+.shell[id],
+.page-hero[id] {
+    scroll-margin-top: calc(var(--header-h) + var(--subnav-h));
+}
+
+
+/* ============================================================
+   3. FIGURE CHROME
+   ------------------------------------------------------------
+   A diagram is a coordinate system. It cannot usefully reflow, so
+   below its natural width it scrolls inside its frame rather than
+   deforming. Restated locally for the same reason the local index
+   is.
+   ============================================================ */
+
+.fig {
+    margin: 0;
+}
+
+.fig__frame {
+    position: relative;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+.fig__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* SVG typography, in the same instrument voice as every other
+   label on the site. Sizes are user units, so they scale with the
+   viewBox instead of fighting it. */
+.svg-label,
+.svg-value,
+.svg-unit {
+    font-family: var(--font-mono);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.svg-label {
+    font-size: 12px;
+    fill: var(--text-2);
+}
+
+.svg-value {
+    font-size: 12px;
+    fill: var(--text);
+    letter-spacing: 0.05em;
+    text-transform: none;
+    font-variant-numeric: tabular-nums;
+}
+
+.svg-unit {
+    font-size: 10px;
+    fill: var(--text-4);
+}
+
+/* For labels sitting over a lit surface rather than over the page
+   background. Draws the glyph's own outline in the void colour
+   first, which keeps small mono type legible without a solid
+   label box behind it. */
+.svg-onlight {
+    paint-order: stroke fill;
+    stroke: rgba(3, 4, 18, 0.9);
+    stroke-width: 3.4;
+    stroke-linejoin: round;
+}
+
+.svg-label--baryon { fill: var(--baryon); }
+.svg-label--dm     { fill: var(--dm); }
+.svg-label--de     { fill: var(--de); }
+.svg-label--cmb    { fill: var(--cmb); }
+.svg-label--hot    { fill: var(--plasma); }
+.svg-label--dawn   { fill: var(--dawn); }
+.svg-label--node   { fill: var(--node); }
+.svg-label--red    { fill: var(--shift-red); }
+.svg-label--blue   { fill: var(--shift-blue); }
+
+.svg-leader {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    opacity: 0.7;
+}
+
+.svg-leader--dm   { stroke: var(--dm-mid); }
+.svg-leader--cmb  { stroke: var(--cmb-soft); }
+.svg-leader--node { stroke: var(--node-soft); }
+
+.svg-tick {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+}
+
+.svg-dash {
+    fill: none;
+    stroke-dasharray: 4 5;
+}
+
+.svg-grid {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 1;
+}
+
+.svg-axis {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+}
+
+
+/* ============================================================
+   3b. CAPTION BODY
+   ------------------------------------------------------------
+   .caption is a flex row, so any element inside the caption prose
+   becomes a flex item of its own and a leading <strong> collapses
+   into a stack of one-word lines. Wrapping the prose in a single
+   element makes it one flex item again. Introduced on the Nebulae
+   page; the note in components.css points there too.
+   ============================================================ */
+
+.caption__body {
+    min-width: 0;
+}
+
+
+/* ============================================================
+   4. HERO
+   ------------------------------------------------------------
+   The photograph carries the arrival; the crop and the grade are
+   the plate-imagery component in components.css. What is added
+   here is the horizon, and it is the region's own geometry.
+
+   Galaxies opens on one logarithmic arc, Nebulae on dust
+   filaments, Cosmic Events on a shock front, Missions on an
+   ascent curve. This opens on the cosmic web seen from inside it:
+   long straight strands meeting at lit nodes, with most of the
+   frame empty, because most of the universe is.
+   ============================================================ */
+
+.un-hero__web {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 2;
+    height: min(58%, 430px);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.un-hero__web svg {
+    position: absolute;
+    left: 50%;
+    bottom: -12%;
+    width: min(1700px, 156%);
+    height: auto;
+    transform: translateX(-50%);
+}
+
+/* The strand. The readout docks over the middle of the hero, so
+   only the ends of each filament are ever visible — the weight
+   therefore sits in the bloom, which has no edge to be caught out
+   by, exactly as on the Nebulae and Cosmic Events heroes. */
+.un-fil {
+    fill: none;
+    stroke: var(--filament);
+    stroke-width: 1.1;
+    stroke-linecap: round;
+    opacity: 0.22;
+}
+
+/* Dark matter is what the filament is actually made of, so the
+   halo around the visible strand is violet rather than indigo. */
+.un-fil--bloom {
+    stroke: var(--dm);
+    stroke-width: 22;
+    opacity: 0.07;
+    filter: blur(12px);
+}
+
+.un-fil--lead {
+    stroke: var(--accent-2);
+    opacity: 0.28;
+}
+
+/* Nodes — where filaments cross, galaxy clusters form. */
+.un-node {
+    fill: var(--node);
+}
+
+.un-node--halo {
+    fill: var(--dm);
+    opacity: 0.1;
+    filter: blur(7px);
+}
+
+
+/* ============================================================
+   5. FIG 01 — COSMIC EVOLUTION
+   ------------------------------------------------------------
+   The standard cosmological "cone", and the one figure on the
+   page that shows the *shape* of expansion rather than its
+   timing. Read left to right: an almost-invisible start, the
+   sudden flare of inflation, a long stretch of gravity slowing
+   things down, and a slight reopening at the right where dark
+   energy takes over.
+
+   It carries no numbers. Fig 05 is the timeline and it carries
+   all of them; duplicating them here would make two figures
+   compete to be the same figure.
+   ============================================================ */
+
+.cone__body {
+    fill: url(#coneFill);
+}
+
+.cone__edge {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.2;
+    opacity: 0.5;
+}
+
+.cone__flash {
+    fill: url(#coneFlash);
+}
+
+/* Divider between epochs, drawn inside the cone. */
+.cone__divide {
+    fill: none;
+    stroke: rgba(207, 225, 255, 0.24);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+}
+
+/* The one place on the page allowed to look like fog. Between
+   nucleosynthesis and recombination the universe was an ionised
+   plasma: light existed but could not travel, so the interior of
+   the cone in this band is genuinely not transparent. */
+.cone__opaque {
+    fill: url(#coneOpaque);
+}
+
+/* The surface of last scattering. Everything to the left of this
+   wall is permanently unobservable in light — not because it is
+   far away, but because it is behind a fog. */
+.cone__wall {
+    fill: url(#coneWall);
+}
+
+.cone__mottle circle {
+    opacity: 0.75;
+}
+
+.cone__mottle circle:nth-child(odd)  { fill: var(--cmb-hot); }
+.cone__mottle circle:nth-child(even) { fill: var(--cmb-cold); }
+
+/* Particle soup — hot, relativistic, structureless. */
+.cone__quark circle {
+    fill: var(--hot);
+    opacity: 0.5;
+}
+
+/* First stars. Blue-white, metal-free, enormous. */
+.cone__star {
+    fill: var(--dawn);
+}
+
+/* Galaxies. Same drawn size throughout, spreading apart, because
+   galaxies are not what expands. */
+.cone__galaxy {
+    fill: var(--baryon);
+    opacity: 0.62;
+}
+
+.cone__era {
+    fill: var(--text-3);
+}
+
+
+/* ============================================================
+   6. FIG 02 — THE COMOVING GRID
+   ------------------------------------------------------------
+   Rule 1, stated as plainly as the page can state it. Two panels
+   of the same lattice at two different scale factors. The grid
+   spacing grows; the galaxies keep their coordinates and their
+   drawn size. Nothing travels anywhere.
+
+   The wave beneath each panel is the same photon in both, and it
+   is stretched by exactly the factor the grid was — which is what
+   cosmological redshift is, and the reason the observable radius
+   is larger than the age in light years.
+   ============================================================ */
+
+.exp__grid {
+    fill: none;
+    stroke: rgba(151, 164, 255, 0.2);
+    stroke-width: 1;
+}
+
+.exp__frame {
+    fill: none;
+    stroke: rgba(151, 164, 255, 0.4);
+    stroke-width: 1;
+}
+
+/* Every galaxy is drawn at the same size in both panels. That is
+   not a simplification — bound systems genuinely do not take part
+   in the expansion. */
+.exp__galaxy {
+    fill: var(--baryon);
+    opacity: 0.85;
+}
+
+.exp__here {
+    fill: var(--node);
+}
+
+.exp__here-ring {
+    fill: none;
+    stroke: var(--accent-2);
+    stroke-width: 1;
+    opacity: 0.7;
+}
+
+/* Recession arrows. Length is proportional to distance from the
+   observer, which is Hubble's law drawn rather than plotted. */
+.exp__flee {
+    fill: none;
+    stroke: var(--shift-red);
+    stroke-width: 1.4;
+    opacity: 0.8;
+}
+
+.exp__step {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.4;
+    opacity: 0.6;
+}
+
+.exp__wave {
+    fill: none;
+    stroke-width: 1.6;
+}
+
+.exp__wave--short { stroke: var(--shift-blue); }
+.exp__wave--long  { stroke: var(--shift-red); }
+
+
+/* ============================================================
+   7. FIG 03 — THE HUBBLE DIAGRAM
+   ------------------------------------------------------------
+   The measurement the whole region rests on, and the only figure
+   here with a linear axis on both sides — because the relation
+   really is a straight line through the origin, and drawing it
+   on a log axis would hide the one thing worth seeing.
+   ============================================================ */
+
+.hub__fit {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.6;
+    opacity: 0.85;
+}
+
+.hub__fit-bloom {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 10;
+    opacity: 0.1;
+    filter: blur(5px);
+}
+
+.hub__point {
+    fill: var(--baryon);
+    stroke: rgba(3, 4, 18, 0.8);
+    stroke-width: 1;
+}
+
+/* Andromeda. Bound to us, so it is approaching, so it sits below
+   the axis — the one point on the figure that disproves the
+   "everything is rushing away from us" reading. */
+.hub__point--bound {
+    fill: var(--shift-blue);
+}
+
+.hub__err {
+    stroke: var(--baryon-soft);
+    stroke-width: 1;
+}
+
+
+/* ============================================================
+   8. FIG 05 — THE TIMELINE
+   ------------------------------------------------------------
+   Two bands, because one axis cannot do this job honestly.
+
+   Band A is base-10 in seconds and covers the first 380,000
+   years, where all the particle physics happens and where a
+   linear axis would put every event on top of t = 0.
+
+   Band B is linear in billions of years and covers all 13.8 of
+   them, where a log axis would crush the last ten billion years
+   into the final centimetre.
+
+   They overlap at exactly one event — the release of the
+   microwave background — which is the last mark on A and the
+   origin of B.
+   ============================================================ */
+
+.tl__axis {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+}
+
+.tl__decade {
+    stroke: var(--line);
+    stroke-width: 1;
+}
+
+.tl__tick {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+}
+
+/* An event with a duration rather than an instant gets a bar. */
+.tl__span {
+    stroke: var(--accent);
+    stroke-width: 5;
+    stroke-linecap: butt;
+    opacity: 0.5;
+}
+
+.tl__span--dawn { stroke: var(--dawn); }
+
+.tl__dot {
+    fill: var(--accent);
+}
+
+.tl__dot--cmb    { fill: var(--cmb); }
+.tl__dot--dawn   { fill: var(--dawn); }
+.tl__dot--baryon { fill: var(--baryon); }
+.tl__dot--de     { fill: var(--dm); }
+
+.tl__band {
+    fill: var(--text-3);
+}
+
+/* The tie between the two bands. The CMB is one event and it
+   appears twice, so the figure says so out loud. */
+.tl__join {
+    fill: none;
+    stroke: var(--cmb-soft);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+}
+
+
+/* ============================================================
+   9. FIG 06 — THE COSMIC WEB
+   ------------------------------------------------------------
+   Three layers, and the order matters because it is the causal
+   order. First the dark matter: a wide, soft, violet bloom, which
+   is where the mass actually is. Then the strand itself. Then the
+   galaxies, drawn as a dashed stroke along the strand — each dash
+   is a schematic galaxy group, and the reason they are drawn *on*
+   the filament rather than scattered freely is the whole point of
+   the figure. Galaxies do not choose where to be. They light up
+   wherever the invisible mass already was.
+   ============================================================ */
+
+.web__halo {
+    fill: none;
+    stroke: var(--dm);
+    stroke-width: 26;
+    stroke-linecap: round;
+    opacity: 0.07;
+    filter: blur(11px);
+}
+
+.web__thread {
+    fill: none;
+    stroke: var(--filament);
+    stroke-width: 1;
+    opacity: 0.28;
+}
+
+/* Each dash is a galaxy group. Round caps, so they read as
+   objects strung on a line rather than as a dashed rule. */
+.web__galaxies {
+    fill: none;
+    stroke: var(--baryon);
+    stroke-width: 2.1;
+    stroke-linecap: round;
+    stroke-dasharray: 0.1 7;
+    opacity: 0.7;
+}
+
+/* A node is a galaxy cluster: the richest one in this frame would
+   hold a thousand galaxies and a hundred trillion solar masses,
+   almost all of it dark. */
+.web__node {
+    fill: url(#webNode);
+}
+
+.web__node-halo {
+    fill: var(--dm);
+    opacity: 0.11;
+    filter: blur(9px);
+}
+
+/* A sheet. Filaments are where two sheets meet; nodes are where
+   filaments meet. */
+.web__sheet {
+    fill: var(--dm);
+    opacity: 0.045;
+}
+
+/* Voids are not perfectly empty, and saying otherwise would be
+   the easiest mistake on this figure to make. A few galaxies live
+   out there, isolated, with no neighbours for tens of millions of
+   light years. */
+.web__lonely {
+    fill: var(--baryon);
+    opacity: 0.4;
+}
+
+.web__scale {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+}
+
+
+/* ============================================================
+   10. FIG 07 — COMPOSITION
+   ------------------------------------------------------------
+   One bar, three segments, drawn at true proportion. The point of
+   drawing it rather than tabling it is that 4.9 per cent is
+   genuinely hard to see, and it should be — everything anyone has
+   ever touched, measured or been made of is inside that sliver.
+
+   Rule 2 sets the light levels: the sliver is the brightest thing
+   on the bar and the largest segment is the dimmest.
+   ============================================================ */
+
+.comp {
+    position: relative;
+}
+
+.comp__bar {
+    display: flex;
+    height: clamp(96px, 11vw, 132px);
+    border: 1px solid var(--line-2);
+    background: var(--void);
+}
+
+.comp__seg {
+    position: relative;
+    flex: 0 0 calc(var(--w, 33) * 1%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--s-1);
+    min-width: 0;
+    padding: var(--s-4);
+    overflow: hidden;
+}
+
+.comp__seg + .comp__seg {
+    border-left: 1px solid var(--line-2);
+}
+
+/* Dark energy — smooth to the limit of measurement, so its fill
+   is the only one on the page with no texture in it at all. */
+.comp__seg--de {
+    background: linear-gradient(180deg, var(--de-soft) 0%, rgba(86, 95, 196, 0.04) 100%);
+}
+
+/* Dark matter — it clumps, so its fill does too. */
+.comp__seg--dm {
+    background:
+        radial-gradient(ellipse 40% 60% at 26% 62%, var(--dm-soft) 0%, transparent 70%),
+        radial-gradient(ellipse 34% 48% at 72% 34%, var(--dm-soft) 0%, transparent 72%),
+        linear-gradient(180deg, rgba(169, 124, 255, 0.14) 0%, rgba(169, 124, 255, 0.03) 100%);
+}
+
+/* Ordinary matter. The only segment that emits, and the only one
+   lit from the inside. */
+.comp__seg--om {
+    background: linear-gradient(180deg, rgba(255, 220, 168, 0.5) 0%, rgba(255, 220, 168, 0.14) 100%);
+    box-shadow: inset 0 0 20px -6px var(--baryon-soft);
+}
+
+.comp__seg em {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    font-style: normal;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+}
+
+.comp__seg b {
+    font-family: var(--font-display);
+    font-size: var(--t-2xl);
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.comp__seg b small {
+    margin-left: 0.18em;
+    font-family: var(--font-mono);
+    font-size: var(--t-sm);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--text-3);
+}
+
+.comp__seg--de em { color: rgba(169, 176, 232, 0.8); }
+.comp__seg--dm em { color: var(--dm); }
+
+/* At true proportion the ordinary-matter segment is about fifty
+   pixels wide, which will not hold a label. So its label hangs
+   below the bar with a tick rising back into it — the segment
+   keeps its real width and the type stays legible. */
+.comp__callout {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: calc(var(--s-6) + 2px);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--baryon);
+}
+
+.comp__callout::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 2.45%;
+    width: 1px;
+    height: var(--s-6);
+    background: linear-gradient(180deg, var(--baryon), transparent);
+}
+
+.comp__callout b {
+    font-weight: 500;
+    color: var(--baryon-hot);
+}
+
+
+/* ============================================================
+   11. FIG 08 — THE FATE CURVES
+   ------------------------------------------------------------
+   Scale factor against time, with every curve normalised to pass
+   through the same point today, because that is the only thing
+   all five models are required to agree on. One of them is drawn
+   brighter than the others; it is the one the data currently
+   prefer, and the caption says how strongly.
+   ============================================================ */
+
+.fate__curve {
+    fill: none;
+    stroke: var(--text-4);
+    stroke-width: 1.4;
+    opacity: 0.75;
+}
+
+/* The favoured model. Brighter, and the only one with a bloom. */
+.fate__curve--lcdm {
+    stroke: var(--accent);
+    stroke-width: 2;
+    opacity: 1;
+}
+
+.fate__bloom {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 11;
+    opacity: 0.1;
+    filter: blur(5px);
+}
+
+.fate__curve--rip    { stroke: var(--shift-red); opacity: 0.8; }
+.fate__curve--crunch { stroke: var(--dm); opacity: 0.8; }
+
+.fate__now {
+    fill: none;
+    stroke: var(--node-soft);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+}
+
+.fate__here {
+    fill: var(--node);
+}
+
+
+/* ============================================================
+   12. .sig — the evidence primitive
+   ------------------------------------------------------------
+   The counterpart to .orb, .neb and .ev, and the smallest of the
+   four because this region has no objects to portrait. What it
+   has instead is four measurements, so the primitive draws a
+   *signature* — what each instrument actually sees — inside a
+   framed square plate.
+
+   Markup:
+       <span class="sig sig--cmb" aria-hidden="true">
+           <span class="sig__field"></span>
+           <span class="sig__mark"></span>
+       </span>
+   ============================================================ */
+
+/* Four probes, so the grid is two pairs rather than a row of three
+   and an orphan. .plate-grid--2's auto-fit floor of 320px divides an
+   1084px gutter into three columns, which is right for the home
+   page's three reading depths and wrong for four of anything. */
+@media (min-width: 860px) {
+    .ev-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.sig {
+    --sig-w: min(100%, 330px);
+    --sig-h: 142px;
+    position: relative;
+    flex: none;
+    width: var(--sig-w);
+    height: var(--sig-h);
+    background: var(--void);
+    border: 1px solid var(--line-2);
+    overflow: hidden;
+}
+
+/* Corner ticks, so the signature reads as a measured frame rather
+   than a decorative panel. */
+.sig::before,
+.sig::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.sig::before {
+    top: 4px;
+    left: 4px;
+    border-top: 1px solid var(--accent);
+    border-left: 1px solid var(--accent);
+}
+
+.sig::after {
+    right: 4px;
+    bottom: 4px;
+    border-right: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+}
+
+.sig__field,
+.sig__mark {
+    position: absolute;
+    inset: 0;
+}
+
+/* Two spare hairlines per signature, for the variants that need a
+   line at an arbitrary angle. A rotated element is used rather than
+   an angled linear-gradient because a gradient's colour band runs
+   perpendicular to its axis, so getting a line to sit at a chosen
+   angle by that route means solving for the complement and it stops
+   being legible as intent. */
+.sig__mark::before,
+.sig__mark::after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+/* --- 01 · The microwave background -------------------------
+   A patch of sky in the conventional anisotropy colour scale.
+   The amplitude is exaggerated by about four orders of magnitude:
+   the real variation is one part in a hundred thousand, and drawn
+   truthfully this panel would be a flat grey rectangle. */
+.sig--cmb .sig__field {
+    background:
+        radial-gradient(ellipse 30% 42% at 18% 30%, rgba(255, 122, 106, 0.55) 0%, transparent 68%),
+        radial-gradient(ellipse 26% 36% at 62% 22%, rgba(74, 134, 255, 0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 34% 46% at 84% 62%, rgba(255, 122, 106, 0.44) 0%, transparent 70%),
+        radial-gradient(ellipse 28% 40% at 40% 74%, rgba(74, 134, 255, 0.48) 0%, transparent 70%),
+        radial-gradient(ellipse 22% 30% at 66% 78%, rgba(255, 172, 120, 0.34) 0%, transparent 72%),
+        radial-gradient(ellipse 20% 28% at 10% 76%, rgba(120, 150, 255, 0.34) 0%, transparent 72%),
+        linear-gradient(180deg, rgba(151, 164, 255, 0.16), rgba(86, 95, 196, 0.14));
+    filter: blur(5px) saturate(1.1);
+}
+
+/* A graticule, because this is a map of the sky. */
+.sig--cmb .sig__mark {
+    background-image:
+        repeating-linear-gradient(0deg,  transparent 0 25px, rgba(230, 236, 255, 0.07) 25px 26px),
+        repeating-linear-gradient(90deg, transparent 0 25px, rgba(230, 236, 255, 0.07) 25px 26px);
+}
+
+/* --- 02 · Galaxy redshift ---------------------------------
+   Two spectra of the same element. The upper one is the
+   laboratory rest frame; the lower one is the same pattern
+   further from the blue end, by the same factor throughout —
+   which is what distinguishes a redshift from a colour change. */
+.sig--redshift .sig__field {
+    /* Two strips of continuum, both running 400 nm at the left edge
+       to 800 nm at the right. The horizontal axis of this panel is
+       therefore a real wavelength axis, which is what makes the line
+       positions below mean something. */
+    background:
+        linear-gradient(90deg,
+            #5f6cf0 0%, #6fa8ff 18%, #8fe0d8 38%,
+            #ffe9a0 58%, #ff9a72 78%, #7d2a1c 100%);
+    -webkit-mask-image:
+        linear-gradient(180deg, transparent 18%, #000 20%, #000 40%, transparent 42%,
+                                transparent 58%, #000 60%, #000 80%, transparent 82%);
+            mask-image:
+        linear-gradient(180deg, transparent 18%, #000 20%, #000 40%, transparent 42%,
+                                transparent 58%, #000 60%, #000 80%, transparent 82%);
+    opacity: 0.72;
+}
+
+/* The absorption lines: hydrogen gamma, beta and alpha, at 434.0,
+   486.1 and 656.3 nm. On a 400–800 nm axis that puts the rest-frame
+   set at 8.5, 21.5 and 64.0 per cent.
+
+   The lower strip is the same three lines multiplied by 1.15 — a
+   redshift of 0.15 — landing at 24.8, 39.8 and 88.7 per cent. The
+   displacement is therefore proportional rather than a constant
+   offset, which is the whole distinction between a redshift and a
+   panel that merely looks shifted: the gap between the lines grows
+   along with the lines' positions. */
+.sig--redshift .sig__mark {
+    background-image:
+        linear-gradient(90deg, var(--void) 0 100%),
+        linear-gradient(90deg, var(--void) 0 100%),
+        linear-gradient(90deg, var(--void) 0 100%),
+        linear-gradient(90deg, var(--void) 0 100%),
+        linear-gradient(90deg, var(--void) 0 100%),
+        linear-gradient(90deg, var(--void) 0 100%);
+    background-repeat: no-repeat;
+    background-size:
+        2px 20%, 3px 20%, 3px 20%,
+        2px 20%, 3px 20%, 3px 20%;
+    background-position:
+        8.5% 25%, 21.5% 25%, 64% 25%,
+        24.8% 75%, 39.8% 75%, 88.7% 75%;
+}
+
+/* --- 03 · Type Ia supernovae ------------------------------
+   Standard candles. Three explosions of the same true brightness
+   at increasing distance, so the only thing that changes is how
+   faint they look — and past a certain distance they come out
+   fainter than a universe without dark energy would allow. */
+/* Explicit radii. Percentage-only stops are measured against the
+   box's corner distance, so at this aspect ratio a "46%" stop
+   produced one soft wash across the whole panel instead of three
+   separate explosions — and three separate explosions is the
+   entire point. Each is smaller and fainter than the last: same
+   true brightness, increasing distance. */
+.sig--candle .sig__field {
+    background-image:
+        radial-gradient(circle 30px at 17% 74%,
+            rgba(255, 244, 222, 0.98) 0%, rgba(255, 244, 222, 0.34) 30%, transparent 100%),
+        radial-gradient(circle 22px at 47% 47%,
+            rgba(255, 244, 222, 0.6) 0%, rgba(255, 244, 222, 0.2) 30%, transparent 100%),
+        radial-gradient(circle 16px at 77% 22%,
+            rgba(255, 244, 222, 0.32) 0%, rgba(255, 244, 222, 0.1) 30%, transparent 100%);
+}
+
+/* Two tracks, and the gap between them is the 1998 result.
+
+   The panel is about 2.3:1, so a line spanning 80 per cent of its
+   width cannot exceed roughly 23 degrees without leaving the frame
+   through the top. Both angles sit under that, and they are far
+   enough apart — 6 degrees — to open a visible wedge rather than
+   reading as one line with a colour fringe. */
+.sig--candle .sig__mark::before,
+.sig--candle .sig__mark::after {
+    display: block;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    transform-origin: 0 50%;
+}
+
+/* Measured. It passes through the three explosions in .sig__field,
+   because those are the observations. */
+.sig--candle .sig__mark::before {
+    top: 80%;
+    background: rgba(255, 154, 114, 0.55);
+    transform: rotate(-21deg);
+}
+
+/* Predicted by a universe with no dark energy. The supernovae come
+   out above it — that is, fainter than it allows. */
+.sig--candle .sig__mark::after {
+    top: 84%;
+    background: rgba(151, 164, 255, 0.4);
+    transform: rotate(-15deg);
+}
+
+/* --- 04 · Large-scale structure ---------------------------
+   A survey patch. The same three-strand geometry .field--web
+   uses, at plate scale, with the nodes lit. */
+/* Each strand is offset off the 50% mark, and by a different
+   amount. An angled linear-gradient always puts its colour band
+   through the centre of the box, so four of them at 50% met at one
+   point and drew an asterisk — which is the geometry of a burst,
+   not of a web. Displacing the stops makes them cross at four
+   separate places, which is what a filament network does. */
+.sig--web .sig__field {
+    background-image:
+        linear-gradient(58deg,  transparent 33.4%, rgba(151, 164, 255, 0.5) 34%, transparent 34.6%),
+        linear-gradient(-41deg, transparent 61.4%, rgba(151, 164, 255, 0.42) 62%, transparent 62.6%),
+        linear-gradient(12deg,  transparent 44.5%, rgba(151, 164, 255, 0.34) 45%, transparent 45.5%),
+        linear-gradient(104deg, transparent 70.5%, rgba(151, 164, 255, 0.3) 71%, transparent 71.5%),
+        linear-gradient(-76deg, transparent 26.5%, rgba(151, 164, 255, 0.22) 27%, transparent 27.5%),
+        radial-gradient(ellipse 30% 40% at 30% 34%, var(--dm-soft) 0%, transparent 72%),
+        radial-gradient(ellipse 26% 34% at 72% 66%, var(--dm-soft) 0%, transparent 74%);
+}
+
+.sig--web .sig__mark {
+    background-image:
+        radial-gradient(2.6px 2.6px at 30% 34%, var(--node), transparent),
+        radial-gradient(2.2px 2.2px at 72% 66%, var(--node), transparent),
+        radial-gradient(1.8px 1.8px at 50% 50%, rgba(230, 236, 255, 0.8), transparent),
+        radial-gradient(1.6px 1.6px at 14% 72%, rgba(255, 220, 168, 0.7), transparent),
+        radial-gradient(1.6px 1.6px at 86% 26%, rgba(255, 220, 168, 0.7), transparent),
+        radial-gradient(1.3px 1.3px at 60% 20%, rgba(255, 220, 168, 0.5), transparent),
+        radial-gradient(1.3px 1.3px at 40% 80%, rgba(255, 220, 168, 0.5), transparent);
+}
+
+
+/* ============================================================
+   12b. THE SCALE RAIL
+   ------------------------------------------------------------
+   Fig 04 is the shared .rail with seven marks rather than the
+   four or five the component was tuned for, and its names are
+   longer ("Observable radius", "Proxima Centauri"). Two marks
+   land 2.7 per cent apart, so the alternating rows have to clear
+   each other by more than the default, and the last mark sits at
+   92 per cent, where a centred label reaches past the axis — the
+   extra height gives the stack room and the inline padding stops
+   the final label being clipped by the section's overflow.
+   ============================================================ */
+
+.rail--scale {
+    height: 176px;
+    padding-inline: 1rem;
+}
+
+.rail--scale .rail__name {
+    font-size: var(--t-micro);
+}
+
+
+/* ============================================================
+   13. COLUMN COPY + PULL LINE
+   ------------------------------------------------------------
+   .copy is body text inside a two-column .split that is not a
+   .prose passage. .pull is restated from the Stars page. Both
+   the same as on the preceding regions.
+   ============================================================ */
+
+.copy {
+    font-size: var(--t-base);
+    line-height: 1.72;
+    color: var(--text-2);
+}
+
+.pull {
+    max-width: 30ch;
+    font-family: var(--font-display);
+    font-size: var(--t-2xl);
+    font-weight: 300;
+    line-height: 1.34;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.pull em {
+    font-style: normal;
+    font-weight: 400;
+    background-image: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+
+/* ============================================================
+   14. MYTH / FACT
+   ------------------------------------------------------------
+   Claim on the left, correction on the right, hairline between.
+   Restated locally; the Galaxies, Black Holes, Nebulae, Cosmic
+   Events, Exoplanets and Missions copies are the others.
+   ============================================================ */
+
+.myths {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+}
+
+.myth {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(var(--s-5), 4vw, var(--s-7));
+    padding: clamp(var(--s-5), 3vw, var(--s-6)) 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.myth__claim {
+    position: relative;
+    padding-left: var(--s-5);
+    font-size: var(--t-md);
+    line-height: 1.5;
+    color: var(--text-3);
+}
+
+.myth__claim::before {
+    content: '';
+    position: absolute;
+    top: 0.72em;
+    left: 0;
+    width: 10px;
+    height: 1px;
+    background: var(--text-4);
+}
+
+.myth__claim strong {
+    font-weight: 500;
+    color: var(--text-2);
+}
+
+.myth__truth {
+    font-size: var(--t-sm);
+    line-height: 1.72;
+    color: var(--text-3);
+}
+
+.myth__truth strong {
+    font-weight: 500;
+    color: var(--accent-2);
+}
+
+
+/* ============================================================
+   15. MOTION
+   ------------------------------------------------------------
+   One thing moves: the hero web drifts very slightly outward,
+   which is the only animation on the site that is arguably
+   informative — the web really is being pulled apart — and it is
+   still slow enough to be subliminal. It carries no information
+   the caption does not, and because the web is drawn at full
+   opacity at rest, stopping it leaves nothing looking broken.
+
+   Nothing in any figure animates. Every one of them is a
+   measurement, and a measurement that moves is a worse
+   measurement.
+   ============================================================ */
+
+.un-hero__web svg {
+    animation: web-stretch 96s ease-in-out infinite alternate;
+}
+
+@keyframes web-stretch {
+    from { transform: translateX(-50%) scale(1); }
+    to   { transform: translateX(-50%) scale(1.045); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .un-hero__web svg {
+        animation: none !important;
+        transform: translateX(-50%);
+    }
+}
+
+
+/* ============================================================
+   16. RESPONSIVE
+   ------------------------------------------------------------
+   Desktop-first. Diagrams are coordinate systems, so below their
+   natural width they scroll inside their frame rather than
+   reflowing; everything that is a grid of prose wraps.
+   ============================================================ */
+
+/* The index becomes a horizontal scroller before it can wrap onto
+   a second row — --subnav-h is fixed at 46px and every section's
+   scroll-margin-top is computed from it, so a two-row bar would
+   land every anchor jump half a bar too low. */
+@media (max-width: 1120px) {
+    .subnav__list {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .subnav__list::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .myth {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--s-4);
+    }
+}
+
+@media (max-width: 860px) {
+    .fig__frame {
+        padding-bottom: var(--s-3);
+    }
+
+    .fig__svg {
+        min-width: 780px;
+    }
+
+    .un-hero__web {
+        height: min(48%, 300px);
+    }
+
+    /* Below about 640px of bar the ordinary-matter segment is
+       under 32px wide and its lit fill stops reading as a
+       segment at all, so the bar gets shorter and the callout
+       does more of the work. */
+    .comp__bar {
+        height: 88px;
+    }
+
+    .comp__seg {
+        padding: var(--s-3);
+    }
+
+    .sig {
+        --sig-w: 100%;
+        --sig-h: 120px;
+    }
+}

@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nebulae — what an interstellar cloud is, the five types and why three of them are the same cloud, star formation inside molecular clouds, the Orion, Eagle, Crab and Ring nebulae, and the misconceptions that outlive the facts.">
+    <meta name="keywords" content="nebula, nebulae, emission nebula, H II region, reflection nebula, dark nebula, planetary nebula, supernova remnant, molecular cloud, star formation, Orion Nebula, Eagle Nebula, Pillars of Creation, Crab Nebula, Ring Nebula, H-alpha, astronomy">
+    <meta name="author" content="CosmoVerse">
+    <meta name="theme-color" content="#000003">
+    <title>Nebulae | CosmoVerse</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/nebulae.css">
+</head>
+<!-- dm-nebulae sets the domain palette. Its accent pair is already
+     [O III] teal into H-alpha rose, so unlike the other regions this
+     page does not retune the heading gradient; nebulae.css adds the
+     individual line colours and the two behaviours of dust. -->
+<body class="dm-nebulae">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                CosmoVerse
+                <span class="logo-mark">Obs.</span>
+            </a>
+
+            <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+            <label for="mobile-menu-checkbox" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </label>
+
+            <nav class="nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../solar-system/index.html" class="nav-link">Solar System</a></li>
+                    <li><a href="../stars/index.html" class="nav-link">Stars</a></li>
+                    <li><a href="../black-holes/index.html" class="nav-link">Black Holes</a></li>
+                    <li><a href="../galaxies/index.html" class="nav-link">Galaxies</a></li>
+                    <li><a href="index.html" class="nav-link active" aria-current="page">Nebulae</a></li>
+                    <li><a href="../cosmic-events/index.html" class="nav-link">Cosmic Events</a></li>
+                    <li><a href="../missions/index.html" class="nav-link">Missions</a></li>
+                    <li><a href="../exoplanets/index.html" class="nav-link">Exoplanets</a></li>
+                    <li><a href="../universe/index.html" class="nav-link">Universe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ============================================================
+             ARRIVAL
+             Galaxies opens on a single logarithmic arc, because a disk is
+             one smooth structure. This opens on filaments and a dust
+             lane, because a molecular cloud is the opposite of smooth.
+             ============================================================ -->
+        <section class="page-hero">
+            <div class="page-hero__shot" aria-hidden="true">
+                <img src="../images/nebulae.png" alt="" decoding="async">
+            </div>
+            <div class="field field--emission" aria-hidden="true"></div>
+            <div class="starfield" aria-hidden="true"></div>
+            <div class="starfield-streak" aria-hidden="true"></div>
+
+            <div class="neb-hero__veil" aria-hidden="true">
+                <svg viewBox="0 0 1700 420" preserveAspectRatio="xMidYMax meet">
+                    <path class="neb-strand neb-strand--bloom"
+                          d="M -80 388 C 260 316, 520 246, 830 262 C 1120 278, 1400 342, 1780 384"/>
+                    <path class="neb-strand neb-strand--ha neb-strand--bloom"
+                          d="M -80 416 C 300 366, 600 288, 900 300 C 1200 312, 1440 372, 1780 404"/>
+                    <path class="neb-strand"
+                          d="M -80 388 C 260 316, 520 246, 830 262 C 1120 278, 1400 342, 1780 384"/>
+                    <path class="neb-strand neb-strand--ha"
+                          d="M -80 416 C 300 366, 600 288, 900 300 C 1200 312, 1440 372, 1780 404"/>
+                    <path class="neb-strand"
+                          d="M -80 350 C 340 292, 640 214, 960 232 C 1260 248, 1480 318, 1780 356"
+                          style="opacity:0.18"/>
+                    <path class="neb-lane"
+                          d="M -80 404 C 320 342, 560 300, 880 306 C 1180 312, 1420 356, 1780 394"/>
+                    <g class="neb-natal">
+                        <circle cx="512" cy="268" r="1.6"/>
+                        <circle cx="806" cy="256" r="2"/>
+                        <circle cx="842" cy="272" r="1.4"/>
+                        <circle cx="1078" cy="284" r="1.7"/>
+                        <circle cx="316" cy="308" r="1.3"/>
+                        <circle cx="1340" cy="330" r="1.5"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="container">
+                <p class="eyebrow"><span class="eyebrow__id">06</span> Region &middot; Interstellar</p>
+                <h1 class="page-hero__title">The<em>Nebulae</em></h1>
+                <p class="page-hero__lede">Clouds of gas and dust between the stars &mdash; thinner than any vacuum a laboratory can reach, and light years thick, which is the only reason you can see them at all. Every one is either a nursery or a corpse.</p>
+                <p class="page-hero__coords">
+                    <span>H&alpha; 656.3 nm &middot; [O III] 500.7 nm</span>
+                    <span>10&ndash;20 K in the cold cores</span>
+                    <span>Gas to dust, 100 to 1</span>
+                </p>
+            </div>
+
+            <div class="page-hero__dock">
+                <div class="container">
+                    <dl class="readout readout--flush">
+                        <div class="readout__cell">
+                            <dt>Gas, by mass</dt>
+                            <dd>~99 <small>per cent</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Dust, by mass</dt>
+                            <dd>~1 <small>per cent</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Cold cores</dt>
+                            <dd>10&ndash;20 <small>K</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Ionised gas</dt>
+                            <dd>~10,000 <small>K</small></dd>
+                        </div>
+                        <!-- Labels are kept short enough to stay on one line.
+                             A two-line label in one cell drops that cell's
+                             figure below the other five and the readout stops
+                             reading as a single instrument. -->
+                        <div class="readout__cell">
+                            <dt>Orion Nebula</dt>
+                            <dd>~1,340 <small>ly</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Planetaries</dt>
+                            <dd>~3,500 <small>known</small></dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             LOCAL INDEX
+             ============================================================ -->
+        <nav class="subnav" aria-label="Sections in this region">
+            <div class="subnav__list">
+                <a href="#overview">Overview</a>
+                <a href="#types">Types</a>
+                <a href="#birth">Star Birth</a>
+                <a href="#famous">Famous</a>
+                <a href="#facts">Myths</a>
+            </div>
+        </nav>
+
+
+        <!-- ============================================================
+             01 · OVERVIEW — what a nebula is
+             ============================================================ -->
+        <section class="shell shell--abyss" id="overview">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">01</span> Overview</p>
+                    <h2 class="head__title">A cloud thinner than <em>any vacuum we can build</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Nebula is simply Latin for cloud, and for most of astronomy's history it meant any fuzzy patch that refused to resolve into stars. The name survived the discovery that half of those patches were entire galaxies. What is left under it is genuine: interstellar gas and dust, gathered densely enough to be seen against the sky.</p>
+                </header>
+
+                <div class="split">
+                    <div class="prose prose--lede">
+                        <p>A nebula is about 99 per cent gas by mass &mdash; roughly seventy parts hydrogen to twenty-eight parts helium, with everything heavier making up the remainder &mdash; and about 1 per cent dust: grains of silicate and carbon a fraction of a micron across. That 1 per cent does most of the visible work, because grains block and scatter light far more effectively per gram than gas does.</p>
+                        <p>The densities involved are the hardest thing to believe. A bright emission nebula holds somewhere between a hundred and ten thousand particles per cubic centimetre. The air in the room you are in holds about twenty-five billion billion. A good ultra-high-vacuum chamber gets down to a few million per cubic centimetre, which means it is emptier than the Orion Nebula by a comfortable margin.</p>
+                        <p>They are visible anyway, because they are enormous. The Orion Nebula is around twenty-four light years across and holds roughly two thousand solar masses of gas. Stack a hundred trillion kilometres of almost nothing along a line of sight and it stops being almost nothing. Flying through one, you would notice nothing at all.</p>
+                    </div>
+
+                    <div>
+                        <p class="pull">Not a substance you could touch. A <em>column depth</em> you happen to be looking down.</p>
+
+                        <div class="note" style="margin-top:2.5rem">
+                            <span class="note__title">Three ways a cloud becomes visible</span>
+                            <ul class="note__list">
+                                <li><strong>It emits.</strong> A hot star strips electrons from the hydrogen around it. When they recombine, the gas gives out light at fixed wavelengths of its own.</li>
+                                <li><strong>It scatters.</strong> With no ionising star nearby, dust grains simply redirect starlight &mdash; preferentially at the blue end, so the cloud comes out bluer than the star lighting it.</li>
+                                <li><strong>It blocks.</strong> With nothing behind it to light it and something bright behind it to hide, the same dust is a silhouette.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fig 01 · The two colours of the domain, measured.
+                     Built on the shared .rail, because a spectrum is a
+                     labelled axis with marks at real positions and that
+                     is exactly what .rail is for. -->
+                <figure class="fig" style="margin-top:4rem">
+                    <div class="rail rail--spectrum" role="img"
+                         aria-label="The visible spectrum from 380 to 700 nanometres with six nebular emission lines marked at their true wavelengths: hydrogen beta at 486.1 nanometres in the blue-green, the doubly ionised oxygen doublet at 495.9 and 500.7 nanometres in the teal-green, hydrogen alpha at 656.3 nanometres and singly ionised nitrogen at 658.4 nanometres in the deep red, and singly ionised sulphur at 672.4 nanometres further into the red.">
+                        <span class="nline" style="--pos:33.2%; --nline:#7ff0dc"></span>
+                        <span class="nline nline--faint" style="--pos:36.2%; --nline:#58e3c4"></span>
+                        <span class="nline" style="--pos:37.7%; --nline:#58e3c4"></span>
+                        <span class="nline" style="--pos:86.3%; --nline:#ff6f8f"></span>
+                        <span class="nline nline--faint" style="--pos:87.0%; --nline:#ff6f8f"></span>
+                        <span class="nline" style="--pos:91.4%; --nline:#e2506e"></span>
+
+                        <span class="rail__mark rail__mark--up" style="--pos:33.2%">
+                            <em class="rail__name">H&beta;</em><b class="rail__value">486.1 nm</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down" style="--pos:37.7%">
+                            <em class="rail__name">[O III]</em><b class="rail__value">500.7 nm</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--up" style="--pos:86.3%">
+                            <em class="rail__name">H&alpha;</em><b class="rail__value">656.3 nm</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down" style="--pos:91.4%">
+                            <em class="rail__name">[S II]</em><b class="rail__value">672.4 nm</b><i class="rail__tick"></i>
+                        </span>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 01</span>
+                        <span class="caption__body"><strong>True positions on a linear wavelength axis</strong> &mdash; 380&nbsp;nm at the left edge, 700&nbsp;nm at the right. Six lines are drawn; four are labelled, because the [O&nbsp;III] doublet and the H&alpha;/[N&nbsp;II] pair sit less than one per cent of the axis apart. The band beneath is an approximate sRGB rendering of the spectrum, so the hue under each line is roughly the colour that line is. This is where the teal and rose of this whole region come from: they are two transitions, not a palette.</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             02 · TYPES
+             ============================================================ -->
+        <section class="shell shell--void shell--seam" id="types">
+            <div class="field field--emission" aria-hidden="true" style="--field-opacity:0.28"></div>
+
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">02</span> Types</p>
+                    <h2 class="head__title">Five names, and <em>three are one cloud</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Emission, reflection and dark nebulae are not three kinds of object. They are the same interstellar cloud under three lighting conditions, and which one you see depends entirely on what star happens to be near it and where you happen to be standing. The other two are different: they are what a star leaves behind when it dies.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <!-- viewBox is cropped to the drawn content rather than
+                             starting at 0. The zone titles begin at y=116 and
+                             the bottom units end at y=594; leaving the unused
+                             band in put ~115px of dead space between the head
+                             and the figure. -->
+                        <svg class="fig__svg" viewBox="0 104 1180 500" role="img"
+                             aria-label="One continuous interstellar cloud shown under three lighting conditions. On the left a hot O-type star inside the cloud ionises the gas around it, which glows rose with an inner teal core and is bounded by an ionisation front; line emission travels to the observer. In the middle a cooler star gives out no ionising light, so dust grains scatter its light and the cloud appears cold blue; scattered continuum travels to the observer. On the right a dense core has no star to light it, so it blocks the background stars and appears as a black gap; no light reaches the observer from it.">
+
+                            <defs>
+                                <!-- Ionised hydrogen. Rose, because H-alpha is. -->
+                                <radialGradient id="nfHii" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%"   stop-color="#ff8ea8" stop-opacity="0.72"/>
+                                    <stop offset="42%"  stop-color="#ff6f8f" stop-opacity="0.46"/>
+                                    <stop offset="74%"  stop-color="#8e2540" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="#8e2540" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <!-- Doubly ionised oxygen sits in the hottest gas,
+                                     nearest the star — so it is inside the rose. -->
+                                <radialGradient id="nfOiii" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%"   stop-color="#dffcf6" stop-opacity="0.8"/>
+                                    <stop offset="46%"  stop-color="#58e3c4" stop-opacity="0.5"/>
+                                    <stop offset="100%" stop-color="#14655c" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <!-- Scattered starlight. No emission lines, and
+                                     bluer than the star it came from. -->
+                                <radialGradient id="nfRefl" cx="46%" cy="40%" r="58%">
+                                    <stop offset="0%"   stop-color="#e2ecff" stop-opacity="0.6"/>
+                                    <stop offset="40%"  stop-color="#8fb6ff" stop-opacity="0.34"/>
+                                    <stop offset="100%" stop-color="#3f6bb8" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <!-- The cloud itself: dust, so it is dark. -->
+                                <linearGradient id="nfCloud" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%"   stop-color="#241a12" stop-opacity="0.62"/>
+                                    <stop offset="52%"  stop-color="#150c06" stop-opacity="0.82"/>
+                                    <stop offset="100%" stop-color="#0b0603" stop-opacity="0.9"/>
+                                </linearGradient>
+
+                                <!-- A dense core. Effectively opaque. -->
+                                <radialGradient id="nfCore" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%"   stop-color="#040302" stop-opacity="0.99"/>
+                                    <stop offset="58%"  stop-color="#0d0804" stop-opacity="0.94"/>
+                                    <stop offset="100%" stop-color="#150c06" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <!-- Unresolved background starlight. Not
+                                     decoration: without something behind the
+                                     dark zone there is nothing for it to
+                                     block, and a black core on a black page
+                                     is not a figure. -->
+                                <radialGradient id="nfBack" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%"   stop-color="#8f9ec4" stop-opacity="0.16"/>
+                                    <stop offset="58%"  stop-color="#6b789c" stop-opacity="0.08"/>
+                                    <stop offset="100%" stop-color="#6b789c" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <marker id="nfArrow" viewBox="0 0 10 10" refX="8" refY="5"
+                                        markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                    <path d="M 0 1 L 9 5 L 0 9 z" fill="currentColor"/>
+                                </marker>
+                            </defs>
+
+                            <ellipse class="nfig__backglow" cx="946" cy="336" rx="200" ry="142"/>
+
+                            <!-- BACKGROUND FIELD · drawn first, so the cloud dims
+                                 it and the dense core removes it entirely. The
+                                 three stars at 905, 940 and 968 are deliberately
+                                 placed behind the core: their disappearance is
+                                 the whole point of the right-hand zone. -->
+                            <g class="nfig__field">
+                                <circle cx="112" cy="252" r="1.6"/><circle cx="196" cy="436" r="1.4"/>
+                                <circle cx="332" cy="206" r="1.7"/><circle cx="418" cy="452" r="1.3"/>
+                                <circle cx="486" cy="262" r="1.5"/><circle cx="552" cy="440" r="1.4"/>
+                                <circle cx="664" cy="230" r="1.6"/><circle cx="700" cy="418" r="1.3"/>
+                                <circle cx="792" cy="268" r="1.7"/><circle cx="836" cy="424" r="1.4"/>
+                                <circle cx="1024" cy="418" r="1.5"/><circle cx="1074" cy="272" r="1.6"/>
+                                <circle cx="1112" cy="360" r="1.3"/><circle cx="248" cy="482" r="1.3"/>
+                                <circle cx="1002" cy="204" r="1.5"/><circle cx="866" cy="212" r="1.4"/>
+                                <circle cx="1120" cy="240" r="1.5"/><circle cx="1058" cy="452" r="1.4"/>
+                                <circle cx="880" cy="470" r="1.5"/><circle cx="960" cy="484" r="1.3"/>
+
+                                <!-- These eight sit inside the dense core and
+                                     are meant to be gone. Their absence is the
+                                     right-hand third of the figure. -->
+                                <circle cx="905" cy="300" r="1.8"/><circle cx="940" cy="352" r="2"/>
+                                <circle cx="968" cy="316" r="1.6"/><circle cx="922" cy="386" r="1.7"/>
+                                <circle cx="982" cy="372" r="1.5"/><circle cx="890" cy="340" r="1.6"/>
+                                <circle cx="956" cy="288" r="1.4"/><circle cx="1000" cy="340" r="1.5"/>
+                            </g>
+
+                            <!-- THE ONE CLOUD · a single path across all three
+                                 zones, because the argument of the figure is that
+                                 it is a single cloud. -->
+                            <path class="nfig__cloud"
+                                  d="M 46 356 C 96 262, 178 222, 276 234 C 356 244, 404 208, 502 214
+                                     C 592 220, 646 250, 726 240 C 812 229, 892 200, 984 218
+                                     C 1068 234, 1132 272, 1136 340 C 1140 408, 1092 458, 1002 470
+                                     C 902 483, 826 460, 736 468 C 646 476, 566 492, 476 480
+                                     C 386 468, 302 482, 214 464 C 126 446, 38 418, 46 356 Z"/>
+
+                            <!-- ---- ZONE A · EMISSION ------------------------- -->
+                            <g>
+                                <ellipse class="nfig__hii" cx="252" cy="336" rx="150" ry="110"/>
+                                <ellipse class="nfig__oiii" cx="252" cy="334" rx="68" ry="52"/>
+
+                                <!-- The ionisation front: where the star runs out
+                                     of photons able to strip an electron. Dashed,
+                                     because it is a ramp rather than an edge. -->
+                                <ellipse class="nfig__front svg-dash" cx="252" cy="336" rx="160" ry="120"/>
+
+                                <!-- Ultraviolet shorter than 91.2 nm — the only
+                                     light that can ionise hydrogen. -->
+                                <g class="nfig__uv">
+                                    <path d="M 252 336 L 372 272" marker-end="url(#nfArrow)"/>
+                                    <path d="M 252 336 L 392 348" marker-end="url(#nfArrow)"/>
+                                    <path d="M 252 336 L 330 428" marker-end="url(#nfArrow)"/>
+                                    <path d="M 252 336 L 138 262" marker-end="url(#nfArrow)"/>
+                                    <path d="M 252 336 L 116 372" marker-end="url(#nfArrow)"/>
+                                    <path d="M 252 336 L 208 442" marker-end="url(#nfArrow)"/>
+                                </g>
+
+                                <circle class="nfig__star nfig__star--o" cx="252" cy="336" r="7"/>
+                                <text class="svg-unit svg-onlight" x="252" y="372" text-anchor="middle">O star &middot; ionising</text>
+                                <text class="svg-unit svg-onlight" x="252" y="240" text-anchor="middle">Ionisation front</text>
+                            </g>
+
+                            <!-- ---- ZONE B · REFLECTION ---------------------- -->
+                            <g>
+                                <ellipse class="nfig__refl" cx="594" cy="336" rx="126" ry="96"/>
+                                <circle class="nfig__star nfig__star--b" cx="594" cy="330" r="5.5"/>
+                                <text class="svg-unit svg-onlight" x="594" y="366" text-anchor="middle">Cooler star &middot; no ionising UV</text>
+                                <text class="svg-unit svg-onlight" x="594" y="256" text-anchor="middle">Grains scatter, gas does nothing</text>
+                            </g>
+
+                            <!-- ---- ZONE C · DARK ---------------------------- -->
+                            <g>
+                                <ellipse class="nfig__core" cx="938" cy="336" rx="122" ry="98"/>
+                                <text class="svg-unit svg-onlight" x="938" y="252" text-anchor="middle">Dense core &middot; no star inside</text>
+                                <text class="svg-unit svg-onlight" x="938" y="428" text-anchor="middle">Background stars blocked</text>
+                            </g>
+
+                            <!-- ---- Zone titles, above the cloud ------------- -->
+                            <g>
+                                <text class="svg-label svg-label--ha" x="252" y="126" text-anchor="middle">Emission nebula</text>
+                                <text class="svg-unit" x="252" y="146" text-anchor="middle">It makes its own light</text>
+                                <path class="svg-leader svg-leader--ha" d="M 252 160 L 252 226"/>
+
+                                <text class="svg-label svg-label--scatter" x="594" y="126" text-anchor="middle">Reflection nebula</text>
+                                <text class="svg-unit" x="594" y="146" text-anchor="middle">It borrows someone else's</text>
+                                <path class="svg-leader svg-leader--scatter" d="M 594 160 L 594 216"/>
+
+                                <text class="svg-label svg-label--dust" x="938" y="126" text-anchor="middle">Dark nebula</text>
+                                <text class="svg-unit" x="938" y="146" text-anchor="middle">It takes light away</text>
+                                <path class="svg-leader" d="M 938 160 L 938 210"/>
+                            </g>
+
+                            <!-- ---- What reaches the observer ---------------- -->
+                            <g>
+                                <text class="svg-unit" x="40" y="548">Towards the observer</text>
+
+                                <path class="nfig__los nfig__los--ha" d="M 252 480 L 252 540" marker-end="url(#nfArrow)"/>
+                                <text class="svg-label svg-label--ha" x="252" y="570" text-anchor="middle">Line emission</text>
+                                <text class="svg-unit" x="252" y="590" text-anchor="middle">H&alpha; 656.3 &middot; [O III] 500.7</text>
+
+                                <path class="nfig__los nfig__los--scatter" d="M 594 490 L 594 540" marker-end="url(#nfArrow)"/>
+                                <text class="svg-label svg-label--scatter" x="594" y="570" text-anchor="middle">Scattered continuum</text>
+                                <text class="svg-unit" x="594" y="590" text-anchor="middle">Bluer than the star itself</text>
+
+                                <path class="nfig__los nfig__los--none svg-dash" d="M 938 478 L 938 540"/>
+                                <text class="svg-label" x="938" y="570" text-anchor="middle">Nothing</text>
+                                <text class="svg-unit" x="938" y="590" text-anchor="middle">A hole in the background field</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 02</span>
+                        <span class="caption__body">Schematic: sizes, separations and the observer's distance are not to scale, and the cloud is drawn as one body for the argument's sake &mdash; a real complex is far more ragged. What is accurate is the ordering. The teal sits inside the rose because doubly ionised oxygen needs the hottest gas, nearest the star, and the right-hand third is dark only because the background starlight behind it has been absorbed. For real dimensions see Fig&nbsp;04.</span>
+                    </figcaption>
+                </figure>
+
+                <!-- The taxonomy, ordered birth to death. Rows rather than
+                     plates: five items in the shared plate grid resolve to
+                     four columns at this width and orphan the fifth. -->
+                <ol class="ntypes" style="margin-top:4rem">
+
+                    <li class="ntype">
+                        <div class="ntype__stage">
+                            <span class="neb neb--emission" style="--neb-d:132px" aria-hidden="true">
+                                <span class="neb__gas"></span>
+                                <span class="neb__dust"></span>
+                                <span class="neb__stars"></span>
+                            </span>
+                        </div>
+                        <div>
+                            <div class="ntype__head">
+                                <span class="ntype__index">01</span>
+                                <h3 class="ntype__title">Emission</h3>
+                                <span class="chip">H II region</span>
+                            </div>
+                            <p class="ntype__text">A cloud with a hot young star inside it. Ultraviolet light shorter than 91.2&nbsp;nm carries enough energy to strip the electron off a hydrogen atom, and when the two find each other again the atom emits at its own fixed wavelengths. So the gas is genuinely a light source, not a reflector. The characteristic rose is H&alpha;; the teal in the hottest parts is doubly ionised oxygen.</p>
+                        </div>
+                        <dl class="spec ntype__spec">
+                            <div class="spec__row"><dt>Lit by</dt><dd>Its own recombining gas</dd></div>
+                            <div class="spec__row"><dt>Needs</dt><dd>An O or B star nearby</dd></div>
+                            <div class="spec__row"><dt>Gas temp</dt><dd>~10,000 K</dd></div>
+                            <div class="spec__row"><dt>Example</dt><dd>Orion, Lagoon, Carina</dd></div>
+                        </dl>
+                    </li>
+
+                    <li class="ntype">
+                        <div class="ntype__stage">
+                            <span class="neb neb--reflection" style="--neb-d:132px" aria-hidden="true">
+                                <span class="neb__gas"></span>
+                                <span class="neb__dust"></span>
+                                <span class="neb__stars"></span>
+                            </span>
+                        </div>
+                        <div>
+                            <div class="ntype__head">
+                                <span class="ntype__index">02</span>
+                                <h3 class="ntype__title">Reflection</h3>
+                                <span class="chip chip--outline">No ionisation</span>
+                            </div>
+                            <p class="ntype__text">The same dust, near a star that is bright but not hot enough to ionise anything. The grains simply redirect its light, and they are better at redirecting short wavelengths than long ones &mdash; so the cloud comes out distinctly bluer than the star illuminating it, for the same reason the daytime sky is blue. Vesto Slipher settled this in 1912 by taking a spectrum of the haze around the Pleiades and finding the stars' own absorption lines in it.</p>
+                        </div>
+                        <dl class="spec ntype__spec">
+                            <div class="spec__row"><dt>Lit by</dt><dd>Scattered starlight</dd></div>
+                            <div class="spec__row"><dt>Spectrum</dt><dd>Continuum, no emission lines</dd></div>
+                            <div class="spec__row"><dt>Colour</dt><dd>Blue &mdash; a scattering effect</dd></div>
+                            <div class="spec__row"><dt>Example</dt><dd>Merope, Witch Head, NGC 1999</dd></div>
+                        </dl>
+                    </li>
+
+                    <li class="ntype">
+                        <div class="ntype__stage">
+                            <span class="neb neb--dark" style="--neb-d:132px" aria-hidden="true">
+                                <span class="neb__gas"></span>
+                                <span class="neb__stars"></span>
+                                <span class="neb__dust"></span>
+                            </span>
+                        </div>
+                        <div>
+                            <div class="ntype__head">
+                                <span class="ntype__index">03</span>
+                                <h3 class="ntype__title">Dark</h3>
+                                <span class="chip chip--outline">Absorption only</span>
+                            </div>
+                            <p class="ntype__text">The same dust again, with nothing nearby to light it and something bright behind it to hide. William Herschel took these for genuine holes in the Milky Way; they are the opposite &mdash; the densest material in the neighbourhood. They matter far more than their looks suggest, because a cloud cold and opaque enough to be black is a cloud cold enough to collapse. Every star forms inside one.</p>
+                        </div>
+                        <dl class="spec ntype__spec">
+                            <div class="spec__row"><dt>Lit by</dt><dd>Nothing &mdash; it is a silhouette</dd></div>
+                            <div class="spec__row"><dt>Temperature</dt><dd>10&ndash;20 K</dd></div>
+                            <div class="spec__row"><dt>Density</dt><dd>Up to 10&#8310; cm&#8315;&sup3; in cores</dd></div>
+                            <div class="spec__row"><dt>Example</dt><dd>Coalsack, Barnard 68, Horsehead</dd></div>
+                        </dl>
+                    </li>
+
+                    <li class="ntype">
+                        <div class="ntype__stage">
+                            <span class="neb neb--planetary" style="--neb-d:132px" aria-hidden="true">
+                                <span class="neb__gas"></span>
+                                <span class="neb__stars"></span>
+                                <span class="neb__core"></span>
+                            </span>
+                        </div>
+                        <div>
+                            <div class="ntype__head">
+                                <span class="ntype__index">04</span>
+                                <h3 class="ntype__title">Planetary</h3>
+                                <span class="chip">Stellar death &middot; low mass</span>
+                            </div>
+                            <p class="ntype__text">Nothing to do with planets. William Herschel named them in 1785 for their round, planet-like appearance in a small telescope and the name stuck. What they actually are is the outer envelope of a dying star of roughly 0.8 to 8 solar masses, shrugged off over a few thousand years and then lit from inside by the exposed core &mdash; a future white dwarf at anywhere from 25,000 to 200,000&nbsp;K. Here the geometry changes: this is a shell, with a centre.</p>
+                        </div>
+                        <dl class="spec ntype__spec">
+                            <div class="spec__row"><dt>Lit by</dt><dd>The exposed stellar core</dd></div>
+                            <div class="spec__row"><dt>Progenitor</dt><dd>0.8 &ndash; 8 M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Lifetime</dt><dd>~10,000 &ndash; 20,000 yr</dd></div>
+                            <div class="spec__row"><dt>Example</dt><dd>Ring, Helix, Cat's Eye</dd></div>
+                        </dl>
+                    </li>
+
+                    <li class="ntype">
+                        <div class="ntype__stage">
+                            <span class="neb neb--remnant" style="--neb-d:132px" aria-hidden="true">
+                                <span class="neb__gas"></span>
+                                <span class="neb__web"></span>
+                                <span class="neb__stars"></span>
+                                <span class="neb__core"></span>
+                            </span>
+                        </div>
+                        <div>
+                            <div class="ntype__head">
+                                <span class="ntype__index">05</span>
+                                <h3 class="ntype__title">Supernova remnant</h3>
+                                <span class="chip">Stellar death &middot; high mass</span>
+                            </div>
+                            <p class="ntype__text">The other shell, and the violent one. A star above roughly eight solar masses does not shrug its envelope off; it throws it outward at thousands of kilometres per second, and the wreckage ploughs into whatever was already there. That shock is what makes remnants filamentary rather than smooth, and it is where most of the elements heavier than iron in your body were distributed from.</p>
+                        </div>
+                        <dl class="spec ntype__spec">
+                            <div class="spec__row"><dt>Lit by</dt><dd>Shock heating &amp; synchrotron</dd></div>
+                            <div class="spec__row"><dt>Progenitor</dt><dd>&gt; ~8 M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Expansion</dt><dd>1,000s of km/s</dd></div>
+                            <div class="spec__row"><dt>Example</dt><dd>Crab, Veil, Cassiopeia A</dd></div>
+                        </dl>
+                    </li>
+                </ol>
+
+                <p class="caption" style="margin-top:2.5rem">
+                    <span class="caption__id">Plates</span>
+                    <span class="caption__body">Renders, not photographs. Each is built from the physics in Fig&nbsp;01 and Fig&nbsp;02 rather than traced from an image, so read them as diagrams of type. Note that rows 02 and 03 contain no rose at all: with no ionising star there is no H&alpha; to draw, and putting some there would quietly undo the argument above.</span>
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             03 · STAR BIRTH
+             shell--lit: the section is illuminated from above by the
+             stars it is describing the formation of.
+             ============================================================ -->
+        <section class="shell shell--lit" id="birth">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">03</span> Star birth</p>
+                    <h2 class="head__title">Stars begin in the <em>coldest places there are</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Star formation happens in giant molecular clouds: tens to hundreds of light years across, thousands to millions of solar masses, and sitting at ten to twenty degrees above absolute zero. The cold is not incidental. It is the precondition.</p>
+                </header>
+
+                <div class="split">
+                    <div class="prose prose--lede">
+                        <p>Gravity is always trying to collapse a cloud, and gas pressure is always resisting. Pressure comes from heat, so the colder a cloud is, the less it can push back &mdash; and below about twenty kelvin, hydrogen stops being atomic and pairs up into H&#8322; molecules that radiate warmth away efficiently instead of trapping it. A cloud that can shed its heat can keep collapsing, which is why nothing forms in warm gas.</p>
+                        <p>Molecular hydrogen at that temperature is also almost impossible to detect, having no convenient emission lines. Nearly everything known about these clouds was measured through carbon monoxide instead: about one CO molecule per ten thousand H&#8322;, bright at millimetre wavelengths, and standing in for the hydrogen it travels with.</p>
+                        <p>Once a dense core exceeds its own Jeans mass it collapses, and it collapses unevenly &mdash; which is why stars are born in groups rather than one at a time. Only a few per cent of a cloud's mass ever ends up inside stars. The rest is blown away by the ones that made it.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">The cloud is the parent of everything else</span>
+                            <ul class="note__list">
+                                <li><strong>Dark nebulae are the nurseries.</strong> Type 03 in the section above and this section are the same object described twice &mdash; once by how it looks, once by what it does.</li>
+                                <li><strong>The nursery destroys itself.</strong> The massive stars a cloud produces ionise and blow away the gas around them. An H II region is a cloud being dismantled by its own children.</li>
+                                <li><strong>That is why bright nebulae are young.</strong> A visible H II region lasts a few million years at most. On astronomical timescales, every one you can see switched on recently.</li>
+                            </ul>
+                        </div>
+
+                        <dl class="spec" style="margin-top:2.5rem">
+                            <div class="spec__row"><dt>Cloud size</dt><dd>~30 &ndash; 300 ly</dd></div>
+                            <div class="spec__row"><dt>Cloud mass</dt><dd>10&sup3; &ndash; 10&#8310; M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Temperature</dt><dd>10 &ndash; 20 K</dd></div>
+                            <div class="spec__row"><dt>Core density</dt><dd>10&#8308; &ndash; 10&#8310; cm&#8315;&sup3;</dd></div>
+                            <div class="spec__row"><dt>Chief tracer</dt><dd>CO, not H&#8322;</dd></div>
+                            <div class="spec__row"><dt>Efficiency</dt><dd>A few per cent into stars</dd></div>
+                        </dl>
+                    </div>
+                </div>
+
+                <figure class="fig" style="margin-top:4.5rem">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1180 420" role="img"
+                             aria-label="Four stages of star formation inside a molecular cloud. First, a cold prestellar core at ten to twenty kelvin. Second, free-fall collapse as gravity overcomes gas pressure, with material falling inward. Third, a protostar with an accretion disc and twin bipolar jets, still gathering mass. Fourth, a young star that has reached the main sequence, having cleared a cavity in its cocoon and left a residual disc behind. Durations are given for each stage rather than plotted on a time axis.">
+
+                            <defs>
+                                <!-- The cloud is near-black and close to uniform
+                                     on purpose. An earlier version ramped from
+                                     a lighter brown centre outward, and since
+                                     the core sits on top of that centre the
+                                     only thing left visible was a brown
+                                     annulus — the cloud read as a donut. Dust
+                                     is absence: it is allowed to be almost
+                                     exactly the colour of the page, and what
+                                     makes it visible is the starlight it
+                                     removes plus one faint reddened rim. -->
+                                <radialGradient id="nsCloud" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%"   stop-color="#100a06" stop-opacity="0.92"/>
+                                    <stop offset="62%"  stop-color="#0e0904" stop-opacity="0.88"/>
+                                    <stop offset="86%"  stop-color="#1d1309" stop-opacity="0.46"/>
+                                    <stop offset="94%"  stop-color="#4a2c17" stop-opacity="0.16"/>
+                                    <stop offset="100%" stop-color="#4a2c17" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <radialGradient id="nsCore" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%"   stop-color="#020202" stop-opacity="1"/>
+                                    <stop offset="74%"  stop-color="#050403" stop-opacity="0.96"/>
+                                    <stop offset="100%" stop-color="#0a0705" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <radialGradient id="nsWarm" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%"   stop-color="#ffd9c0" stop-opacity="0.72"/>
+                                    <stop offset="52%"  stop-color="#ff9a7a" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="#8e2540" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <linearGradient id="nsJet" x1="50%" y1="100%" x2="50%" y2="0%">
+                                    <stop offset="0%"   stop-color="#58e3c4" stop-opacity="0"/>
+                                    <stop offset="46%"  stop-color="#9df3e2" stop-opacity="0.52"/>
+                                    <stop offset="100%" stop-color="#dffcf6" stop-opacity="0.12"/>
+                                </linearGradient>
+
+                                <radialGradient id="nsRim" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%"   stop-color="#ff6f8f" stop-opacity="0"/>
+                                    <stop offset="70%"  stop-color="#ff6f8f" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="#ff6f8f" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <marker id="nsArrow" viewBox="0 0 10 10" refX="8" refY="5"
+                                        markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 1 L 9 5 L 0 9 z" fill="currentColor"/>
+                                </marker>
+                            </defs>
+
+                            <!-- BACKGROUND FIELD · panels one to three only.
+                                 A cold cloud emits nothing, so drawn on black
+                                 it reads as a faint brown ring rather than as
+                                 an opaque mass. Against stars it reads as what
+                                 it is: extinction. The field stops before panel
+                                 four, where the object supplies its own light. -->
+                            <g class="nform__field">
+                                <circle cx="92" cy="96" r="1.5"/><circle cx="146" cy="212" r="1.6"/>
+                                <circle cx="198" cy="106" r="1.4"/><circle cx="112" cy="252" r="1.5"/>
+                                <circle cx="234" cy="238" r="1.5"/><circle cx="62" cy="176" r="1.4"/>
+                                <circle cx="258" cy="150" r="1.3"/><circle cx="176" cy="76" r="1.3"/>
+                                <circle cx="158" cy="160" r="1.7"/><circle cx="128" cy="140" r="1.5"/>
+                                <circle cx="186" cy="192" r="1.6"/><circle cx="216" cy="176" r="1.4"/>
+
+                                <circle cx="386" cy="104" r="1.5"/><circle cx="522" cy="228" r="1.5"/>
+                                <circle cx="360" cy="244" r="1.4"/><circle cx="548" cy="112" r="1.6"/>
+                                <circle cx="452" cy="70" r="1.4"/><circle cx="336" cy="164" r="1.3"/>
+                                <circle cx="574" cy="176" r="1.4"/><circle cx="452" cy="258" r="1.5"/>
+                                <circle cx="440" cy="152" r="1.7"/><circle cx="470" cy="180" r="1.5"/>
+
+                                <circle cx="672" cy="98" r="1.4"/><circle cx="826" cy="230" r="1.4"/>
+                                <circle cx="650" cy="238" r="1.3"/><circle cx="840" cy="106" r="1.5"/>
+                                <circle cx="746" cy="66" r="1.3"/><circle cx="632" cy="168" r="1.3"/>
+                            </g>
+
+                            <!-- ---- 01 · PRESTELLAR CORE -------------------- -->
+                            <g>
+                                <ellipse class="nform__cloud" cx="158" cy="164" rx="104" ry="82"/>
+                                <ellipse class="nform__core" cx="158" cy="164" rx="38" ry="31"/>
+                                <text class="svg-label" x="158" y="288" text-anchor="middle">Prestellar core</text>
+                                <text class="svg-unit" x="158" y="308" text-anchor="middle">10&ndash;20 K &middot; 10&#8308; cm&#8315;&sup3;</text>
+                                <text class="svg-value" x="158" y="332" text-anchor="middle">t = 0</text>
+                            </g>
+
+                            <path class="nform__step" d="M 288 164 L 322 164" marker-end="url(#nsArrow)"/>
+
+                            <!-- ---- 02 · FREE-FALL COLLAPSE ----------------- -->
+                            <g>
+                                <ellipse class="nform__cloud" cx="452" cy="164" rx="86" ry="68" style="opacity:0.8"/>
+                                <ellipse class="nform__core" cx="452" cy="164" rx="30" ry="25"/>
+                                <g class="nform__infall">
+                                    <path d="M 452 76 L 452 122" marker-end="url(#nsArrow)"/>
+                                    <path d="M 452 252 L 452 206" marker-end="url(#nsArrow)"/>
+                                    <path d="M 358 164 L 410 164" marker-end="url(#nsArrow)"/>
+                                    <path d="M 546 164 L 494 164" marker-end="url(#nsArrow)"/>
+                                    <path d="M 388 106 L 424 138" marker-end="url(#nsArrow)"/>
+                                    <path d="M 516 222 L 480 190" marker-end="url(#nsArrow)"/>
+                                </g>
+                                <text class="svg-label" x="452" y="288" text-anchor="middle">Free-fall collapse</text>
+                                <text class="svg-unit" x="452" y="308" text-anchor="middle">Gravity beats gas pressure</text>
+                                <text class="svg-value" x="452" y="332" text-anchor="middle">~10&#8309; yr</text>
+                            </g>
+
+                            <path class="nform__step" d="M 582 164 L 616 164" marker-end="url(#nsArrow)"/>
+
+                            <!-- ---- 03 · PROTOSTAR + DISC + JETS ------------ -->
+                            <g>
+                                <ellipse class="nform__cloud" cx="746" cy="164" rx="78" ry="62" style="opacity:0.52"/>
+
+                                <!-- Bipolar outflow: the collapse cannot shed its
+                                     angular momentum any other way. -->
+                                <path class="nform__jet" d="M 746 164 L 716 58 L 776 58 Z"/>
+                                <path class="nform__jet" d="M 746 164 L 716 270 L 776 270 Z"/>
+
+                                <ellipse class="nform__disc" cx="746" cy="164" rx="76" ry="13"
+                                         transform="rotate(-10 746 164)"/>
+                                <ellipse class="nform__warm" cx="746" cy="164" rx="30" ry="24"/>
+                                <circle class="nform__proto" cx="746" cy="164" r="6"/>
+
+                                <text class="svg-label" x="746" y="288" text-anchor="middle">Protostar &amp; disc</text>
+                                <text class="svg-unit" x="746" y="308" text-anchor="middle">Bipolar jets &middot; still accreting</text>
+                                <text class="svg-value" x="746" y="332" text-anchor="middle">10&#8309;&ndash;10&#8310; yr</text>
+                            </g>
+
+                            <path class="nform__step" d="M 876 164 L 910 164" marker-end="url(#nsArrow)"/>
+
+                            <!-- ---- 04 · ONTO THE MAIN SEQUENCE ------------- -->
+                            <g>
+                                <ellipse class="nform__rim" cx="1040" cy="164" rx="102" ry="82"/>
+                                <ellipse class="nform__cavity svg-dash" cx="1040" cy="164" rx="72" ry="58"/>
+                                <ellipse class="nform__disc nform__disc--thin" cx="1040" cy="164" rx="54" ry="8"
+                                         transform="rotate(-10 1040 164)"/>
+
+                                <g class="nform__spikes">
+                                    <path d="M 1040 118 L 1040 210"/>
+                                    <path d="M 994 164 L 1086 164"/>
+                                </g>
+                                <circle class="nform__star" cx="1040" cy="164" r="8"/>
+
+                                <text class="svg-label" x="1040" y="288" text-anchor="middle">Main sequence</text>
+                                <text class="svg-unit" x="1040" y="308" text-anchor="middle">Cocoon cleared &middot; disc left over</text>
+                                <text class="svg-value" x="1040" y="332" text-anchor="middle">10&#8311;&ndash;5&times;10&#8311; yr</text>
+                            </g>
+
+                            <!-- A direction, not an axis. See the caption. -->
+                            <path class="svg-axis" d="M 56 372 L 1124 372"/>
+                            <text class="svg-unit" x="56" y="394">Cold, dark, molecular</text>
+                            <text class="svg-unit" x="1124" y="394" text-anchor="end">Hot, luminous, ionising</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 03</span>
+                        <span class="caption__body"><strong>Not a time axis</strong> &mdash; the four stages are spaced evenly for legibility, and each one's real duration is printed beneath it instead. Those durations span three orders of magnitude, so drawn to scale the first three panels would occupy the leftmost tenth of the frame. Sizes are schematic and not to a shared scale: the disc in panel three is a few hundred astronomical units across, while the cloud in panel one is light years. The first two panels are drawn against a background star field because a cold cloud has no light of its own &mdash; what makes it visible is the starlight it removes.</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             04 · FAMOUS NEBULAE
+             ============================================================ -->
+        <section class="shell shell--atmos shell--seam" id="famous">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">04</span> Four we know best</p>
+                    <h2 class="head__title">Two nurseries and <em>two kinds of corpse</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Between them these four cover everything above: the nearest region where massive stars are being made, the most photographed dust in the sky, the only nebula that can be matched to a specific night in recorded history, and a shell of gas that is the future of the Sun.</p>
+                </header>
+
+                <div class="plate-grid plate-grid--tall neb-famous">
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="neb neb--orion" style="--neb-d:168px" aria-hidden="true">
+                                <span class="neb__gas"></span>
+                                <span class="neb__dust"></span>
+                                <span class="neb__stars"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">01 / 04</span>
+                            <span class="plate__index">M42 &middot; NGC 1976</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Orion</h3>
+                            <span class="chip">Emission</span>
+                        </div>
+                        <p class="plate__text">The nearest place massive stars are forming, and the only nebula easily visible to the unaided eye &mdash; the middle &ldquo;star&rdquo; in Orion's sword. Not a sphere but a blister on the near face of a much larger molecular cloud: the Trapezium stars have eaten a cavity outward towards us, which is why we can see in at all.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Distance</dt><dd>~1,340 ly</dd></div>
+                            <div class="spec__row"><dt>Diameter</dt><dd>~24 ly</dd></div>
+                            <div class="spec__row"><dt>Ionised by</dt><dd>&theta;&sup1; Ori C &middot; O6</dd></div>
+                            <div class="spec__row"><dt>Notable</dt><dd>~700 stars mid-formation</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="neb neb--eagle" style="--neb-d:168px" aria-hidden="true">
+                                <span class="neb__gas"></span>
+                                <span class="neb__dust"></span>
+                                <span class="neb__stars"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">02 / 04</span>
+                            <span class="plate__index">M16 &middot; NGC 6611</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Eagle</h3>
+                            <span class="chip chip--outline">Dust in relief</span>
+                        </div>
+                        <p class="plate__text">An H II region whose most famous feature is dark, not bright. The Pillars of Creation are columns of cold molecular dust being eroded from above by the ultraviolet output of the cluster they helped produce &mdash; which is why they taper upward. Hubble's 1995 frame is probably the most reproduced astronomical image ever taken.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Distance</dt><dd>~6,500 ly</dd></div>
+                            <div class="spec__row"><dt>Extent</dt><dd>~70 &times; 55 ly</dd></div>
+                            <div class="spec__row"><dt>Pillars</dt><dd>4 &ndash; 5 ly tall</dd></div>
+                            <div class="spec__row"><dt>Notable</dt><dd>Hubble, April 1995</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="neb neb--crab" style="--neb-d:168px" aria-hidden="true">
+                                <span class="neb__gas"></span>
+                                <span class="neb__web"></span>
+                                <span class="neb__stars"></span>
+                                <span class="neb__core"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">03 / 04</span>
+                            <span class="plate__index">M1 &middot; NGC 1952</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Crab</h3>
+                            <span class="chip">Remnant</span>
+                        </div>
+                        <p class="plate__text">The wreckage of a star seen to explode in 1054, recorded by Chinese and Japanese observers, and the first nebula ever tied to a specific historical event. Unusually it is filled rather than hollow: the pulsar at its centre, spinning about thirty times a second, keeps pumping energy into the interior, which glows blue-white by synchrotron radiation.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Distance</dt><dd>~6,500 ly</dd></div>
+                            <div class="spec__row"><dt>Diameter</dt><dd>~11 ly</dd></div>
+                            <div class="spec__row"><dt>Expanding</dt><dd>~1,500 km/s</dd></div>
+                            <div class="spec__row"><dt>Notable</dt><dd>PSR B0531+21 &middot; 30 Hz</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="neb neb--ring" style="--neb-d:168px" aria-hidden="true">
+                                <span class="neb__gas"></span>
+                                <span class="neb__stars"></span>
+                                <span class="neb__core"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">04 / 04</span>
+                            <span class="plate__index">M57 &middot; NGC 6720</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Ring</h3>
+                            <span class="chip">Planetary</span>
+                        </div>
+                        <p class="plate__text">The textbook planetary nebula, and not actually a ring. It is a barrel of gas seen almost exactly down its axis, so our line of sight passes through much more material at the rim than through the middle &mdash; the hole is a projection effect. At the centre sits the naked core of the star that shed it, at roughly 120,000&nbsp;K.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Distance</dt><dd>~2,500 ly</dd></div>
+                            <div class="spec__row"><dt>Diameter</dt><dd>~1 ly</dd></div>
+                            <div class="spec__row"><dt>Age</dt><dd>~7,000 yr</dd></div>
+                            <div class="spec__row"><dt>Notable</dt><dd>Central star ~120,000 K</dd></div>
+                        </dl>
+                    </article>
+                </div>
+
+                <!-- Every figure above compresses or schematises size. This
+                     one does not: real diameters, stated. -->
+                <h3 class="sub-title" style="margin-top:4.5rem">The same objects, at their real sizes</h3>
+
+                <ol class="ledger" style="margin-top:2rem" role="img"
+                    aria-label="Nebula diameters on a base-10 axis: Barnard 68, a dark globule, about half a light year; the Ring Nebula, a planetary, about one light year; the Crab Nebula, a supernova remnant, about eleven light years; the Orion Nebula, an H two region, about twenty-four light years; the Eagle Nebula complex about seventy light years; and the Cygnus Loop, an old remnant, about one hundred and twenty light years.">
+                    <li class="ledger__row" style="--reach:17%">
+                        <span class="ledger__label">Barnard 68 <small>Dark globule</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">~0.5 ly</span>
+                    </li>
+                    <li class="ledger__row" style="--reach:25%">
+                        <span class="ledger__label">Ring Nebula <small>Planetary &middot; M57</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">~1 ly</span>
+                    </li>
+                    <li class="ledger__row" style="--reach:51%">
+                        <span class="ledger__label">Crab Nebula <small>Remnant &middot; M1</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">~11 ly</span>
+                    </li>
+                    <li class="ledger__row" style="--reach:60%">
+                        <span class="ledger__label">Orion Nebula <small>H II region &middot; M42</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">~24 ly</span>
+                    </li>
+                    <li class="ledger__row" style="--reach:71%">
+                        <span class="ledger__label">Eagle Nebula <small>H II complex &middot; M16</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">~70 ly</span>
+                    </li>
+                    <li class="ledger__row" style="--reach:77%">
+                        <span class="ledger__label">Cygnus Loop <small>Old remnant &middot; the Veil</small></span>
+                        <span class="ledger__track"><span class="ledger__fill"></span></span>
+                        <span class="ledger__value">~120 ly</span>
+                    </li>
+                </ol>
+
+                <p class="caption" style="margin-top:2.5rem">
+                    <span class="caption__id">Fig 04</span>
+                    <span class="caption__body"><strong>Base-10 axis</strong>, 0.1 to 1,000 light years &mdash; each equal step along a bar is a factor of ten. On a linear axis the Ring Nebula's bar would be under one per cent of the Cygnus Loop's and Barnard&nbsp;68 would be invisible. In real terms the Cygnus Loop is about 120 times the Ring's diameter. Nebulae have no edges, so every figure here is a conventional extent measured to some chosen surface brightness, not a boundary.</span>
+                </p>
+
+                <p class="caption">
+                    <span class="caption__id">Plates</span>
+                    <span class="caption__body">Each portrait is the type render from section 02 retuned to that object's actual structure &mdash; Orion lopsided because it is a blister, the Eagle's pillars tapering upward because they erode from above, the Crab filled rather than hollow, the Ring keeping the faint interior that shows the hole is a projection. They remain diagrams, not portraits, and sizes here are not to a shared scale; for that, the ledger above.</span>
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             05 · MISCONCEPTIONS
+             ============================================================ -->
+        <section class="shell shell--void" id="facts">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">05</span> Misconceptions</p>
+                    <h2 class="head__title">Six things that sound right <em>and are not</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Most of these are not folklore. They are things that were taught, or that were true of an older model, or that are true of the picture rather than the object.</p>
+                </header>
+
+                <div class="myths">
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Nebulae are thick, billowing clouds you could fly into.</strong></p>
+                        <p class="myth__truth">They are the <strong>emptiest things you will ever see</strong>. A bright nebula holds a hundred to ten thousand particles per cubic centimetre against the twenty-five billion billion in ordinary air, and a good laboratory vacuum is thinner still. Flying through one, you would register nothing: no haze, no resistance, no colour. They look substantial only because you are looking through light years of them at once.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>The colours in the famous images are what your eye would see.</strong></p>
+                        <p class="myth__truth">Partly. H&alpha; genuinely is rose and [O&nbsp;III] genuinely is teal-green, as Fig&nbsp;01 shows. But most celebrated nebula images are <strong>narrowband composites</strong> in which each emission line is assigned a channel for legibility &mdash; the standard Hubble palette puts [S&nbsp;II] in red, H&alpha; in green and [O&nbsp;III] in blue, which is why the Pillars come out gold and teal rather than pink. The structure is real; the mapping is a decision.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Planetary nebulae have something to do with planets.</strong></p>
+                        <p class="myth__truth">Nothing whatsoever. <strong>William Herschel</strong> coined the term in 1785 because in the telescopes of the day they were small round discs that looked like planets. They are dying stars of roughly one to eight solar masses shedding their outer layers. The name is a two-hundred-year-old observational accident that astronomy has never got around to fixing.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Nebulae glow because they are hot.</strong></p>
+                        <p class="myth__truth">Three different things are going on and only one involves heat. An emission nebula's gas is around ten thousand kelvin, but it does not shine as a hot body does &mdash; it shines because <strong>ionised atoms are recombining</strong> and emitting at specific wavelengths. A reflection nebula produces no light of its own at all. A dark nebula is ten to twenty degrees above absolute zero, which is about as cold as anything gets.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Nebulae are permanent features of the sky.</strong></p>
+                        <p class="myth__truth">They are the most <strong>short-lived</strong> structures on this site. A planetary nebula disperses in ten to twenty thousand years. A supernova remnant merges into the surrounding medium within a hundred thousand or so. A bright H II region survives a few million years before the stars inside it blow it apart. Against a 13.8-billion-year universe, every nebula you can see appeared essentially just now.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>The Pillars of Creation were destroyed a thousand years ago.</strong></p>
+                        <p class="myth__truth">This is <strong>a hypothesis, not a finding</strong>, and it is repeated as though it were settled. A 2007 Spitzer interpretation of hot dust near the pillars was read as evidence of a shock front that had already passed through them, whose arrival we would witness in about a thousand years. It has not been confirmed, other explanations for that dust exist, and later infrared imaging shows the pillars intact. The honest position is that we do not know.</p>
+                    </div>
+                </div>
+
+                <div class="note" style="margin-top:3.5rem">
+                    <span class="note__title">Two that are true and sound false</span>
+                    <ul class="note__list">
+                        <li><strong>Half the entries in the first galaxy catalogues were nebulae, and half the nebulae were galaxies.</strong> Andromeda was the &ldquo;Andromeda Nebula&rdquo; until 1924, when Edwin Hubble found a Cepheid variable in it and put it far outside the Milky Way. The word nebula simply meant &ldquo;unresolved smudge&rdquo;, and it took a century to sort the clouds from the galaxies.</li>
+                        <li><strong>You are made of nebula.</strong> Every atom in you heavier than helium was manufactured inside a star and then distributed by one of the two death geometries in section 02. The Solar System condensed out of gas that had already been through that cycle several times.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             ONWARD
+             ============================================================ -->
+        <section class="shell shell--rise shell--seam">
+            <div class="container">
+                <div class="head head--center" style="margin-bottom:0">
+                    <p class="eyebrow eyebrow--bare">End of region 06</p>
+                    <h2 class="head__title">Next: the explosion <em>that makes the wreckage</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Two of the five types on this page are debris fields, and this region only describes what they look like afterwards. The Cosmic Events region takes the moment itself &mdash; the collapse, the shock front, and the few seconds that scatter a star across a hundred light years.</p>
+                    <p style="margin-top:2.5rem">
+                        <a href="../galaxies/index.html" class="back-link"><span aria-hidden="true">&larr;</span> Back to the Galaxies these clouds sit in</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p class="footer-text">&copy; 2026 CosmoVerse &mdash; Explore beyond the horizon.</p>
+            <p class="footer-note">Region 06 &middot; Interstellar &middot; 5 sections &middot; Figures 01&ndash;04</p>
+        </div>
+    </footer>
+</body>
+</html>

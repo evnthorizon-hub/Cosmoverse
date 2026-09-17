@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stars — spectral classification, star formation, stellar evolution, star types, binary and variable stars, famous stars, and the Hertzsprung–Russell diagram that explains all of them.">
+    <meta name="keywords" content="stars, stellar classification, spectral type, H-R diagram, Hertzsprung-Russell, star formation, stellar evolution, red dwarf, white dwarf, neutron star, supergiant, binary star, variable star, Cepheid, astronomy">
+    <meta name="author" content="CosmoVerse">
+    <meta name="theme-color" content="#000003">
+    <title>Stars | CosmoVerse</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/stars.css">
+</head>
+<!-- dm-stars sets the domain palette; stars.css adds the true
+     spectral colours and the shared temperature axis. -->
+<body class="dm-stars">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                CosmoVerse
+                <span class="logo-mark">Obs.</span>
+            </a>
+
+            <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+            <label for="mobile-menu-checkbox" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </label>
+
+            <nav class="nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../solar-system/index.html" class="nav-link">Solar System</a></li>
+                    <li><a href="index.html" class="nav-link active" aria-current="page">Stars</a></li>
+                    <li><a href="../black-holes/index.html" class="nav-link">Black Holes</a></li>
+                    <li><a href="../galaxies/index.html" class="nav-link">Galaxies</a></li>
+                    <li><a href="../nebulae/index.html" class="nav-link">Nebulae</a></li>
+                    <li><a href="../cosmic-events/index.html" class="nav-link">Cosmic Events</a></li>
+                    <li><a href="../missions/index.html" class="nav-link">Missions</a></li>
+                    <li><a href="../exoplanets/index.html" class="nav-link">Exoplanets</a></li>
+                    <li><a href="../universe/index.html" class="nav-link">Universe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ============================================================
+             ARRIVAL
+             Solar System opens on a planetary limb. Stars opens on a
+             spectrum — the dispersed beam that everything below is
+             read from.
+             ============================================================ -->
+        <section class="page-hero">
+            <div class="field field--spectral" aria-hidden="true"></div>
+            <div class="starfield" aria-hidden="true"></div>
+            <div class="starfield-streak" aria-hidden="true"></div>
+            <div class="spectrum-horizon" aria-hidden="true">
+                <span class="spectrum-horizon__lines"></span>
+            </div>
+
+            <div class="container">
+                <p class="eyebrow"><span class="eyebrow__id">03</span> Region &middot; Stellar</p>
+                <h1 class="page-hero__title">The<em>Stars</em></h1>
+                <p class="page-hero__lede">Every star is the same argument between gravity pulling inward and fusion pushing outward. Its mass decides who wins, how brightly it burns while the argument lasts, and what is left when it ends.</p>
+                <p class="page-hero__coords">
+                    <span>Spectral sequence O B A F G K M</span>
+                    <span>2,400 &ndash; 50,000 K</span>
+                    <span>Lifetimes 10&#8310; &ndash; 10&#185;&sup3; yr</span>
+                </p>
+            </div>
+
+            <div class="page-hero__dock">
+                <div class="container">
+                    <dl class="readout readout--flush">
+                        <div class="readout__cell">
+                            <dt>Nearest star</dt>
+                            <dd>4.25 <small>ly</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>In the Milky Way</dt>
+                            <dd>~200 <small>billion</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Most common class</dt>
+                            <dd>M <small>76%</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Mass range</dt>
+                            <dd>0.08&ndash;300 <small>M&#9737;</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Visible unaided</dt>
+                            <dd>~9,100</dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>On the main sequence</dt>
+                            <dd>~90 <small>per cent</small></dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             LOCAL INDEX
+             ============================================================ -->
+        <nav class="subnav" aria-label="Sections in this region">
+            <div class="subnav__list">
+                <a href="#overview">Overview</a>
+                <a href="#classification">Classification</a>
+                <a href="#hr">H&ndash;R Diagram</a>
+                <a href="#formation">Formation</a>
+                <a href="#evolution">Evolution</a>
+                <a href="#types">Star Types</a>
+                <a href="#variable">Binary &amp; Variable</a>
+                <a href="#famous">Famous Stars</a>
+                <a href="catalog/index.html">Catalog</a>
+            </div>
+        </nav>
+
+
+        <!-- ============================================================
+             01 · OVERVIEW
+             ============================================================ -->
+        <section class="shell shell--abyss" id="overview">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">01</span> Overview</p>
+                    <h2 class="head__title">A balance held for <em>billions of years</em></h2>
+                    <div class="head__rule"></div>
+                </header>
+
+                <div class="split">
+                    <div class="prose prose--lede">
+                        <p>A star is a ball of plasma massive enough that its own gravity crushes its core until hydrogen nuclei begin to fuse. The energy released pushes back out. When the two forces balance exactly, the star stops collapsing and simply shines — a state it can hold, if it is the right size, for longer than the universe has so far existed.</p>
+                        <p>Below about 0.08 solar masses gravity never wins hard enough to start fusion, and you get a brown dwarf: warm, dim, and not a star. Above roughly 300 solar masses the outward pressure wins outright and the object tears itself apart. Everything we call a star lives inside that range.</p>
+                        <p>What makes stellar astronomy tractable is that almost nothing else matters. Give the initial mass and the chemical composition, and the star's colour, size, brightness, lifetime and manner of death all follow. That is an unusually strong statement for astrophysics, and the next section is where it becomes visible.</p>
+                    </div>
+
+                    <div>
+                        <p class="pull">Look at enough stars and they do not scatter. They fall into <em>one narrow line</em> — and that line is a sequence in mass.</p>
+
+                        <div class="note" style="margin-top:2.5rem">
+                            <span class="note__title">What a star is not</span>
+                            <ul class="note__list">
+                                <li><strong>Not burning.</strong> Nothing is on fire. Fusion converts mass into energy; combustion rearranges chemical bonds. The two differ by a factor of about ten million.</li>
+                                <li><strong>Not solid, liquid or gas.</strong> Stellar material is plasma — ionised, so it conducts and responds to magnetic fields.</li>
+                                <li><strong>Not fusing throughout.</strong> Fusion happens only in the innermost few per cent of the volume, where it is hot and dense enough.</li>
+                                <li><strong>Not steady forever.</strong> Every star is slowly changing composition as it converts hydrogen to helium. That drift is what eventually ends it.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             PLATE — a star-forming region
+             Sits between the overview and the classification system,
+             where the page turns from "what a star is" to "how we sort
+             them". Cropped to the clean middle band of the source; see
+             the plate imagery notes in components.css.
+             ============================================================ -->
+        <section class="shell shell--abyss" style="padding-top:0">
+            <figure class="shot-figure">
+                <div class="shot">
+                    <img class="shot__img"
+                         src="../images/stars.png"
+                         alt="A star-forming region: towering pillars of cold dust silhouetted against glowing hydrogen, with newly formed stars burning blue-white above them."
+                         decoding="async">
+                </div>
+                <div class="container">
+                    <figcaption class="caption">
+                        <span class="caption__id">Plate</span>
+                        Pillars of cold molecular gas being eroded by the radiation of the stars they just produced. Every star in the classification that follows began somewhere like this.
+                    </figcaption>
+                </div>
+            </figure>
+        </section>
+
+
+        <!-- ============================================================
+             02 · CLASSIFICATION
+             ============================================================ -->
+        <section class="shell shell--void shell--seam" id="classification">
+            <div class="field field--spectral" aria-hidden="true" style="--field-opacity:0.22"></div>
+
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">02</span> Classification</p>
+                    <h2 class="head__title">Seven letters, in a <em>famously wrong order</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Stars are sorted by the absorption lines in their spectra — the dark gaps where atoms in the star's own atmosphere have removed their own wavelengths from the light passing through. The original scheme ran A to Q by hydrogen line strength. When Annie Jump Cannon reordered it by temperature in the 1900s, the surviving letters came out as O B A F G K M, and astronomy has been living with it since.</p>
+                </header>
+
+                <!-- The class strip is a temperature axis: each segment's
+                     width is its true share of the log-temperature range,
+                     so it lines up with the H-R diagram below. -->
+                <figure style="margin:0">
+                    <div class="class-strip" role="img" aria-label="The spectral sequence from class O at 42,000 kelvin on the left to class M at 2,400 kelvin on the right, shown in each class's true colour.">
+                        <div class="class-strip__seg class-strip__seg--o">O<span class="class-strip__lines" aria-hidden="true"></span></div>
+                        <div class="class-strip__seg class-strip__seg--b">B<span class="class-strip__lines" aria-hidden="true"></span></div>
+                        <div class="class-strip__seg class-strip__seg--a">A<span class="class-strip__lines" aria-hidden="true"></span></div>
+                        <div class="class-strip__seg class-strip__seg--f">F<span class="class-strip__lines" aria-hidden="true"></span></div>
+                        <div class="class-strip__seg class-strip__seg--g">G<span class="class-strip__lines" aria-hidden="true"></span></div>
+                        <div class="class-strip__seg class-strip__seg--k">K<span class="class-strip__lines" aria-hidden="true"></span></div>
+                        <div class="class-strip__seg class-strip__seg--m">M<span class="class-strip__lines" aria-hidden="true"></span></div>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 01</span>
+                        Segment widths are each class's true share of the base-10 temperature axis, hot on the left. Colours are approximate blackbody appearance. The vertical lines indicate absorption, drawn schematically.
+                    </figcaption>
+                </figure>
+
+                <div class="ladder" style="margin-top:3.5rem">
+                    <div class="ladder__row ladder__row--o">
+                        <span class="ladder__badge">O</span>
+                        <span class="ladder__viz">
+                            <span class="star star--o" style="--st-d:32px;--st-cycle:6s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </span>
+                        <span class="ladder__temp">&ge; 30,000 K<small>Blue &middot; &ge; 16 M&#9737;</small></span>
+                        <span class="ladder__desc">Fiercely hot and fiercely short-lived. Their ultraviolet output ionises the gas around them, which is why they sit inside glowing nebulae. <b>Alnitak, Zeta Puppis</b></span>
+                        <span class="ladder__share">
+                            <span class="ladder__bar"><i></i></span>
+                            <span class="ladder__pct">0.00003%</span>
+                        </span>
+                    </div>
+
+                    <div class="ladder__row ladder__row--b">
+                        <span class="ladder__badge">B</span>
+                        <span class="ladder__viz">
+                            <span class="star star--b" style="--st-d:30px;--st-cycle:7s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </span>
+                        <span class="ladder__temp">10,000&ndash;30,000 K<small>Blue-white &middot; 2.1&ndash;16 M&#9737;</small></span>
+                        <span class="ladder__desc">The bright blue stars that define constellation shapes. Most of the naked-eye sky is B-type, because they are luminous enough to be seen from very far away. <b>Rigel, Spica</b></span>
+                        <span class="ladder__share">
+                            <span class="ladder__bar"><i></i></span>
+                            <span class="ladder__pct">0.13%</span>
+                        </span>
+                    </div>
+
+                    <div class="ladder__row ladder__row--a">
+                        <span class="ladder__badge">A</span>
+                        <span class="ladder__viz">
+                            <span class="star star--a" style="--st-d:26px;--st-cycle:8s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </span>
+                        <span class="ladder__temp">7,500&ndash;10,000 K<small>White &middot; 1.4&ndash;2.1 M&#9737;</small></span>
+                        <span class="ladder__desc">Strong hydrogen lines — which is exactly why the original alphabetical scheme put them first. <b>Sirius A, Vega, Altair</b></span>
+                        <span class="ladder__share">
+                            <span class="ladder__bar"><i></i></span>
+                            <span class="ladder__pct">0.6%</span>
+                        </span>
+                    </div>
+
+                    <div class="ladder__row ladder__row--f">
+                        <span class="ladder__badge">F</span>
+                        <span class="ladder__viz">
+                            <span class="star star--f" style="--st-d:23px;--st-cycle:9s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </span>
+                        <span class="ladder__temp">6,000&ndash;7,500 K<small>Yellow-white &middot; 1.04&ndash;1.4 M&#9737;</small></span>
+                        <span class="ladder__desc">Slightly hotter and larger than the Sun, with metal absorption lines beginning to strengthen against the hydrogen. <b>Procyon A, Polaris</b></span>
+                        <span class="ladder__share">
+                            <span class="ladder__bar"><i></i></span>
+                            <span class="ladder__pct">3.0%</span>
+                        </span>
+                    </div>
+
+                    <div class="ladder__row ladder__row--g">
+                        <span class="ladder__badge">G</span>
+                        <span class="ladder__viz">
+                            <span class="star star--g" style="--st-d:21px;--st-cycle:10s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </span>
+                        <span class="ladder__temp">5,200&ndash;6,000 K<small>Yellow &middot; 0.8&ndash;1.04 M&#9737;</small></span>
+                        <span class="ladder__desc">Our own class. Note that the Sun is white when seen from space — it looks yellow from the ground because the atmosphere scatters its blue light away. <b>The Sun, &alpha; Centauri A</b></span>
+                        <span class="ladder__share">
+                            <span class="ladder__bar"><i></i></span>
+                            <span class="ladder__pct">7.6%</span>
+                        </span>
+                    </div>
+
+                    <div class="ladder__row ladder__row--k">
+                        <span class="ladder__badge">K</span>
+                        <span class="ladder__viz">
+                            <span class="star star--k" style="--st-d:19px;--st-cycle:11s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </span>
+                        <span class="ladder__temp">3,700&ndash;5,200 K<small>Orange &middot; 0.45&ndash;0.8 M&#9737;</small></span>
+                        <span class="ladder__desc">Long-lived, stable, and abundant. Increasingly argued to be the best places to look for life: they last far longer than G stars without the violent flaring of M stars. <b>&alpha; Centauri B, Arcturus</b></span>
+                        <span class="ladder__share">
+                            <span class="ladder__bar"><i></i></span>
+                            <span class="ladder__pct">12.1%</span>
+                        </span>
+                    </div>
+
+                    <div class="ladder__row ladder__row--m">
+                        <span class="ladder__badge">M</span>
+                        <span class="ladder__viz">
+                            <span class="star star--m" style="--st-d:17px;--st-cycle:12s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </span>
+                        <span class="ladder__temp">2,400&ndash;3,700 K<small>Orange-red &middot; 0.08&ndash;0.45 M&#9737;</small></span>
+                        <span class="ladder__desc">Three out of every four stars. Not one is visible to the naked eye from Earth, including the nearest star to the Sun. Their spectra show molecules, not just atoms. <b>Proxima Centauri, Barnard's Star</b></span>
+                        <span class="ladder__share">
+                            <span class="ladder__bar"><i></i></span>
+                            <span class="ladder__pct">76.45%</span>
+                        </span>
+                    </div>
+                </div>
+
+                <p class="caption">
+                    <span class="caption__id">Fig 02</span>
+                    Abundance among main-sequence stars in the solar neighbourhood, approximate. The bar is logarithmic — on a linear axis every class except M would be invisible, which is itself the finding.
+                </p>
+
+                <div class="note" style="margin-top:3rem">
+                    <span class="note__title">Two things the names get wrong</span>
+                    <ul class="note__list">
+                        <li><strong>"Red" dwarfs are orange.</strong> A 3,000&nbsp;K blackbody is orange. The colours on this page are the colours these stars actually are, so class M is rendered orange even though its common name says otherwise.</li>
+                        <li><strong>The Sun is not a yellow star.</strong> Its output peaks in green and it integrates to white. Every "yellow dwarf" you have ever seen drawn is an artefact of Earth's atmosphere.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             03 · THE H–R DIAGRAM  ·  centrepiece
+             Same temperature axis as Fig 01 above. Every point placed
+             from published effective temperature and luminosity.
+             ============================================================ -->
+        <section class="shell shell--lit" id="hr">
+            <div class="container">
+                <header class="head head--center">
+                    <p class="eyebrow"><span class="eyebrow__id">03</span> The Hertzsprung&ndash;Russell diagram</p>
+                    <h2 class="head__title">Plot colour against brightness and the sky <em>sorts itself out</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">In 1911 Ejnar Hertzsprung, and independently in 1913 Henry Norris Russell, plotted stars by temperature against luminosity expecting a cloud. They got a line. Around nine stars in ten fall on one narrow diagonal, and the position of a star along it is set almost entirely by its mass. Everything off the diagonal is a star that has stopped fusing hydrogen in its core.</p>
+                </header>
+
+                <figure class="hr">
+                    <div class="hr__frame">
+
+                        <!-- Spectral class, on the same axis as Fig 01 -->
+                        <div class="hr__classbar">
+                            <div class="class-strip" style="height:26px" aria-hidden="true">
+                                <div class="class-strip__seg class-strip__seg--o">O</div>
+                                <div class="class-strip__seg class-strip__seg--b">B</div>
+                                <div class="class-strip__seg class-strip__seg--a">A</div>
+                                <div class="class-strip__seg class-strip__seg--f">F</div>
+                                <div class="class-strip__seg class-strip__seg--g">G</div>
+                                <div class="class-strip__seg class-strip__seg--k">K</div>
+                                <div class="class-strip__seg class-strip__seg--m">M</div>
+                            </div>
+                        </div>
+
+                        <!-- Luminosity axis -->
+                        <div class="hr__ax hr__ax--lum">
+                            <span class="hr__ax-name">Luminosity (L&#9737;)</span>
+                            <span class="hr__t" style="--at:0%">10&#8310;</span>
+                            <span class="hr__t" style="--at:18.18%">10&#8308;</span>
+                            <span class="hr__t" style="--at:36.36%">10&sup2;</span>
+                            <span class="hr__t" style="--at:54.55%">1</span>
+                            <span class="hr__t" style="--at:72.73%">10&#8315;&sup2;</span>
+                            <span class="hr__t" style="--at:90.91%">10&#8315;&#8308;</span>
+                        </div>
+
+                        <!-- The plot -->
+                        <div class="hr__plot">
+                            <div class="hr__grid" aria-hidden="true"></div>
+                            <div class="hr__vgrid" aria-hidden="true"></div>
+
+                            <div class="hr__zone hr__zone--super" aria-hidden="true"></div>
+                            <div class="hr__zone hr__zone--giant" aria-hidden="true"></div>
+                            <div class="hr__zone hr__zone--ms" aria-hidden="true"></div>
+                            <div class="hr__zone hr__zone--wd" aria-hidden="true"></div>
+                            <div class="hr__strip" aria-hidden="true"></div>
+
+                            <span class="hr__tag hr__tag--ms" style="--x:29%;--y:17%" aria-hidden="true">Main sequence</span>
+                            <span class="hr__tag" style="--x:21%;--y:3%" aria-hidden="true">Supergiants<small>Luminosity class I</small></span>
+                            <span class="hr__tag" style="--x:75%;--y:19%" aria-hidden="true">Giants<small>Class III</small></span>
+                            <span class="hr__tag" style="--x:26%;--y:79%" aria-hidden="true">White dwarfs<small>Remnants</small></span>
+                            <span class="hr__tag hr__tag--strip" style="--x:53.5%;--y:19%" aria-hidden="true">Instability strip</span>
+
+                            <!-- Plotted stars. --x and --y come from the
+                                 transform documented in stars.css §1. -->
+                            <span class="hr-star" style="--x:54.90%;--y:6.43%;--d:15px;--c:var(--sp-a);--g:var(--gl-a);--lx:11px">
+                                <span class="hr-star__n">Deneb</span>
+                                <span class="hr-star__d">Deneb &middot; A2&nbsp;Ia<br>8,525&nbsp;K &middot; <b>196,000 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star hr-star--l" style="--x:84.58%;--y:8.18%;--d:16px;--c:var(--sp-m);--g:var(--gl-m);--lx:-11px">
+                                <span class="hr-star__n">Betelgeuse</span>
+                                <span class="hr-star__d">Betelgeuse &middot; M1&ndash;2&nbsp;Ia-ab<br>3,600&nbsp;K &middot; <b>126,000 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star" style="--x:42.84%;--y:8.37%;--d:15px;--c:var(--sp-b);--g:var(--gl-b);--lx:11px">
+                                <span class="hr-star__n">Rigel</span>
+                                <span class="hr-star__d">Rigel &middot; B8&nbsp;Ia<br>12,100&nbsp;K &middot; <b>120,000 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star" style="--x:84.00%;--y:10.18%;--d:15px;--c:var(--sp-m);--g:var(--gl-m);--lx:11px;--ly:13px">
+                                <span class="hr-star__n">Antares</span>
+                                <span class="hr-star__d">Antares &middot; M1.5&nbsp;Iab<br>3,660&nbsp;K &middot; <b>75,900 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star" style="--x:21.64%;--y:15.35%;--d:12px;--c:var(--sp-b);--g:var(--gl-b);--lx:10px">
+                                <span class="hr-star__n">Spica</span>
+                                <span class="hr-star__d">Spica &middot; B1&nbsp;III-IV<br>22,400&nbsp;K &middot; <b>20,500 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star" style="--x:66.90%;--y:26.36%;--d:13px;--c:var(--sp-f);--g:var(--gl-f);--lx:10px">
+                                <span class="hr-star__n">Polaris</span>
+                                <span class="hr-star__d">Polaris &middot; F7&nbsp;Ib<br>6,015&nbsp;K &middot; <b>1,260 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star" style="--x:81.73%;--y:30.52%;--d:13px;--c:var(--sp-k);--g:var(--gl-k);--lx:10px">
+                                <span class="hr-star__n">Aldebaran</span>
+                                <span class="hr-star__d">Aldebaran &middot; K5&nbsp;III<br>3,910&nbsp;K &middot; <b>439 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star hr-star--l" style="--x:78.53%;--y:34.27%;--d:12px;--c:var(--sp-k);--g:var(--gl-k);--lx:-10px">
+                                <span class="hr-star__n">Arcturus</span>
+                                <span class="hr-star__d">Arcturus &middot; K1.5&nbsp;III<br>4,290&nbsp;K &middot; <b>170 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star hr-star--l" style="--x:41.83%;--y:31.82%;--d:10px;--c:var(--sp-b);--g:var(--gl-b);--lx:-10px">
+                                <span class="hr-star__n">Regulus</span>
+                                <span class="hr-star__d">Regulus &middot; B8&nbsp;IVn<br>12,460&nbsp;K &middot; <b>316 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star hr-star--l" style="--x:50.81%;--y:39.98%;--d:9px;--c:var(--sp-a);--g:var(--gl-a);--lx:-9px">
+                                <span class="hr-star__n">Vega</span>
+                                <span class="hr-star__d">Vega &middot; A0&nbsp;V<br>9,600&nbsp;K &middot; <b>40 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star" style="--x:49.61%;--y:41.77%;--d:9px;--c:var(--sp-a);--g:var(--gl-a);--lx:9px;--ly:9px">
+                                <span class="hr-star__n">Sirius A</span>
+                                <span class="hr-star__d">Sirius A &middot; A1&nbsp;V<br>9,940&nbsp;K &middot; <b>25.4 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star hr-star--l" style="--x:59.08%;--y:45.22%;--d:8px;--c:var(--sp-a);--g:var(--gl-a);--lx:-9px">
+                                <span class="hr-star__n">Altair</span>
+                                <span class="hr-star__d">Altair &middot; A7&nbsp;V<br>7,550&nbsp;K &middot; <b>10.6 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star" style="--x:64.11%;--y:46.90%;--d:8px;--c:var(--sp-f);--g:var(--gl-f);--lx:9px">
+                                <span class="hr-star__n">Procyon A</span>
+                                <span class="hr-star__d">Procyon A &middot; F5&nbsp;IV-V<br>6,530&nbsp;K &middot; <b>6.9 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star" style="--x:68.21%;--y:52.90%;--d:8px;--c:var(--sp-g);--g:var(--gl-g);--lx:10px;--ly:-9px">
+                                <span class="hr-star__n">&alpha; Cen A</span>
+                                <span class="hr-star__d">&alpha; Centauri A &middot; G2&nbsp;V<br>5,790&nbsp;K &middot; <b>1.52 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star hr-star--sun hr-star--l" style="--x:68.32%;--y:54.55%;--c:var(--sp-g);--g:var(--gl-g);--lx:-13px;--ly:10px">
+                                <span class="hr-star__n">The Sun</span>
+                                <span class="hr-star__d">The Sun &middot; G2&nbsp;V<br>5,772&nbsp;K &middot; <b>1 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star" style="--x:71.52%;--y:57.28%;--d:8px;--c:var(--sp-k);--g:var(--gl-k);--lx:10px;--ly:9px">
+                                <span class="hr-star__n">&alpha; Cen B</span>
+                                <span class="hr-star__d">&alpha; Centauri B &middot; K1&nbsp;V<br>5,260&nbsp;K &middot; <b>0.50 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star" style="--x:17.86%;--y:65.93%;--d:6px;--c:#dbe6ff;--g:rgba(190,214,255,.6);--lx:9px">
+                                <span class="hr-star__n">Sirius B</span>
+                                <span class="hr-star__d">Sirius B &middot; DA2 white dwarf<br>25,000&nbsp;K &middot; <b>0.056 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star" style="--x:58.22%;--y:84.63%;--d:5px;--c:#f4f2ff;--g:rgba(226,230,255,.55);--lx:9px">
+                                <span class="hr-star__n">Procyon B</span>
+                                <span class="hr-star__d">Procyon B &middot; DQZ white dwarf<br>7,740&nbsp;K &middot; <b>0.00049 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star hr-star--l" style="--x:89.39%;--y:76.87%;--d:6px;--c:var(--sp-m);--g:var(--gl-m);--lx:-9px">
+                                <span class="hr-star__n">Barnard's Star</span>
+                                <span class="hr-star__d">Barnard's Star &middot; M4&nbsp;V<br>3,130&nbsp;K &middot; <b>0.0035 L&#9737;</b></span>
+                            </span>
+
+                            <span class="hr-star hr-star--l" style="--x:90.37%;--y:79.72%;--d:6px;--c:var(--sp-m);--g:var(--gl-m);--lx:-9px;--ly:14px">
+                                <span class="hr-star__n">Proxima Centauri</span>
+                                <span class="hr-star__d">Proxima Centauri &middot; M5.5&nbsp;V<br>3,042&nbsp;K &middot; <b>0.0017 L&#9737;</b></span>
+                            </span>
+                        </div>
+
+                        <!-- Absolute magnitude, the observer's version of
+                             the same y axis. M = 4.74 − 2.5 log(L/L☉) -->
+                        <div class="hr__ax hr__ax--mag">
+                            <span class="hr__ax-name">Absolute magnitude</span>
+                            <span class="hr__t" style="--at:0.95%">&minus;10</span>
+                            <span class="hr__t" style="--at:19.13%">&minus;5</span>
+                            <span class="hr__t" style="--at:37.31%">0</span>
+                            <span class="hr__t" style="--at:55.49%">+5</span>
+                            <span class="hr__t" style="--at:73.67%">+10</span>
+                            <span class="hr__t" style="--at:91.85%">+15</span>
+                        </div>
+
+                        <!-- Temperature axis -->
+                        <div class="hr__ax hr__ax--temp">
+                            <span class="hr__t" style="--at:1.67%">40,000</span>
+                            <span class="hr__t" style="--at:25.54%">20,000</span>
+                            <span class="hr__t" style="--at:49.40%">10,000</span>
+                            <span class="hr__t" style="--at:59.30%">7,500</span>
+                            <span class="hr__t" style="--at:66.98%">6,000</span>
+                            <span class="hr__t" style="--at:73.26%">5,000</span>
+                            <span class="hr__t" style="--at:80.94%">4,000</span>
+                            <span class="hr__t" style="--at:90.85%">3,000</span>
+                            <span class="hr__t" style="--at:97.13%">2,500</span>
+                            <span class="hr__ax-name">Effective temperature (K) &mdash; decreasing &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div class="hr__key">
+                        <span style="--key-c:var(--sp-b)"><i></i> Main sequence &mdash; core hydrogen fusion</span>
+                        <span style="--key-c:var(--sp-k)"><i></i> Giants &mdash; shell fusion, envelope expanded</span>
+                        <span style="--key-c:var(--sp-a)"><i></i> Supergiants &mdash; the most massive, near the end</span>
+                        <span style="--key-c:#dbe6ff"><i></i> White dwarfs &mdash; no fusion, just cooling</span>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 03</span>
+                        Both axes are base-10; temperature decreases to the right, which is the original convention and the reason the diagram looks reversed. Population regions are indicative envelopes, not measured densities. Betelgeuse's luminosity is uncertain by roughly &plusmn;30%. &alpha;&nbsp;Centauri&nbsp;A sits almost exactly on the Sun because it very nearly is one.
+                    </figcaption>
+                </figure>
+
+                <!-- Same figures, available to screen readers and to
+                     anyone who cannot use a hover. -->
+                <table class="sr-only">
+                    <caption>Stars plotted in Figure 3, with effective temperature and luminosity</caption>
+                    <thead><tr><th>Star</th><th>Spectral type</th><th>Temperature (K)</th><th>Luminosity (solar units)</th></tr></thead>
+                    <tbody>
+                        <tr><td>Deneb</td><td>A2 Ia</td><td>8,525</td><td>196,000</td></tr>
+                        <tr><td>Betelgeuse</td><td>M1–2 Ia-ab</td><td>3,600</td><td>126,000</td></tr>
+                        <tr><td>Rigel</td><td>B8 Ia</td><td>12,100</td><td>120,000</td></tr>
+                        <tr><td>Antares</td><td>M1.5 Iab</td><td>3,660</td><td>75,900</td></tr>
+                        <tr><td>Spica</td><td>B1 III-IV</td><td>22,400</td><td>20,500</td></tr>
+                        <tr><td>Polaris</td><td>F7 Ib</td><td>6,015</td><td>1,260</td></tr>
+                        <tr><td>Aldebaran</td><td>K5 III</td><td>3,910</td><td>439</td></tr>
+                        <tr><td>Regulus</td><td>B8 IVn</td><td>12,460</td><td>316</td></tr>
+                        <tr><td>Arcturus</td><td>K1.5 III</td><td>4,290</td><td>170</td></tr>
+                        <tr><td>Vega</td><td>A0 V</td><td>9,600</td><td>40</td></tr>
+                        <tr><td>Sirius A</td><td>A1 V</td><td>9,940</td><td>25.4</td></tr>
+                        <tr><td>Altair</td><td>A7 V</td><td>7,550</td><td>10.6</td></tr>
+                        <tr><td>Procyon A</td><td>F5 IV-V</td><td>6,530</td><td>6.9</td></tr>
+                        <tr><td>Alpha Centauri A</td><td>G2 V</td><td>5,790</td><td>1.52</td></tr>
+                        <tr><td>The Sun</td><td>G2 V</td><td>5,772</td><td>1</td></tr>
+                        <tr><td>Alpha Centauri B</td><td>K1 V</td><td>5,260</td><td>0.50</td></tr>
+                        <tr><td>Sirius B</td><td>DA2 white dwarf</td><td>25,000</td><td>0.056</td></tr>
+                        <tr><td>Barnard's Star</td><td>M4 V</td><td>3,130</td><td>0.0035</td></tr>
+                        <tr><td>Proxima Centauri</td><td>M5.5 V</td><td>3,042</td><td>0.0017</td></tr>
+                        <tr><td>Procyon B</td><td>DQZ white dwarf</td><td>7,740</td><td>0.00049</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="note">
+                        <span class="note__title">How to read it</span>
+                        <ul class="note__list">
+                            <li><strong>Left is hot.</strong> Temperature decreases to the right. Hertzsprung and Russell plotted spectral class along the bottom, and O came first, so the axis has run backwards ever since.</li>
+                            <li><strong>Up is bright.</strong> Eleven decades of luminosity, from a ten-thousandth of the Sun to a million times it.</li>
+                            <li><strong>The diagonal is a mass sequence.</strong> Position along the main sequence is set by mass: hot and bright at the top, cool and faint at the bottom.</li>
+                            <li><strong>Off the diagonal means finished.</strong> A star leaves the main sequence when its core runs out of hydrogen. Where it goes next depends on how heavy it started.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">The two vertical gaps</span>
+                        <ul class="note__list">
+                            <li><strong>Above the sequence:</strong> giants and supergiants have the same surface temperature as ordinary stars but are hundreds of times brighter. Since brightness depends on area, they must be enormous — which is how we knew stars could be that large before we could resolve one.</li>
+                            <li><strong>Below the sequence:</strong> Sirius B is hotter than Sirius A but 450 times fainter. The only way to be hot and dim is to be tiny. That reasoning identified white dwarfs as Earth-sized objects with the mass of a star.</li>
+                            <li><strong>The hatched strip</strong> marks where a star's envelope cannot find equilibrium and pulses instead. Cepheids live at its top, RR&nbsp;Lyrae variables lower down.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             04 · FORMATION
+             ============================================================ -->
+        <section class="shell shell--abyss shell--seam" id="formation">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">04</span> Formation</p>
+                    <h2 class="head__title">It starts with a cloud that is <em>too cold to resist</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Star formation is a race between gravity and pressure inside a cloud of molecular hydrogen. Where the cloud is dense and cold enough, pressure loses. What follows takes about ten million years and turns a diffuse region tens of light years across into an object the size of the Sun.</p>
+                </header>
+
+                <ol class="track">
+                    <li class="track__step">
+                        <span class="track__time">t = 0<b>Free-fall begins</b></span>
+                        <div class="track__scene">
+                            <span class="scene-cloud" aria-hidden="true"></span>
+                        </div>
+                        <h3 class="track__label">Molecular cloud</h3>
+                        <p class="track__text">Hydrogen at 10&ndash;20&nbsp;K, dense enough for molecules to survive. Dust makes it opaque, which is why these regions look like holes in the sky. A disturbance &mdash; a passing shock, a nearby supernova &mdash; pushes part of it over the threshold.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">~100,000 yr<b>Core forms</b></span>
+                        <div class="track__scene">
+                            <span class="scene-collapse" aria-hidden="true"></span>
+                        </div>
+                        <h3 class="track__label">Collapse</h3>
+                        <p class="track__text">Fragments contract and fragment again. Gravitational energy converts to heat, the centre becomes opaque to its own infrared, and the trapped heat builds a genuine pressure-supported core for the first time.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">~10&#8309; yr<b>Accretion</b></span>
+                        <div class="track__scene">
+                            <span class="scene-proto" aria-hidden="true"></span>
+                        </div>
+                        <h3 class="track__label">Protostar</h3>
+                        <p class="track__text">Conservation of angular momentum flattens the infalling material into a disc. Magnetic fields channel some of it back out along the rotation axis as two opposed jets &mdash; the most recognisable signature of a star being built.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">~10&#8311; yr<b>Disc clears</b></span>
+                        <div class="track__scene">
+                            <span class="scene-ttauri" aria-hidden="true">
+                                <span class="star star--k" style="--st-d:40px;--st-cycle:3.5s">
+                                    <span class="star__corona"></span>
+                                    <span class="star__disc"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <h3 class="track__label">T Tauri phase</h3>
+                        <p class="track__text">The star is nearly assembled but not yet fusing. It is variable, magnetically violent, and still contracting. The disc thins and develops gaps where planets are sweeping their orbits clear.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">~10&#8311; yr<b>Equilibrium</b></span>
+                        <div class="track__scene">
+                            <span class="scene-zams" aria-hidden="true">
+                                <span class="star star--g" style="--st-d:52px;--st-cycle:7s">
+                                    <span class="star__corona"></span>
+                                    <span class="star__disc"></span>
+                                    <span class="star__grain"></span>
+                                    <span class="star__spikes"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <h3 class="track__label">Ignition</h3>
+                        <p class="track__text">The core reaches about 10&nbsp;million&nbsp;K and hydrogen fusion begins. Outward pressure finally matches gravity, contraction stops, and the star arrives on the main sequence &mdash; where it will spend ninety per cent of its life.</p>
+                    </li>
+                </ol>
+
+                <p class="caption">
+                    <span class="caption__id">Fig 04</span>
+                    Timings are for a roughly solar-mass star. A 30&nbsp;M&#9737; star runs the same sequence in under 100,000 years; a 0.1&nbsp;M&#9737; star takes several hundred million.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             05 · EVOLUTION
+             ============================================================ -->
+        <section class="shell shell--void" id="evolution">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">05</span> Evolution</p>
+                    <h2 class="head__title">One number at birth decides <em>the whole story</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">A star's initial mass fixes its temperature, its brightness, how long it lasts and how it ends. Five bands of mass produce five entirely different endings, and the boundaries between them are sharp.</p>
+                </header>
+
+                <div class="fork" role="img" aria-label="Five evolutionary tracks by initial mass: below 0.08 solar masses becomes a brown dwarf; 0.08 to 0.5 becomes a helium white dwarf; 0.5 to 8 becomes a planetary nebula and white dwarf; 8 to 20 becomes a supernova and neutron star; above 20 becomes a supernova and black hole.">
+                    <div class="fork__track fork__track--sub">
+                        <span class="fork__mass">&lt; 0.08 M&#9737;<small>Substellar</small></span>
+                        <div class="fork__chain">
+                            <span class="fork__node" style="--nd:7px"><i></i><b>Collapsing core</b></span>
+                            <span class="fork__node" style="--nd:8px"><i></i><b>Never ignites</b></span>
+                            <span class="fork__node" style="--nd:7px"><i></i><b>Cools forever</b></span>
+                        </div>
+                        <span class="fork__end fork__end--dim">Brown dwarf</span>
+                    </div>
+
+                    <div class="fork__track fork__track--dwarf">
+                        <span class="fork__mass">0.08 &ndash; 0.5 M&#9737;<small>Red dwarf</small></span>
+                        <div class="fork__chain">
+                            <span class="fork__node" style="--nd:8px"><i></i><b>Main sequence</b></span>
+                            <span class="fork__node" style="--nd:9px"><i></i><b>Fully convective</b></span>
+                            <span class="fork__node" style="--nd:7px"><i></i><b>Slow exhaustion</b></span>
+                        </div>
+                        <span class="fork__end">Helium white dwarf</span>
+                    </div>
+
+                    <div class="fork__track fork__track--solar">
+                        <span class="fork__mass">0.5 &ndash; 8 M&#9737;</span>
+                        <div class="fork__chain">
+                            <span class="fork__node" style="--nd:9px"><i></i><b>Main sequence</b></span>
+                            <span class="fork__node" style="--nd:16px;--nd-c:var(--sp-k)"><i></i><b>Red giant</b></span>
+                            <span class="fork__node" style="--nd:11px;--nd-c:var(--sp-a)"><i></i><b>Helium flash</b></span>
+                            <span class="fork__node" style="--nd:18px;--nd-c:var(--sp-a)"><i></i><b>Planetary nebula</b></span>
+                        </div>
+                        <span class="fork__end">Carbon white dwarf</span>
+                    </div>
+
+                    <div class="fork__track fork__track--massive">
+                        <span class="fork__mass">8 &ndash; 20 M&#9737;<small>Massive</small></span>
+                        <div class="fork__chain">
+                            <span class="fork__node" style="--nd:12px"><i></i><b>Main sequence</b></span>
+                            <span class="fork__node" style="--nd:20px;--nd-c:var(--sp-m)"><i></i><b>Red supergiant</b></span>
+                            <span class="fork__node" style="--nd:10px;--nd-c:#ffffff"><i></i><b>Iron core</b></span>
+                            <span class="fork__node" style="--nd:14px;--nd-c:#ff9a7a"><i></i><b>Type II supernova</b></span>
+                        </div>
+                        <span class="fork__end">Neutron star</span>
+                    </div>
+
+                    <div class="fork__track fork__track--giant">
+                        <span class="fork__mass">&gt; 20 M&#9737;<small>Very massive</small></span>
+                        <div class="fork__chain">
+                            <span class="fork__node" style="--nd:14px"><i></i><b>Main sequence</b></span>
+                            <span class="fork__node" style="--nd:16px;--nd-c:var(--sp-b)"><i></i><b>Wolf&ndash;Rayet</b></span>
+                            <span class="fork__node" style="--nd:13px;--nd-c:#ff9a7a"><i></i><b>Core collapse</b></span>
+                            <span class="fork__node" style="--nd:9px;--nd-c:#5a4a86"><i></i><b>Direct collapse</b></span>
+                        </div>
+                        <span class="fork__end">Black hole</span>
+                    </div>
+                </div>
+
+                <p class="caption">
+                    <span class="caption__id">Fig 05</span>
+                    Boundaries are approximate and depend on metallicity and rotation. The 8&nbsp;M&#9737; line is the sharpest: below it a star cannot fuse carbon and must end as a white dwarf.
+                </p>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div>
+                        <h3 class="sub-title">The mass&ndash;lifetime inversion</h3>
+                        <p class="head__lede">A massive star has far more fuel and burns through it far faster. Luminosity rises roughly as the fourth power of mass while fuel rises only linearly, so lifetime collapses. This is the only ledger on CosmoVerse where more of the quantity produces a shorter bar &mdash; and that inversion is the entire point.</p>
+
+                        <div class="note" style="margin-top:2rem">
+                            <span class="note__title">Consequence</span>
+                            <ul class="note__list">
+                                <li>Every O-type star you can see was formed within the last few million years. They cannot be older; they do not last.</li>
+                                <li>No red dwarf has ever died. The universe is 13.8&nbsp;billion years old and their lifetimes run into the trillions, so every one ever formed is still shining.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <ol class="ledger ledger--life ledger--tinted">
+                            <li class="ledger__row ledger__row--m60 ledger__row--o-tint">
+                                <span class="ledger__label">60 M&#9737; <small>Class O</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">3 Myr</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m25 ledger__row--o-tint">
+                                <span class="ledger__label">25 M&#9737; <small>Class O</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">6 Myr</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m10 ledger__row--b-tint">
+                                <span class="ledger__label">10 M&#9737; <small>Class B</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">20 Myr</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m5 ledger__row--b-tint">
+                                <span class="ledger__label">5 M&#9737; <small>Class B</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">70 Myr</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m2 ledger__row--a-tint">
+                                <span class="ledger__label">2 M&#9737; <small>Class A</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">1.1 Gyr</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m1 ledger__row--g-tint">
+                                <span class="ledger__label">1 M&#9737; <small>The Sun</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">10 Gyr</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m05 ledger__row--k-tint">
+                                <span class="ledger__label">0.5 M&#9737; <small>Class K</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">80 Gyr</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m01 ledger__row--m-tint">
+                                <span class="ledger__label">0.1 M&#9737; <small>Class M</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">10 Tyr</span>
+                            </li>
+                        </ol>
+
+                        <p class="ledger__caption">
+                            <span>Base-10 axis &middot; 1 Myr to 13 Tyr</span>
+                            <span>Age of universe = 13.8 Gyr</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             06 · STAR TYPES
+             ============================================================ -->
+        <section class="shell shell--atmos shell--seam" id="types">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">06</span> Star types</p>
+                    <h2 class="head__title">The same physics, across <em>ten powers of ten</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Sizes below are illustrative and chosen for composition. The honest comparison is the ledger at the end of this section, which puts every one of them on a single logarithmic axis.</p>
+                </header>
+
+                <div class="plate-grid plate-grid--tall plate-grid--stars plate-grid--stagger">
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--m" style="--st-d:52px;--st-cycle:11s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">01 / 07</span>
+                            <span class="plate__index">Class M V</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Red dwarf</h3>
+                            <span class="chip">76% of all stars</span>
+                        </div>
+                        <p class="plate__text">Small, cool and fully convective, which lets them use nearly all their hydrogen instead of just the core. That efficiency buys them lifetimes in the trillions of years.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Mass</dt><dd>0.08 &ndash; 0.45 M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Temperature</dt><dd>2,400 &ndash; 3,700 K</dd></div>
+                            <div class="spec__row"><dt>Lifetime</dt><dd>&gt; 10&#185;&sup2; yr</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--g" style="--st-d:76px;--st-cycle:9s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span><span class="star__grain"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">02 / 07</span>
+                            <span class="plate__index">Class G V</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Yellow dwarf</h3>
+                            <span class="chip chip--outline">Our Sun</span>
+                        </div>
+                        <p class="plate__text">A middling star by every measure, which is precisely why it is the reference. Every mass, radius, luminosity and temperature on this site is quoted relative to this one object.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Mass</dt><dd>0.8 &ndash; 1.04 M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Temperature</dt><dd>5,200 &ndash; 6,000 K</dd></div>
+                            <div class="spec__row"><dt>Lifetime</dt><dd>~10 Gyr</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--b" style="--st-d:96px;--st-cycle:6s;--st-spike:0.85" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span><span class="star__spikes"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">03 / 07</span>
+                            <span class="plate__index">Class O&ndash;B</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Blue giant</h3>
+                            <span class="chip">Short-lived</span>
+                        </div>
+                        <p class="plate__text">Massive, blue-white and radiating overwhelmingly in the ultraviolet. They carve cavities in the clouds that made them and enrich the galaxy with heavy elements when they explode.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Mass</dt><dd>10 &ndash; 100 M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Temperature</dt><dd>10,000 &ndash; 50,000 K</dd></div>
+                            <div class="spec__row"><dt>Lifetime</dt><dd>1 &ndash; 20 Myr</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--k" style="--st-d:118px;--st-cycle:14s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">04 / 07</span>
+                            <span class="plate__index">Class K&ndash;M III</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Red giant</h3>
+                            <span class="chip chip--outline">Post-main-sequence</span>
+                        </div>
+                        <p class="plate__text">What happens when the core hydrogen runs out: the core contracts, the envelope swells enormously and the surface cools. The Sun will reach roughly Earth's present orbit doing this.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Radius</dt><dd>10 &ndash; 100 R&#9737;</dd></div>
+                            <div class="spec__row"><dt>Temperature</dt><dd>3,500 &ndash; 5,000 K</dd></div>
+                            <div class="spec__row"><dt>Duration</dt><dd>~1 Gyr</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--m" style="--st-d:140px;--st-cycle:16s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">05 / 07</span>
+                            <span class="plate__index">Class M I</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Red supergiant</h3>
+                            <span class="chip">Largest by volume</span>
+                        </div>
+                        <p class="plate__text">The most voluminous stars known. Their outer layers are so tenuous that the boundary is hard to define at all, and so weakly bound that they shed mass continuously.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Radius</dt><dd>200 &ndash; 1,500 R&#9737;</dd></div>
+                            <div class="spec__row"><dt>Temperature</dt><dd>3,000 &ndash; 4,500 K</dd></div>
+                            <div class="spec__row"><dt>Ends as</dt><dd>Type II supernova</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star" style="--st-d:34px;--st-c:#dbe6ff;--st-g:rgba(190,214,255,.6);--st-cycle:8s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">06 / 07</span>
+                            <span class="plate__index">Remnant</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">White dwarf</h3>
+                            <span class="chip chip--outline">No fusion</span>
+                        </div>
+                        <p class="plate__text">A stellar core with no fuel, held up by electron degeneracy pressure rather than heat. Earth-sized, star-massed, and doing nothing for the rest of time but radiating away leftover warmth.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Mass limit</dt><dd>1.4 M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Radius</dt><dd>~0.01 R&#9737;</dd></div>
+                            <div class="spec__row"><dt>Density</dt><dd>~10&#8313; kg/m&sup3;</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--neutron" style="--st-d:18px;--st-cycle:4s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span><span class="star__spikes"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">07 / 07</span>
+                            <span class="plate__index">Remnant</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Neutron star</h3>
+                            <span class="chip">Extreme</span>
+                        </div>
+                        <p class="plate__text">A city-sized ball of neutrons with more mass than the Sun. A teaspoon would weigh about a billion tonnes. Many spin hundreds of times a second and sweep beams of radio across the galaxy.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Mass</dt><dd>1.4 &ndash; 2.3 M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Radius</dt><dd>~10 km</dd></div>
+                            <div class="spec__row"><dt>Density</dt><dd>~10&#185;&#8311; kg/m&sup3;</dd></div>
+                        </dl>
+                    </article>
+                </div>
+
+                <div style="margin-top:5rem">
+                    <h3 class="sub-title">Radius, honestly</h3>
+                    <p class="head__lede" style="margin-bottom:2.5rem">From a 10-kilometre neutron star to a supergiant that would engulf Jupiter's orbit. Ten orders of magnitude cannot go on a linear axis, so this one is base-10.</p>
+
+                    <ol class="ledger ledger--radius ledger--tinted" role="img" aria-label="Stellar radii on a logarithmic axis, from a neutron star at 0.0000144 solar radii to UY Scuti at 909 solar radii.">
+                        <li class="ledger__row ledger__row--neutron ledger__row--ns-tint">
+                            <span class="ledger__label">Neutron star <small>Remnant</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">10 km</span>
+                        </li>
+                        <li class="ledger__row ledger__row--wd ledger__row--wd-tint">
+                            <span class="ledger__label">Sirius B <small>White dwarf</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">0.0084 R&#9737;</span>
+                        </li>
+                        <li class="ledger__row ledger__row--reddwarf ledger__row--m-tint">
+                            <span class="ledger__label">Proxima Centauri <small>Red dwarf</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">0.154 R&#9737;</span>
+                        </li>
+                        <li class="ledger__row ledger__row--sun ledger__row--g-tint">
+                            <span class="ledger__label">The Sun <small>Reference</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">1 R&#9737;</span>
+                        </li>
+                        <li class="ledger__row ledger__row--sirius ledger__row--a-tint">
+                            <span class="ledger__label">Sirius A <small>Main sequence</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">1.71 R&#9737;</span>
+                        </li>
+                        <li class="ledger__row ledger__row--arcturus ledger__row--k-tint">
+                            <span class="ledger__label">Arcturus <small>Red giant</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">25.4 R&#9737;</span>
+                        </li>
+                        <li class="ledger__row ledger__row--aldebaran ledger__row--k-tint">
+                            <span class="ledger__label">Aldebaran <small>Red giant</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">45.1 R&#9737;</span>
+                        </li>
+                        <li class="ledger__row ledger__row--betelgeuse ledger__row--m-tint">
+                            <span class="ledger__label">Betelgeuse <small>Red supergiant</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">~724 R&#9737;</span>
+                        </li>
+                        <li class="ledger__row ledger__row--uyscuti ledger__row--m-tint">
+                            <span class="ledger__label">UY Scuti <small>Red supergiant</small></span>
+                            <span class="ledger__track"><span class="ledger__fill"></span></span>
+                            <span class="ledger__value">~909 R&#9737;</span>
+                        </li>
+                    </ol>
+
+                    <p class="ledger__caption">
+                        <span>Base-10 axis &middot; 10&#8315;&#8309; to 10&sup3; R&#9737;</span>
+                        <span>1 R&#9737; = 695,700 km</span>
+                    </p>
+
+                    <p class="caption">
+                        <span class="caption__id">Fig 06</span>
+                        Supergiant radii carry large uncertainties &mdash; these stars have no sharp surface, and published values for UY Scuti have ranged from 750 to over 1,700 R&#9737;. Betelgeuse from NASA, 2024; UY Scuti from the current revised estimate.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             07 · BINARY & VARIABLE
+             ============================================================ -->
+        <section class="shell shell--rise" id="variable">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">07</span> Binary &amp; variable stars</p>
+                    <h2 class="head__title">Most stars come <em>in pairs</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Single stars like the Sun are the minority among massive stars. Pairs are extraordinarily useful: if two stars orbit each other, Kepler's third law gives their masses directly &mdash; and stellar mass is otherwise almost impossible to measure.</p>
+                </header>
+
+                <div class="split">
+                    <div>
+                        <h3 class="sub-title">An eclipsing pair</h3>
+                        <p class="head__lede">Both stars orbit a common barycentre, not each other. The more massive star circles closer in: Algol&nbsp;A is about 4.5&nbsp;times the mass of Algol&nbsp;B and so keeps a 4.5&nbsp;times tighter orbit. Seen nearly edge-on, each one passes in front of the other once per revolution.</p>
+
+                        <figure style="margin:2.5rem 0 0">
+                            <div class="binary" role="img" aria-label="Animated diagram of two stars orbiting a common barycentre, viewed nearly edge-on. The hot blue-white primary keeps a tight orbit; the cooler orange secondary swings much wider. Each passes in front of the other once per revolution.">
+                                <div class="binary__stage" aria-hidden="true">
+                                    <div class="binary__path binary__path--a"></div>
+                                    <div class="binary__path binary__path--b"></div>
+
+                                    <div class="binary__arm binary__arm--a">
+                                        <div class="binary__hub binary__hub--a">
+                                            <span class="binary__upright">
+                                                <span class="star star--b" style="--st-d:46px;--st-cycle:9s">
+                                                    <span class="star__corona"></span><span class="star__disc"></span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="binary__arm binary__arm--b">
+                                        <div class="binary__hub binary__hub--b">
+                                            <span class="binary__upright">
+                                                <span class="star star--k" style="--st-d:30px;--st-cycle:12s">
+                                                    <span class="star__corona"></span><span class="star__disc"></span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="binary__bary"></div>
+                                </div>
+                            </div>
+
+                            <div class="binary__legend">
+                                <span style="--key-c:var(--sp-b)"><i></i> Algol A &middot; B8 V &middot; 3.7 M&#9737;</span>
+                                <span style="--key-c:var(--sp-k)"><i></i> Algol B &middot; K0 IV &middot; 0.8 M&#9737;</span>
+                                <span style="--key-c:var(--accent)"><i></i> Barycentre</span>
+                            </div>
+
+                            <figcaption class="caption">
+                                <span class="caption__id">Fig 07</span>
+                                Orbit radii are inverse to mass, as they must be. Inclination and period are compressed for legibility; the real period is 2.87 days. Occlusion is not drawn in &mdash; the near star is genuinely nearer in three dimensions.
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <div>
+                        <h3 class="sub-title">Reading brightness over time</h3>
+                        <p class="head__lede">A light curve is the whole of observational variable-star astronomy in one plot. Its <em>shape</em> identifies the mechanism: two unequal dips per cycle means an eclipse, a sawtooth means the star itself is pulsing.</p>
+
+                        <figure style="margin:2.5rem 0 0">
+                            <div class="curve curve--algol" role="img" aria-label="Light curve of Algol: flat at magnitude 2.12, with a deep V-shaped primary eclipse to magnitude 3.39 and a much shallower secondary dip half a period later.">
+                                <span class="curve__grid" aria-hidden="true"></span>
+                                <span class="curve__fill" aria-hidden="true"></span>
+                                <span class="curve__line" aria-hidden="true"></span>
+                                <span class="curve__ax curve__ax--y">mag 1.9</span>
+                                <span class="curve__ax curve__ax--y2">mag 3.6</span>
+                                <span class="curve__ax curve__ax--x">Phase &rarr; 1 period</span>
+                                <span class="curve__pin" style="--x:25%;--y:84%">Primary eclipse</span>
+                                <span class="curve__pin" style="--x:75%;--y:30%">Secondary</span>
+                            </div>
+                            <figcaption class="caption">
+                                <span class="caption__id">Fig 08</span>
+                                Algol &middot; eclipsing binary &middot; period 2.867 d. The deep dip is the cool subgiant covering the hot primary; the shallow one is the reverse.
+                            </figcaption>
+                        </figure>
+
+                        <figure style="margin:2.5rem 0 0">
+                            <div class="curve curve--cepheid" role="img" aria-label="Light curve of Delta Cephei: a sawtooth rising rapidly from magnitude 4.37 to 3.48 then declining slowly back over the rest of the period.">
+                                <span class="curve__grid" aria-hidden="true"></span>
+                                <span class="curve__fill" aria-hidden="true"></span>
+                                <span class="curve__line" aria-hidden="true"></span>
+                                <span class="curve__ax curve__ax--y">mag 3.3</span>
+                                <span class="curve__ax curve__ax--y2">mag 4.5</span>
+                                <span class="curve__ax curve__ax--x">Phase &rarr; 1 period</span>
+                                <span class="curve__pin" style="--x:27%;--y:36%">Maximum</span>
+                            </div>
+                            <figcaption class="caption">
+                                <span class="caption__id">Fig 09</span>
+                                Delta Cephei &middot; classical Cepheid &middot; period 5.366 d. Fast rise, slow decline &mdash; the envelope overshoots outward and then falls back.
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div class="note">
+                        <span class="note__title">Kinds of binary</span>
+                        <ul class="note__list">
+                            <li><strong>Visual</strong> &mdash; far enough apart to resolve as two points. Alpha Centauri A and B.</li>
+                            <li><strong>Spectroscopic</strong> &mdash; unresolvable, but the spectral lines shift back and forth as the stars approach and recede.</li>
+                            <li><strong>Eclipsing</strong> &mdash; the orbit happens to lie edge-on to us, so the pair periodically dims. The only kind that gives radii directly.</li>
+                            <li><strong>Contact</strong> &mdash; so close that the two share an envelope and material flows from one to the other.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">Why Cepheids matter more than they should</span>
+                        <ul class="note__list">
+                            <li>In 1908 Henrietta Swan Leavitt found that a Cepheid's pulsation period predicts its true luminosity.</li>
+                            <li>Time the pulse and you know how bright it really is. Compare that with how bright it looks, and you have its distance.</li>
+                            <li>Edwin Hubble used exactly this on Cepheids in Andromeda in 1923 and proved it was a separate galaxy, not a nebula inside ours.</li>
+                            <li>The method is still the first rung of the cosmic distance ladder a century later.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             08 · FAMOUS STARS
+             ============================================================ -->
+        <section class="shell shell--void shell--seam" id="famous">
+            <div class="starfield" aria-hidden="true" style="--stars-opacity:0.6"></div>
+
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">08</span> Famous stars</p>
+                    <h2 class="head__title">Six that <em>taught us something</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Each of these is plotted in Figure&nbsp;3. Their positions there explain what they are; the notes here explain why they mattered.</p>
+                </header>
+
+                <div class="plate-grid plate-grid--tall plate-grid--stars">
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--a" style="--st-d:96px;--st-cycle:7s;--st-spike:0.9" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span><span class="star__spikes"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">&alpha; Canis Majoris</span>
+                            <span class="plate__index">8.6 ly</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Sirius</h3>
+                            <span class="chip">A1 V</span>
+                        </div>
+                        <p class="plate__text">The brightest star in the night sky, and a double. Its white dwarf companion was predicted from a wobble in 1844 and found in 1862 &mdash; the first evidence that stars could end as something small and dense.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Apparent mag</dt><dd>&minus;1.46</dd></div>
+                            <div class="spec__row"><dt>Temperature</dt><dd>9,940 K</dd></div>
+                            <div class="spec__row"><dt>Luminosity</dt><dd>25.4 L&#9737;</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--m" style="--st-d:136px;--st-cycle:15s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">&alpha; Orionis</span>
+                            <span class="plate__index">~548 ly</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Betelgeuse</h3>
+                            <span class="chip">M1&ndash;2 Ia-ab</span>
+                        </div>
+                        <p class="plate__text">A red supergiant near the end of its life. It dimmed dramatically in 2019&ndash;20, which turned out to be a dust cloud it had ejected itself rather than an imminent supernova. It will explode &mdash; but probably not soon.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Radius</dt><dd>~724 R&#9737;</dd></div>
+                            <div class="spec__row"><dt>Temperature</dt><dd>3,600 K</dd></div>
+                            <div class="spec__row"><dt>Luminosity</dt><dd>~126,000 L&#9737;</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--m" style="--st-d:40px;--st-cycle:5s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">&alpha; Centauri C</span>
+                            <span class="plate__index">4.2465 ly</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Proxima Centauri</h3>
+                            <span class="chip">M5.5 Ve</span>
+                        </div>
+                        <p class="plate__text">The closest star to the Sun, and completely invisible without a telescope at magnitude 11. It hosts at least one Earth-mass planet in its habitable zone &mdash; a zone tight enough that the planet is almost certainly tidally locked.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Apparent mag</dt><dd>+11.13</dd></div>
+                            <div class="spec__row"><dt>Mass</dt><dd>0.122 M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Luminosity</dt><dd>0.0017 L&#9737;</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--b" style="--st-d:112px;--st-cycle:6s;--st-spike:0.8" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span><span class="star__spikes"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">&beta; Orionis</span>
+                            <span class="plate__index">~860 ly</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Rigel</h3>
+                            <span class="chip">B8 Ia</span>
+                        </div>
+                        <p class="plate__text">A blue supergiant putting out 120,000 times the Sun's light. Despite being much further away than Betelgeuse it usually outshines it, and it will reach the same end far sooner.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Apparent mag</dt><dd>+0.13</dd></div>
+                            <div class="spec__row"><dt>Temperature</dt><dd>12,100 K</dd></div>
+                            <div class="spec__row"><dt>Luminosity</dt><dd>~120,000 L&#9737;</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--f" style="--st-d:112px;--st-cycle:8s" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">&alpha; Ursae Minoris</span>
+                            <span class="plate__index">~448 ly</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Polaris</h3>
+                            <span class="chip">F7 Ib</span>
+                        </div>
+                        <p class="plate__text">A Cepheid variable that happens to sit within a degree of the north celestial pole. It has not always been the pole star and will not remain one: Earth's axis precesses on a 26,000-year cycle.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Apparent mag</dt><dd>+1.98 var</dd></div>
+                            <div class="spec__row"><dt>Period</dt><dd>3.97 d</dd></div>
+                            <div class="spec__row"><dt>Luminosity</dt><dd>~1,260 L&#9737;</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="star star--a" style="--st-d:88px;--st-cycle:9s;--st-spike:0.85" aria-hidden="true">
+                                <span class="star__corona"></span><span class="star__disc"></span><span class="star__spikes"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">&alpha; Lyrae</span>
+                            <span class="plate__index">25.0 ly</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Vega</h3>
+                            <span class="chip">A0 V</span>
+                        </div>
+                        <p class="plate__text">For a century the zero point of the magnitude system &mdash; every brightness ever published was measured against it. It spins so fast, once every 12.5 hours, that it is measurably flattened at the poles.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Apparent mag</dt><dd>+0.03</dd></div>
+                            <div class="spec__row"><dt>Temperature</dt><dd>9,600 K</dd></div>
+                            <div class="spec__row"><dt>Luminosity</dt><dd>40 L&#9737;</dd></div>
+                        </dl>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             09 · CATALOG ENTRY POINT
+             ============================================================ -->
+        <section class="shell shell--abyss" id="catalog">
+            <div class="container">
+                <div class="split">
+                    <div>
+                        <header class="head" style="margin-bottom:2rem">
+                            <p class="eyebrow"><span class="eyebrow__id">09</span> Catalog</p>
+                            <h2 class="head__title">Thirty-two stars, <em>measured</em></h2>
+                            <div class="head__rule"></div>
+                            <p class="head__lede">The nearest stars and the brightest stars, with spectral type, distance, magnitude, mass, radius and temperature &mdash; filterable by spectral class. The two lists barely overlap, which is the most interesting thing about them.</p>
+                        </header>
+                        <a href="catalog/index.html" class="btn btn--primary">
+                            Open the star catalog
+                            <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                    </div>
+
+                    <div>
+                        <div class="pair">
+                            <div class="pair__item">
+                                <span class="star star--a" style="--st-d:78px;--st-cycle:7s;--st-spike:0.9" aria-hidden="true">
+                                    <span class="star__corona"></span><span class="star__disc"></span><span class="star__spikes"></span>
+                                </span>
+                                <span class="pair__cap"><b>Brightest</b>Sirius &middot; mag &minus;1.46</span>
+                            </div>
+                            <div class="pair__item">
+                                <span class="star star--m" style="--st-d:26px;--st-cycle:5s" aria-hidden="true">
+                                    <span class="star__corona"></span><span class="star__disc"></span>
+                                </span>
+                                <span class="pair__cap"><b>Nearest</b>Proxima &middot; mag +11.13</span>
+                            </div>
+                        </div>
+                        <p class="caption caption--center">
+                            <span class="caption__id">Fig 10</span>
+                            Drawn at honest relative size. The nearest star to the Sun is 6,500 times fainter than the brightest one in our sky.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             ONWARD
+             ============================================================ -->
+        <section class="shell shell--rise shell--seam">
+            <div class="container">
+                <div class="head head--center" style="margin-bottom:0">
+                    <p class="eyebrow eyebrow--bare">End of region 03</p>
+                    <h2 class="head__title">Some stars do not <em>settle for a remnant</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Above roughly twenty solar masses, the collapse at the end of the fork does not stop at a neutron star. Nothing stops it.</p>
+                    <p style="margin-top:2rem">
+                        <a href="../black-holes/index.html" class="btn btn--ghost">Continue to Black Holes <span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p class="footer-text">&copy; 2026 CosmoVerse &mdash; Explore beyond the horizon.</p>
+            <p class="footer-note">Region 03 &middot; Stellar &middot; Figures 01&ndash;10</p>
+        </div>
+    </footer>
+</body>
+</html>

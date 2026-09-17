@@ -1,0 +1,1422 @@
+/* ============================================================
+   COSMOVERSE — GALAXIES
+   ============================================================
+
+   THE VISUAL REFERENCE
+   --------------------
+   Every galaxy on this page is built from real astronomical
+   colour, not from a palette chosen to look good. Four rules
+   keep it out of sci-fi territory:
+
+   1. A galaxy has TWO STELLAR POPULATIONS and they are
+      different colours. The bulge and the halo are old — low
+      mass, cool, metal-poor stars — and they read warm ivory
+      through amber. The spiral arms are where gas is collapsing
+      right now, so they are full of O and B stars that live
+      only a few million years, and they read blue-white. This
+      single fact is why real spirals look like a gold coin
+      wrapped in blue thread, and it is the whole identity of
+      this domain.
+
+   2. DUST IS DARK, NOT GLOWING. The lanes threading a spiral
+      arm are cold silicate and carbon grains blocking the light
+      behind them. They are drawn as absence — deep umber and
+      black — never as luminous filaments.
+
+   3. VIOLET IS RESERVED FOR WHAT CANNOT BE SEEN. The dark
+      matter halo, the mass discrepancy in the rotation curve,
+      the unseen scaffolding of the cosmic web. Nothing that
+      emits light is ever violet on this page. The Black Holes
+      domain reserves the same hue for spacetime geometry, for
+      the same reason: one colour, one meaning, and the reader
+      learns it once.
+
+   4. NO NEON, NO PARTICLE CONFETTI. HII regions get a
+      restrained rose because hydrogen alpha really is rose at
+      656 nm. That is the warmest saturation on the page.
+
+   THE SIGNATURE GEOMETRY
+   ----------------------
+   The logarithmic spiral, r = a·e^(bθ). Every arm on this page
+   is plotted from it with a pitch angle of 18°, so b = 0.3249 —
+   a grand-design value, the kind M51 and M74 have. Arms are not
+   drawn freehand anywhere.
+
+   THE ONE IDEA THE PAGE IS BUILT AROUND
+   -------------------------------------
+   A galaxy rotates far too fast for the matter you can see.
+   Sections 05 through 07 walk from "here is rotation" to "here
+   is the curve that should fall and does not" to "here is the
+   halo that has to be there". The colour rule in point 3 is
+   what makes that argument visible rather than stated.
+   ============================================================ */
+
+
+/* ============================================================
+   1. PALETTE + POPULATIONS
+   ============================================================ */
+
+.dm-galaxies {
+    /* --- Old population -----------------------------------
+       Bulges, halos and ellipticals: 10-billion-year-old stars
+       with the massive blue ones long gone. Real integrated
+       colours run ivory to amber to a deep ember red. */
+    --old-core:  #fff6e2;
+    --old-hot:   #ffe7bb;
+    --old-mid:   #f6cd8c;
+    --old-warm:  #dfa964;
+    --old-deep:  #a4703c;
+    --old-edge:  #5c3c1f;
+
+    /* --- Young population ---------------------------------
+       Spiral arms. O and B stars a few million years old,
+       still sitting in the gas that made them. */
+    --young-core: #ffffff;
+    --young-hot:  #dfeaff;
+    --young-mid:  #a8c8ff;
+    --young-warm: #7aa6f0;
+    --young-deep: #3f6bb8;
+    --young-edge: #1d3260;
+
+    /* --- Dust ---------------------------------------------
+       Drawn as absence. Rule 2. */
+    --dust:      #2a1a10;
+    --dust-soft: rgba(28, 16, 9, 0.72);
+
+    /* --- HII regions --------------------------------------
+       Hydrogen alpha, 656 nm. The only saturated warm note. */
+    --hii:       #ff9ab0;
+    --hii-soft:  rgba(255, 154, 176, 0.4);
+
+    /* --- The unseen ---------------------------------------
+       Dark matter, the mass discrepancy, the cosmic web's
+       scaffolding. Rule 3: nothing luminous is ever this hue. */
+    --dark:      #c489ff;
+    --dark-mid:  rgba(196, 137, 255, 0.46);
+    --dark-soft: rgba(196, 137, 255, 0.16);
+    --dark-wash: rgba(196, 137, 255, 0.07);
+
+    /* Height of the sticky local index. */
+    --subnav-h:  46px;
+}
+
+/* Headings run gold into blue-white — the two populations, in
+   the type. The shared default ends on --accent-2, which here is
+   a hot magenta that belongs to nothing on this page, and using
+   it would also spend the violet reserved by rule 3. */
+.dm-galaxies .head__title em,
+.dm-galaxies .page-hero__title em {
+    background-image: linear-gradient(96deg,
+        var(--old-mid) 0%, var(--old-hot) 30%, var(--young-hot) 100%);
+}
+
+
+/* ============================================================
+   2. LOCAL INDEX
+   ------------------------------------------------------------
+   The third copy of this component; Stars and Black Holes each
+   carry their own. It is overdue for promotion to
+   components.css, but promoting it now would mean editing a
+   stylesheet three finished pages depend on, so it stays local
+   and the note stays here.
+   ============================================================ */
+
+.subnav {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 900;
+    background: rgba(4, 2, 10, 0.92);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    border-bottom: 1px solid var(--line);
+}
+
+/* The two populations as a 1px rule: old gold in the middle
+   where a bulge would be, young blue at the edges where the
+   arms are. */
+.subnav::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--young-deep) 10%,
+        var(--young-mid) 26%,
+        var(--old-hot) 50%,
+        var(--young-mid) 74%,
+        var(--young-deep) 90%,
+        transparent 100%);
+    opacity: 0.55;
+}
+
+.subnav__list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+/* Tighter than the Stars and Black Holes copies because this region
+   has fifteen sections rather than nine or twelve. At the wider
+   padding the last item wrapped onto a second row at 1440, which
+   both looks broken and doubles the sticky bar's height while
+   --subnav-h, used for anchor scroll-margin, still says 46px. */
+.subnav__list a {
+    position: relative;
+    padding: 0.85rem clamp(0.28rem, 0.62vw, 0.54rem);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+    transition: color var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child {
+    padding-left: 0;
+}
+
+.subnav__list a::after {
+    content: '';
+    position: absolute;
+    left: clamp(0.34rem, 0.8vw, 0.7rem);
+    right: clamp(0.34rem, 0.8vw, 0.7rem);
+    bottom: 0;
+    height: 1px;
+    background: var(--old-mid);
+    box-shadow: 0 0 8px rgba(246, 205, 140, 0.45);
+    transform: scaleX(0);
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+.subnav__list a:first-child::after {
+    left: 0;
+}
+
+.subnav__list a:hover {
+    color: var(--text);
+}
+
+.subnav__list a:hover::after {
+    transform: scaleX(1);
+}
+
+.shell[id],
+.page-hero[id] {
+    scroll-margin-top: calc(var(--header-h) + var(--subnav-h));
+}
+
+
+/* ============================================================
+   3. FIGURE CHROME
+   ------------------------------------------------------------
+   A diagram is a coordinate system. It cannot usefully reflow,
+   so below its natural width it scrolls inside its frame rather
+   than deforming.
+   ============================================================ */
+
+.fig {
+    margin: 0;
+}
+
+.fig__frame {
+    position: relative;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+.fig__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* SVG typography, in the same instrument voice as every other
+   label on the site. Sizes are user units, so they scale with
+   the viewBox instead of fighting it. */
+.svg-label,
+.svg-value,
+.svg-unit {
+    font-family: var(--font-mono);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.svg-label {
+    font-size: 12px;
+    fill: var(--text-2);
+}
+
+.svg-value {
+    font-size: 12px;
+    fill: var(--text);
+    letter-spacing: 0.05em;
+    text-transform: none;
+    font-variant-numeric: tabular-nums;
+}
+
+.svg-unit {
+    font-size: 10px;
+    fill: var(--text-4);
+}
+
+/* For labels that have to sit on top of a bright galaxy rather
+   than on the page background. Draws the glyph's own outline in
+   the void colour first, which keeps small mono type readable
+   over a lit disk without a solid label box behind it. The 8 kpc
+   ring label was invisible against the bulge before this. */
+.svg-onlight {
+    paint-order: stroke fill;
+    stroke: rgba(2, 1, 8, 0.88);
+    stroke-width: 3.4;
+    stroke-linejoin: round;
+}
+
+.svg-label--old   { fill: var(--old-mid); }
+.svg-label--young { fill: var(--young-mid); }
+.svg-label--dark  { fill: var(--dark); }
+.svg-label--hii   { fill: var(--hii); }
+.svg-label--lit   { fill: var(--old-hot); }
+
+/* Leader lines. Every callout elbows from the feature to a
+   shared vertical rail, so labels sit at fixed intervals down
+   that rail and cannot collide however tightly the features
+   themselves are packed. */
+.svg-leader {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    opacity: 0.7;
+}
+
+.svg-leader--old  { stroke: rgba(246, 205, 140, 0.42); }
+.svg-leader--dark { stroke: var(--dark-mid); }
+
+.svg-tick {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+}
+
+.svg-dash {
+    fill: none;
+    stroke-dasharray: 4 5;
+}
+
+.svg-grid {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 1;
+}
+
+.svg-axis {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+}
+
+
+/* ============================================================
+   4. HERO
+   ------------------------------------------------------------
+   The photograph carries the arrival; the crop and the grade
+   are the plate-imagery component in components.css. What is
+   added here is the horizon: a single logarithmic spiral arc
+   swept across the bottom of the frame, so the hero states the
+   page's geometry before any diagram does.
+   ============================================================ */
+
+.gx-hero__horizon {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 2;
+    height: min(46%, 340px);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.gx-hero__horizon svg {
+    position: absolute;
+    left: 50%;
+    bottom: -18%;
+    width: min(1700px, 150%);
+    height: auto;
+    transform: translateX(-50%);
+}
+
+.gx-arc {
+    fill: none;
+    stroke: url(#gxHorizonRamp);
+    stroke-width: 1.4;
+    opacity: 0.5;
+}
+
+.gx-arc--soft {
+    stroke-width: 7;
+    opacity: 0.09;
+    filter: blur(5px);
+}
+
+
+/* ============================================================
+   5. .gx — the compact galaxy primitive
+   ------------------------------------------------------------
+   Thumbnails for the type plates, the merger frames, the Local
+   Group map and the famous-galaxy plates. The spiral is a real
+   log spiral defined once as an SVG <symbol> in the document
+   and pulled in with <use>, because it appears eleven times and
+   drawing it eleven times in the markup would be indefensible.
+
+   Everything is sized from --gx-d so one instance can be a
+   34px dot on a map and another a 190px plate portrait without
+   a second set of rules.
+   ============================================================ */
+
+.gx {
+    display: block;
+    flex: none;
+    width: var(--gx-d, 150px);
+    height: var(--gx-d, 150px);
+}
+
+/* Face-on plates get the full spiral; the map and the scale
+   ladder tilt it, so the tilt lives on the instance. */
+.gx--tilt   { transform: rotateX(64deg) rotate(-18deg); }
+.gx--edge   { transform: rotateX(82deg); }
+
+/* The four type plates want two across, not three. The shared
+   .plate-grid--2 is auto-fit at minmax(320px, 1fr), which fits
+   three columns in a 1240px container and left the fourth plate
+   orphaned on its own row. */
+.gx-types {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Taller than --tall, because these portraits are 196px of
+   galaxy and the 222px shared stage clipped the outer arm. */
+.gx-types .plate__stage {
+    --stage-h: 248px;
+}
+
+@media (max-width: 760px) {
+    .gx-types {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* --- Shared fills used by every galaxy body ---------------- */
+.gx-bulge   { fill: url(#gxBulge); }
+.gx-disk    { fill: url(#gxDisk); }
+.gx-halo    { fill: url(#gxHalo); }
+/* Irregulars have no bulge, so their body cannot use the warm
+   disk ramp — that ramp's hot centre is what made the first
+   version look like three little galaxies stuck together. */
+.gx-irr     { fill: url(#gxIrr); }
+
+/* The shared plate stage draws an optical-axis hairline across
+   its middle for aligning drawn bodies. Through a galaxy it
+   reads as a scratch on the print, so it is suppressed on the
+   grids that hold galaxy portraits. */
+.gx-types .plate__stage::before,
+.gx-famous .plate__stage::before {
+    display: none;
+}
+
+/* Arms.
+
+   Three strokes on one path: a wide blurred bloom, a broad body,
+   and a thin bright core. The first version used a single 7-unit
+   stroke and the result was a swirl icon — two thin threads with
+   black between them and no galaxy anywhere. Real grand-design
+   arms are broad enough to overlap the disk light on both sides,
+   so the body stroke is now 15 units in a 236-unit box and the
+   bloom is four times that. The disk sheet underneath was also
+   nearly transparent, which is what left the arms floating; it
+   now carries real opacity so light fills the gaps between them. */
+.gx-arm {
+    fill: none;
+    stroke: var(--young-mid);
+    stroke-width: var(--arm-w, 15);
+    stroke-linecap: round;
+    opacity: 0.62;
+}
+
+.gx-arm--bloom {
+    stroke: var(--young-warm);
+    stroke-width: calc(var(--arm-w, 15) * 4.2);
+    opacity: 0.26;
+    filter: blur(7px);
+}
+
+.gx-arm--core {
+    stroke: var(--young-hot);
+    stroke-width: calc(var(--arm-w, 15) * 0.34);
+    opacity: 0.9;
+}
+
+/* Dust lane: just inside its arm, on the concave side, because
+   that is the side the compression happens on. Rule 2 — it
+   subtracts light rather than adding any. */
+.gx-dust {
+    fill: none;
+    stroke: var(--dust);
+    stroke-width: calc(var(--arm-w, 15) * 0.46);
+    stroke-linecap: round;
+    opacity: 0.6;
+}
+
+/* HII regions — the knots of active star formation strung along
+   the arms. Real ones are lumpy and unevenly spaced, so these
+   are placed individually rather than stepped along the path. */
+.gx-hii {
+    fill: var(--hii);
+    opacity: 0.58;
+}
+
+.gx-hii--glow {
+    fill: var(--hii);
+    opacity: 0.16;
+    filter: blur(3px);
+}
+
+/* Old halo stars and globular clusters: sparse, warm, and well
+   outside the disk, which is the point of drawing them. */
+.gx-globular {
+    fill: var(--old-warm);
+    opacity: 0.55;
+}
+
+
+/* ============================================================
+   6. ANATOMY
+   ------------------------------------------------------------
+   Five components in one edge-on section, because that is the
+   only orientation where a disk, a bulge and a halo can all be
+   distinguished at once. Face-on you cannot see the disk is
+   thin; edge-on you cannot see it is a spiral. The page shows
+   both and says which is which.
+   ============================================================ */
+
+.anat__disk    { fill: url(#anatDisk); }
+.anat__bulge   { fill: url(#anatBulge); }
+.anat__halo    { fill: url(#anatHalo); stroke: var(--old-edge); stroke-width: 1; stroke-dasharray: 3 6; }
+.anat__dust    { fill: var(--dust); opacity: 0.8; }
+
+/* The central black hole is four million solar masses inside a
+   region smaller than Neptune's orbit. At this scale it is not
+   drawable, so it is marked rather than depicted — a bracket
+   and a label, not a little sphere. */
+.anat__bh      { fill: #000000; stroke: var(--old-hot); stroke-width: 1; }
+.anat__bh-mark { fill: none; stroke: var(--old-hot); stroke-width: 1; opacity: 0.7; }
+
+.anat__arm     { fill: none; stroke: var(--young-mid); stroke-width: 4; opacity: 0.8; }
+.anat__globular{ fill: var(--old-warm); opacity: 0.5; }
+
+
+/* ============================================================
+   7. SPIRAL STRUCTURE
+   ------------------------------------------------------------
+   The section exists to kill one misconception: that arms are
+   objects. They are a traffic jam — a density wave that turns
+   at its own pattern speed while the stars and gas orbit
+   through it, faster on the inside. Two animations at two
+   different rates over the same centre is the only honest way
+   to show that, and it is the reason this figure moves at all.
+   ============================================================ */
+
+/* Rotation origin, for every turning group on the page.
+
+   transform-box: view-box with a 50% 50% origin means "the centre
+   of this SVG's own viewBox", so any figure that has to turn is
+   given its own <svg> with the galaxy centred in it. The obvious
+   alternative, fill-box, is the origin of the element's own
+   bounding box — correct for a centred ring, silently wrong for a
+   group holding a single marker, which would then orbit the
+   centre of itself and never move. */
+.spiral__pattern,
+.spiral__orbit,
+.rot__spoke {
+    transform-box: view-box;
+    transform-origin: 50% 50%;
+}
+
+.spiral__pattern {
+    animation: gx-turn 92s linear infinite;
+}
+
+/* Material orbits. Period scales with radius because the curve
+   is flat (v constant ⇒ T ∝ r), which is itself the dark-matter
+   result from two sections earlier — so the inner tracks really
+   do lap the outer ones, and by the right ratio. */
+.spiral__orbit {
+    animation: gx-turn var(--orbit-t, 30s) linear infinite;
+}
+
+.spiral__track {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+    stroke-dasharray: 2 6;
+    opacity: 0.5;
+}
+
+.spiral__star {
+    fill: var(--old-hot);
+}
+
+.spiral__star--young { fill: var(--young-hot); }
+
+@keyframes gx-turn {
+    to { transform: rotate(360deg); }
+}
+
+/* Counter-rotation for the "pattern stands still" panel: the
+   arms are held and the stars sweep through them. */
+.spiral__pattern--held { animation: none; }
+
+
+/* ============================================================
+   8. ROTATION
+   ------------------------------------------------------------
+   Two panels of the same disk, side by side, turning at the two
+   different rates the next section plots. Left: what the
+   visible mass predicts, outer markers falling behind. Right:
+   what is measured, outer markers keeping pace. The comparison
+   is the argument; the chart that follows is the evidence.
+   ============================================================ */
+
+.rot__disk {
+    fill: url(#rotDisk);
+}
+
+.rot__ring {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+    opacity: 0.42;
+}
+
+.rot__spoke {
+    animation: gx-turn var(--spoke-t, 24s) linear infinite;
+}
+
+/* Two panels of the same disk. Each gets its own <svg> so that
+   "centre of the viewBox" is also the centre of that galaxy —
+   one shared SVG would put only one of them on the origin. */
+.rot-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(var(--s-5), 3vw, var(--s-7));
+    align-items: start;
+}
+
+.rot-pair__panel {
+    min-width: 0;
+}
+
+.rot-pair__cap {
+    margin-top: var(--s-4);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.rot-pair__cap b {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+.rot-pair--pred .rot-pair__cap b { color: var(--young-mid); }
+.rot-pair--obs  .rot-pair__cap b { color: var(--old-hot); }
+
+.rot__marker {
+    fill: var(--young-hot);
+}
+
+.rot__marker--far { fill: var(--old-mid); }
+
+/* A radial reference line per radius, so "falling behind" reads as
+   a fan opening rather than as four dots you have to compare from
+   memory.
+
+   Neutral, not violet. These lines are drafting marks, and rule 3
+   reserves the violet for the unseen mass itself — spending it on
+   a construction line would blunt the one place it has to land,
+   which is the gap in the rotation curve overleaf. */
+.rot__ref {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1.2;
+    stroke-dasharray: 5 4;
+    opacity: 0.72;
+}
+
+
+/* ============================================================
+   9. ROTATION CURVE
+   ------------------------------------------------------------
+   The page's central chart. Two curves from the same galaxy:
+   the one Newtonian gravity predicts from the light you can
+   see, and the one the 21 cm line actually gives. They agree
+   out to about eight kiloparsecs and then separate, and the
+   gap between them is the section's whole subject — so the gap
+   is filled violet, per rule 3, rather than merely annotated.
+   ============================================================ */
+
+.curve__observed {
+    fill: none;
+    stroke: var(--old-hot);
+    stroke-width: 2.6;
+    stroke-linejoin: round;
+}
+
+.curve__observed-bloom {
+    fill: none;
+    stroke: var(--old-mid);
+    stroke-width: 9;
+    opacity: 0.14;
+    filter: blur(4px);
+}
+
+.curve__predicted {
+    fill: none;
+    stroke: var(--young-warm);
+    stroke-width: 2;
+    stroke-dasharray: 7 5;
+    stroke-linejoin: round;
+}
+
+/* The discrepancy, as a region rather than a caption. */
+.curve__gap {
+    fill: var(--dark-soft);
+    stroke: none;
+}
+
+.curve__gap-edge {
+    fill: none;
+    stroke: var(--dark-mid);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+}
+
+.curve__point       { fill: var(--old-hot); }
+.curve__point--pred { fill: var(--young-warm); }
+
+/* Where the Sun sits on its own galaxy's curve. */
+.curve__sun {
+    fill: var(--old-core);
+    stroke: var(--old-deep);
+    stroke-width: 1;
+}
+
+
+/* ============================================================
+   10. DARK MATTER HALO
+   ------------------------------------------------------------
+   Drawn to scale, which is the only way this figure is worth
+   drawing. The stellar disk is about 15 kpc in radius and the
+   halo runs out past 200, so at one shared scale the entire
+   visible galaxy is a scratch in the middle of the frame. That
+   is not a drafting problem to be fixed with a broken axis —
+   it is the finding.
+   ============================================================ */
+
+/* Boundary rings only — no fill.
+
+   These four shells are nested, so filling each of them stacked
+   four washes on top of the halo's own gradient at the centre and
+   turned a diffuse halo into a solid purple ball. The gradient
+   alone carries the density; the shells only mark the steps. */
+.halo__shell {
+    fill: none;
+    stroke: var(--dark-mid);
+    stroke-width: 1;
+    stroke-dasharray: 4 7;
+}
+
+.halo__fill {
+    fill: url(#haloFall);
+}
+
+.halo__visible {
+    fill: url(#haloDisk);
+}
+
+/* Inset that magnifies the scratch, with a frame and two leader
+   lines so the relationship between the two scales is stated
+   geometrically instead of in the caption. */
+.halo__inset-frame {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+}
+
+.halo__inset-tie {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+    opacity: 0.6;
+}
+
+
+/* ============================================================
+   11. FORMATION TRACK
+   ------------------------------------------------------------
+   Five stages from the first collapsing overdensities to a
+   present-day spiral. Restated from the Stars and Black Holes
+   copies for the same reason as the local index above, with the
+   scene wash pushed cool because early-universe scenes are
+   hydrogen and dark matter, not warm dust.
+   ============================================================ */
+
+.track {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--s-5);
+    counter-reset: stage;
+}
+
+.track__step {
+    position: relative;
+    counter-increment: stage;
+    padding-top: var(--s-6);
+}
+
+.track__step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: calc(var(--s-5) * -1);
+    height: 1px;
+    background: var(--line-2);
+}
+
+.track__step:last-child::before {
+    right: 0;
+    background: linear-gradient(90deg, var(--line-2) 0%, transparent 100%);
+}
+
+.track__step::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--void);
+    border: 1px solid var(--old-mid);
+    box-shadow: 0 0 10px rgba(246, 205, 140, 0.4);
+}
+
+.track__time {
+    display: block;
+    margin-bottom: var(--s-5);
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--old-mid);
+    opacity: 0.9;
+}
+
+.track__time b {
+    display: block;
+    margin-top: 3px;
+    font-weight: 400;
+    color: var(--text-4);
+}
+
+/* Soft-edged, like the Black Holes copy: these scenes are lit
+   objects with wide bloom, and a plain overflow clip cut the
+   bloom off with a straight edge on all four sides. */
+.track__scene {
+    position: relative;
+    height: 150px;
+    margin-bottom: var(--s-4);
+    background: radial-gradient(ellipse 70% 70% at 50% 52%,
+        rgba(30, 24, 62, 0.5) 0%, transparent 72%);
+    overflow: hidden;
+    -webkit-mask-image: radial-gradient(ellipse 78% 86% at 50% 50%,
+        #000 48%, transparent 100%);
+            mask-image: radial-gradient(ellipse 78% 86% at 50% 50%,
+        #000 48%, transparent 100%);
+}
+
+.track__label {
+    font-size: var(--t-md);
+    font-weight: 500;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.track__label::before {
+    content: counter(stage, decimal-leading-zero) ' ';
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.1em;
+    color: var(--text-4);
+}
+
+.track__text {
+    margin-top: var(--s-3);
+    font-size: var(--t-sm);
+    line-height: 1.62;
+    color: var(--text-3);
+}
+
+
+/* ============================================================
+   12. MERGERS
+   ------------------------------------------------------------
+   Four frames of the Milky Way and Andromeda, from approach to
+   a single elliptical. The pair drifts together on a loop
+   rather than sitting still, because the one thing a still
+   sequence cannot convey is that this is slow — four billion
+   years between frame one and frame four.
+   ============================================================ */
+
+.merge {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--s-5);
+}
+
+.merge__frame {
+    position: relative;
+}
+
+.merge__stage {
+    position: relative;
+    height: 190px;
+    margin-bottom: var(--s-4);
+    overflow: hidden;
+    background: radial-gradient(ellipse 76% 70% at 50% 50%,
+        rgba(24, 18, 48, 0.44) 0%, transparent 74%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 88% at 50% 50%,
+        #000 50%, transparent 100%);
+            mask-image: radial-gradient(ellipse 80% 88% at 50% 50%,
+        #000 50%, transparent 100%);
+}
+
+.merge__t {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--old-mid);
+}
+
+.merge__title {
+    margin-top: var(--s-3);
+    font-size: var(--t-md);
+    font-weight: 500;
+    letter-spacing: var(--track-tight);
+    color: var(--text);
+}
+
+.merge__text {
+    margin-top: var(--s-3);
+    font-size: var(--t-sm);
+    line-height: 1.62;
+    color: var(--text-3);
+}
+
+/* The approach. Two galaxies closing on each other and easing
+   back out, so the loop has no visible cut. */
+.merge__drift-a { animation: merge-close 16s ease-in-out infinite; }
+.merge__drift-b { animation: merge-close 16s ease-in-out infinite reverse; }
+
+@keyframes merge-close {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(14%); }
+}
+
+/* Tidal bridge and tails: the stars pulled out of both disks.
+   Drawn thin and warm because they are old disk stars, not new
+   star formation. */
+.merge__tail {
+    fill: none;
+    stroke: var(--old-warm);
+    stroke-width: 2;
+    opacity: 0.6;
+    stroke-linecap: round;
+}
+
+.merge__bridge {
+    fill: none;
+    stroke: var(--old-mid);
+    stroke-width: 1.6;
+    opacity: 0.45;
+    stroke-dasharray: 3 5;
+}
+
+/* A merger-driven starburst is genuinely rose — shocked gas
+   collapsing all at once across both disks. */
+.merge__burst {
+    fill: var(--hii);
+    opacity: 0.5;
+    filter: blur(2px);
+}
+
+
+/* ============================================================
+   13. MILKY WAY MAP
+   ------------------------------------------------------------
+   Face-on, four major arms, the bar, and us. Everything here is
+   a survey position rather than an artistic choice: the Sun sits
+   on the Orion Spur between the Sagittarius and Perseus arms,
+   about 26,000 light years out, which is a little over halfway
+   to the visible edge.
+
+   Drawn face-on and labelled with the caveat that no one has
+   ever seen it this way — we are inside it, and the far side is
+   behind the bulge.
+   ============================================================ */
+
+.mw__ring {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+    stroke-dasharray: 2 7;
+    opacity: 0.55;
+}
+
+/* Softer and less saturated than the first pass, which put a
+   0.85-opacity #a8c8ff line straight onto black and produced neon
+   wireframe. On a map this is a tracer through a disk, not a
+   glowing tube, so the core is desaturated towards white and both
+   layers are pulled back. */
+.mw__arm {
+    fill: none;
+    stroke: var(--young-warm);
+    stroke-width: 13;
+    stroke-linecap: round;
+    opacity: 0.24;
+    filter: blur(3px);
+}
+
+.mw__arm-core {
+    fill: none;
+    stroke: color-mix(in srgb, var(--young-hot) 74%, #ffffff);
+    stroke-width: 3.4;
+    stroke-linecap: round;
+    opacity: 0.5;
+}
+
+.mw__spur {
+    fill: none;
+    stroke: var(--young-mid);
+    stroke-width: 2;
+    opacity: 0.6;
+}
+
+.mw__bar {
+    fill: url(#mwBar);
+}
+
+.mw__bulge {
+    fill: url(#mwBulge);
+}
+
+/* Us. A ringed marker rather than a dot, because on a map this
+   size a dot is indistinguishable from an HII region. */
+.mw__sun      { fill: var(--old-core); }
+.mw__sun-ring { fill: none; stroke: var(--old-core); stroke-width: 1; opacity: 0.8; }
+
+/* This one scales rather than turns, so it wants the origin of its
+   own circle, not of the map. fill-box is correct here for exactly
+   the reason view-box is correct for the rotating groups. */
+.mw__sun-pulse {
+    fill: none;
+    stroke: var(--old-core);
+    stroke-width: 1;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: mw-ping 4.6s ease-out infinite;
+}
+
+@keyframes mw-ping {
+    0%   { transform: scale(0.6); opacity: 0.8; }
+    100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* The Sun's orbit, and the direction it is travelling. One
+   circuit is a galactic year: about 230 million of ours. */
+.mw__orbit {
+    fill: none;
+    stroke: var(--old-warm);
+    stroke-width: 1;
+    stroke-dasharray: 5 6;
+    opacity: 0.5;
+}
+
+
+/* ============================================================
+   14. LOCAL GROUP
+   ------------------------------------------------------------
+   About eighty members inside roughly ten million light years,
+   and almost all of the mass in two of them. Plotted on a
+   shared scale bar so the emptiness is legible: the Milky Way
+   and Andromeda are 2.5 million light years apart, and both are
+   only about a tenth of a million across.
+   ============================================================ */
+
+.lg__member      { fill: var(--old-mid); }
+.lg__member--big { fill: var(--old-hot); }
+.lg__dwarf       { fill: var(--old-warm); opacity: 0.7; }
+
+.lg__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    fill: var(--text-3);
+}
+
+/* The barycentre the two big spirals are falling towards, and
+   the line they are falling along. */
+.lg__axis {
+    fill: none;
+    stroke: var(--old-warm);
+    stroke-width: 1;
+    stroke-dasharray: 4 5;
+    opacity: 0.5;
+}
+
+.lg__bary {
+    fill: none;
+    stroke: var(--dark);
+    stroke-width: 1;
+    opacity: 0.7;
+}
+
+/* Approach vector. Andromeda is closing at about 110 km/s,
+   which is the rare case of a blueshifted galaxy. */
+.lg__vector {
+    fill: none;
+    stroke: var(--young-mid);
+    stroke-width: 1.4;
+}
+
+.lg__vector-tip { fill: var(--young-mid); }
+
+/* The group's own dark halo, which overlaps both spirals — one
+   of the cleanest arguments that the halos are much larger than
+   the galaxies sitting in them. */
+.lg__halo {
+    fill: var(--dark-wash);
+    stroke: var(--dark-mid);
+    stroke-width: 1;
+    stroke-dasharray: 3 6;
+}
+
+
+/* ============================================================
+   15. SCALE LADDER
+   ------------------------------------------------------------
+   Galaxy diameters across four orders of magnitude, on the
+   shared .ledger component. A dwarf spheroidal and a giant
+   elliptical are both called galaxies and differ by a factor of
+   forty in size and ten thousand in stellar mass, which is
+   worth one row each rather than a sentence.
+   ============================================================ */
+
+.ledger--old .ledger__fill {
+    background: linear-gradient(90deg,
+        var(--old-edge) 0%, var(--old-warm) 58%, var(--old-hot) 100%);
+    box-shadow: 0 0 14px -3px rgba(246, 205, 140, 0.5);
+}
+
+.ledger--old .ledger__fill::after {
+    background: var(--old-core);
+    box-shadow: 0 0 12px var(--old-hot);
+}
+
+.ledger--young .ledger__fill {
+    background: linear-gradient(90deg,
+        var(--young-edge) 0%, var(--young-warm) 58%, var(--young-hot) 100%);
+    box-shadow: 0 0 14px -3px rgba(168, 200, 255, 0.45);
+}
+
+.ledger--young .ledger__fill::after {
+    background: var(--young-core);
+    box-shadow: 0 0 12px var(--young-hot);
+}
+
+
+/* ============================================================
+   16. COSMIC WEB
+   ------------------------------------------------------------
+   The largest structure there is, and the last section before
+   the famous galaxies, because it is where a galaxy stops being
+   an object and becomes a pixel.
+
+   Filaments are violet — rule 3, since the scaffolding is dark
+   matter and the galaxies are only what lit up along it. Nodes
+   are warm because clusters are made of old red ellipticals.
+   Voids are left empty; the emptiness is the structure.
+   ============================================================ */
+
+.web__filament {
+    fill: none;
+    stroke: var(--dark-mid);
+    stroke-width: 1.2;
+    opacity: 0.5;
+}
+
+.web__filament--bright {
+    stroke: var(--dark);
+    stroke-width: 2;
+    opacity: 0.34;
+    filter: blur(2px);
+}
+
+.web__node {
+    fill: var(--old-mid);
+}
+
+.web__node--big {
+    fill: var(--old-hot);
+}
+
+.web__node-glow {
+    fill: var(--old-warm);
+    opacity: 0.2;
+    filter: blur(4px);
+}
+
+/* Faint, but not invisible. At --line and 0.5 the boundaries did
+   not render at all and the "Void" labels floated in black with
+   nothing to label. */
+.web__void {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    stroke-dasharray: 3 9;
+    opacity: 0.55;
+}
+
+/* A very slow drift, so the web reads as a structure being
+   surveyed rather than a static diagram. Nothing pulses. */
+.web__drift {
+    animation: web-drift 48s ease-in-out infinite;
+}
+
+@keyframes web-drift {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(-1.4%, 0.8%); }
+}
+
+.web__scan {
+    fill: none;
+    stroke: var(--old-hot);
+    stroke-width: 1;
+    opacity: 0.5;
+    stroke-dasharray: 260 1400;
+    animation: web-scan 26s linear infinite;
+}
+
+@keyframes web-scan {
+    to { stroke-dashoffset: -1660; }
+}
+
+
+/* ============================================================
+   17. MYTH / FACT
+   ------------------------------------------------------------
+   Claim on the left, correction on the right, hairline between.
+   Restated locally; the Black Holes copy is the other one.
+   ============================================================ */
+
+.myths {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+}
+
+.myth {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(var(--s-5), 4vw, var(--s-7));
+    padding: clamp(var(--s-5), 3vw, var(--s-6)) 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.myth__claim {
+    position: relative;
+    padding-left: var(--s-5);
+    font-size: var(--t-md);
+    line-height: 1.5;
+    color: var(--text-3);
+}
+
+/* A struck-through bullet: the claim is being withdrawn, and the
+   mark says so before the sentence does. */
+.myth__claim::before {
+    content: '';
+    position: absolute;
+    top: 0.72em;
+    left: 0;
+    width: 10px;
+    height: 1px;
+    background: var(--text-4);
+}
+
+.myth__claim strong {
+    font-weight: 500;
+    color: var(--text-2);
+}
+
+.myth__truth {
+    font-size: var(--t-sm);
+    line-height: 1.72;
+    color: var(--text-3);
+}
+
+.myth__truth strong {
+    font-weight: 500;
+    color: var(--old-hot);
+}
+
+
+/* ============================================================
+   18. REDUCED MOTION
+   ------------------------------------------------------------
+   Everything that moves on this page is illustrative, so all of
+   it can stop. The global rule in style.css collapses durations;
+   these overrides make sure nothing is left frozen in a state
+   that reads as broken. The rotation pair is the one figure that
+   loses its argument when still, so its two panels are parked at
+   different angles instead of the same one — the outer marker
+   visibly behind on the left, level on the right, which is the
+   comparison the animation was making.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .spiral__pattern,
+    .spiral__orbit,
+    .web__drift {
+        animation: none !important;
+    }
+
+    .web__scan,
+    .mw__sun-pulse {
+        animation: none !important;
+        display: none;
+    }
+
+    .merge__drift-a,
+    .merge__drift-b {
+        animation: none !important;
+        transform: none;
+    }
+
+    .rot__spoke {
+        animation: none !important;
+    }
+
+    /* Predicted panel: outer radii have fallen behind. */
+    .rot--pred .rot__spoke {
+        transform: rotate(var(--rest-pred, 0deg));
+    }
+
+    /* Measured panel: every radius still lines up. */
+    .rot--obs .rot__spoke {
+        transform: rotate(var(--rest-obs, 0deg));
+    }
+}
+
+
+/* ============================================================
+   19. RESPONSIVE
+   ------------------------------------------------------------
+   Desktop-first. Diagrams that are coordinate systems scroll
+   inside their frame rather than reflowing; everything that is
+   a grid of prose wraps.
+   ============================================================ */
+
+@media (max-width: 1180px) {
+    .merge {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: var(--s-7);
+    }
+}
+
+@media (max-width: 1024px) {
+    .track {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: var(--s-7);
+    }
+}
+
+@media (max-width: 900px) {
+    .myth {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--s-4);
+    }
+}
+
+/* The index becomes a horizontal scroller at 1023px, not at 860.
+
+   Fifteen items fit on one row down to 1024. Below that they wrap,
+   and with the scroller starting at 860 there was a dead band from
+   861 to about 1000 where the bar silently became two rows 92px
+   tall while --subnav-h, which every section's scroll-margin-top is
+   computed from, still claimed 46 — so every anchor jump landed
+   half a bar too low. Measured: 900px gave rows=2, navH=92. */
+@media (max-width: 1023px) {
+    .subnav__list {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .subnav__list::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media (max-width: 860px) {
+    /* Diagrams get a floor width and scroll inside their frame
+       rather than compressing their own labels into each other. */
+    .fig__frame {
+        padding-bottom: var(--s-3);
+    }
+
+    .fig__svg {
+        min-width: 700px;
+    }
+
+    .track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
+    .merge {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .merge__stage {
+        height: 210px;
+    }
+}
+
+@media (max-width: 560px) {
+    .track {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .track__scene {
+        height: 168px;
+    }
+}

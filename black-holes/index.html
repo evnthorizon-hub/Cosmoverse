@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Black holes — anatomy, gravitational lensing, event horizons, accretion disks, relativistic jets, tidal stretching, time dilation, and the three we have measured best: Sagittarius A*, M87* and Cygnus X-1.">
+    <meta name="keywords" content="black holes, event horizon, singularity, photon sphere, accretion disk, gravitational lensing, relativistic jets, spaghettification, time dilation, Sagittarius A*, M87, Cygnus X-1, Interstellar, Gargantua, astronomy">
+    <meta name="author" content="CosmoVerse">
+    <meta name="theme-color" content="#000000">
+    <title>Black Holes | CosmoVerse</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/black-holes.css">
+</head>
+<!-- dm-holes: accretion-disc orange and lensing violet on a black
+     that is genuinely #000000 — the one region where the void goes
+     absolute. black-holes.css adds the Gargantua disk ramp. -->
+<body class="dm-holes">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                CosmoVerse
+                <span class="logo-mark">Obs.</span>
+            </a>
+
+            <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+            <label for="mobile-menu-checkbox" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </label>
+
+            <nav class="nav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../solar-system/index.html" class="nav-link">Solar System</a></li>
+                    <li><a href="../stars/index.html" class="nav-link">Stars</a></li>
+                    <li><a href="index.html" class="nav-link active" aria-current="page">Black Holes</a></li>
+                    <li><a href="../galaxies/index.html" class="nav-link">Galaxies</a></li>
+                    <li><a href="../nebulae/index.html" class="nav-link">Nebulae</a></li>
+                    <li><a href="../cosmic-events/index.html" class="nav-link">Cosmic Events</a></li>
+                    <li><a href="../missions/index.html" class="nav-link">Missions</a></li>
+                    <li><a href="../exoplanets/index.html" class="nav-link">Exoplanets</a></li>
+                    <li><a href="../universe/index.html" class="nav-link">Universe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ============================================================
+             ARRIVAL — the Gargantua frame
+
+             This was a hand-built SVG of the same subject. The drawing
+             existed to show the five layers separately and to run the
+             disk at Keplerian speeds; the photograph shows the result
+             without the reconstruction, so that explanatory job now
+             belongs entirely to the anatomy, lensing and accretion-disk
+             figures further down, which is where a diagram belongs.
+
+             The source is 1920x1080 with the shadow dead centre, so
+             almost the whole frame is subject and the crop keeps nearly
+             all of it. Placed with object-fit: cover and never scaled
+             non-uniformly — the disk reading as circular is the whole
+             point. See section 4 of black-holes.css for the two crop
+             modes and why mobile needs a different one.
+             ============================================================ -->
+        <section class="bh-hero">
+            <div class="starfield" style="--stars-opacity:0.85" aria-hidden="true"></div>
+
+            <div class="bh-hero__stage">
+                <img class="bh-hero__img"
+                     src="../images/gargantua.webp"
+                     width="1920" height="1080" decoding="async"
+                     alt="The black hole Gargantua: a perfectly black circular shadow edged by a thin bright ring, a brilliant accretion disk crossing in front of it, and the lensed image of the disk's far side bent up over the top of the shadow and back under the bottom.">
+            </div>
+
+            <div class="container">
+                <p class="eyebrow"><span class="eyebrow__id">04</span> Region &middot; Collapsed</p>
+                <h1 class="page-hero__title">Black<em>Holes</em></h1>
+                <p class="page-hero__lede">Not objects. Regions. Enough mass has collapsed into a small enough volume that spacetime closes over the top, and every path that used to lead out now leads further in.</p>
+                <p class="page-hero__coords">
+                    <span>Shadow radius 2.6 R<sub>s</sub></span>
+                    <span>Escape velocity &gt; c</span>
+                    <span>Directly imaged 2019 &amp; 2022</span>
+                </p>
+            </div>
+
+            <div class="bh-hero__dock">
+                <div class="container">
+                    <dl class="readout readout--flush">
+                        <div class="readout__cell">
+                            <dt>Nearest known</dt>
+                            <dd>1,560 <small>ly</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>In the Milky Way</dt>
+                            <dd>~10&#8312; <small>est.</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Sgr A* horizon</dt>
+                            <dd>12.7 <small>M km</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Largest measured</dt>
+                            <dd>66 <small>bn M&#9737;</small></dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Directly imaged</dt>
+                            <dd>2</dd>
+                        </div>
+                        <div class="readout__cell">
+                            <dt>Escape route</dt>
+                            <dd>None</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             LOCAL INDEX
+             ============================================================ -->
+        <nav class="subnav" aria-label="Sections in this region">
+            <div class="subnav__list">
+                <a href="#anatomy">Anatomy</a>
+                <a href="#lensing">Lensing</a>
+                <a href="#horizon">Horizon</a>
+                <a href="#disk">Disk</a>
+                <a href="#jets">Jets</a>
+                <a href="#types">Types</a>
+                <a href="#formation">Formation</a>
+                <a href="#tides">Tides</a>
+                <a href="#time">Time</a>
+                <a href="#neutron">vs Neutron</a>
+                <a href="#real">Real Ones</a>
+                <a href="#facts">Myths</a>
+            </div>
+        </nav>
+
+
+        <!-- ============================================================
+             OPENING
+             ============================================================ -->
+        <section class="shell shell--abyss">
+            <div class="container">
+                <div class="split">
+                    <div class="prose prose--lede">
+                        <p>The render above is not an artist's impression. Its geometry comes from the same physics that produced the black hole in <em>Interstellar</em> &mdash; Kip Thorne wrote the equations, Double Negative built the renderer, and the result was accurate enough to yield two published papers.</p>
+                        <p>Everything strange about the image is a real prediction. The disk appears to pass over the top of the black hole because you are seeing its far side, with light bent through almost 180&deg; around the hole and delivered back to your eye. The bright rim hugging the shadow is light that orbited the hole one or more times before escaping. The black disc in the middle is 2.6 times wider than the event horizon it contains, because the hole magnifies its own silhouette.</p>
+                        <p>What you cannot see is the black hole itself. Every photon in the frame comes from gas outside it. A black hole has no surface, no substance and nothing to look at &mdash; only a region that light enters and does not leave.</p>
+                    </div>
+
+                    <div>
+                        <div class="note">
+                            <span class="note__title">Three things this page will not do</span>
+                            <ul class="note__list">
+                                <li><strong>Colour the disk.</strong> Accretion disks are thermal emission at millions of kelvin. They read white with amber edges. Every purple or cyan black hole you have seen was a choice made for a poster.</li>
+                                <li><strong>Put a texture on the shadow.</strong> It is <b>#000000</b> everywhere on this page. It occludes the starfield completely, because there is nothing there to emit.</li>
+                                <li><strong>Call it a hole in space.</strong> It is a region of spacetime, not a puncture in it. Nothing is torn, nothing leads anywhere, and it has a definite mass, spin and charge &mdash; three numbers, and that is the entire description.</li>
+                            </ul>
+                        </div>
+
+                        <div class="note" style="margin-top:2rem">
+                            <span class="note__title">One thing the film left out on purpose</span>
+                            <ul class="note__list">
+                                <li>A real disk is <strong>lopsided</strong>. The side rotating toward you is Doppler-boosted and can be many times brighter than the side rotating away. Thorne's simulations showed this correctly &mdash; and the filmmakers switched it off, because a black hole with one blazing edge read as a rendering error to test audiences. The disk here is symmetric for the same reason, and this is the one place the page departs from the physics.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             01 · ANATOMY
+             A schematic cross-section, deliberately in a different
+             register from the hero: the hero is what a camera would
+             record, this is what the geometry actually is. Radii are
+             to scale in Schwarzschild units.
+             ============================================================ -->
+        <!-- No lensing field behind this one: the figure is itself a
+             set of concentric circles, and the field's rings compete
+             with the very geometry being labelled. -->
+        <section class="shell shell--void shell--seam" id="anatomy">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">01</span> Anatomy</p>
+                    <h2 class="head__title">Six boundaries and <em>one place the maths stops</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">A black hole has no parts in the way a planet has parts. What it has is a set of nested radii, each defined by what happens to light there. Every one of them is measured in Schwarzschild radii &mdash; R<sub>s</sub> = 2GM/c&sup2; &mdash; and for a non-rotating hole that single number fixes all of them.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1120 640" role="img"
+                             aria-label="Cross-section of a non-rotating black hole showing, from the centre outward: the singularity, the event horizon at 1 Schwarzschild radius, the photon sphere at 1.5, the apparent shadow at 2.6, the innermost stable circular orbit at 3, the accretion disk beyond that, and twin relativistic jets along the spin axis.">
+                            <defs>
+                                <linearGradient id="anatJet" x1="0" y1="1" x2="0" y2="0">
+                                    <stop offset="0%"   stop-color="#d4e4ff" stop-opacity="0.5"/>
+                                    <stop offset="60%"  stop-color="#a8c8ff" stop-opacity="0.16"/>
+                                    <stop offset="100%" stop-color="#a8c8ff" stop-opacity="0"/>
+                                </linearGradient>
+                                <linearGradient id="anatDiskR" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0%"   stop-color="#fffdf7"/>
+                                    <stop offset="26%"  stop-color="#ffe3b0"/>
+                                    <stop offset="62%"  stop-color="#eda058"/>
+                                    <stop offset="100%" stop-color="#74431f" stop-opacity="0.35"/>
+                                </linearGradient>
+                                <linearGradient id="anatDiskL" x1="1" y1="0" x2="0" y2="0">
+                                    <stop offset="0%"   stop-color="#fffdf7"/>
+                                    <stop offset="26%"  stop-color="#ffe3b0"/>
+                                    <stop offset="62%"  stop-color="#eda058"/>
+                                    <stop offset="100%" stop-color="#74431f" stop-opacity="0.35"/>
+                                </linearGradient>
+                            </defs>
+
+                            <!-- Jets, along the spin axis -->
+                            <path class="anatomy__jet" d="M 316 250 L 344 250 L 358 40 L 302 40 Z" fill="url(#anatJet)"/>
+                            <path class="anatomy__jet" d="M 316 390 L 344 390 L 358 600 L 302 600 Z" fill="url(#anatJet)"/>
+
+                            <!-- Accretion disk, seen edge-on: two flaring
+                                 slabs, hottest at the inner edge -->
+                            <path d="M 468 313 L 630 296 L 630 344 L 468 327 Z" fill="url(#anatDiskR)"/>
+                            <path d="M 192 313 L 30 296 L 30 344 L 192 327 Z" fill="url(#anatDiskL)"/>
+
+                            <!-- ISCO · 3 Rs -->
+                            <circle class="anatomy__isco" cx="330" cy="320" r="138"/>
+                            <!-- Apparent shadow · 2.6 Rs. Drawn as a
+                                 faint filled region rather than another
+                                 dashed ring: it sits only 18 units
+                                 inside the ISCO, and two dashed rings
+                                 that close together read as one. -->
+                            <circle cx="330" cy="320" r="120" fill="rgba(255,246,232,0.05)" stroke="none"/>
+                            <!-- Photon sphere · 1.5 Rs -->
+                            <circle class="anatomy__photon" cx="330" cy="320" r="69"/>
+                            <!-- Ergosphere · schematic, spin-dependent -->
+                            <ellipse class="anatomy__ergo" cx="330" cy="320" rx="66" ry="46"/>
+                            <!-- Event horizon · 1 Rs -->
+                            <circle class="anatomy__horizon" cx="330" cy="320" r="46"/>
+                            <!-- Singularity: an absence, not an object -->
+                            <circle class="anatomy__sing" cx="330" cy="320" r="9"/>
+                            <text class="svg-label svg-label--geo" x="330" y="325" text-anchor="middle" style="font-size:13px">?</text>
+
+                            <!-- Callout rail. Every leader runs to a fixed
+                                 slot on x = 680, so labels are evenly
+                                 spread down the rail and cannot collide
+                                 however tightly the radii are packed. -->
+                            <g class="svg-leader">
+                                <path d="M 344 96 L 656 60 L 680 60"/>
+                                <path d="M 560 332 L 656 130 L 680 130"/>
+                                <path d="M 330 182 L 656 200 L 680 200"/>
+                                <path d="M 330 251 L 656 270 L 680 270"/>
+                                <path d="M 415 235 L 656 340 L 680 340"/>
+                                <path d="M 363 353 L 656 410 L 680 410"/>
+                                <path d="M 386 344 L 656 480 L 680 480"/>
+                                <path d="M 339 320 L 656 550 L 680 550"/>
+                            </g>
+
+                            <g class="svg-tick">
+                                <circle cx="344" cy="96"  r="2.5" fill="var(--jet)" stroke="none"/>
+                                <circle cx="560" cy="332" r="2.5" fill="var(--disk-warm)" stroke="none"/>
+                                <circle cx="330" cy="182" r="2.5" fill="var(--accent)" stroke="none"/>
+                                <circle cx="330" cy="251" r="2.5" fill="var(--ring)" stroke="none"/>
+                                <circle cx="415" cy="235" r="2.5" fill="var(--ring)" stroke="none"/>
+                                <circle cx="363" cy="353" r="2.5" fill="var(--ring)" stroke="none"/>
+                                <circle cx="386" cy="344" r="2.5" fill="var(--geo)" stroke="none"/>
+                                <circle cx="339" cy="320" r="2.5" fill="var(--geo)" stroke="none"/>
+                            </g>
+
+                            <g>
+                                <text class="svg-label svg-label--jet" x="694" y="56">Relativistic jet</text>
+                                <text class="svg-unit" x="694" y="74">Magnetically collimated &middot; up to 0.99 c</text>
+
+                                <text class="svg-label" x="694" y="126">Accretion disk</text>
+                                <text class="svg-unit" x="694" y="144">Beyond 3 R&#8347; &middot; 10&#179; to 10&#8311; K</text>
+
+                                <text class="svg-label svg-label--lit" x="694" y="196">Innermost stable orbit</text>
+                                <text class="svg-unit" x="694" y="214">3 R&#8347; &middot; inside this, orbits decay</text>
+
+                                <text class="svg-label svg-label--ring" x="694" y="266">Photon sphere</text>
+                                <text class="svg-unit" x="694" y="284">1.5 R&#8347; &middot; light can orbit here</text>
+
+                                <text class="svg-label svg-label--ring" x="694" y="336">Apparent shadow</text>
+                                <text class="svg-unit" x="694" y="354">2.6 R&#8347; &middot; what a camera records</text>
+
+                                <text class="svg-label svg-label--ring" x="694" y="406">Event horizon</text>
+                                <text class="svg-unit" x="694" y="424">1 R&#8347; &middot; the point of no return</text>
+
+                                <text class="svg-label svg-label--geo" x="694" y="476">Ergosphere</text>
+                                <text class="svg-unit" x="694" y="494">Rotating holes only &middot; space is dragged</text>
+
+                                <text class="svg-label svg-label--geo" x="694" y="546">Singularity</text>
+                                <text class="svg-unit" x="694" y="564">Where general relativity stops working</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 01</span>
+                        Radii to scale for a non-rotating hole. The ergosphere is indicated schematically because its size depends on spin, and a rapidly rotating hole also shrinks its own horizon. Disk and jets are not to scale &mdash; a real disk extends thousands of R&#8347; and a jet can run for kiloparsecs.
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="note">
+                        <span class="note__title">The two radii people confuse</span>
+                        <ul class="note__list">
+                            <li><strong>The event horizon</strong> sits at 1 R<sub>s</sub>. It is not a surface or a membrane &mdash; nothing is there. It is simply the last place from which an outward-going light ray can still make progress outward.</li>
+                            <li><strong>The shadow</strong> is what you photograph, and it is 2.6 R<sub>s</sub> across &mdash; 2.6 times larger. The hole bends light so strongly that rays which would have missed it are pulled in, so its silhouette is magnified. The EHT images show the shadow, not the horizon.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">Only three numbers</span>
+                        <ul class="note__list">
+                            <li>A black hole is completely described by <strong>mass, spin and electric charge</strong>. Nothing else survives the collapse &mdash; not composition, not shape, not what fell in.</li>
+                            <li>This is the <strong>no-hair theorem</strong>, and it is unique in astrophysics. Two holes with the same three numbers are not similar objects; they are identical in every measurable respect.</li>
+                            <li>Real holes have essentially zero charge, so in practice it is two numbers. Mass sets the size; spin sets almost everything interesting about the disk and the jets.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             02 · GRAVITATIONAL LENSING
+             ============================================================ -->
+        <section class="shell shell--lit" id="lensing">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">02</span> Gravitational lensing</p>
+                    <h2 class="head__title">Light does not bend. <em>The straight lines do</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Photons always travel the straightest available path. Near a black hole the straightest available paths are curved, because mass curves the geometry those paths are drawn in. How far a ray is deflected depends on one quantity: its impact parameter <em>b</em>, the distance it would have missed by had nothing been there.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1200 700" role="img"
+                             aria-label="Five light rays approaching a black hole from the left at different impact parameters. The ray at 6 Schwarzschild radii is deflected 19 degrees, at 4 radii 29 degrees, at 3 radii 38 degrees. The ray at the critical impact parameter of 2.6 radii is captured into the photon sphere, and the ray at 1.8 radii falls through the event horizon.">
+                            <!-- Reference: where the rays would have gone.
+                                 Only distinguishable to the right of the
+                                 hole, which is the point. -->
+                            <g class="svg-dash" style="stroke:var(--line-2);stroke-width:1;opacity:0.9">
+                                <path d="M 0 90 L 1200 90"/>
+                                <path d="M 0 170 L 1200 170"/>
+                                <path d="M 0 210 L 1200 210"/>
+                            </g>
+                            <text class="svg-unit" x="1010" y="76">undeflected path</text>
+
+                            <!-- Photon sphere · 1.5 Rs -->
+                            <circle class="lens__photon" cx="760" cy="330" r="60"/>
+                            <!-- Event horizon · 1 Rs -->
+                            <circle class="lens__horizon" cx="760" cy="330" r="40"/>
+
+                            <!-- b = 6 Rs · deflected 19° -->
+                            <g>
+                                <path class="lens__ray-glow" d="M 0 90 C 560 90, 700 90, 1200 242"/>
+                                <path class="lens__ray"      d="M 0 90 C 560 90, 700 90, 1200 242"/>
+                                <path class="lens__pulse" style="--delay:0s"   d="M 0 90 C 560 90, 700 90, 1200 242" pathLength="1200"/>
+                            </g>
+                            <!-- b = 4 Rs · deflected 29° -->
+                            <g>
+                                <path class="lens__ray-glow" d="M 0 170 C 540 170, 690 172, 1200 410"/>
+                                <path class="lens__ray"      d="M 0 170 C 540 170, 690 172, 1200 410"/>
+                                <path class="lens__pulse" style="--delay:0.5s" d="M 0 170 C 540 170, 690 172, 1200 410" pathLength="1200"/>
+                            </g>
+                            <!-- b = 3 Rs · deflected 38° -->
+                            <g>
+                                <path class="lens__ray-glow" d="M 0 210 C 520 210, 680 216, 1128 620"/>
+                                <path class="lens__ray"      d="M 0 210 C 520 210, 680 216, 1128 620"/>
+                                <path class="lens__pulse" style="--delay:1s"   d="M 0 210 C 520 210, 680 216, 1128 620" pathLength="1200"/>
+                            </g>
+
+                            <!-- b = 2.598 Rs · the critical impact
+                                 parameter. Deflection diverges: the ray
+                                 neither escapes nor falls in, it winds
+                                 onto the photon sphere. The arc follows
+                                 the sphere for three quarters of a turn;
+                                 its chord is kept well inside the
+                                 diameter so the renderer does not have
+                                 to inflate the radius to make it fit. -->
+                            <path class="lens__ray lens__ray--critical"
+                                  d="M 0 226 C 480 226, 620 240, 703.6 309.5 A 60 60 0 1 1 739.5 386.4"/>
+
+                            <!-- b = 1.8 Rs · captured -->
+                            <path class="lens__ray lens__ray--captured"
+                                  d="M 0 258 C 490 258, 640 268, 727 307"/>
+                            <path class="svg-leader" d="M 668 292 L 664 402 L 690 402"/>
+
+                            <!-- Exit labels. The rays are bunched on
+                                 entry and well separated where they
+                                 leave, so every label sits on the exit
+                                 side.
+
+                                 Each one is parked BELOW its own ray,
+                                 not above it. These rays descend to the
+                                 right, so a label held at a fixed y is
+                                 above its ray at the right-hand end and
+                                 below it further left — the line runs
+                                 straight through the text somewhere in
+                                 between. Below the endpoint the next ray
+                                 down is 100+ units away, so there is
+                                 clear air and no ambiguity about which
+                                 ray each label belongs to. -->
+                            <g>
+                                <text class="svg-label svg-label--ring" x="1192" y="304" text-anchor="end">b = 6 R&#8347;</text>
+                                <text class="svg-unit" x="1192" y="322" text-anchor="end">deflected 19&deg;</text>
+
+                                <text class="svg-label svg-label--ring" x="1192" y="470" text-anchor="end">b = 4 R&#8347;</text>
+                                <text class="svg-unit" x="1192" y="488" text-anchor="end">deflected 29&deg;</text>
+
+                                <!-- The 3 Rs ray leaves through the
+                                     bottom rather than the right edge,
+                                     so its label sits under the end of
+                                     the path. The viewBox carries 40
+                                     spare units below the diagram for
+                                     exactly this. -->
+                                <text class="svg-label svg-label--ring" x="1192" y="658" text-anchor="end">b = 3 R&#8347;</text>
+                                <text class="svg-unit" x="1192" y="676" text-anchor="end">deflected 38&deg;</text>
+
+                                <text class="svg-label svg-label--lit" x="856" y="252">b = 2.598 R&#8347;</text>
+                                <text class="svg-unit" x="856" y="270">critical &middot; winds onto the sphere</text>
+
+                                <text class="svg-label svg-label--lit" x="698" y="406">b &lt; 2.598 R&#8347;</text>
+                                <text class="svg-unit" x="698" y="424">captured &mdash; no exit path</text>
+                            </g>
+
+                            <!-- Entry side -->
+                            <text class="svg-unit" x="10" y="52">Light in &rarr;</text>
+                        </svg>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 02</span>
+                        Deflection angles from the weak-field result &alpha; &asymp; 2R&#8347;/b, which is accurate for wide passes and increasingly approximate as b approaches the critical value, where the true deflection diverges. Paths are drawn to convey the trend, not traced from a geodesic integrator.
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4rem">
+                    <div>
+                        <h3 class="sub-title">The observable consequence</h3>
+                        <p class="head__lede">Because rays passing on either side are bent toward you, a single object behind a black hole is seen more than once. Perfectly aligned, its images merge into a complete circle &mdash; an Einstein ring. This is not exotic: it is routinely observed around galaxies and galaxy clusters, and it is how a great deal of dark matter has been mapped.</p>
+
+                        <div class="note" style="margin-top:2rem">
+                            <span class="note__title">Where this was settled</span>
+                            <ul class="note__list">
+                                <li>Einstein predicted a deflection of <strong>1.75 arcseconds</strong> for starlight grazing the Sun &mdash; twice the Newtonian value.</li>
+                                <li>Eddington's expedition measured it during the total eclipse of <strong>29 May 1919</strong>, and general relativity stopped being a hypothesis.</li>
+                                <li>A black hole is the same effect taken to its limit. Nothing new is happening &mdash; the geometry is just steep enough that light can be turned all the way around.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <figure class="fig">
+                        <div class="fig__frame">
+                            <svg class="fig__svg" viewBox="0 0 520 420" role="img"
+                                 aria-label="A background galaxy directly behind a black hole is lensed into a complete Einstein ring surrounding the shadow, with two brighter arcs where the alignment is strongest.">
+                                <!-- True position of the source -->
+                                <circle class="ering__source" cx="260" cy="210" r="26"/>
+                                <text class="svg-unit" x="260" y="176" text-anchor="middle">true position</text>
+
+                                <!-- The ring: every path from the source
+                                     that reaches us, together -->
+                                <circle class="ering__ring-bloom" cx="260" cy="210" r="112"/>
+                                <circle class="ering__ring" cx="260" cy="210" r="112"/>
+
+                                <!-- Brighter arcs where the lensing is
+                                     strongest along the alignment axis -->
+                                <path class="ering__arc" d="M 148 210 A 112 112 0 0 1 210 115"/>
+                                <path class="ering__arc" d="M 372 210 A 112 112 0 0 1 310 305"/>
+
+                                <!-- The lens -->
+                                <circle cx="260" cy="210" r="46" fill="#000000" stroke="var(--ring)" stroke-width="1.5"/>
+
+                                <text class="svg-label svg-label--ring" x="260" y="366" text-anchor="middle">Einstein ring</text>
+                                <text class="svg-unit" x="260" y="384" text-anchor="middle">one source &middot; infinitely many images</text>
+                            </svg>
+                        </div>
+                        <figcaption class="caption">
+                            <span class="caption__id">Fig 03</span>
+                            Perfect alignment produces a full ring; real alignments are imperfect and produce two or four bright arcs instead.
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             03 · EVENT HORIZON
+             The escape cone is the rigorous way to show "point of no
+             return": the exact Schwarzschild expression, evaluated at
+             six radii, closing to zero at the horizon.
+             ============================================================ -->
+        <section class="shell shell--abyss shell--seam" id="horizon">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">03</span> The event horizon</p>
+                    <h2 class="head__title">The sky closes <em>like an aperture</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">"Escape velocity exceeds the speed of light" is the usual line, and it is misleading &mdash; it suggests you could get out with a fast enough rocket. The accurate picture is geometric. Point a torch outward from close to a black hole and only some directions still lead away. As you descend, that window of escaping directions narrows, and at the horizon it shuts.</p>
+                </header>
+
+                <div class="cones" role="img" aria-label="Escape cones at six radii. At 4 Schwarzschild radii the escape window is 146 degrees wide; at 2 radii, 113 degrees; at the photon sphere at 1.5 radii, exactly 90 degrees, half the sky; at 1.2 radii, 62 degrees; at 1.05 radii, 33 degrees; and at the event horizon it is zero.">
+                    <div class="cone">
+                        <svg viewBox="-80 -80 160 160" width="104" height="104" aria-hidden="true">
+                            <path class="cone__wedge" d="M 0 0 L -39.1 58 A 70 70 0 1 1 39.1 58 Z"/>
+                            <path class="cone__edge"  d="M 0 0 L -39.1 58 M 0 0 L 39.1 58"/>
+                            <path class="cone__inward" d="M 0 22 L 0 62"/>
+                            <path class="cone__inward-tip" d="M 0 70 L -5 58 L 5 58 Z"/>
+                            <circle class="cone__emitter" cx="0" cy="0" r="3.5"/>
+                        </svg>
+                        <span class="cone__r">r = 4 R&#8347;</span>
+                        <span class="cone__a">146&deg; open</span>
+                        <span class="cone__note">Almost all of it</span>
+                    </div>
+
+                    <div class="cone">
+                        <svg viewBox="-80 -80 160 160" width="104" height="104" aria-hidden="true">
+                            <path class="cone__wedge" d="M 0 0 L -64.4 27.3 A 70 70 0 1 1 64.4 27.3 Z"/>
+                            <path class="cone__edge"  d="M 0 0 L -64.4 27.3 M 0 0 L 64.4 27.3"/>
+                            <path class="cone__inward" d="M 0 22 L 0 62"/>
+                            <path class="cone__inward-tip" d="M 0 70 L -5 58 L 5 58 Z"/>
+                            <circle class="cone__emitter" cx="0" cy="0" r="3.5"/>
+                        </svg>
+                        <span class="cone__r">r = 2 R&#8347;</span>
+                        <span class="cone__a">113&deg; open</span>
+                        <span class="cone__note">A third is gone</span>
+                    </div>
+
+                    <div class="cone">
+                        <svg viewBox="-80 -80 160 160" width="104" height="104" aria-hidden="true">
+                            <path class="cone__wedge" d="M 0 0 L -70 0 A 70 70 0 1 1 70 0 Z"/>
+                            <path class="cone__edge"  d="M 0 0 L -70 0 M 0 0 L 70 0"/>
+                            <path class="cone__inward" d="M 0 22 L 0 62"/>
+                            <path class="cone__inward-tip" d="M 0 70 L -5 58 L 5 58 Z"/>
+                            <circle class="cone__emitter" cx="0" cy="0" r="3.5"/>
+                        </svg>
+                        <span class="cone__r">r = 1.5 R&#8347;</span>
+                        <span class="cone__a">90&deg; open</span>
+                        <span class="cone__note">Photon sphere</span>
+                    </div>
+
+                    <div class="cone">
+                        <svg viewBox="-80 -80 160 160" width="104" height="104" aria-hidden="true">
+                            <path class="cone__wedge" d="M 0 0 L -61.8 -32.9 A 70 70 0 0 1 61.8 -32.9 Z"/>
+                            <path class="cone__edge"  d="M 0 0 L -61.8 -32.9 M 0 0 L 61.8 -32.9"/>
+                            <path class="cone__inward" d="M 0 22 L 0 62"/>
+                            <path class="cone__inward-tip" d="M 0 70 L -5 58 L 5 58 Z"/>
+                            <circle class="cone__emitter" cx="0" cy="0" r="3.5"/>
+                        </svg>
+                        <span class="cone__r">r = 1.2 R&#8347;</span>
+                        <span class="cone__a">62&deg; open</span>
+                        <span class="cone__note">Closing fast</span>
+                    </div>
+
+                    <div class="cone">
+                        <svg viewBox="-80 -80 160 160" width="104" height="104" aria-hidden="true">
+                            <path class="cone__wedge" d="M 0 0 L -38.1 -58.7 A 70 70 0 0 1 38.1 -58.7 Z"/>
+                            <path class="cone__edge"  d="M 0 0 L -38.1 -58.7 M 0 0 L 38.1 -58.7"/>
+                            <path class="cone__inward" d="M 0 22 L 0 62"/>
+                            <path class="cone__inward-tip" d="M 0 70 L -5 58 L 5 58 Z"/>
+                            <circle class="cone__emitter" cx="0" cy="0" r="3.5"/>
+                        </svg>
+                        <span class="cone__r">r = 1.05 R&#8347;</span>
+                        <span class="cone__a">33&deg; open</span>
+                        <span class="cone__note">Aim carefully</span>
+                    </div>
+
+                    <div class="cone cone--horizon">
+                        <svg viewBox="-80 -80 160 160" width="104" height="104" aria-hidden="true">
+                            <path class="cone__edge" d="M 0 0 L 0 -70" style="opacity:1"/>
+                            <path class="cone__inward" d="M 0 22 L 0 62"/>
+                            <path class="cone__inward-tip" d="M 0 70 L -5 58 L 5 58 Z"/>
+                            <circle class="cone__emitter" cx="0" cy="0" r="3.5"/>
+                        </svg>
+                        <span class="cone__r">r = 1 R&#8347;</span>
+                        <span class="cone__a">0&deg; &mdash; shut</span>
+                        <span class="cone__note">Event horizon</span>
+                    </div>
+                </div>
+
+                <p class="caption">
+                    <span class="caption__id">Fig 04</span>
+                    Half-angles from the exact Schwarzschild result sin&#8202;&psi; = (3&radic;3/2)(R&#8347;/r)&radic;(1&nbsp;&minus;&nbsp;R&#8347;/r), taking the obtuse branch inside the photon sphere. The violet arrow marks the direction of the hole. At the photon sphere exactly half the sky still leads out; at the horizon, none of it does.
+                </p>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="note">
+                        <span class="note__title">Crossing it</span>
+                        <ul class="note__list">
+                            <li><strong>You would not feel it.</strong> There is no wall, no jolt, no shudder. For a supermassive hole the horizon is a completely unremarkable place, and you would not be able to tell locally that you had passed it.</li>
+                            <li><strong>You could not tell anyone.</strong> Every signal you sent afterwards would fall inward with you. The horizon is defined by exactly that.</li>
+                            <li><strong>You would still see out.</strong> The sky outside remains visible, squeezed into a shrinking bright patch above you as you fall.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">Watching from outside</span>
+                        <ul class="note__list">
+                            <li>The two observers do not agree, and both are right. From a distance you never see anything cross. The infalling object appears to <strong>slow, redden and dim</strong>, freezing ever closer to the horizon and fading below detection.</li>
+                            <li>This is why Soviet physicists originally called them <strong>frozen stars</strong>. The name describes the view from here; "black hole" describes the geometry.</li>
+                            <li>The falling observer measures a short, finite time and crosses without incident. Nothing is paradoxical &mdash; the two are simply using different clocks, and relativity does not privilege either.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             04 · ACCRETION DISK
+             Opened up to a wider inclination than the hero so the
+             annulus is readable. Lensing is deliberately omitted —
+             at this inclination it would hide the structure this
+             figure exists to show. The caption says so.
+             ============================================================ -->
+        <section class="shell shell--void" id="disk">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">04</span> Accretion disk</p>
+                    <h2 class="head__title">Friction between shells moving at <em>a third of light speed</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">A black hole itself emits nothing. Everything we detect comes from the gas queueing to get in. Because inner orbits move faster than outer ones, adjacent shells of that gas grind past each other at enormous relative speeds, and the friction heats the disk until it radiates X-rays. Quasars &mdash; the brightest sustained objects in the universe &mdash; are this process around a supermassive hole.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1120 560" role="img"
+                             aria-label="An accretion disk viewed at a moderate inclination. A continuous sheet of gas runs from the innermost stable circular orbit out to the rim, white-hot at the inner edge and fading to dull ember at the outside, with the event horizon sitting in the gap the inner edge clears. Each radius rotates at its own Keplerian rate, so the inner disk visibly outruns the outer.">
+                            <defs>
+                                <!-- Radial in the disk's own plane, not
+                                     across the screen: the gradient is a
+                                     circle squashed by the inclination.
+                                     Opacity falls with radius as well as
+                                     colour — without that the sheet
+                                     reads as one solid orange blob and
+                                     all the structure is lost. -->
+                                <radialGradient id="dskRamp" gradientUnits="userSpaceOnUse"
+                                                cx="560" cy="280" r="440"
+                                                gradientTransform="matrix(1 0 0 0.46 0 151.2)">
+                                    <stop offset="0.205" stop-color="#ffffff"/>
+                                    <stop offset="0.260" stop-color="#fffbf2"/>
+                                    <stop offset="0.330" stop-color="#fff2d8" stop-opacity="0.97"/>
+                                    <stop offset="0.430" stop-color="#ffdca4" stop-opacity="0.9"/>
+                                    <stop offset="0.550" stop-color="#f7b26c" stop-opacity="0.76"/>
+                                    <stop offset="0.680" stop-color="#d18848" stop-opacity="0.56"/>
+                                    <stop offset="0.800" stop-color="#965c2c" stop-opacity="0.38"/>
+                                    <stop offset="0.900" stop-color="#5c3617" stop-opacity="0.2"/>
+                                    <stop offset="1.000" stop-color="#3a220e" stop-opacity="0"/>
+                                </radialGradient>
+
+                                <radialGradient id="dskGap" gradientUnits="userSpaceOnUse"
+                                                cx="560" cy="280" r="90"
+                                                gradientTransform="matrix(1 0 0 0.46 0 151.2)">
+                                    <stop offset="0.30" stop-color="#3a1f0c" stop-opacity="0"/>
+                                    <stop offset="0.70" stop-color="#5c3216" stop-opacity="0.5"/>
+                                    <stop offset="1.00" stop-color="#965224" stop-opacity="0.8"/>
+                                </radialGradient>
+                            </defs>
+
+                            <!-- The sheet. One filled annulus from the
+                                 ISCO to the rim — a disk is continuous
+                                 gas, and drawn as separate rings it
+                                 reads as a set of hoops instead. -->
+                            <path fill="url(#dskRamp)" fill-rule="evenodd"
+                                  d="M 120 280 A 440 202.4 0 1 0 1000 280 A 440 202.4 0 1 0 120 280 Z
+                                     M 470 280 A 90 41.4 0 1 0 650 280 A 90 41.4 0 1 0 470 280 Z"/>
+
+                            <!-- Structure bands. Each carries the flow
+                                 animation at its own Keplerian period,
+                                 --band-t scaled as r^1.5, so the inner
+                                 disk laps the outer one on screen. -->
+                            <g style="--band-c:var(--ring);--band-w:3;--band-t:6.4s;--band-dash:150 90">
+                                <ellipse class="disk__band" cx="560" cy="280" rx="118" ry="54.3" style="opacity:0.34"/>
+                                <ellipse class="disk__flow" cx="560" cy="280" rx="118" ry="54.3"/>
+                            </g>
+                            <g style="--band-c:var(--disk-hot);--band-w:3;--band-t:10.6s;--band-dash:170 110">
+                                <ellipse class="disk__band" cx="560" cy="280" rx="165" ry="75.9" style="opacity:0.3"/>
+                                <ellipse class="disk__flow" cx="560" cy="280" rx="165" ry="75.9"/>
+                            </g>
+                            <g style="--band-c:var(--disk-mid);--band-w:3;--band-t:17.2s;--band-dash:190 130">
+                                <ellipse class="disk__band" cx="560" cy="280" rx="228" ry="104.9" style="opacity:0.26"/>
+                                <ellipse class="disk__flow" cx="560" cy="280" rx="228" ry="104.9"/>
+                            </g>
+                            <g style="--band-c:var(--disk-warm);--band-w:2.5;--band-t:26.6s;--band-dash:210 150">
+                                <ellipse class="disk__band" cx="560" cy="280" rx="305" ry="140.3" style="opacity:0.2"/>
+                                <ellipse class="disk__flow" cx="560" cy="280" rx="305" ry="140.3"/>
+                            </g>
+                            <g style="--band-c:var(--disk-cool);--band-w:2.5;--band-t:38.5s;--band-dash:230 170">
+                                <ellipse class="disk__band" cx="560" cy="280" rx="390" ry="179.4" style="opacity:0.15"/>
+                                <ellipse class="disk__flow" cx="560" cy="280" rx="390" ry="179.4"/>
+                            </g>
+
+                            <!-- The plunging region. Gas here has left
+                                 its last stable orbit and is spiralling
+                                 in over a few turns, so it still glows
+                                 faintly. Without it the gap is flat
+                                 black and the horizon inside reads as a
+                                 drawn outline rather than a void. -->
+                            <ellipse cx="560" cy="280" rx="90" ry="41.4" fill="url(#dskGap)"/>
+
+                            <!-- The inner edge, and the hole itself
+                                 sitting in the gap it clears. -->
+                            <ellipse class="disk__isco" cx="560" cy="280" rx="90" ry="41.4"/>
+                            <circle class="disk__horizon" cx="560" cy="280" r="30"/>
+
+                            <!-- Annotations. Placed where the ellipse is
+                                 narrow enough to leave clear margin, so
+                                 no label lands on the sheet. -->
+                            <g class="svg-leader">
+                                <path d="M 548 252 L 360 100 L 336 100"/>
+                                <path d="M 636 258 L 772 100 L 796 100"/>
+                            </g>
+                            <circle cx="548" cy="252" r="2.5" fill="var(--ring)"/>
+                            <circle cx="636" cy="258" r="2.5" fill="var(--accent)"/>
+
+                            <text class="svg-label svg-label--ring" x="328" y="96" text-anchor="end">Event horizon</text>
+                            <text class="svg-unit" x="328" y="114" text-anchor="end">1 R&#8347; &middot; the whole disk drains here</text>
+
+                            <text class="svg-label svg-label--lit" x="804" y="96">Innermost stable orbit</text>
+                            <text class="svg-unit" x="804" y="114">3 R&#8347; &middot; the disk's inner edge</text>
+
+                            <text class="svg-label" x="40" y="534">Cooler &middot; slower</text>
+                            <text class="svg-label svg-label--ring" x="1080" y="534" text-anchor="end">Hotter &middot; faster inward</text>
+                        </svg>
+                    </div>
+
+                    <!-- The diagram compresses radius to stay legible, so
+                         the rail beneath states orbital speed honestly. -->
+                    <div class="rail" role="img" aria-label="Orbital speed as a fraction of light speed against radius, from 0.41 c at the innermost stable orbit at 3 Schwarzschild radii down to 0.18 c at 16 radii.">
+                        <span class="rail__mark rail__mark--up" style="--pos:0%">
+                            <em class="rail__name">ISCO</em><b class="rail__value">0.41 c</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down" style="--pos:7.7%">
+                            <em class="rail__name">4 R&#8347;</em><b class="rail__value">0.35 c</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--up" style="--pos:23.1%">
+                            <em class="rail__name">6 R&#8347;</em><b class="rail__value">0.29 c</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down" style="--pos:38.5%">
+                            <em class="rail__name">8 R&#8347;</em><b class="rail__value">0.25 c</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--up" style="--pos:61.5%">
+                            <em class="rail__name">11 R&#8347;</em><b class="rail__value">0.21 c</b><i class="rail__tick"></i>
+                        </span>
+                        <span class="rail__mark rail__mark--down" style="--pos:100%">
+                            <em class="rail__name">16 R&#8347;</em><b class="rail__value">0.18 c</b><i class="rail__tick"></i>
+                        </span>
+                    </div>
+
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 05</span>
+                        Band periods scale as r<sup>3/2</sup>, so the animation is Keplerian &mdash; the inner bands genuinely lap the outer ones. Orbital speeds from v/c = &radic;(R&#8347;/2r). Gravitational lensing is not drawn here; see Fig&nbsp;02 and the render at the top of the page.
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="note">
+                        <span class="note__title">Why the inner edge stops at 3 R&#8347;</span>
+                        <ul class="note__list">
+                            <li>In Newtonian gravity there is a stable circular orbit at every radius. In general relativity there is not: below <strong>three Schwarzschild radii</strong> no stable circular orbit exists at all.</li>
+                            <li>Gas drifting inward past that point cannot settle into a new orbit. It spirals in over a few orbits and is gone, which is why disks have a sharp inner edge and a hole in the middle.</li>
+                            <li>Spin moves this boundary. For a maximally rotating hole the innermost stable orbit drops to about <strong>0.5 R&#8347;</strong>, the disk reaches far deeper into the gravity well, and the efficiency climbs.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">The most efficient engine there is</span>
+                        <ul class="note__list">
+                            <li>Accretion converts <strong>6% to 32%</strong> of infalling rest mass into radiation, depending on spin.</li>
+                            <li>Hydrogen fusion &mdash; the process powering every star &mdash; manages <strong>0.7%</strong>.</li>
+                            <li>Chemical burning manages about <strong>0.00000003%</strong>.</li>
+                            <li>That is why a quasar the size of the Solar System can outshine the hundred billion stars of its host galaxy combined.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             05 · RELATIVISTIC JETS
+             Full width, not in a split: the figure is a tall vertical
+             structure with side annotations, and squeezed into half a
+             column its labels shrink below legibility.
+             ============================================================ -->
+        <section class="shell shell--rise shell--seam" id="jets">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">05</span> Relativistic jets</p>
+                    <h2 class="head__title">The one thing that <em>gets back out</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Not everything that falls toward a black hole falls in. Magnetic field lines threading the inner disk are wound up by the hole's rotation into a tight helix, and that helix flings a fraction of the infalling plasma back out along the spin axis at more than 99% of light speed. These jets are the largest coherent structures any single object makes.</p>
+                </header>
+
+                <figure class="fig">
+                    <div class="fig__frame">
+                        <svg class="fig__svg" viewBox="0 0 1120 660" role="img"
+                             aria-label="Twin relativistic jets launched along the spin axis of a black hole, above and below a bright accretion disk. Helical magnetic field lines wind up the beams, knots of plasma travel outward along them, and a scale bar marks the five thousand light year length of M87's jet.">
+                            <defs>
+                                <linearGradient id="jetGrad" x1="0" y1="1" x2="0" y2="0">
+                                    <stop offset="0%"   stop-color="#f4f9ff" stop-opacity="0.75"/>
+                                    <stop offset="24%"  stop-color="#cfe2ff" stop-opacity="0.4"/>
+                                    <stop offset="62%"  stop-color="#a8c8ff" stop-opacity="0.16"/>
+                                    <stop offset="100%" stop-color="#a8c8ff" stop-opacity="0"/>
+                                </linearGradient>
+                                <linearGradient id="jetGradDown" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%"   stop-color="#f4f9ff" stop-opacity="0.75"/>
+                                    <stop offset="24%"  stop-color="#cfe2ff" stop-opacity="0.4"/>
+                                    <stop offset="62%"  stop-color="#a8c8ff" stop-opacity="0.16"/>
+                                    <stop offset="100%" stop-color="#a8c8ff" stop-opacity="0"/>
+                                </linearGradient>
+                                <!-- Bright collimated spine inside the
+                                     wider sheath. Without it the beam
+                                     reads as grey smoke rather than as
+                                     relativistic plasma. -->
+                                <linearGradient id="jetCore" x1="0" y1="1" x2="0" y2="0">
+                                    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.9"/>
+                                    <stop offset="30%"  stop-color="#e8f2ff" stop-opacity="0.5"/>
+                                    <stop offset="100%" stop-color="#cfe2ff" stop-opacity="0"/>
+                                </linearGradient>
+                                <linearGradient id="jetCoreDown" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.9"/>
+                                    <stop offset="30%"  stop-color="#e8f2ff" stop-opacity="0.5"/>
+                                    <stop offset="100%" stop-color="#cfe2ff" stop-opacity="0"/>
+                                </linearGradient>
+                                <radialGradient id="jetDisk" gradientUnits="userSpaceOnUse"
+                                                cx="560" cy="330" r="240"
+                                                gradientTransform="matrix(1 0 0 0.26 0 244.2)">
+                                    <stop offset="0.14" stop-color="#ffffff"/>
+                                    <stop offset="0.30" stop-color="#fff4de"/>
+                                    <stop offset="0.52" stop-color="#ffd49a" stop-opacity="0.86"/>
+                                    <stop offset="0.74" stop-color="#e0934c" stop-opacity="0.54"/>
+                                    <stop offset="0.92" stop-color="#8a5628" stop-opacity="0.22"/>
+                                    <stop offset="1.00" stop-color="#5c3617" stop-opacity="0"/>
+                                </radialGradient>
+                            </defs>
+
+                            <!-- Beams -->
+                            <path d="M 542 306 L 506 26 L 614 26 L 578 306 Z" fill="url(#jetGrad)"/>
+                            <path d="M 542 354 L 506 634 L 614 634 L 578 354 Z" fill="url(#jetGradDown)"/>
+                            <path d="M 552 306 L 540 26 L 580 26 L 568 306 Z" fill="url(#jetCore)"/>
+                            <path d="M 552 354 L 540 634 L 580 634 L 568 354 Z" fill="url(#jetCoreDown)"/>
+                            <path class="jet__sheath" d="M 542 306 L 506 26 M 578 306 L 614 26 M 542 354 L 506 634 M 578 354 L 614 634"/>
+
+                            <!-- Helical magnetic field, the thing doing
+                                 the collimating. Amplitude grows with
+                                 height as the beam widens. -->
+                            <path class="jet__helix" d="M 560 300 C 586 276, 534 252, 560 228 C 590 204, 530 180, 560 156 C 594 132, 526 108, 560 84 C 596 60, 524 40, 560 26"/>
+                            <path class="jet__helix" d="M 560 360 C 586 384, 534 408, 560 432 C 590 456, 530 480, 560 504 C 594 528, 526 552, 560 576 C 596 600, 524 620, 560 634"/>
+
+                            <!-- Knots of plasma travelling out -->
+                            <g style="--knot-y:-268px">
+                                <ellipse class="jet__knot" style="--knot-t:5.4s;--knot-d:0s"   cx="560" cy="300" rx="11" ry="5"/>
+                                <ellipse class="jet__knot" style="--knot-t:5.4s;--knot-d:1.8s" cx="560" cy="300" rx="8"  ry="4"/>
+                                <ellipse class="jet__knot" style="--knot-t:5.4s;--knot-d:3.6s" cx="560" cy="300" rx="12" ry="5"/>
+                            </g>
+                            <g style="--knot-y:-268px">
+                                <ellipse class="jet__knot jet__knot--down" style="--knot-t:5.4s;--knot-d:0.9s" cx="560" cy="360" rx="11" ry="5"/>
+                                <ellipse class="jet__knot jet__knot--down" style="--knot-t:5.4s;--knot-d:2.7s" cx="560" cy="360" rx="8"  ry="4"/>
+                                <ellipse class="jet__knot jet__knot--down" style="--knot-t:5.4s;--knot-d:4.5s" cx="560" cy="360" rx="12" ry="5"/>
+                            </g>
+
+                            <!-- Disk at the base, and the hole -->
+                            <path fill="url(#jetDisk)" fill-rule="evenodd"
+                                  d="M 320 330 A 240 62.4 0 1 0 800 330 A 240 62.4 0 1 0 320 330 Z
+                                     M 526 330 A 34 8.8 0 1 0 594 330 A 34 8.8 0 1 0 526 330 Z"/>
+                            <circle class="disk__horizon" cx="560" cy="330" r="26"/>
+
+                            <!-- Annotations, both sides, well clear of
+                                 the beam and of each other. -->
+                            <g class="svg-leader">
+                                <path d="M 596 92 L 704 72 L 728 72"/>
+                                <path d="M 546 200 L 404 176 L 380 176"/>
+                                <path d="M 700 336 L 812 396 L 836 396"/>
+                                <path d="M 548 560 L 404 588 L 380 588"/>
+                            </g>
+                            <g>
+                                <circle cx="596" cy="92"  r="2.5" fill="var(--jet)"/>
+                                <circle cx="546" cy="200" r="2.5" fill="var(--geo)"/>
+                                <circle cx="700" cy="336" r="2.5" fill="var(--disk-warm)"/>
+                                <circle cx="548" cy="560" r="2.5" fill="var(--jet)"/>
+                            </g>
+
+                            <text class="svg-label svg-label--jet" x="736" y="68">Jet &middot; up to 0.99 c</text>
+                            <text class="svg-unit" x="736" y="86">Synchrotron &middot; radio to gamma</text>
+
+                            <text class="svg-label svg-label--geo" x="372" y="172" text-anchor="end">Helical B field</text>
+                            <text class="svg-unit" x="372" y="190" text-anchor="end">Wound up by the spin</text>
+
+                            <text class="svg-label" x="844" y="392">Accretion disk</text>
+                            <text class="svg-unit" x="844" y="410">The fuel supply &mdash; and the fuel</text>
+
+                            <text class="svg-label svg-label--jet" x="372" y="584" text-anchor="end">Counter-jet</text>
+                            <text class="svg-unit" x="372" y="602" text-anchor="end">Beamed away &middot; far fainter</text>
+
+                            <!-- Scale -->
+                            <g class="svg-axis">
+                                <path d="M 934 40 L 934 300 M 926 40 L 942 40 M 926 300 L 942 300"/>
+                            </g>
+                            <text class="svg-unit" x="952" y="166">M87 jet &asymp; 5,000 ly</text>
+                        </svg>
+                    </div>
+                    <figcaption class="caption">
+                        <span class="caption__id">Fig 06</span>
+                        Beam opening angles exaggerated for legibility &mdash; real jets stay collimated to within a few degrees over thousands of light years, which is the genuinely hard thing to explain about them.
+                    </figcaption>
+                </figure>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="note">
+                        <span class="note__title">Why only one jet is usually visible</span>
+                        <ul class="note__list">
+                            <li>Jets are launched in <strong>opposite pairs</strong>, and they are intrinsically near-identical.</li>
+                            <li>The one pointed toward us is <strong>relativistically beamed</strong> &mdash; its light is concentrated forward and blueshifted, brightening it enormously. The one pointed away is beamed away and dimmed just as severely.</li>
+                            <li>M87's jet is a textbook case: the approaching jet is a famous 5,000-light-year spike, and the counter-jet was only detected decades later.</li>
+                            <li>The same effect makes some jets appear to move <strong>faster than light</strong> across the sky. They do not &mdash; it is a projection illusion from material chasing its own emitted light almost directly at us.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">Feedback on a galactic scale</span>
+                        <ul class="note__list">
+                            <li>Jets from a supermassive hole inject enough energy into the surrounding gas to <strong>stop it cooling and forming stars</strong>.</li>
+                            <li>An object a few astronomical units across therefore regulates star formation across a galaxy a hundred thousand light years wide.</li>
+                            <li>Galaxy formation models that leave this out predict far more massive galaxies than exist. The black hole is not a passenger &mdash; it is part of the mechanism.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             06 · TYPES
+             ============================================================ -->
+        <section class="shell shell--void" id="types">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">06</span> Types</p>
+                    <h2 class="head__title">Three mass classes, and <em>a suspicious gap</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Black holes come in a range of masses spanning ten orders of magnitude, but not evenly. We know of many below a hundred solar masses and many above a hundred thousand, and remarkably few in between &mdash; a gap that is either a real feature of how they form or a limitation of how we look.</p>
+                </header>
+
+                <div class="plate-grid plate-grid--tall plate-grid--stagger">
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="bh" style="--bh-d:74px" aria-hidden="true">
+                                <span class="bh__disk bh__disk--far"></span>
+                                <span class="bh__shadow"></span>
+                                <span class="bh__arc"></span>
+                                <span class="bh__disk bh__disk--near"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">01 / 03</span>
+                            <span class="plate__index">3 &ndash; 150 M&#9737;</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Stellar-mass</h3>
+                            <span class="chip">Thousands known</span>
+                        </div>
+                        <p class="plate__text">The collapsed cores of stars that began above roughly twenty solar masses. Horizons a few tens of kilometres across &mdash; a city, holding several Suns. Found as X-ray binaries, and heard as gravitational waves when two of them merge.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Horizon</dt><dd>9 &ndash; 440 km</dd></div>
+                            <div class="spec__row"><dt>Formed by</dt><dd>Core collapse</dd></div>
+                            <div class="spec__row"><dt>Nearest</dt><dd>Gaia BH1 &middot; 1,560 ly</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="bh" style="--bh-d:104px" aria-hidden="true">
+                                <span class="bh__disk bh__disk--far"></span>
+                                <span class="bh__shadow"></span>
+                                <span class="bh__arc"></span>
+                                <span class="bh__disk bh__disk--near"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">02 / 03</span>
+                            <span class="plate__index">10&sup2; &ndash; 10&#8309; M&#9737;</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Intermediate</h3>
+                            <span class="chip chip--outline">Scarce</span>
+                        </div>
+                        <p class="plate__text">The missing middle. Too heavy for a single star to make, too light to sit at a galactic centre. The 2019 merger GW190521 produced a 142-solar-mass remnant &mdash; the first firm detection inside the gap, and evidence that the route is mergers of smaller holes.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Horizon</dt><dd>300 km &ndash; 0.002 AU</dd></div>
+                            <div class="spec__row"><dt>Formed by</dt><dd>Repeated mergers</dd></div>
+                            <div class="spec__row"><dt>Found in</dt><dd>Dense star clusters</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="bh" style="--bh-d:150px" aria-hidden="true">
+                                <span class="bh__disk bh__disk--far"></span>
+                                <span class="bh__shadow"></span>
+                                <span class="bh__arc"></span>
+                                <span class="bh__disk bh__disk--near"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">03 / 03</span>
+                            <span class="plate__index">10&#8309; &ndash; 10&#185;&#8304; M&#9737;</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Supermassive</h3>
+                            <span class="chip">One per galaxy</span>
+                        </div>
+                        <p class="plate__text">Millions to tens of billions of solar masses, at the centre of essentially every large galaxy including ours. Their masses track the properties of the host galaxy so tightly that the two must have grown together.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Horizon</dt><dd>0.002 &ndash; 1,300 AU</dd></div>
+                            <div class="spec__row"><dt>Formed by</dt><dd>Accretion &amp; merger</dd></div>
+                            <div class="spec__row"><dt>Largest</dt><dd>TON 618 &middot; 66 bn M&#9737;</dd></div>
+                        </dl>
+                    </article>
+                </div>
+
+                <div class="split" style="margin-top:5rem">
+                    <div>
+                        <h3 class="sub-title">Mass</h3>
+                        <p class="head__lede" style="margin-bottom:2rem">Ten orders of magnitude, so the axis is base-10. The gap between the first three rows and the last three is the intermediate-mass problem.</p>
+
+                        <ol class="ledger ledger--mass ledger--warm" role="img" aria-label="Black hole masses on a logarithmic axis from 3 solar masses to 66 billion.">
+                            <li class="ledger__row ledger__row--m3">
+                                <span class="ledger__label">A0620&minus;00 <small>Stellar</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">6.6 M&#9737;</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m21">
+                                <span class="ledger__label">Cygnus X-1 <small>Stellar</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">21.2 M&#9737;</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m100">
+                                <span class="ledger__label">GW190521 <small>Intermediate</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">142 M&#9737;</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m1e5">
+                                <span class="ledger__label">Dwarf-galaxy nuclei <small>Light SMBH</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">10&#8309; M&#9737;</span>
+                            </li>
+                            <li class="ledger__row ledger__row--sgra">
+                                <span class="ledger__label">Sagittarius A* <small>Our own</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">4.3 M M&#9737;</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m87">
+                                <span class="ledger__label">M87* <small>Supermassive</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">6.5 bn M&#9737;</span>
+                            </li>
+                            <li class="ledger__row ledger__row--ton618">
+                                <span class="ledger__label">TON 618 <small>Ultramassive</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">66 bn M&#9737;</span>
+                            </li>
+                        </ol>
+
+                        <p class="ledger__caption">
+                            <span>Base-10 axis &middot; 1 to 10&#185;&#185; M&#9737;</span>
+                            <span>Gap at 10&sup2;&ndash;10&#8309;</span>
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="sub-title">Horizon radius</h3>
+                        <p class="head__lede" style="margin-bottom:2rem">The same ordering, because it is the same quantity: R<sub>s</sub> = 2.95&nbsp;km &times; M/M<sub>&#9737;</sub>. Horizon size is mass expressed in metres.</p>
+
+                        <ol class="ledger ledger--rs ledger--warm" role="img" aria-label="Schwarzschild radii on a logarithmic axis from 20 kilometres to 195 billion kilometres.">
+                            <li class="ledger__row ledger__row--m3">
+                                <span class="ledger__label">A0620&minus;00 <small>6.6 M&#9737;</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">19 km</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m21">
+                                <span class="ledger__label">Cygnus X-1 <small>21.2 M&#9737;</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">63 km</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m100">
+                                <span class="ledger__label">GW190521 <small>142 M&#9737;</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">419 km</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m1e5">
+                                <span class="ledger__label">Dwarf nuclei <small>10&#8309; M&#9737;</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">295,000 km</span>
+                            </li>
+                            <li class="ledger__row ledger__row--sgra">
+                                <span class="ledger__label">Sagittarius A* <small>0.085 AU</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">12.7 M km</span>
+                            </li>
+                            <li class="ledger__row ledger__row--m87">
+                                <span class="ledger__label">M87* <small>128 AU</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">19.2 bn km</span>
+                            </li>
+                            <li class="ledger__row ledger__row--ton618">
+                                <span class="ledger__label">TON 618 <small>1,300 AU</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">195 bn km</span>
+                            </li>
+                        </ol>
+
+                        <p class="ledger__caption">
+                            <span>Base-10 axis &middot; 1 km to 10&#185;&sup2; km</span>
+                            <span>Neptune's orbit = 4.5 bn km</span>
+                        </p>
+                    </div>
+                </div>
+
+                <p class="caption">
+                    <span class="caption__id">Fig 07</span>
+                    M87*'s horizon is 128 astronomical units across &mdash; it would swallow the Solar System out past the Kuiper Belt. TON 618's would reach a fifth of the way to Proxima Centauri.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             07 · FORMATION
+             ============================================================ -->
+        <section class="shell shell--atmos shell--seam" id="formation">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">07</span> Formation</p>
+                    <h2 class="head__title">A core that runs out of <em>anything left to burn</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">A star holds itself up by radiating. Fusion in the core supplies the outward pressure that balances its own weight, and each fuel it exhausts is replaced by a heavier one. Iron is where that chain ends: fusing iron consumes energy instead of releasing it. The support vanishes in less than a second.</p>
+                </header>
+
+                <ol class="track">
+                    <li class="track__step">
+                        <span class="track__time">t &minus; 10&#8310; yr<b>Main sequence</b></span>
+                        <div class="track__scene">
+                            <span style="display:grid;place-items:center;height:100%" aria-hidden="true">
+                                <span style="width:76px;height:76px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#fff 0%,#dce8ff 26%,#8fb4ff 62%,#4a6ec0 100%);box-shadow:0 0 30px rgba(150,190,255,.5),0 0 70px rgba(120,160,255,.25)"></span>
+                            </span>
+                        </div>
+                        <h3 class="track__label">Massive star</h3>
+                        <p class="track__text">Above roughly 20&nbsp;M&#9737;. It burns hydrogen ferociously and lasts only a few million years &mdash; the whole life of the star is shorter than the time since mammals appeared.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">t &minus; 10&#8309; yr<b>Shell burning</b></span>
+                        <div class="track__scene">
+                            <span style="display:grid;place-items:center;height:100%" aria-hidden="true">
+                                <span style="position:relative;width:112px;height:112px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#ffffff 0%,#ffe0a8 16%,#ff9d52 44%,#c9512a 74%,#5e2412 100%);box-shadow:0 0 34px rgba(255,150,80,.4)">
+                                    <span style="position:absolute;inset:34%;border-radius:50%;background:radial-gradient(circle,#fff 0%,#cfe0ff 60%,#7f9fd8 100%);box-shadow:0 0 18px rgba(220,235,255,.8)"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <h3 class="track__label">Onion core</h3>
+                        <p class="track__text">The star swells into a supergiant. Inside, fusion runs in concentric shells &mdash; hydrogen outermost, then helium, carbon, neon, oxygen, silicon &mdash; each burning faster than the last.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">&lt; 1 second<b>Collapse</b></span>
+                        <div class="track__scene">
+                            <span style="display:grid;place-items:center;height:100%" aria-hidden="true">
+                                <span style="position:relative;width:104px;height:104px">
+                                    <span style="position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(from 0deg at 50% 50%,transparent 0deg 13deg,rgba(255,190,140,.5) 13deg 15deg,transparent 15deg 28deg);-webkit-mask-image:radial-gradient(circle,transparent 16%,#000 40%,transparent 78%);mask-image:radial-gradient(circle,transparent 16%,#000 40%,transparent 78%)"></span>
+                                    <span style="position:absolute;top:50%;left:50%;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#ffd9a0 60%,#ff7a2f 100%);box-shadow:0 0 26px rgba(255,180,110,.9)"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <h3 class="track__label">Core collapse</h3>
+                        <p class="track__text">The iron core exceeds 1.4&nbsp;M&#9737; and electron pressure fails. An Earth-sized core falls to city size in about a quarter of a second, reaching a quarter of light speed.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">Hours to days<b>Shock breakout</b></span>
+                        <div class="track__scene">
+                            <span style="display:grid;place-items:center;height:100%" aria-hidden="true">
+                                <span style="position:relative;width:118px;height:118px">
+                                    <span style="position:absolute;inset:6px;border-radius:50%;border:1px solid rgba(255,140,90,.7);box-shadow:0 0 26px rgba(255,120,70,.34),inset 0 0 22px rgba(255,130,80,.2)"></span>
+                                    <span style="position:absolute;inset:26px;border-radius:50%;border:1px solid rgba(255,214,170,.55)"></span>
+                                    <span style="position:absolute;top:50%;left:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;box-shadow:0 0 22px #fff,0 0 44px rgba(255,150,90,.8)"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <h3 class="track__label">Supernova</h3>
+                        <p class="track__text">The infall rebounds off the new core and blows the star apart, briefly outshining its entire galaxy. Some collapses fail instead and the star simply vanishes without a flash.</p>
+                    </li>
+
+                    <li class="track__step">
+                        <span class="track__time">t = 0<b>Horizon forms</b></span>
+                        <div class="track__scene">
+                            <span style="display:grid;place-items:center;height:100%" aria-hidden="true">
+                                <span class="bh" style="--bh-d:52px">
+                                    <span class="bh__disk bh__disk--far"></span>
+                                    <span class="bh__shadow"></span>
+                                    <span class="bh__arc"></span>
+                                    <span class="bh__disk bh__disk--near"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <h3 class="track__label">Black hole</h3>
+                        <p class="track__text">If the remnant exceeds about 2.3&nbsp;M&#9737;, no known pressure can hold it. Collapse continues past neutron density, the horizon closes over it, and what is left is described by two numbers.</p>
+                    </li>
+                </ol>
+
+                <p class="caption">
+                    <span class="caption__id">Fig 08</span>
+                    Timings for a star of roughly 25&nbsp;M&#9737;. The final stage is not a slow settling &mdash; the horizon forms during the collapse itself, in milliseconds.
+                </p>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="note">
+                        <span class="note__title">Three other routes</span>
+                        <ul class="note__list">
+                            <li><strong>Direct collapse.</strong> The most massive stars may skip the supernova entirely, falling straight through to a hole. Candidate disappearing stars have been observed.</li>
+                            <li><strong>Merger.</strong> Two holes spiral together and become one, radiating several solar masses of energy as gravitational waves. LIGO has now recorded well over a hundred of these.</li>
+                            <li><strong>Primordial.</strong> Density fluctuations in the first second after the Big Bang could have collapsed directly, producing holes of any mass. None has been found, and they remain a live dark-matter candidate.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">The unsolved one</span>
+                        <ul class="note__list">
+                            <li>Quasars are observed at redshift 7 and beyond, already holding <strong>a billion solar masses</strong> less than 700 million years after the Big Bang.</li>
+                            <li>Growing that from a stellar-mass seed by ordinary accretion takes longer than the universe had available. The arithmetic does not close.</li>
+                            <li>Either the first seeds were already enormous &mdash; direct collapse of primordial gas clouds &mdash; or early accretion ran far above the rate we thought possible. <strong>We do not know which</strong>, and JWST was built partly to find out.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             08 · TIDAL FORCES
+             Δg = 2GMh/r³. Evaluated at the horizon this reduces to
+             Δg = h·c⁶/(4G²M²) — it falls as 1/M², so the biggest
+             holes are the gentle ones. That inversion is the figure.
+             ============================================================ -->
+        <section class="shell shell--void" id="tides">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">08</span> Tidal forces</p>
+                    <h2 class="head__title">Pulled apart by <em>a difference, not a force</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Gravity does not tear things apart. <em>Gradients</em> in gravity do. Falling feet-first, your feet are closer to the hole than your head and are pulled harder, and it is that difference &mdash; not the pull itself &mdash; that stretches you. The effect has an unhelpfully vivid name: spaghettification.</p>
+                </header>
+
+                <div class="tide" role="img" aria-label="Tidal stretching of a human-sized object at the event horizon of four black holes. At a 10 solar mass hole the differential acceleration is about 19 million g and the object is destroyed. At 1,000 solar masses it is 1,900 g, still fatal. At Sagittarius A* it is one ten-thousandth of a g, imperceptible. At M87* it is effectively zero.">
+                    <div class="tide__cell">
+                        <svg viewBox="0 0 120 150" width="100" height="125" aria-hidden="true">
+                            <!-- 10 M☉ · shredded -->
+                            <path class="tide__body" d="M 60 8 C 66 8 68 14 68 20 C 68 40 74 70 74 100 C 74 128 66 142 60 142 C 54 142 46 128 46 100 C 46 70 52 40 52 20 C 52 14 54 8 60 8 Z" opacity="0.25"/>
+                            <path class="tide__body" d="M 60 2 C 63 2 64 6 64 10 C 64 46 68 96 68 124 C 68 142 63 148 60 148 C 57 148 52 142 52 124 C 52 96 56 46 56 10 C 56 6 57 2 60 2 Z"/>
+                            <g class="tide__arrow">
+                                <path d="M 96 40 L 96 12"/>
+                                <path d="M 96 110 L 96 140"/>
+                            </g>
+                            <path class="tide__tip" d="M 96 4 L 91 15 L 101 15 Z"/>
+                            <path class="tide__tip" d="M 96 148 L 91 137 L 101 137 Z"/>
+                        </svg>
+                        <span class="tide__r">10 M&#9737;</span>
+                        <span class="tide__dg">1.9 &times; 10&#8311; g</span>
+                        <span class="tide__verdict">Shredded far outside</span>
+                    </div>
+
+                    <div class="tide__cell">
+                        <svg viewBox="0 0 120 150" width="100" height="125" aria-hidden="true">
+                            <!-- 1,000 M☉ · still fatal -->
+                            <path class="tide__body" d="M 60 8 C 66 8 68 14 68 20 C 68 40 74 70 74 100 C 74 128 66 142 60 142 C 54 142 46 128 46 100 C 46 70 52 40 52 20 C 52 14 54 8 60 8 Z" opacity="0.25"/>
+                            <path class="tide__body" d="M 60 12 C 65 12 67 17 67 22 C 67 44 72 72 72 100 C 72 124 65 138 60 138 C 55 138 48 124 48 100 C 48 72 53 44 53 22 C 53 17 55 12 60 12 Z"/>
+                            <g class="tide__arrow">
+                                <path d="M 96 46 L 96 22"/>
+                                <path d="M 96 104 L 96 130"/>
+                            </g>
+                            <path class="tide__tip" d="M 96 14 L 91 25 L 101 25 Z"/>
+                            <path class="tide__tip" d="M 96 138 L 91 127 L 101 127 Z"/>
+                        </svg>
+                        <span class="tide__r">1,000 M&#9737;</span>
+                        <span class="tide__dg">1,900 g</span>
+                        <span class="tide__verdict">Still fatal</span>
+                    </div>
+
+                    <div class="tide__cell">
+                        <svg viewBox="0 0 120 150" width="100" height="125" aria-hidden="true">
+                            <!-- Sgr A* · survivable -->
+                            <path class="tide__outline" d="M 60 8 C 66 8 68 14 68 20 C 68 40 74 70 74 100 C 74 128 66 142 60 142 C 54 142 46 128 46 100 C 46 70 52 40 52 20 C 52 14 54 8 60 8 Z"/>
+                            <path class="tide__body" d="M 60 9 C 66 9 68 15 68 21 C 68 41 74 70 74 100 C 74 127 66 141 60 141 C 54 141 46 127 46 100 C 46 70 52 41 52 21 C 52 15 54 9 60 9 Z"/>
+                        </svg>
+                        <span class="tide__r">Sgr A* &middot; 4.3 M M&#9737;</span>
+                        <span class="tide__dg">10&#8315;&#8308; g</span>
+                        <span class="tide__verdict">Imperceptible</span>
+                    </div>
+
+                    <div class="tide__cell">
+                        <svg viewBox="0 0 120 150" width="100" height="125" aria-hidden="true">
+                            <!-- M87* · nothing at all -->
+                            <path class="tide__body" d="M 60 8 C 66 8 68 14 68 20 C 68 40 74 70 74 100 C 74 128 66 142 60 142 C 54 142 46 128 46 100 C 46 70 52 40 52 20 C 52 14 54 8 60 8 Z"/>
+                        </svg>
+                        <span class="tide__r">M87* &middot; 6.5 bn M&#9737;</span>
+                        <span class="tide__dg">~10&#8315;&#185;&#8304; g</span>
+                        <span class="tide__verdict">Undetectable</span>
+                    </div>
+                </div>
+
+                <p class="caption">
+                    <span class="caption__id">Fig 09</span>
+                    Differential acceleration across 1.8&nbsp;m, evaluated at each hole's own event horizon, from &Delta;g = h&#8202;c&#8310;/(4G&sup2;M&sup2;). Outlines show the undistorted shape.
+                </p>
+
+                <div class="split" style="margin-top:4rem">
+                    <div>
+                        <h3 class="sub-title">The inversion nobody expects</h3>
+                        <p class="head__lede">Because &Delta;g at the horizon scales as <strong>1/M&sup2;</strong>, the bigger the black hole the gentler the crossing. A stellar-mass hole would pull you apart thousands of kilometres before you reached it. At a supermassive hole you would cross the horizon fully intact, feeling nothing at all, and only meet lethal tides much later on the way to the centre.</p>
+                        <p class="head__lede">This is the opposite of the intuition, and it follows from geometry alone: doubling the mass doubles the horizon radius, and tidal force falls as the cube of distance. Size wins.</p>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">Seen from the outside</span>
+                        <ul class="note__list">
+                            <li>When a star wanders too close to a supermassive hole it is torn apart in a <strong>tidal disruption event</strong>. About half the debris is flung away; the rest forms a disk and lights up for months.</li>
+                            <li>These are now caught several times a year by all-sky surveys, and they are the main way <strong>dormant</strong> black holes announce themselves.</li>
+                            <li>The star does not fall in cleanly. It is stretched into a stream, wraps around the hole, and collides with itself &mdash; which is what produces the flare.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             09 · TIME DILATION
+             ============================================================ -->
+        <section class="shell shell--lit" id="time">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">09</span> Gravitational time dilation</p>
+                    <h2 class="head__title">Clocks run slower <em>lower down</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Time is not a universal background. It runs at a rate that depends on where you are in a gravitational field, and near a black hole the effect stops being subtle. A clock at radius r ticks at &radic;(1&nbsp;&minus;&nbsp;R<sub>s</sub>/r) times the rate of a clock far away &mdash; and that factor goes to zero at the horizon.</p>
+                </header>
+
+                <div class="dilate">
+                    <figure class="fig">
+                        <div class="fig__frame">
+                            <svg class="fig__svg" viewBox="0 0 720 420" role="img"
+                                 aria-label="Clock rate against radius. The curve rises steeply from zero at the event horizon at 1 Schwarzschild radius, reaching 71 percent of the distant rate at 2 radii, 87 percent at 4 radii, and approaching 100 percent far away.">
+                                <!-- Plot area: x 78–690, y 40–340 -->
+                                <g class="svg-grid">
+                                    <path d="M 78 40 L 690 40"/>
+                                    <path d="M 78 115 L 690 115"/>
+                                    <path d="M 78 190 L 690 190"/>
+                                    <path d="M 78 265 L 690 265"/>
+                                </g>
+                                <g class="svg-axis">
+                                    <path d="M 78 40 L 78 340 L 690 340"/>
+                                </g>
+
+                                <!-- The horizon: a vertical asymptote -->
+                                <path class="dilate__asymptote" d="M 78 40 L 78 340"/>
+
+                                <!-- √(1 − Rs/r), sampled at r/Rs =
+                                     1, 1.1, 1.25, 1.5, 2, 3, 4, 6, 8, 10
+                                     and mapped onto the axes. -->
+                                <path class="dilate__fill"
+                                      d="M 78 340 L 78 340 L 146 249 L 180 207 L 214 172 L 282 128 L 350 95 L 418 78 L 520 62 L 588 55 L 690 49 L 690 340 Z"/>
+                                <path class="dilate__curve-bloom"
+                                      d="M 78 340 L 146 249 L 180 207 L 214 172 L 282 128 L 350 95 L 418 78 L 520 62 L 588 55 L 690 49"/>
+                                <path class="dilate__curve"
+                                      d="M 78 340 L 146 249 L 180 207 L 214 172 L 282 128 L 350 95 L 418 78 L 520 62 L 588 55 L 690 49"/>
+
+                                <!-- Marked points -->
+                                <g>
+                                    <circle cx="78"  cy="340" r="4" fill="var(--ring)"/>
+                                    <circle cx="214" cy="172" r="4" fill="var(--accent)"/>
+                                    <circle cx="418" cy="78"  r="4" fill="var(--accent)"/>
+                                </g>
+
+                                <!-- Y axis -->
+                                <text class="svg-unit" x="68" y="44"  text-anchor="end">1.00</text>
+                                <text class="svg-unit" x="68" y="119" text-anchor="end">0.75</text>
+                                <text class="svg-unit" x="68" y="194" text-anchor="end">0.50</text>
+                                <text class="svg-unit" x="68" y="269" text-anchor="end">0.25</text>
+                                <text class="svg-unit" x="68" y="344" text-anchor="end">0</text>
+                                <text class="svg-label" x="24" y="190" text-anchor="middle" transform="rotate(-90 24 190)">Clock rate</text>
+
+                                <!-- X axis -->
+                                <text class="svg-unit" x="78"  y="362" text-anchor="middle">1</text>
+                                <text class="svg-unit" x="214" y="362" text-anchor="middle">2</text>
+                                <text class="svg-unit" x="350" y="362" text-anchor="middle">3</text>
+                                <text class="svg-unit" x="418" y="362" text-anchor="middle">4</text>
+                                <text class="svg-unit" x="520" y="362" text-anchor="middle">6</text>
+                                <text class="svg-unit" x="690" y="362" text-anchor="middle">10</text>
+                                <text class="svg-label" x="384" y="390" text-anchor="middle">Radius (R&#8347;)</text>
+
+                                <text class="svg-label svg-label--ring" x="92" y="330">Horizon &middot; time stops</text>
+                                <!-- Two readings called out on the curve
+                                     itself. Placed just under it, inside
+                                     the filled area, and in ring white —
+                                     at .svg-unit's default dimness they
+                                     sat on the curve and read as noise. -->
+                                <text class="svg-unit svg-label--ring" x="292" y="148">2 R&#8347; &middot; 0.71&times;</text>
+                                <text class="svg-unit svg-label--ring" x="428" y="98">4 R&#8347; &middot; 0.87&times;</text>
+                            </svg>
+                        </div>
+                        <figcaption class="caption">
+                            <span class="caption__id">Fig 10</span>
+                            Rate relative to an observer at infinity, for a non-rotating hole. The curve meets zero exactly at the horizon &mdash; which is why, from outside, infalling objects appear to freeze there rather than cross.
+                        </figcaption>
+                    </figure>
+
+                    <div>
+                        <div class="clocks">
+                            <div class="clock">
+                                <div class="clock__face" aria-hidden="true">
+                                    <span class="clock__hand clock__hand--slow" style="--tick:6s"></span>
+                                    <span class="clock__hand" style="--tick:6s"></span>
+                                    <span class="clock__pivot"></span>
+                                </div>
+                                <p class="clock__label"><b>Far away</b>Reference rate</p>
+                            </div>
+                            <div class="clock clock--near">
+                                <div class="clock__face" aria-hidden="true">
+                                    <span class="clock__hand clock__hand--slow" style="--tick:20s"></span>
+                                    <span class="clock__hand" style="--tick:20s"></span>
+                                    <span class="clock__pivot"></span>
+                                </div>
+                                <p class="clock__label"><b>At 1.1 R&#8347;</b>0.30&times; as fast</p>
+                            </div>
+                        </div>
+
+                        <ol class="ledger ledger--warm" style="margin-top:2.5rem" role="img" aria-label="Time dilation factors: at 10 Schwarzschild radii a clock runs at 0.95 of the distant rate; at 4 radii 0.87; at 2 radii 0.71; at 1.5 radii 0.58; at 1.1 radii 0.30; at 1.01 radii 0.10.">
+                            <li class="ledger__row" style="--reach:95%">
+                                <span class="ledger__label">10 R&#8347; <small>Comfortable</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">0.95&times;</span>
+                            </li>
+                            <li class="ledger__row" style="--reach:87%">
+                                <span class="ledger__label">4 R&#8347; <small>Noticeable</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">0.87&times;</span>
+                            </li>
+                            <li class="ledger__row" style="--reach:71%">
+                                <span class="ledger__label">2 R&#8347; <small>Marked</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">0.71&times;</span>
+                            </li>
+                            <li class="ledger__row" style="--reach:58%">
+                                <span class="ledger__label">1.5 R&#8347; <small>Photon sphere</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">0.58&times;</span>
+                            </li>
+                            <li class="ledger__row" style="--reach:30%">
+                                <span class="ledger__label">1.1 R&#8347; <small>Extreme</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">0.30&times;</span>
+                            </li>
+                            <li class="ledger__row" style="--reach:10%">
+                                <span class="ledger__label">1.01 R&#8347; <small>Nearly stopped</small></span>
+                                <span class="ledger__track"><span class="ledger__fill"></span></span>
+                                <span class="ledger__value">0.10&times;</span>
+                            </li>
+                        </ol>
+
+                        <p class="ledger__caption">
+                            <span>Rate relative to infinity</span>
+                            <span>&radic;(1 &minus; R&#8347;/r)</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="split" style="margin-top:4.5rem">
+                    <div class="note">
+                        <span class="note__title">You already live with this</span>
+                        <ul class="note__list">
+                            <li>Clocks on <strong>GPS satellites</strong> run about 45 microseconds per day faster than clocks on the ground, purely because they sit higher in Earth's gravity. Uncorrected, positions would drift by ten kilometres a day.</li>
+                            <li>Your head ages very slightly faster than your feet. The effect is around one part in 10&#185;&#8310; per metre &mdash; real, and measured in the laboratory.</li>
+                            <li>Nothing about a black hole introduces new physics here. It is the same equation, evaluated somewhere steep.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">The Miller's planet problem</span>
+                        <ul class="note__list">
+                            <li><em>Interstellar</em>'s first planet runs at one hour per seven Earth years &mdash; a factor of about <strong>61,000</strong>.</li>
+                            <li>For a non-rotating hole that requires orbiting at 1.0000000003&nbsp;R<sub>s</sub>, which is inside the innermost stable orbit. No such orbit exists.</li>
+                            <li>Thorne's fix was to make Gargantua spin at very nearly the maximum allowed. Extreme rotation drags the innermost stable orbit down almost to the horizon, and a stable orbit with that dilation becomes genuinely possible.</li>
+                            <li>The film's most implausible-sounding detail is the one that forced the most careful physics.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             10 · BLACK HOLE vs NEUTRON STAR
+             Drawn to a shared scale because the answer is surprising:
+             they are almost the same size, and almost nothing else
+             about them matches.
+             ============================================================ -->
+        <section class="shell shell--abyss shell--seam" id="neutron">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">10</span> Against a neutron star</p>
+                    <h2 class="head__title">Almost the same size. <em>Nothing else the same</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Both are what a massive star leaves behind, and both are roughly the size of a city. The difference is whether anything stopped the collapse. A neutron star is held up &mdash; barely &mdash; by neutron degeneracy pressure. A black hole is what happens when that fails, and there is no next thing to try.</p>
+                </header>
+
+                <div class="versus">
+                    <div class="versus__side">
+                        <div class="versus__title">
+                            <h3>Neutron star</h3>
+                            <span class="chip chip--outline">Has a surface</span>
+                        </div>
+                        <div class="versus__stage">
+                            <span class="nstar" style="--ns-d:100px" aria-hidden="true"></span>
+                        </div>
+                        <dl class="spec">
+                            <div class="spec__row"><dt>Mass</dt><dd>2.0 M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Radius</dt><dd>~11 km</dd></div>
+                            <div class="spec__row"><dt>Held up by</dt><dd>Degeneracy pressure</dd></div>
+                            <div class="spec__row"><dt>Surface</dt><dd>Iron crust, 10&#8310; K</dd></div>
+                            <div class="spec__row"><dt>Escape velocity</dt><dd>~0.6 c</dd></div>
+                            <div class="spec__row"><dt>Made of</dt><dd>Neutrons</dd></div>
+                            <div class="spec__row"><dt>Emits</dt><dd>Yes &mdash; radio, X-ray</dd></div>
+                            <div class="spec__row"><dt>Mass limit</dt><dd>~2.3 M&#9737;</dd></div>
+                        </dl>
+                    </div>
+
+                    <div class="versus__side">
+                        <div class="versus__title">
+                            <h3>Black hole</h3>
+                            <span class="chip">No surface</span>
+                        </div>
+                        <div class="versus__stage">
+                            <span class="bh" style="--bh-d:81px" aria-hidden="true">
+                                <span class="bh__disk bh__disk--far"></span>
+                                <span class="bh__shadow"></span>
+                                <span class="bh__arc"></span>
+                                <span class="bh__disk bh__disk--near"></span>
+                            </span>
+                        </div>
+                        <dl class="spec">
+                            <div class="spec__row"><dt>Mass</dt><dd>3.0 M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Horizon</dt><dd>8.9 km</dd></div>
+                            <div class="spec__row"><dt>Held up by</dt><dd>Nothing</dd></div>
+                            <div class="spec__row"><dt>Surface</dt><dd>None &mdash; no matter at all</dd></div>
+                            <div class="spec__row"><dt>Escape velocity</dt><dd>&gt; c</dd></div>
+                            <div class="spec__row"><dt>Made of</dt><dd>Curved spacetime</dd></div>
+                            <div class="spec__row"><dt>Emits</dt><dd>Only its disk does</dd></div>
+                            <div class="spec__row"><dt>Mass limit</dt><dd>None known</dd></div>
+                        </dl>
+                    </div>
+                </div>
+
+                <p class="caption">
+                    <span class="caption__id">Fig 11</span>
+                    Drawn to one shared scale. A 2&nbsp;M&#9737; neutron star is about 11&nbsp;km in radius; a 3&nbsp;M&#9737; black hole's horizon is 8.9&nbsp;km. The gap between them &mdash; roughly 2.3 to 3 solar masses &mdash; is the narrowest and least-populated boundary in stellar astrophysics.
+                </p>
+
+                <div class="note" style="margin-top:3rem">
+                    <span class="note__title">How the difference is actually measured</span>
+                    <ul class="note__list">
+                        <li><strong>Look for the surface.</strong> Gas hitting a neutron star's crust decelerates and flashes in X-rays. Gas crossing a horizon simply stops being visible. The absence of that flash is positive evidence for a horizon.</li>
+                        <li><strong>Weigh it.</strong> Above roughly 2.3&nbsp;M&#9737; no equation of state can hold a neutron star up. Anything heavier and compact is a black hole by elimination.</li>
+                        <li><strong>Listen to the merger.</strong> Gravitational waves from two neutron stars colliding carry a signature of matter being deformed. Two black holes merging produce a clean chirp and then silence, because there was nothing to deform.</li>
+                        <li><strong>GW170817</strong> was a neutron-star merger and produced a visible flash of light across the electromagnetic spectrum. Black hole mergers produce no light at all, which is exactly what we observe.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             11 · REAL BLACK HOLES
+             ============================================================ -->
+        <!-- A second photographic plate stood here, using images/
+             black-holes.png. It has been removed rather than reskinned:
+             the hero is now the Gargantua frame at full bleed, so a
+             second cinematic black-hole photograph two thirds of the
+             way down the page was repeating the opening shot, and
+             black-holes.png is a different render of the same subject —
+             which is exactly the mixed-source look this page is meant
+             to avoid. The plate imagery component in components.css is
+             untouched and still used by the other domains. -->
+        <section class="shell shell--void" id="real">
+            <div class="starfield" style="--stars-opacity:0.6" aria-hidden="true"></div>
+
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">11</span> Real black holes</p>
+                    <h2 class="head__title">Three that stopped being <em>theoretical</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">For most of the twentieth century black holes were a solution to an equation that Einstein himself doubted described anything real. These three closed the argument &mdash; one by orbit, one by silhouette, and one by winning a bet.</p>
+                </header>
+
+                <div class="plate-grid plate-grid--tall">
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="bh" style="--bh-d:112px" aria-hidden="true">
+                                <span class="bh__disk bh__disk--far"></span>
+                                <span class="bh__shadow"></span>
+                                <span class="bh__arc"></span>
+                                <span class="bh__disk bh__disk--near"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">Sagittarius</span>
+                            <span class="plate__index">26,996 ly</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Sagittarius A*</h3>
+                            <span class="chip">Our own</span>
+                        </div>
+                        <p class="plate__text">Tracking individual stars whipping around an invisible point over three decades gave a mass with no room for anything else. The 2020 Nobel Prize went to Genzel and Ghez for that campaign; the EHT released its portrait in May 2022.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Mass</dt><dd>4.297 M M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Horizon</dt><dd>12.7 M km &middot; 0.085 AU</dd></div>
+                            <div class="spec__row"><dt>Shadow</dt><dd>51.8 &micro;as</dd></div>
+                            <div class="spec__row"><dt>Imaged</dt><dd>May 2022</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="bh" style="--bh-d:150px" aria-hidden="true">
+                                <span class="bh__disk bh__disk--far"></span>
+                                <span class="bh__shadow"></span>
+                                <span class="bh__arc"></span>
+                                <span class="bh__disk bh__disk--near"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">Virgo A</span>
+                            <span class="plate__index">53.5 Mly</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">M87*</h3>
+                            <span class="chip">First image</span>
+                        </div>
+                        <p class="plate__text">Two thousand times further away than Sgr A* but 1,500 times more massive, which makes its shadow almost the same angular size &mdash; and it varies slowly enough to photograph. The April 2019 image was the first direct look at a black hole's silhouette.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Mass</dt><dd>6.5 bn M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Horizon</dt><dd>19.2 bn km &middot; 128 AU</dd></div>
+                            <div class="spec__row"><dt>Shadow</dt><dd>42 &micro;as</dd></div>
+                            <div class="spec__row"><dt>Jet length</dt><dd>~5,000 ly</dd></div>
+                        </dl>
+                    </article>
+
+                    <article class="plate">
+                        <div class="plate__stage">
+                            <span class="bh" style="--bh-d:76px" aria-hidden="true">
+                                <span class="bh__disk bh__disk--far"></span>
+                                <span class="bh__shadow"></span>
+                                <span class="bh__arc"></span>
+                                <span class="bh__disk bh__disk--near"></span>
+                            </span>
+                        </div>
+                        <div class="plate__meta">
+                            <span class="plate__index">Cygnus</span>
+                            <span class="plate__index">7,200 ly</span>
+                        </div>
+                        <div class="plate__title-row">
+                            <h3 class="plate__title">Cygnus X-1</h3>
+                            <span class="chip chip--outline">The first</span>
+                        </div>
+                        <p class="plate__text">Found as an X-ray source in 1964 and the subject of a famous 1974 wager: Hawking bet against it being a black hole, and conceded in 1990. A 2021 reanalysis revised it upward to 21&nbsp;M&#9737; &mdash; heavier than stellar-wind models said was possible.</p>
+                        <dl class="spec plate__spec">
+                            <div class="spec__row"><dt>Mass</dt><dd>21.2 M&#9737;</dd></div>
+                            <div class="spec__row"><dt>Horizon</dt><dd>63 km</dd></div>
+                            <div class="spec__row"><dt>Spin</dt><dd>&gt; 0.95 of maximum</dd></div>
+                            <div class="spec__row"><dt>Companion</dt><dd>O9.7 supergiant</dd></div>
+                        </dl>
+                    </article>
+                </div>
+
+                <div class="split" style="margin-top:4rem">
+                    <div class="note">
+                        <span class="note__title">What the EHT images actually are</span>
+                        <ul class="note__list">
+                            <li><strong>Not photographs.</strong> Eight radio observatories on four continents observed simultaneously, and the Earth's rotation swept out an aperture the size of the planet. The image is reconstructed from interference patterns.</li>
+                            <li><strong>Not the black hole.</strong> The bright ring is hot gas; the dark centre is the shadow that gas is silhouetted against. The horizon is well inside the dark patch.</li>
+                            <li><strong>Resolution:</strong> around 20&nbsp;microarcseconds &mdash; enough to read a newspaper in New York from a caf&eacute; in Paris.</li>
+                            <li>The data volume was so large it was <strong>flown on hard drives</strong> rather than transmitted, and the South Pole disks had to wait for the Antarctic summer.</li>
+                        </ul>
+                    </div>
+
+                    <div class="note">
+                        <span class="note__title">Why Sgr A* took three more years</span>
+                        <ul class="note__list">
+                            <li>Both shadows are about the same angular size, but Sgr A* is <strong>1,500 times smaller</strong>, so its gas orbits 1,500 times faster.</li>
+                            <li>M87*'s disk takes days to change. Sgr A*'s changes in <strong>minutes</strong> &mdash; the equivalent of photographing a running child with a long exposure.</li>
+                            <li>The team had to model thousands of possible configurations and average them, which is why the published image is blurrier and took until 2022.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             12 · MISCONCEPTIONS
+             ============================================================ -->
+        <section class="shell shell--abyss shell--seam" id="facts">
+            <div class="container">
+                <header class="head">
+                    <p class="eyebrow"><span class="eyebrow__id">12</span> Misconceptions</p>
+                    <h2 class="head__title">Eight things that are <em>almost right</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">Black holes attract bad explanations the way they attract gas. Most of these are not inventions &mdash; they are reasonable readings of a loose phrase, which is what makes them stick.</p>
+                </header>
+
+                <div class="myths">
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Black holes suck things in.</strong></p>
+                        <p class="myth__truth">They pull exactly as hard as any other object of the same mass. Replace the Sun with a one-solar-mass black hole and every planet would continue on precisely the same orbit, in the dark. Nothing sucks; there is no inflow, no wind, no reaching out. You have to be aimed at one to fall in.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>They will eventually eat their galaxy.</strong></p>
+                        <p class="myth__truth">Sagittarius A* is 4.3 million solar masses in a galaxy of about 1.5 trillion &mdash; roughly three millionths of the total. It is also <strong>starved</strong>, accreting so little that it is millions of times fainter than its theoretical limit. Almost nothing ever gets close enough to fall in.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>The Sun might become one.</strong></p>
+                        <p class="myth__truth">It cannot. The Sun is about eight times too light to even reach the neutron-star route, let alone past it. It will become a red giant, shed its outer layers, and leave an Earth-sized white dwarf that cools quietly for the rest of time.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>They are holes, or tunnels to somewhere else.</strong></p>
+                        <p class="myth__truth">The word "hole" is doing real damage here. A black hole is a <strong>region</strong>, and a very dense one &mdash; there is more mass inside it than in most stars. Nothing is punctured and nothing leads anywhere. Wormholes are a separate mathematical solution with no observational support whatsoever.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Nothing can escape a black hole.</strong></p>
+                        <p class="myth__truth">Nothing escapes from <em>inside the horizon</em>. Outside it, plenty does: jets carry away a substantial fraction of the infalling mass, and Hawking radiation means the hole itself slowly evaporates. A stellar-mass hole would take about 10<sup>67</sup> years to do so &mdash; but the process is not zero.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>You would be crushed the instant you crossed.</strong></p>
+                        <p class="myth__truth">Depends entirely on the mass. At a stellar-mass hole you would be pulled apart thousands of kilometres out. At a supermassive one you would cross the horizon completely intact and notice nothing, because tidal forces at the horizon fall as 1/M&sup2;. Bigger is gentler.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>Time stops if you fall in.</strong></p>
+                        <p class="myth__truth">Only as measured from outside. Your own watch keeps perfectly normal time all the way down, and you reach the centre in a short, finite interval. Distant observers see you freeze at the horizon; you see yourself cross it. Both descriptions are correct, and relativity does not prefer either.</p>
+                    </div>
+
+                    <div class="myth">
+                        <p class="myth__claim"><strong>We have photographed a black hole.</strong></p>
+                        <p class="myth__truth">We have imaged the <strong>shadow</strong> that two of them cast on the gas behind and around them, using a virtual telescope the width of the Earth. The black hole itself is not in the picture and never can be. What the images prove is that the dark region is the right size and shape for a horizon &mdash; which is exactly the test that mattered.</p>
+                    </div>
+                </div>
+
+                <div class="note" style="margin-top:3.5rem">
+                    <span class="note__title">The one that is still genuinely open</span>
+                    <ul class="note__list">
+                        <li>If a hole evaporates completely, what happened to the information about everything that fell in? Quantum mechanics says information cannot be destroyed. General relativity says it went somewhere unreachable and then the somewhere ceased to exist.</li>
+                        <li>This is the <strong>information paradox</strong>, and it is not a puzzle about black holes. It is the sharpest known point of contradiction between the two theories physics is built on, which is why so much effort goes into a class of object we cannot visit.</li>
+                        <li>Recent work on holographic entropy suggests information does come back out, encoded in the radiation. It is not settled.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             ONWARD
+             ============================================================ -->
+        <section class="shell shell--rise shell--seam">
+            <div class="container">
+                <div class="head head--center" style="margin-bottom:0">
+                    <p class="eyebrow eyebrow--bare">End of region 04</p>
+                    <h2 class="head__title">Every large galaxy is built <em>around one of these</em></h2>
+                    <div class="head__rule"></div>
+                    <p class="head__lede">The mass of a central black hole tracks the mass of its host galaxy's bulge so tightly that the relationship cannot be coincidence. Next, the structures they sit inside.</p>
+                    <p style="margin-top:2rem">
+                        <a href="../galaxies/index.html" class="btn btn--ghost">Continue to Galaxies <span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p class="footer-text">&copy; 2026 CosmoVerse &mdash; Explore beyond the horizon.</p>
+            <p class="footer-note">Region 04 &middot; Collapsed &middot; Figures 01&ndash;11</p>
+        </div>
+    </footer>
+</body>
+</html>
